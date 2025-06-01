@@ -1,25 +1,60 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+{% endblock %}
+
 {% block main %}
-    <div class="swiper w-full h-64 relative">
+    <div class="swiper w-full max-w-5xl mx-auto mb-10">
         <div class="swiper-wrapper">
-            <div class="swiper-slide bg-blue-300 text-slate-900 flex items-center justify-center" style="background: url({{asset('assets/media/covers/cover1.png')}}) center / cover no-repeat"></div>
-            <div class="swiper-slide bg-green-500 text-white flex items-center justify-center" style="background: url({{asset('assets/media/covers/cover2.png')}}) center / cover no-repeat"></div>
-            <div class="swiper-slide bg-red-500 text-white flex items-center justify-center" style="background: url({{asset('assets/media/covers/cover3.png')}}) center / cover no-repeat"></div>
+            <div class="swiper-slide relative">
+                <img src="{{asset('assets/media/covers/cover1.png')}}" class="h-64 w-full object-cover rounded-xl mb-2" />
+                <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center gap-3 px-5 md:px-12">
+                    <h3 class="font-medium text-primary text-3xl mb-2">Titre 1</h3>
+                    <p class="text-gray-600">Texte de description 1</p>
+                    <a href="#" class="inline-flex items-center font-bold text-xl text-secondary hover:text-green-700 transition-colors duration-300 group">
+                        En savoir plus
+                        <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide relative">
+                <img src="{{asset('assets/media/covers/cover2.png')}}" class="h-64 w-full object-cover rounded-xl mb-2" />
+                <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center gap-3 px-5 md:px-12">
+                    <h3 class="font-medium text-primary text-3xl mb-2">Titre 2</h3>
+                    <p class="text-gray-600">Texte de description 2</p>
+                    <a href="#" class="inline-flex items-center font-bold text-xl text-secondary hover:text-green-700 transition-colors duration-300 group">
+                        En savoir plus
+                        <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide relative">
+                <img src="{{asset('assets/media/covers/cover3.png')}}" class="h-64 w-full object-cover rounded-xl mb-2" />
+                <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center gap-3 px-5 md:px-12">
+                    <h3 class="font-medium text-primary text-3xl mb-2">Titre 3</h3>
+                    <p class="text-gray-600">Texte de description 3</p>
+                    <a href="#" class="inline-flex items-center font-bold text-xl text-secondary hover:text-green-700 transition-colors duration-300 group">
+                        En savoir plus
+                        <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+            </div>
+            <!-- Ajoute d'autres slides -->
         </div>
 
-        <!-- Pagination -->
-        <div class="swiper-pagination absolute bottom-2 left-0 right-0"></div>
-
-        <!-- Navigation -->
-        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination mt-4"></div>
         <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 
     <div class="">
         <div class="flex justify-between items-start">
             <h2 class="text-blue-900 font-bold text-xl">Actualités</h2>
-            <a href="#" class="text-blue-900 font-bold text-sm hover:underline">Autres actualités</a>
+            <a href="#" class="inline-flex items-center font-bold text-primary hover:text-blue-700 transition-colors duration-300 group">
+                Autres actualités
+                <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+            </a>
         </div>
 
         <div class="mt-4 flex flex-wrap md:flex-nowrap justify-between gap-5">
@@ -180,4 +215,29 @@
     <div class="flex flex-col border border-blue-900 rounded">
         <img class="h-[165px]" src="{{asset('assets/media/bg/image9.png')}}" alt="">
     </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new Swiper('.swiper', {
+            loop: true,
+            autoplay: {
+                delay: 400000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    });
+</script>
 {% endblock %}

@@ -27,12 +27,8 @@ Contact: +225 07 471 612 21
         
         {% block stylesheets %}
         {% endblock %}
-
-        {% block javascripts %}
-            {{ importmap('app') }}
-        {% endblock %}
     </head>
-    <body class="bg-white text-gray-800 font-[Roboto]">
+    <body class="bg-white text-gray-800 font-[Roboto] text-base">
 
         <!-- Barre de navigation supérieure -->
         <div class="bg-blue-900 text-white text-sm py-2 px-4 flex justify-between">
@@ -85,5 +81,8 @@ Contact: +225 07 471 612 21
         Copyright © BDU Côte d’Ivoire -2025 Tous droits réservés – Designed by Transfo digitale-BDU CI
         </footer>
 
+        {% block javascripts %}
+            {{ importmap('app') }}
+        {% endblock %}
     </body>
 </html>
