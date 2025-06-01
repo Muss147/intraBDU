@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="swiper w-full h-64 relative">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide bg-blue-300 text-slate-900 flex items-center justify-center" style="background: url({{asset('assets/media/covers/cover1.png')}}) center / cover no-repeat"></div>
+            <div class="swiper-slide bg-green-500 text-white flex items-center justify-center" style="background: url({{asset('assets/media/covers/cover2.png')}}) center / cover no-repeat"></div>
+            <div class="swiper-slide bg-red-500 text-white flex items-center justify-center" style="background: url({{asset('assets/media/covers/cover3.png')}}) center / cover no-repeat"></div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="swiper-pagination absolute bottom-2 left-0 right-0"></div>
+
+        <!-- Navigation -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+    <div class="">
+        <div class="flex justify-between items-start">
+            <h2 class="text-blue-900 font-bold text-xl">Actualités</h2>
+            <a href="#" class="text-blue-900 font-bold text-sm hover:underline">Autres actualités</a>
+        </div>
+
+        <div class="mt-4 flex flex-wrap md:flex-nowrap justify-between gap-5">
+            <a href="" class="flex bg-gray-100 rounded shadow max-w-1/2">
+                <div class=""><img src="{{asset('assets/media/actualites/image6.png')}}" alt="" class="w-full md:min-w-[200px] h-full rounded-l-sm object-cover"></div>
+                <div class="p-4">
+                    <p class="font-semibold">Les veux de la nouvelle annee du DG </p>
+                </div>
+            </a>
+            <a href="" class="flex bg-gray-100 rounded shadow max-w-1/2">
+                <div class=""><img src="{{asset('assets/media/actualites/image2.png')}}" alt="" class="w-full md:min-w-[200px] h-full rounded-l-sm object-cover"></div>
+                <div class="p-4">
+                    <p class="font-semibold">La BDU-CI réaffirme son engagement envers les jeunes talents en lançant la Saison 2 du Programme Pépinière d’Excellence BDU-CI</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- Autres actus ici -->
+    <div class="my-8">
+        <div class="flex justify-between items-start">
+            <h2 class="text-blue-900 font-bold text-xl">Note & publication</h2>
+            <a href="#" class="text-blue-900 font-bold text-sm hover:underline">Autres notes & publication</a>
+        </div>
+
+        <ul class="mt-4 space-y-3">
+            <li class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-[#6ca942]"></div>
+                <a href="" class="text-sm leading-snug">
+                    INNOVATION'S DAY 2025
+                </a>
+            </li>
+            <li class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-[#6ca942]"></div>
+                <a href="" class="text-sm leading-snug">
+                    Excellente Journée Internationale des Droits de la Femme 2025
+                </a>
+            </li>
+            <li class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-[#6ca942]"></div>
+                <a href="" class="text-sm leading-snug">
+                    Lancement de la campagne RAMADAN-PAKINOU 2025 – « Les 10 Ans de Partage : Une Décennie de Lumière et de Générosité »
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="my-8">
+        <div class="flex justify-between items-start mb-4">
+            <h2 class="text-blue-900 font-bold text-xl">Votez pour l’Étoile du Mois !</h2>
+        </div>
+
+        <div class="bg-gray-100 p-6 rounded-lg flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Logo -->
+            <div class="flex-shrink-0">
+                <img src="{{asset('assets/media/employees/best-employee.png')}}" alt="Best Employee" class="w-32 h-32 object-contain" />
+            </div>
+
+            <!-- Carrousel -->
+            <div class="relative w-full max-w-md h-40 overflow-hidden">
+                <div id="carousel-track" class="flex items-center justify-center gap-1 transition-all duration-700 ease-in-out">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide maw-w-[130px] h-32 rounded-md overflow-hidden shrink-0 transition-all duration-700 ease-in-out">
+                    <img src="{{asset('assets/media/employees/image20.png')}}" class="w-full h-full object-cover" />
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide maw-w-[140px] h-40 rounded-md overflow-hidden shrink-0 transition-all duration-700 ease-in-out">
+                    <img src="{{asset('assets/media/employees/image19.png')}}" class="w-full h-full object-cover" />
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide maw-w-[130px] h-32 rounded-md overflow-hidden shrink-0 transition-all duration-700 ease-in-out">
+                    <img src="{{asset('assets/media/employees/image11.png')}}" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Texte + Bouton -->
+            <div class="text-center max-w-sm">
+                <p class="text-black font-bold mb-4">
+                    💡 Reconnaissons l’Excellence !<br />
+                    Participez à l’élection du Salarié du Mois.
+                </p>
+                <a href="#" class="bg-[#6ca942] text-white font-bold py-2 px-6 rounded-full inline-block hover:bg-green-600 transition">
+                    Je Vote
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-8">
+        <div class="flex justify-between items-start mb-4">
+            <h2 class="text-blue-900 font-bold text-xl">Ma prise en main</h2>
+        </div>
+
+        <div class="flex justify-between">
+            <div class="flex flex-col justify-center items-center gap-4">
+                <img src="{{asset('assets/media/features/Meeting1.png')}}" class="w-[250px] h-[135px] object-cover rounded-sm" />
+                <a href="" class="text-blue-900 font-semibold hover:text-underline">Ma mutuelle</a>
+            </div>
+            <div class="flex flex-col justify-center items-center gap-4">
+                <img src="{{asset('assets/media/features/image.png')}}" class="w-[250px] h-[135px] object-cover rounded-sm" />
+                <a href="" class="text-blue-900 font-semibold hover:text-underline">Mon livret d’accueil</a>
+            </div>
+            <div class="flex flex-col justify-center items-center gap-4">
+                <img src="{{asset('assets/media/features/image7.png')}}" class="w-[250px] h-[135px] object-cover rounded-sm" />
+                <a href="" class="text-blue-900 font-semibold hover:text-underline">My Bdu mobile</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="publicite mt-8">
+        <img src="{{asset('assets/media/pubs/images0.png')}}" class="w-full h-[90px] object-contain" />
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="flex flex-col border border-blue-900 rounded">
+        <h3 class="bg-blue-900 text-lg font-semibold text-gray-50 p-2 md:px-3">Happy Birthday</h3>
+        <div class="flex justify-between items-center p-3">
+            <div class="border border-gray-500"><img class="h-75px max-w-[100px]" src="{{asset('assets/media/employees/image5.png')}}" alt="photo 1"></div>
+            <div class="border border-gray-500"><img class="h-75px max-w-[100px]" src="{{asset('assets/media/employees/image11.png')}}" alt="photo 2"></div>
+            <div class="border border-gray-500"><img class="h-75px max-w-[100px]" src="{{asset('assets/media/employees/image16.png')}}" alt="photo 3"></div>
+        </div>
+    </div>
+
+    <div class="flex flex-col border border-[#6ca942] rounded">
+        <h3 class="bg-[#6ca942] text-lg font-semibold text-gray-50 p-2 md:px-3">Tools</h3>
+        <div class="p-3">
+            <ul class="text-sm list-disc pl-4">
+                <li><a href="">My DRH</a></li>
+                <li><a href="">Amplitude</a></li>
+                <li><a href="">Mon Avis compte</a></li>
+                <li><a href="">Base de connaissance</a></li>
+                <li><a href="">Demande achat</a></li>
+                <li><a href="">Autres outils</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="flex flex-col border border-blue-900 rounded">
+        <h3 class="bg-blue-900 text-lg font-semibold text-gray-50 p-2 md:px-3">Le Guide du  banquier</h3>
+        <div class="p-3">
+            <ul class="text-sm list-disc pl-4">
+                <li><a href="">Simulateur de credit</a></li>
+                <li><a href="">Convertiseur de devise</a></li>
+                <li><a href="">Procedures BDU CI</a></li>
+                <li><a href="">Me former(e-lerning)</a></li>
+                <li><a href="">My FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="flex flex-col border border-blue-900 rounded">
+        <img class="h-125px" src="{{asset('assets/media/bg/image14.png')}}" alt="">
+    </div>
+    <div class="flex flex-col border border-blue-900 rounded">
+        <img class="h-180px" src="{{asset('assets/media/bg/image17.png')}}" alt="">
+    </div>
+    <div class="flex flex-col border border-blue-900 rounded">
+        <img class="h-[165px]" src="{{asset('assets/media/bg/image9.png')}}" alt="">
+    </div>
+{% endblock %}

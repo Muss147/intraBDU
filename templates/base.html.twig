@@ -1,17 +1,89 @@
 <!DOCTYPE html>
-<html>
+<!--
+Author: Moussa Fofana
+Product Name: IntraWeb BDU-CI
+Website: https://www.moussa-fofana.site
+Email: hello@moussa-fofana.com
+Contact: +225 07 471 612 21
+-->
+<html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta charset="UTF-8" />
+        <meta name="author" content="EMF Technologies : Moussa Fofana" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        
+        <title>Intranet BDU-CI</title>
+
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicons/apple-touch-icon.png')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicons/favicon-32x32.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicons/favicon-16x16.png')}}">
+        <link rel="manifest" href="{{asset('assets/favicons/site.webmanifest')}}">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        
         {% block stylesheets %}
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {{ importmap('app') }}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="bg-white text-gray-800 font-[Roboto]">
+
+        <!-- Barre de navigation supérieure -->
+        <div class="bg-blue-900 text-white text-sm py-2 px-4 flex justify-between">
+            <div class="flex gap-6">
+                <a href="#" class="">Connaître la BDU</a>
+                <a href="#" class="">Politique de Confidentialité</a>
+                <a href="#" class="">Offres d'emploi</a>
+                <a href="#" class="">Notre réseau</a>
+                <a href="#" class="">Organigramme</a>
+            </div>
+            <div class="flex gap-3 items-center">
+                <a href="#"><img src="/icons/facebook.svg" alt="Facebook" class="h-4"></a>
+                <a href="#"><img src="/icons/linkedin.svg" alt="LinkedIn" class="h-4"></a>
+            </div>
+        </div>
+
+        <!-- Logo + menu principal -->
+        <div class="flex justify-between items-center bg-[#6ca942] px-6 py-1 border-b">
+            <div class="">
+                <img src="{{asset('assets/media/logos/Logo-BDUCI-white.png')}}" alt="BDU Logo" class="h-16" />
+            </div>
+            <div class="flex items-center gap-2 text-sm text-blue-50 py-3">
+                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-blue-900">Mot du DG</a>
+                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-blue-900">Document de référence</a>
+                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-blue-900">Charte graphique</a>
+                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-blue-900">Média</a>
+                <div class="flex items-center gap-2 border-l pl-4">
+                    <label for="search" class="text-sm">Annuaire BDU</label>
+                    <input id="search" type="text" placeholder="Nom ou Direction" class="border px-2 py-1 rounded text-sm focus:outline-none focus:ring-0" />
+                    <button class="bg-blue-50 text-slate-700 px-2 py-1 rounded">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenu principal -->
+        <main class="max-w-screen-xl mx-auto px-4 mt-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Colonne principale -->
+            <section class="md:col-span-3 space-y-6">
+                {% block main %}{% endblock %}
+            </section>
+
+            <!-- Colonne latérale -->
+            <aside class="md:col-span-1 space-y-4">
+                {% block sidebar %}{% endblock %}
+            </aside>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="bg-blue-900 text-white text-center text-sm py-4 mt-12">
+        Copyright © BDU Côte d’Ivoire -2025 Tous droits réservés – Designed by Transfo digitale-BDU CI
+        </footer>
+
     </body>
 </html>
