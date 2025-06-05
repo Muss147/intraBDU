@@ -25,64 +25,64 @@ Contact: +225 07 471 612 21
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
         {% block stylesheets %}
         {% endblock %}
+        <style type="text/css">
+        </style>
     </head>
     <body class="bg-white text-gray-800 font-[Roboto] text-base">
-
-        <!-- Barre de navigation supérieure -->
-        <div class="bg-blue-900 text-white text-sm py-2 px-4 flex justify-between">
-            <div class="flex gap-6">
-                <a href="#" class="">Connaître la BDU</a>
-                <a href="#" class="">Politique de Confidentialité</a>
-                <a href="#" class="">Offres d'emploi</a>
-                <a href="#" class="">Notre réseau</a>
-                <a href="#" class="">Organigramme</a>
-            </div>
-            <div class="flex gap-3 items-center">
-                <a href="#"><img src="/icons/facebook.svg" alt="Facebook" class="h-4"></a>
-                <a href="#"><img src="/icons/linkedin.svg" alt="LinkedIn" class="h-4"></a>
-            </div>
-        </div>
-
-        <!-- Logo + menu principal -->
-        <div class="flex justify-between items-center bg-[#6ca942] px-6 py-1 border-b">
-            <div class="">
-                <img src="{{asset('assets/media/logos/Logo-BDUCI-white.png')}}" alt="BDU Logo" class="h-16" />
-            </div>
-            <div class="flex items-center gap-2 text-sm text-blue-50 py-3">
-                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-blue-900">Mot du DG</a>
-                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-blue-900">Document de référence</a>
-                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-blue-900">Charte graphique</a>
-                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-blue-900">Média</a>
-                <div class="flex items-center gap-2 border-l pl-4">
-                    <label for="search" class="text-sm">Annuaire BDU</label>
-                    <input id="search" type="text" placeholder="Nom ou Direction" class="border px-2 py-1 rounded text-sm focus:outline-none focus:ring-0" />
-                    <button class="bg-blue-50 text-slate-700 px-2 py-1 rounded">OK</button>
-                </div>
-            </div>
-        </div>
+        <!-- Header -->
+        {% include "front/_header.html.twig" %}
 
         <!-- Contenu principal -->
-        <main class="max-w-screen-xl mx-auto px-4 mt-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-            <!-- Colonne principale -->
-            <section class="md:col-span-3 space-y-6">
-                {% block main %}{% endblock %}
-            </section>
+        {% block body %}{% endblock %}
 
-            <!-- Colonne latérale -->
-            <aside class="md:col-span-1 space-y-4">
-                {% block sidebar %}{% endblock %}
-            </aside>
-        </main>
+        <!-- Footer -->
+        {% include "front/_footer.html.twig" %}
 
-        <!-- Pied de page -->
-        <footer class="bg-blue-900 text-white text-center text-sm py-4 mt-12">
-        Copyright © BDU Côte d’Ivoire -2025 Tous droits réservés – Designed by Transfo digitale-BDU CI
-        </footer>
-
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
         {% block javascripts %}
             {{ importmap('app') }}
         {% endblock %}
+
+        <script type="text/javascript">
+            const toggleBtn = document.getElementById("menu-toggle");
+            const topLine = toggleBtn.querySelector('.line-top');
+            const middleLine = toggleBtn.querySelector('.line-middle');
+            const bottomLine = toggleBtn.querySelector('.line-bottom');
+
+            const navMenu = document.querySelector('header.main-menu nav');
+            const navMenuForm = document.querySelector('header.main-menu form');
+            const supMenu = document.querySelector('.sup-menu');
+
+            toggleBtn.addEventListener("click", () => {
+                toggleBtn.classList.toggle("is-menuDisplayed");
+
+                if (toggleBtn.classList.contains("is-menuDisplayed")) {
+                    topLine.classList.add("rotate-45", "translate-y-1");
+                    bottomLine.classList.add("-rotate-45", "-translate-y-1");
+                    middleLine.classList.add("opacity-0");
+
+                    navMenu.classList.remove("hidden", "items-center");
+                    navMenu.classList.add("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
+                    navMenuForm.classList.remove("border-l");
+
+                    supMenu.classList.remove("hidden");
+                    supMenu.classList.add("absolute", "p-5");
+                } else {
+                    topLine.classList.remove("rotate-45", "translate-y-1");
+                    bottomLine.classList.remove("-rotate-45", "-translate-y-1");
+                    middleLine.classList.remove("opacity-0");
+
+                    navMenu.classList.add("hidden", "items-center");
+                    navMenu.classList.remove("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
+                    navMenuForm.classList.add("border-l");
+
+                    supMenu.classList.add("hidden");
+                    supMenu.classList.remove("absolute", "p-5", "shadow-xl");
+                }
+            });
+        </script>
     </body>
 </html>
