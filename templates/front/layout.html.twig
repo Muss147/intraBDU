@@ -55,6 +55,7 @@ Contact: +225 07 471 612 21
             const navMenu = document.querySelector('header.main-menu nav');
             const navMenuForm = document.querySelector('header.main-menu form');
             const supMenu = document.querySelector('.sup-menu');
+            const mainAfter = document.querySelector('#mainAfter');
 
             toggleBtn.addEventListener("click", () => {
                 toggleBtn.classList.toggle("is-menuDisplayed");
@@ -69,20 +70,28 @@ Contact: +225 07 471 612 21
                     navMenuForm.classList.remove("border-l");
 
                     supMenu.classList.remove("hidden");
-                    supMenu.classList.add("absolute", "p-5");
-                } else {
-                    topLine.classList.remove("rotate-45", "translate-y-1");
-                    bottomLine.classList.remove("-rotate-45", "-translate-y-1");
-                    middleLine.classList.remove("opacity-0");
+                    supMenu.classList.add("absolute", "p-5", "shadow-xl");
 
-                    navMenu.classList.add("hidden", "items-center");
-                    navMenu.classList.remove("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
-                    navMenuForm.classList.add("border-l");
-
-                    supMenu.classList.add("hidden");
-                    supMenu.classList.remove("absolute", "p-5", "shadow-xl");
-                }
+                    mainAfter.classList.remove("hidden");
+                } else closeMenu();
             });
+
+            mainAfter.addEventListener("click", () => {closeMenu()});
+            
+            function closeMenu() {
+                topLine.classList.remove("rotate-45", "translate-y-1");
+                bottomLine.classList.remove("-rotate-45", "-translate-y-1");
+                middleLine.classList.remove("opacity-0");
+
+                navMenu.classList.add("hidden", "items-center");
+                navMenu.classList.remove("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
+                navMenuForm.classList.add("border-l");
+
+                supMenu.classList.add("hidden");
+                supMenu.classList.remove("absolute", "p-5", "shadow-xl");
+
+                mainAfter.classList.add("hidden");
+            }
         </script>
     </body>
 </html>

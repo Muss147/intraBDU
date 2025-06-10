@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/layout.html.twig' %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 {% endblock %}
 
 {% block body %}
-<main class="max-w-screen-xl mx-auto px-4 mt-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+<main class="relative max-w-screen-xl mx-auto px-4 mt-6 grid grid-cols-1 md:grid-cols-4 gap-6">
     <!-- Colonne principale -->
-    <section class="md:col-span-3 space-y-6">
+    <section class="md:col-span-3 space-y-16 md:space-y-10">
 
         <div class="swiper carouselSwiper w-full max-w-5xl mx-auto">
             <div class="swiper-wrapper">
@@ -83,7 +83,7 @@
             </div>
         </div>
         <!-- Autres actus ici -->
-        <div class="my-8">
+        <div class="">
             <div class="flex justify-between items-start">
                 <h2 class="text-primary font-bold text-xl">Note & publication</h2>
                 <a href="#" class="inline-flex items-center font-bold text-primary hover:text-blue-700 transition-colors duration-300 group">
@@ -95,26 +95,26 @@
             <ul class="mt-4 space-y-3">
                 <li class="flex items-center gap-3">
                     <span class="flex-none w-4 h-4 bg-[#6ca942]"></span>
-                    <a href="" class="text-sm leading-snug">
+                    <a href="" class="text-sm leading-snug inline-flex items-center font-bold hover:text-primary transition-colors duration-300 group">
                         INNOVATION'S DAY 2025
                     </a>
                 </li>
                 <li class="flex items-center gap-3">
                     <span class="flex-none w-4 h-4 bg-[#6ca942]"></span>
-                    <a href="" class="text-sm leading-snug">
+                    <a href="" class="text-sm leading-snug inline-flex items-center font-bold hover:text-primary transition-colors duration-300 group">
                         Excellente Journée Internationale des Droits de la Femme 2025
                     </a>
                 </li>
                 <li class="flex items-center gap-3">
                     <span class="flex-none w-4 h-4 bg-[#6ca942]"></span>
-                    <a href="" class="text-sm leading-snug">
+                    <a href="" class="text-sm leading-snug inline-flex items-center font-bold hover:text-primary transition-colors duration-300 group">
                         Lancement de la campagne RAMADAN-PAKINOU 2025 – « Les 10 Ans de Partage : Une Décennie de Lumière et de Générosité »
                     </a>
                 </li>
             </ul>
         </div>
 
-        <div class="my-8">
+        <div class="">
             <div class="flex justify-between items-start mb-4">
                 <h2 class="text-primary font-bold text-xl">Votez pour l’Étoile du Mois !</h2>
             </div>
@@ -164,7 +164,7 @@
             </div>
         </div>
 
-        <div class="my-8">
+        <div class="">
             <div class="flex justify-between items-start mb-4">
                 <h2 class="text-primary font-bold text-xl">Ma prise en main</h2>
             </div>
@@ -172,30 +172,30 @@
             <!-- Bloc rendu responsive -->
             <div class="flex flex-col sm:flex-row sm:justify-between gap-8">
                 <!-- Élément 1 -->
-                <div class="flex flex-col justify-center items-center gap-4 flex-1">
+                <a href="" class="flex flex-col justify-center items-center gap-4 flex-1">
                     <img src="{{ asset('assets/media/features/Meeting1.png') }}"
-                        class="w-[200px] h-[110px] sm:w-[220px] sm:h-[120px] md:w-[250px] md:h-[135px] object-cover rounded-sm" />
-                    <a href="" class="text-primary font-semibold hover:underline">Ma mutuelle</a>
-                </div>
+                        class="w-full h-[134px] object-cover rounded-sm" />
+                    <span class="text-primary font-semibold hover:underline">Ma mutuelle</span>
+                </a>
 
                 <!-- Élément 2 -->
-                <div class="flex flex-col justify-center items-center gap-4 flex-1">
+                <a href="" class="flex flex-col justify-center items-center gap-4 flex-1">
                     <img src="{{ asset('assets/media/features/image.png') }}"
-                        class="w-[200px] h-[110px] sm:w-[220px] sm:h-[120px] md:w-[250px] md:h-[135px] object-cover rounded-sm" />
-                    <a href="" class="text-primary font-semibold hover:underline">Mon livret d’accueil</a>
-                </div>
+                        class="w-full h-[134px] object-cover rounded-sm" />
+                    <span class="text-primary font-semibold hover:underline">Mon livret d’accueil</span>
+                </a>
 
                 <!-- Élément 3 -->
-                <div class="flex flex-col justify-center items-center gap-4 flex-1">
+                <a href="" class="flex flex-col justify-center items-center gap-4 flex-1">
                     <img src="{{ asset('assets/media/features/image7.png') }}"
-                        class="w-[200px] h-[110px] sm:w-[220px] sm:h-[120px] md:w-[250px] md:h-[135px] object-cover rounded-sm" />
-                    <a href="" class="text-primary font-semibold hover:underline">My Bdu mobile</a>
-                </div>
+                        class="w-full h-[134px] object-cover rounded-sm" />
+                    <span class="text-primary font-semibold hover:underline">My Bdu mobile</span>
+                </a>
             </div>
         </div>
         
-        <div class="publicite mt-8">
-            <img src="{{asset('assets/media/pubs/images0.png')}}" class="w-full h-[90px] object-contain" />
+        <div class="publicite">
+            <img src="{{asset('assets/media/pubs/images0.png')}}" class="w-full h-[90px] object-cover object-left" />
         </div>
         
     </section>
@@ -212,16 +212,44 @@
             </div>
         </div>
 
+        <div class="flex flex-col border border-primary rounded">
+        
+        </div>
+
         <div class="flex flex-col border border-[#6ca942] rounded">
             <h3 class="bg-[#6ca942] text-lg font-semibold text-gray-50 p-2 md:px-3">Tools</h3>
             <div class="p-3">
                 <ul class="text-sm list-disc pl-4">
-                    <li><a href="">My DRH</a></li>
-                    <li><a href="">Amplitude</a></li>
-                    <li><a href="">Mon Avis compte</a></li>
-                    <li><a href="">Base de connaissance</a></li>
-                    <li><a href="">Demande achat</a></li>
-                    <li><a href="">Autres outils</a></li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            My DRH <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Amplitude <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Mon Avis compte <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Base de connaissance <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Demande achat <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Autres outils <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -230,11 +258,31 @@
             <h3 class="bg-primary text-lg font-semibold text-gray-50 p-2 md:px-3">Le Guide du  banquier</h3>
             <div class="p-3">
                 <ul class="text-sm list-disc pl-4">
-                    <li><a href="">Simulateur de credit</a></li>
-                    <li><a href="">Convertiseur de devise</a></li>
-                    <li><a href="">Procedures BDU CI</a></li>
-                    <li><a href="">Me former(e-lerning)</a></li>
-                    <li><a href="">My FAQ</a></li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Simulateur de credit <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Convertiseur de devise <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Procedures BDU CI <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Me former(e-lerning) <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            My FAQ <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -250,6 +298,9 @@
         </div>
         
     </aside>
+    
+    <!-- Équivalent de ::after -->
+    <div id="mainAfter" class="hidden absolute inset-0 backdrop-blur-sm z-[9]"></div>
 </main>
 {% endblock %}
 

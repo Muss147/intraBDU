@@ -9,10 +9,16 @@ use Symfony\Component\Routing\Attribute\Route;
 final class FrontController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
-    public function index(): Response
+    public function home(): Response
     {
-        return $this->render('front/index.html.twig', [
+        return $this->render('front/home.html.twig', [
             'controller_name' => 'FrontController',
         ]);
+    }
+    
+    #[Route('/documents-de-reference', name: 'doc_reference')]
+    public function documents(): Response
+    {
+        return $this->render('front/documents_reference.html.twig');
     }
 }

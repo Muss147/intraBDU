@@ -1,5 +1,5 @@
         <!-- Barre de navigation supérieure -->
-        <div class="sup-menu bg-primary text-white text-sm w-full p-4 md:py-2 hidden md:flex justify-between items-center top-[19.70rem] z-10">
+        <div class="sup-menu bg-primary text-white text-sm w-full p-4 md:py-2 hidden md:flex justify-between items-center top-[19rem] z-10">
             <div class="flex flex-wrap md:flex-nowrap gap-6">
                 <a href="#" class="">Connaître la BDU</a>
                 <a href="#" class="">Politique de Confidentialité</a>
@@ -9,7 +9,7 @@
             </div>
             <div class="flex gap-3 items-center mt-8 md:mt-0">
                 <button data-modal-target="searching-modal" data-modal-toggle="searching-modal" type="button" class="flex items-center gap-3 w-[250px] 
-                    py-2 px-5 me-2 text-sm font-medium text-gray-500 focus:outline-none bg-white rounded-md border border-gray-200 hover:bg-gray-100 hover:text-primary focus:z-10 focus:ring-1 focus:ring-gray-100"
+                    py-1 px-5 me-2 text-sm font-medium text-gray-200 focus:outline-none bg-transparent rounded-md border border-gray-200 focus:z-10 focus:ring-1 focus:ring-gray-100"
                     >
                     <svg width="12" height="12" class="DocSearch-Search-Icon" viewBox="0 0 20 20"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     Recherche
@@ -54,9 +54,9 @@
 
         <!-- Logo + menu principal -->
         <header class="main-menu flex justify-between items-center bg-[#6ca942] px-6 py-1 border-b">
-            <div class="">
+            <a href="">
                 <img src="{{asset('assets/media/logos/Logo-BDUCI-white.png')}}" alt="BDU Logo" class="h-16" />
-            </div>
+            </a>
 
             <!-- Bouton mobile -->
             <button id="menu-toggle"

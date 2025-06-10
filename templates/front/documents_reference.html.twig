@@ -1,0 +1,29 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Documents de référence" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+<main class="relative max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10">
+    <section class="">
+        <div class="flex justify-between items-start">
+            <h2 class="text-primary font-bold text-xl">ActualitésDocuments de réferences</h2>
+        </div>
+        <div class="rounded bg-blue-50 p-5 md:p-20">
+            <div class="flex flex-col sm:flex-row sm:justify-between gap-8">
+                <!-- Élément 1 -->
+                <a href="" class="flex justify-between items-center gap-4 flex-1">
+                    <img src="{{ asset('assets/media/features/Meeting1.png') }}"
+                        class="w-full h-[134px] object-cover rounded-sm" />
+                    <span class="text-primary font-semibold hover:underline">Ma mutuelle</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
