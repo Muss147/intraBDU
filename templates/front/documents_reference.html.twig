@@ -7,7 +7,7 @@
 
 {% block body %}
 <main class="relative max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10">
-    <section class="">
+    {# <section class="">
         <div class="flex justify-between items-start">
             <h2 class="text-primary font-bold text-xl">ActualitésDocuments de réferences</h2>
         </div>
@@ -21,6 +21,73 @@
                 </a>
             </div>
         </div>
+    </section> #}
+
+    <!-- Section principale -->
+    <section class="p-8">
+      <h2 class="text-blue-700 text-xl font-semibold mb-6">Documents de références</h2>
+      
+      <!-- Cartes de documents -->
+      <div class="bg-blue-100 p-6 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white shadow p-4 flex items-center gap-4 rounded">
+          <img src="/icons/note.svg" alt="Notes de services" class="w-12 h-12" />
+          <span class="font-semibold">Notes de Services</span>
+        </div>
+
+        <div class="bg-white shadow p-4 flex items-center gap-4 rounded">
+          <img src="/icons/procedure.svg" alt="Procédures" class="w-12 h-12" />
+          <span class="font-semibold">Procedures</span>
+        </div>
+
+        <div class="bg-white shadow p-4 flex items-center gap-4 rounded">
+          <img src="/icons/politique.svg" alt="Politiques" class="w-12 h-12" />
+          <span class="font-semibold">Politiques</span>
+        </div>
+
+        <div class="bg-white shadow p-4 flex items-center gap-4 rounded">
+          <img src="/icons/directive.svg" alt="Directives" class="w-12 h-12" />
+          <span class="font-semibold">Directives</span>
+        </div>
+
+        <div class="bg-white shadow p-4 flex items-center gap-4 rounded">
+          <img src="/icons/charte.svg" alt="Chartes" class="w-12 h-12" />
+          <span class="font-semibold">Chartes</span>
+        </div>
+
+        <div class="bg-white shadow p-4 flex items-center gap-4 rounded">
+          <img src="/icons/archives.svg" alt="Autres Documents" class="w-12 h-12" />
+          <span class="font-semibold">Autres Documents</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistiques -->
+    <section class="bg-green-200 py-6 px-4 md:px-12 grid grid-cols-2 md:grid-cols-6 gap-4 text-center">
+      <div>
+        <img src="/icons/team.svg" class="mx-auto w-8 mb-2" alt="Collaborateurs" />
+        <p class="font-semibold">264</p>
+        <p class="text-sm">collaborateurs</p>
+      </div>
+      <div>
+        <img src="/icons/femmes.svg" class="mx-auto w-8 mb-2" alt="Femmes managers" />
+        <p class="font-semibold">35%</p>
+        <p class="text-sm">de femmes dans les réseaux de management</p>
+      </div>
+      <div>
+        <img src="/icons/formation.svg" class="mx-auto w-8 mb-2" alt="Formation" />
+        <p class="font-semibold">97%</p>
+        <p class="text-sm">ont suivi une formation en 2023</p>
+      </div>
+      <div>
+        <img src="/icons/recrutement.svg" class="mx-auto w-8 mb-2" alt="Recrutements" />
+        <p class="font-semibold">25</p>
+        <p class="text-sm">recrutements en 2025</p>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <img src="/icons/like.svg" class="mx-auto w-8 mb-2" alt="Recommandation" />
+        <p class="font-semibold">85%</p>
+        <p class="text-sm">des salariés recommandent BDU</p>
+      </div>
     </section>
 </main>
 {% endblock %}
