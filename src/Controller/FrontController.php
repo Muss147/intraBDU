@@ -19,6 +19,18 @@ final class FrontController extends AbstractController
     #[Route('/documents-de-reference', name: 'doc_reference')]
     public function documents(): Response
     {
-        return $this->render('front/documents_reference.html.twig');
+        return $this->render('front/documents-reference/index.html.twig');
+    }
+
+    #[Route('/documents-de-reference/prodecures', name: 'procedures')]
+    public function procedures(): Response
+    {
+        return $this->render('front/documents-reference/procedures.html.twig');
+    }
+
+    #[Route('/dispositif-d-alerte', name: 'dispositif_alerte')]
+    public function dispositifAlerte(): Response
+    {
+        return $this->render('front/dispositif-alerte/index.html.twig');
     }
 }

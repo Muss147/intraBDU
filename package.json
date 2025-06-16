@@ -1,5 +1,13 @@
 {
+  "name": "symfony-tailwind",
+  "version": "1.0.0",
+  "description": "Projet Symfony avec Tailwind CSS",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./assets/styles/app.css -o ./public/build/app.css --minify",
+    "watch:css": "npx tailwindcss -i ./assets/styles/app.css -o ./public/build/app.css --watch"
+  },
   "dependencies": {
+    "tailwindcss": "^3.4.1",
     "swiper": "^11.2.8"
   }
 }

@@ -1,0 +1,91 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Procédures" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="p-8">
+        <h2 class="text-primary text-xl font-semibold mb-4">Les sujets les plus consultés</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="border border-green-500 flex flex-col justify-between p-4">
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Gestion des Promotions <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Gestion des Prêts <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Traitement des Opérations Comptables <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+            <div class="border border-blue-500 flex flex-col justify-between p-4">
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Suivi de la mise en œuvre des recommandations <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Mise en place des Crédits sollicités <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Levée des garanties <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+            <div class="border border-green-500 flex flex-col justify-between p-4">
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Effectuer les blocages et clôtures de Comptes <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Changement des Souris, Claviers, etc... <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" class="inline-flex items-center hover:text-primary transition-colors duration-300 group">
+                    Gestion des Accès et Autorisation au Core Banking <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tous les processus -->
+    <section class="px-8 pb-8">
+      <h2 class="text-primary text-xl font-semibold mb-4">Tous les Processus</h2>
+
+      <div class="space-y-4">
+        <div class="bg-blue-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            {% for i in 1..6 %}
+            <div class="bg-white rounded shadow p-2 text-center">
+              <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
+              <p class="text-sm mt-2">Processus Exploitation</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="bg-gray-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            {% for i in 1..6 %}
+            <div class="bg-white rounded shadow p-2 text-center">
+              <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
+              <p class="text-sm mt-2">Processus Exploitation</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="bg-green-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            {% for i in 1..6 %}
+            <div class="bg-white rounded shadow p-2 text-center">
+              <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
+              <p class="text-sm mt-2">Processus Exploitation</p>
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  });
+</script>
+{% endblock %}

@@ -1,13 +1,15 @@
 {% extends 'front/layout.html.twig' %}
 
+{% block title "Bienvenue" %}
+
 {% block stylesheets %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 {% endblock %}
 
 {% block body %}
-<main class="relative max-w-screen-xl mx-auto px-4 mt-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="max-w-screen-xl mx-auto px-4 mt-6 grid grid-cols-1 md:grid-cols-4 gap-6">
     <!-- Colonne principale -->
-    <section class="md:col-span-3 space-y-16 md:space-y-10">
+    <section class="md:col-span-3 space-y-16 md:space-y-10 mb-12">
 
         <div class="swiper carouselSwiper w-full max-w-5xl mx-auto">
             <div class="swiper-wrapper">
@@ -283,6 +285,11 @@
                             My FAQ <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{path('dispositif_alerte')}}" class="inline-flex items-center font-bold hover:text-blue-700 transition-colors duration-300 group">
+                            Dispositif d'alerte <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -298,10 +305,7 @@
         </div>
         
     </aside>
-    
-    <!-- Équivalent de ::after -->
-    <div id="mainAfter" class="hidden absolute inset-0 backdrop-blur-sm z-[9]"></div>
-</main>
+</div>
 {% endblock %}
 
 {% block javascripts %}

@@ -11,10 +11,9 @@ Contact: +225 07 471 612 21
         <meta charset="UTF-8" />
         <meta name="author" content="EMF Technologies : Moussa Fofana" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        
-        <title>Intranet BDU-CI</title>
+        <title>{% block title %}{% endblock %} | Intraweb BDU-CI</title>
+        <meta name="keywords" content="{% block keywords %}{% endblock %}">
+        <meta name="description" content="{% block description %}{% endblock %}">
 
         <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicons/apple-touch-icon.png')}}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicons/favicon-32x32.png')}}">
@@ -26,6 +25,8 @@ Contact: +225 07 471 612 21
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         
         <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+        
+        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {% block stylesheets %}
         {% endblock %}
         <style type="text/css">
@@ -34,9 +35,15 @@ Contact: +225 07 471 612 21
     <body class="bg-white text-gray-800 font-[Roboto] text-base">
         <!-- Header -->
         {% include "front/_header.html.twig" %}
+        {# {{render('controller\\')}} #}
 
         <!-- Contenu principal -->
-        {% block body %}{% endblock %}
+        <main class="relative">
+            {% block body %}{% endblock %}
+            
+            <!-- Équivalent de ::after -->
+            <div id="mainAfter" class="hidden absolute inset-0 backdrop-blur-sm z-[9]"></div>
+        </main>
 
         <!-- Footer -->
         {% include "front/_footer.html.twig" %}
