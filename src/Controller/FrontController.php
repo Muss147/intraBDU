@@ -33,4 +33,10 @@ final class FrontController extends AbstractController
     {
         return $this->render('front/dispositif-alerte/index.html.twig');
     }
+
+    #[Route('/mediatheque', name: 'app_media')]
+    public function media(): Response
+    {
+        return $this->render('front/mediatheque.html.twig');
+    }
 }
