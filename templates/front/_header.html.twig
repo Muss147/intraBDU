@@ -71,10 +71,17 @@
                 <a href="{{path('doc_reference')}}" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-primary">Document de référence</a>
                 <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-primary">Charte graphique</a>
                 <a href="{{path('app_media')}}" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-primary">Média</a>
-                <form class="flex items-center gap-2 border-l pl-4">
+                {# <form class="flex items-center gap-2 border-l pl-4" action="{{path('annuaire')}}" method="POST">
                     <label for="search" class="text-sm">Annuaire BDU</label>
                     <input id="search" type="text" placeholder="Nom ou Direction" class="border px-2 py-1 rounded text-gray-800 text-sm focus:outline-none focus:ring-0" />
                     <button class="bg-blue-50 text-slate-700 px-2 py-1 rounded">OK</button>
+                </form> #}
+                <form class="flex items-center gap-2 border-l pl-4" action="{{path('annuaire')}}" method="POST">   
+                    <label for="search" class="text-sm">Annuaire BDU</label>
+                    <div class="relative">
+                        <input type="search" id="default-search" class="block w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-0" placeholder="Nom, ou direction..." required />
+                        <button type="submit" class="text-white absolute end-1.5 bottom-1.5 bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1 uppercase">Ok</button>
+                    </div>
                 </form>
             </nav>
         </header>

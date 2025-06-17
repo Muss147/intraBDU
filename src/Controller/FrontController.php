@@ -28,6 +28,12 @@ final class FrontController extends AbstractController
         return $this->render('front/documents-reference/procedures.html.twig');
     }
 
+    #[Route('/documents-de-reference/autres-documents', name: 'autres_docs')]
+    public function autresDocs(): Response
+    {
+        return $this->render('front/documents-reference/autres-doc.html.twig');
+    }
+
     #[Route('/dispositif-d-alerte', name: 'dispositif_alerte')]
     public function dispositifAlerte(): Response
     {
@@ -38,5 +44,11 @@ final class FrontController extends AbstractController
     public function media(): Response
     {
         return $this->render('front/mediatheque.html.twig');
+    }
+
+    #[Route('/annuaire-bdu', name: 'annuaire')]
+    public function annuaire(): Response
+    {
+        return $this->render('front/annuaire.html.twig');
     }
 }

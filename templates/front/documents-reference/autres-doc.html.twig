@@ -1,0 +1,74 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Autres documents" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen">
+      <h2 class="text-primary text-xl font-semibold mb-4">Autres documents</h2>
+
+      <div class="space-y-4">
+        <div class="rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {% for i in 1..18 %}
+            <div class="p-2 text-center">
+                <button type="button" id="dropdownRightButton_{{i}}" data-dropdown-toggle="dropdownRight_{{i}}" data-dropdown-placement="right">
+                    <img src="{{asset('assets/media/icons/folder-green.png')}}" class="mx-auto w-32 h-w-32" alt="Dossier" />
+                </button>
+                <p class="text-sm mt-2">tetetetegeb</p>
+
+                <!-- Dropdown menu -->
+                <div id="dropdownRight_{{i}}" class="text-start z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                    <div class="px-4 py-3 text-sm text-gray-900">
+                        <div class="font-medium truncate">Processus Exploitation</div>
+                        <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500">Veuillez sélectionner le sous processus :</p>
+                    </div>
+                    <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700" aria-labelledby="dropdownRightButton_{{i}}">
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Piloter et coordonner l'activité des agences</a>
+                        </li>
+                        <li>
+                            <button id="doubleDropdownButton_{{i}}" data-dropdown-toggle="doubleDropdown_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100">
+                                Gérer la rélation client
+                                <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                            </button>
+                            <div id="doubleDropdown_{{i}}" class="z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                                <div class="px-4 py-3 text-sm text-gray-900">
+                                    <div class="font-medium truncate">Gérer la rélation client</div>
+                                    <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500">Veuillez sélectionner le sous processus :</p>
+                                </div>
+                                <ul class="py-2 text-sm text-gray-700" aria-labelledby="doubleDropdownButton_{{i}}">
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Réalisation de la Prospection Client</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Gestion des reclamations client</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Réaliser les ouvertures et clotures de comptes</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Traiter les opérations de caisse</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  });
+</script>
+{% endblock %}
