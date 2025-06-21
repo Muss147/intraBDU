@@ -40,6 +40,12 @@ final class FrontController extends AbstractController
         return $this->render('front/dispositif-alerte/index.html.twig');
     }
 
+    #[Route('/foire-aux-questions', name: 'faq_alerte')]
+    public function faqAlerte(): Response
+    {
+        return $this->render('front/dispositif-alerte/faq.html.twig');
+    }
+
     #[Route('/fiche-de-declaration-d-incident', name: 'fiche_declaration')]
     public function ficheDeclaration(): Response
     {
@@ -62,5 +68,11 @@ final class FrontController extends AbstractController
     public function politiqueEthique(): Response
     {
         return $this->render('front/politique-ethique.html.twig');
+    }
+
+    #[Route('/my-faq', name: 'my_faq')]
+    public function myFAQ(): Response
+    {
+        return $this->render('front/my-faq.html.twig');
     }
 }
