@@ -70,9 +70,27 @@ final class FrontController extends AbstractController
         return $this->render('front/politique-ethique.html.twig');
     }
 
-    #[Route('/my-faq', name: 'my_faq')]
+    #[Route('/notes-et-publications', name: 'notes_publications')]
+    public function notesPublications(): Response
+    {
+        return $this->render('front/notes-publications.html.twig');
+    }
+
+    #[Route('/le-guide-du-banquier/my-faq', name: 'guide_myFaq')]
     public function myFAQ(): Response
     {
-        return $this->render('front/my-faq.html.twig');
+        return $this->render('front/le-guide-du-banquier/my-faq.html.twig');
+    }
+
+    #[Route('/le-guide-du-banquier/notes-et-publications', name: 'guide_convertisseur')]
+    public function guideConvertisseur(): Response
+    {
+        return $this->render('front/le-guide-du-banquier/convertisseur-devises.html.twig');
+    }
+
+    #[Route('/le-guide-du-banquier/simulateur-de-credit', name: 'guide_simulateur')]
+    public function guideSimulateur(): Response
+    {
+        return $this->render('front/le-guide-du-banquier/simulateur-credit.html.twig');
     }
 }
