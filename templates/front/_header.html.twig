@@ -1,11 +1,11 @@
         <!-- Barre de navigation supérieure -->
         <div class="sup-menu bg-primary text-white text-sm w-full p-4 md:py-2 hidden md:flex justify-between items-center top-[19rem] z-10">
             <div class="flex flex-wrap md:flex-nowrap gap-6">
-                <a href="#" class="">Connaître la BDU</a>
-                <a href="#" class="">Politique de Confidentialité</a>
+                <a href="https://bduci.com/a-propos/" target="_blank" class="">Connaître la BDU</a>
+                <a href="https://bduci.com/politique-de-confidentialite/" target="_blank" class="">Politique de Confidentialité</a>
                 <a href="#" class="">Offres d'emploi</a>
-                <a href="#" class="">Notre réseau</a>
-                <a href="#" class="">Organigramme</a>
+                <a href="https://bduci.com/a-propos/notre-reseau/" target="_blank" class="">Notre réseau</a>
+                <a href="{{asset('assets/docs/ORGANIGRAMME-DE-LA-BANQUE-DE-L-UNION–CoTE-D-IVOIRE.pdf')}}" download class="">Organigramme</a>
             </div>
             <div class="flex gap-3 items-center mt-8 md:mt-0">
                 <button data-modal-target="searching-modal" data-modal-toggle="searching-modal" type="button" class="flex items-center gap-3 w-[250px] 
@@ -67,7 +67,7 @@
             </button>
 
             <nav class="hidden lg:flex items-center gap-2 top-[4.5rem] start-0 z-10 bg-inherit text-sm text-blue-50 py-3">
-                <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-primary">Mot du DG</a>
+                <a href="{{path('mot_du_dg')}}" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-primary">Mot du DG</a>
                 <a href="{{path('doc_reference')}}" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-primary">Document de référence</a>
                 <a href="#" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-primary">Charte graphique</a>
                 <a href="{{path('app_media')}}" class="font-bold px-3 py-2 fw-bold hover:border-blue-50 hover:text-primary">Média</a>

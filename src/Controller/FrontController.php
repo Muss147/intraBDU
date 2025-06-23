@@ -64,6 +64,12 @@ final class FrontController extends AbstractController
         return $this->render('front/annuaire.html.twig');
     }
 
+    #[Route('/mot-du-dg', name: 'mot_du_dg')]
+    public function motDuDG(): Response
+    {
+        return $this->render('front/mot-du-dg.html.twig');
+    }
+
     #[Route('/politique-et-ethique', name: 'politique_ethique')]
     public function politiqueEthique(): Response
     {

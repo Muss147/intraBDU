@@ -103,19 +103,99 @@
         </div>
 
         <div class="bg-gray-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {% for i in 1..6 %}
+            {% for i in 7..12 %}
             <div class="bg-white rounded shadow p-2 text-center">
-              <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
-              <p class="text-sm mt-2">Processus Exploitation</p>
+                <button type="button" id="dropdownRightButton_{{i}}" data-dropdown-toggle="dropdownRight_{{i}}" data-dropdown-placement="right">
+                    <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
+                </button>
+                <p class="text-sm mt-2">Processus Exploitation</p>
+                <!-- Dropdown menu -->
+                <div id="dropdownRight_{{i}}" class="text-start z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                        <div class="font-medium truncate">Processus Exploitation</div>
+                        <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                    </div>
+                    <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_{{i}}">
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Piloter et coordonner l'activité des agences</a>
+                        </li>
+                        <li>
+                            <button id="doubleDropdownButton_{{i}}" data-dropdown-toggle="doubleDropdown_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                Gérer la rélation client
+                                <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                            </button>
+                            <div id="doubleDropdown_{{i}}" class="z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                    <div class="font-medium truncate">Gérer la rélation client</div>
+                                    <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                                </div>
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_{{i}}">
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Réalisation de la Prospection Client</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Gestion des reclamations client</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Réaliser les ouvertures et clotures de comptes</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Traiter les opérations de caisse</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             {% endfor %}
         </div>
 
         <div class="bg-green-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {% for i in 1..6 %}
+            {% for i in 13..18 %}
             <div class="bg-white rounded shadow p-2 text-center">
-              <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
-              <p class="text-sm mt-2">Processus Exploitation</p>
+                <button type="button" id="dropdownRightButton_{{i}}" data-dropdown-toggle="dropdownRight_{{i}}" data-dropdown-placement="right">
+                    <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
+                </button>
+                <p class="text-sm mt-2">Processus Exploitation</p>
+                <!-- Dropdown menu -->
+                <div id="dropdownRight_{{i}}" class="text-start z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                        <div class="font-medium truncate">Processus Exploitation</div>
+                        <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                    </div>
+                    <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_{{i}}">
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Piloter et coordonner l'activité des agences</a>
+                        </li>
+                        <li>
+                            <button id="doubleDropdownButton_{{i}}" data-dropdown-toggle="doubleDropdown_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                Gérer la rélation client
+                                <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                            </button>
+                            <div id="doubleDropdown_{{i}}" class="z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                    <div class="font-medium truncate">Gérer la rélation client</div>
+                                    <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                                </div>
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_{{i}}">
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Réalisation de la Prospection Client</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Gestion des reclamations client</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Réaliser les ouvertures et clotures de comptes</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Traiter les opérations de caisse</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             {% endfor %}
         </div>

@@ -54,51 +54,53 @@ Contact: +225 07 471 612 21
         {% endblock %}
 
         <script type="text/javascript">
-            const toggleBtn = document.getElementById("menu-toggle");
-            const topLine = toggleBtn.querySelector('.line-top');
-            const middleLine = toggleBtn.querySelector('.line-middle');
-            const bottomLine = toggleBtn.querySelector('.line-bottom');
+            document.addEventListener("DOMContentLoaded", () => {
+                const toggleBtn = document.getElementById("menu-toggle");
+                const topLine = toggleBtn.querySelector('.line-top');
+                const middleLine = toggleBtn.querySelector('.line-middle');
+                const bottomLine = toggleBtn.querySelector('.line-bottom');
 
-            const navMenu = document.querySelector('header.main-menu nav');
-            const navMenuForm = document.querySelector('header.main-menu form');
-            const supMenu = document.querySelector('.sup-menu');
-            const mainAfter = document.querySelector('#mainAfter');
+                const navMenu = document.querySelector('header.main-menu nav');
+                const navMenuForm = document.querySelector('header.main-menu form');
+                const supMenu = document.querySelector('.sup-menu');
+                const mainAfter = document.querySelector('#mainAfter');
 
-            toggleBtn.addEventListener("click", () => {
-                toggleBtn.classList.toggle("is-menuDisplayed");
+                toggleBtn.addEventListener("click", () => {
+                    toggleBtn.classList.toggle("is-menuDisplayed");
 
-                if (toggleBtn.classList.contains("is-menuDisplayed")) {
-                    topLine.classList.add("rotate-45", "translate-y-1");
-                    bottomLine.classList.add("-rotate-45", "-translate-y-1");
-                    middleLine.classList.add("opacity-0");
+                    if (toggleBtn.classList.contains("is-menuDisplayed")) {
+                        topLine.classList.add("rotate-45", "translate-y-1");
+                        bottomLine.classList.add("-rotate-45", "-translate-y-1");
+                        middleLine.classList.add("opacity-0");
 
-                    navMenu.classList.remove("hidden", "items-center");
-                    navMenu.classList.add("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
-                    navMenuForm.classList.remove("border-l");
+                        navMenu.classList.remove("hidden", "items-center");
+                        navMenu.classList.add("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
+                        navMenuForm.classList.remove("border-l");
 
-                    supMenu.classList.remove("hidden");
-                    supMenu.classList.add("absolute", "p-5", "shadow-xl");
+                        supMenu.classList.remove("hidden");
+                        supMenu.classList.add("absolute", "p-5", "shadow-xl");
 
-                    mainAfter.classList.remove("hidden");
-                } else closeMenu();
-            });
+                        mainAfter.classList.remove("hidden");
+                    } else closeMenu();
+                });
 
-            mainAfter.addEventListener("click", () => {closeMenu()});
-            
-            function closeMenu() {
-                topLine.classList.remove("rotate-45", "translate-y-1");
-                bottomLine.classList.remove("-rotate-45", "-translate-y-1");
-                middleLine.classList.remove("opacity-0");
+                mainAfter.addEventListener("click", () => {closeMenu()});
+                
+                function closeMenu() {
+                    topLine.classList.remove("rotate-45", "translate-y-1");
+                    bottomLine.classList.remove("-rotate-45", "-translate-y-1");
+                    middleLine.classList.remove("opacity-0");
 
-                navMenu.classList.add("hidden", "items-center");
-                navMenu.classList.remove("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
-                navMenuForm.classList.add("border-l");
+                    navMenu.classList.add("hidden", "items-center");
+                    navMenu.classList.remove("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
+                    navMenuForm.classList.add("border-l");
 
-                supMenu.classList.add("hidden");
-                supMenu.classList.remove("absolute", "p-5", "shadow-xl");
+                    supMenu.classList.add("hidden");
+                    supMenu.classList.remove("absolute", "p-5", "shadow-xl");
 
-                mainAfter.classList.add("hidden");
-            }
+                    mainAfter.classList.add("hidden");
+                }
+            })
         </script>
     </body>
 </html>
