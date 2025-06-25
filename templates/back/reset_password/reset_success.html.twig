@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+Author: Moussa Fofana
+Product Name: Le Passage Lumière
+Website: https://www.moussa-fofana.site
+Email: hello@moussa-fofana.com
+Contact: +225 07 471 612 21
+-->
+<html
+	lang="fr">
+	<!--begin::Head-->
+	<head>
+		<title>Mot de passe modifié | ERP SIA</title>
+		<meta charset="utf-8"/>
+        <meta name="author" content="Digit Communication : Moussa Fofana" />
+		<meta name="description" content=""/>
+		<meta name="keywords" content=""/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        
+		<!--begin::Fonts(mandatory for all pages)-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+        <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <section class="bg-primary" style="height: 100vh;">
+            <div class="container d-flex flex-column flex-center h-100">
+                <div class="row w-75">
+                    <div class="col-md-5 bg-lightgrey" style="background: #c3c3c3 url({{asset('assets/media/bg/auth-screens.png')}}) center / contain no-repeat;"></div>
+                    <div class="col-md-7 d-flex flex-column justofy-content-evenly bg-white px-3 px-md-5 py-10 py-md-10">
+                        <div
+                            class="text-center mb-11">
+                            <!--begin::Title-->
+							<h1 class="fw-bolder text-gray-900 mb-5">
+                                Mot de passe modifié
+							</h1>
+							<!--end::Title-->
+
+							<!--begin::Message-->
+							<div class="fs-6 fw-semibold text-gray-500 mb-10">
+								Votre mot de passe a été modifié avec succès. Vous pouvez désormais vous connecter avec vos nouveaux identifiants sur la page de connexion
+							</div>
+							<!--end::Message-->
+
+							<!--begin::Link-->
+							<div class="mb-11">
+								<a href="{{path('login')}}" class="btn btn-sm btn-primary">Se connecter</a>
+							</div>
+							<!--end::Link-->
+                        </div>
+                        <!--begin::Heading-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    </body>
+</html>

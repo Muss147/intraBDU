@@ -4,15 +4,34 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
+        admin_provid:
+            entity:
+                class: App\Entity\Users
+                property: email
         users_in_memory: { memory: null }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin:
+            pattern: ^/espace-admin
+            lazy: true
+            provider: admin_provid
+            form_login:
+                login_path: login
+                check_path: login
+                enable_csrf: true
+            remember_me:
+                secret:   '%kernel.secret%' # required
+                lifetime: 604800 # 1 week in seconds
+            logout:
+                path: logout
+                # where to redirect after logout
+                target: login
+        
         main:
             lazy: true
             provider: users_in_memory
-
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -22,8 +41,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/espace-admin/login, roles: PUBLIC_ACCESS }
+        - { path: ^/espace-admin/compte-desactive, roles: PUBLIC_ACCESS }
+        - { path: ^/espace-admin/mot-de-passe-oublie/*, roles: PUBLIC_ACCESS }
+        - { path: ^/espace-admin, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
 
 when@test:
     security:

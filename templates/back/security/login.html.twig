@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+Author: Moussa Fofana
+Product Name: Le Passage Lumière
+Website: https://www.moussa-fofana.site
+Email: hello@moussa-fofana.com
+Contact: +225 07 471 612 21
+-->
+<html
+	lang="fr">
+	<!--begin::Head-->
+	<head>
+		<title>Connexion | ERP SIA</title>
+		<meta charset="utf-8"/>
+        <meta name="author" content="Digit Communication : Moussa Fofana" />
+		<meta name="description" content=""/>
+		<meta name="keywords" content=""/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        
+		<!--begin::Fonts(mandatory for all pages)-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+		<!--end::Fonts-->
+
+		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+		<link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css"/> 
+        <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('assets/css/style.custom.css')}}" rel="stylesheet" type="text/css"/>
+		<!--end::Global Stylesheets Bundle-->
+    </head>
+    <body>
+        <div
+            class="d-flex flex-column flex-root bg-primary-o" id="kt_app_root">
+            
+            <!--begin::Authentication - Signup Welcome Message -->
+            <div
+                class="d-flex flex-column flex-center flex-column-fluid">
+                <!--begin::Content-->
+                <div
+                    class="d-flex flex-column flex-center p-10 h-lg-75">
+                    <!--begin::Wrapper-->
+                    <div class="card card-flush w-lg-950px h-100">
+                        <div
+                            class="card-body p-0 h-100">
+                            
+                            <div class="d-flex flex-column flex-column-fluid flex-lg-row rounded overflow-hidden h-100">
+                                <div class="min-w-lg-350px bg-lightgrey" style="background: #c3c3c3 url({{asset('assets/media/bg/auth-screens.png')}}) center / contain no-repeat;"></div>
+                                <div class="d-flex flex-column-fluid flex-lg-row-1 justify-content-center justify-content-lg-end">
+                                    <div class="bg-body d-flex flex-column align-items-stretch flex-center w-100 p-20">
+                                        <!--begin::Form-->
+                                        <form
+                                            class="form" id="kt_sign_in_form" action="" method="POST">
+                                            <!--begin::Heading-->
+                                            <div
+                                                class="text-center mb-11">
+                                                <!--begin::Title-->
+                                                <h1 class="text-gray-900 fw-bolder mb-3">
+                                                    Connexion
+                                                </h1>
+                                                <!--end::Title-->
+
+                                                <!--begin::Subtitle-->
+                                                <div class="text-gray-500 fw-semibold fs-6">
+                                                    Bienvue sur votre espace d'administration
+                                                </div>
+                                                <!--end::Subtitle-->
+                                            </div>
+                                            <!--begin::Heading-->
+
+                                            {% if error %}
+                                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                            {% endif %}
+
+                                            <!--begin::Input group-->
+                                            <div
+                                                class="fv-row mb-8 fv-plugins-icon-container">
+                                                <label class="form-label" for="_username">Email</label>
+                                                <!--begin::Email-->
+                                                <input
+                                                type="text" id="_username" name="_username" autocomplete="off" class="form-control" value="{{ last_username }}" required />
+                                            <!--end::Email-->
+                                            </div>
+
+                                            <!--end::Input group-->
+                                            <div
+                                                class="fv-row mb-3 fv-plugins-icon-container">
+                                                <label class="form-label" for="_password">Mot de passe</label>
+                                                <!--begin::Password-->
+                                                <input
+                                                type="password" id="_password" name="_password" autocomplete="off" class="form-control" required />
+                                            <!--end::Password-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <input
+                                            type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex justify-content-between flex-wrap gap-3 fs-base fw-semibold mb-8">
+                                                <div class="form-check form-check-custom form-check-info form-check-solid form-check-sm">
+                                                    <input class="form-check-input" type="checkbox" name="_remember_me" id="_remember_me">
+                                                    <label class="form-check-label" for="_remember_me">Rester connecté</label>
+                                                </div>
+
+                                                <!--begin::Link-->
+                                                <a href="{{path('app_forgot_password_request')}}" class="link-primary">
+                                                    Mot de passe oublié ?
+                                                </a>
+                                                <!--end::Link-->
+                                            </div>
+                                            <!--end::Wrapper-->
+
+                                            <!--begin::Submit button-->
+                                            <div class="d-grid mb-10">
+                                                <button
+                                                    type="submit" id="kt_sign_in_submit" class="btn btn-primary py-2">
+
+                                                    <!--begin::Indicator label-->
+                                                    <span class="indicator-label">
+                                                        Se connecter</span>
+                                                    <!--end::Indicator label-->
+
+                                                    <!--begin::Indicator progress-->
+                                                    <span class="indicator-progress">
+                                                        Veuillez patienter...
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                    </span>
+                                                    <!--end::Indicator progress-->
+                                                </button>
+                                            </div>
+                                            <!--end::Submit button-->
+                                        </form>
+                                        <!--end::Form-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Authentication - Signup Welcome Message-->
+        </div>
+
+		<!--begin::Javascript-->
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+        <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"> </script>
+		<script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
+		<!--end::Global Javascript Bundle-->
+
+		<script src="{{asset('assets/js/custom/authentication/sign-in/general.js')}}"></script>
+    </body>
+</html>
