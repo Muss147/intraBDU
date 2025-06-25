@@ -454,7 +454,7 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'projets_manage' %} here show{% endif %}">
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'pages_builder' %} here show{% endif %}">
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
                                                 <span class="menu-icon">
@@ -463,7 +463,7 @@ Contact: +225 07 471 612 21
                                                         <span class="path2"></span>
                                                     </i>
                                                 </span>
-                                                <span class="menu-title">Projects</span>
+                                                <span class="menu-title">Pages builder</span>
                                                 <span class="menu-arrow"></span>
                                             </span>
                                             <!--end:Menu link-->
@@ -472,11 +472,11 @@ Contact: +225 07 471 612 21
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item">
                                                     <!--begin:Menu link-->
-                                                    <a class="menu-link{% if app.session.get('subMenu') == 'projets' %} active{% endif %}" href="">
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'carousel' %} active{% endif %}" href="{{path('carousel')}}">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                                                        <span class="menu-title">Liste des projets</span>
+                                                        <span class="menu-title">Home carousel</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>
@@ -484,11 +484,11 @@ Contact: +225 07 471 612 21
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item">
                                                     <!--begin:Menu link-->
-                                                    <a class="menu-link{% if app.session.get('subMenu') == 'contrats' %} active{% endif %}" href="">
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'banners' %} active{% endif %}" href="">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                                                        <span class="menu-title">Contrats</span>
+                                                        <span class="menu-title">Banners</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>
@@ -508,7 +508,7 @@ Contact: +225 07 471 612 21
                                                         <span class="path3"></span>
                                                     </i>
                                                 </span>
-                                                <span class="menu-title">Clients</span>
+                                                <span class="menu-title">L'Étoile du Mois</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -523,7 +523,7 @@ Contact: +225 07 471 612 21
                                                         <span class="path2"></span>
                                                     </i>
                                                 </span>
-                                                <span class="menu-title">Fournisseurs</span>
+                                                <span class="menu-title">Agents employés</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -538,7 +538,22 @@ Contact: +225 07 471 612 21
                                                         <span class="path2"></span>
                                                     </i>
                                                 </span>
-                                                <span class="menu-title">Bordereau des Prix Unitaires</span>
+                                                <span class="menu-title">Documents de référence</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                        <!--begin:Menu item-->
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="" class="menu-link{% if app.session.get('menu') == 'bpu' %} active{% endif %}">
+                                                <span class="menu-icon">
+                                                    <i class="ki-duotone ki-some-files fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </span>
+                                                <span class="menu-title">Offres d'emploi</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -553,7 +568,7 @@ Contact: +225 07 471 612 21
                                                         <span class="path2"></span>
                                                     </i>
                                                 </span>
-                                                <span class="menu-title">Utilitaires</span>
+                                                <span class="menu-title">Médiathèque</span>
                                             </a>
                                             <!--end:Menu link-->-
                                         </div>
