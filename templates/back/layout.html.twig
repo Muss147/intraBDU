@@ -298,9 +298,9 @@ Contact: +225 07 471 612 21
 							class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
 							<a href="" class="d-flex gap-2 gap-md-4">
-								<img alt="Logo" src="{{asset('assets/media/logos/logo-white.png')}}" class="h-25px app-sidebar-logo-default"/>
-                                <img alt="Logo" src="{{asset('assets/media/logos/logo-white.png')}}" class="h-20px app-sidebar-logo-minimize">
-                                <span class="text-gray-300 fs-3 fw-bold item-fadable">Espace Admin</span>
+								{# <img alt="Logo" src="{{asset('assets/media/logos/logo-white.png')}}" class="h-25px app-sidebar-logo-default"/>
+                                <img alt="Logo" src="{{asset('assets/media/logos/logo-white.png')}}" class="h-20px app-sidebar-logo-minimize"> #}
+                                <span class="text-gray-300 fs-3 fw-bold item-fadable"><span class="d-none d-sm-inline">Espace </span>Admin</span>
 							</a>
 							<!--end::Logo image-->
                             <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate " data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
@@ -477,6 +477,7 @@ Contact: +225 07 471 612 21
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Home carousel</span>
+                                                        <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>
@@ -484,7 +485,32 @@ Contact: +225 07 471 612 21
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item">
                                                     <!--begin:Menu link-->
-                                                    <a class="menu-link{% if app.session.get('subMenu') == 'banners' %} active{% endif %}" href="">
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'actualites' %} active{% endif %} disabled cursor-not-allowed" href="javascript:;">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Actualités</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'notes_publications' %} active{% endif %}" href="{{path('app_notes_publications')}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Notes & Publications</span>
+                                                        <span class="badge badge-light-danger">New</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'banners' %} active{% endif %} disabled cursor-not-allowed" href="javascript:;">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
@@ -500,12 +526,11 @@ Contact: +225 07 471 612 21
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <!--begin:Menu link-->
-                                            <a href="" class="menu-link{% if app.session.get('menu') == 'clients' %} active{% endif %}">
+                                            <a href="javascript:;" class="menu-link{% if app.session.get('menu') == 'clients' %} active{% endif %} disabled cursor-not-allowed">
                                                 <span class="menu-icon">
-                                                    <i class="ki-duotone ki-address-book fs-2">
+                                                    <i class="ki-duotone ki-abstract-23 fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
-                                                        <span class="path3"></span>
                                                     </i>
                                                 </span>
                                                 <span class="menu-title">L'Étoile du Mois</span>
@@ -516,22 +541,24 @@ Contact: +225 07 471 612 21
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <!--begin:Menu link-->
-                                            <a href="" class="menu-link{% if app.session.get('menu') == 'fournisseurs' %} active{% endif %}">
+                                            <a href="{{path('app_agents')}}" class="menu-link{% if app.session.get('menu') == 'fournisseurs' %} active{% endif %}">
                                                 <span class="menu-icon">
-                                                    <i class="ki-duotone ki-briefcase fs-2">
+                                                    <i class="ki-duotone ki-address-book fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
+                                                        <span class="path3"></span>
                                                     </i>
                                                 </span>
                                                 <span class="menu-title">Agents employés</span>
+                                                <span class="badge badge-light-danger">New</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'documents' %} here show{% endif %}">
                                             <!--begin:Menu link-->
-                                            <a href="" class="menu-link{% if app.session.get('menu') == 'bpu' %} active{% endif %}">
+                                            <span class="menu-link">
                                                 <span class="menu-icon">
                                                     <i class="ki-duotone ki-some-files fs-2">
                                                         <span class="path1"></span>
@@ -539,16 +566,47 @@ Contact: +225 07 471 612 21
                                                     </i>
                                                 </span>
                                                 <span class="menu-title">Documents de référence</span>
-                                            </a>
+                                                <span class="menu-arrow"></span>
+                                            </span>
                                             <!--end:Menu link-->
+                                            <!--begin:Menu sub-->
+                                            <div class="menu-sub menu-sub-accordion">
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'procedures' %} active{% endif %}" href="{{path('app_documents', {type: 'Procedures'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Procedures</span>
+                                                        <span class="badge badge-light-danger">New</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'autres_documents' %} active{% endif %}" href="{{path('app_documents', {type: 'Autres documents'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Autres documents</span>
+                                                        <span class="badge badge-light-danger">New</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                            </div>
+                                            <!--end:Menu sub-->
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <!--begin:Menu link-->
-                                            <a href="" class="menu-link{% if app.session.get('menu') == 'bpu' %} active{% endif %}">
+                                            <a href="javascript:;" class="menu-link{% if app.session.get('menu') == 'bpu' %} active{% endif %} disabled cursor-not-allowed">
                                                 <span class="menu-icon">
-                                                    <i class="ki-duotone ki-some-files fs-2">
+                                                    <i class="ki-duotone ki-briefcase fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
@@ -561,7 +619,7 @@ Contact: +225 07 471 612 21
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion disabled">
                                             <!--begin:Menu link-->
-                                            <a href="" class="menu-link{% if app.session.get('menu') == 'utilitaires' %} active{% endif %}">
+                                            <a href="{{path('app_medias')}}" class="menu-link{% if app.session.get('menu') == 'medias' %} active{% endif %}">
                                                 <span class="menu-icon">
                                                     <i class="ki-duotone ki-chart fs-2">
                                                         <span class="path1"></span>
@@ -569,8 +627,68 @@ Contact: +225 07 471 612 21
                                                     </i>
                                                 </span>
                                                 <span class="menu-title">Médiathèque</span>
+                                                <span class="badge badge-light-danger">New</span>
                                             </a>
-                                            <!--end:Menu link-->-
+                                            <!--end:Menu link-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                        <!--begin:Menu item-->
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'parametres' %} here show{% endif %}">
+                                            <!--begin:Menu link-->
+                                            <span class="menu-link">
+                                                <span class="menu-icon">
+                                                    <i class="ki-duotone ki-some-files fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </span>
+                                                <span class="menu-title">Paramètres</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu sub-->
+                                            <div class="menu-sub menu-sub-accordion">
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'agences' %} active{% endif %}" href="{{path('param_type', {type: 'agences'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Agences</span>
+                                                        <span class="badge badge-light-danger">New</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'directions' %} active{% endif %}" href="{{path('param_type', {type: 'directions', 'parent': 'agences'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Directions</span>
+                                                        <span class="badge badge-light-danger">New</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'services' %} active{% endif %}" href="{{path('param_type', {type: 'services', 'parent': 'directions'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Services</span>
+                                                        <span class="badge badge-light-danger">New</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                            </div>
+                                            <!--end:Menu sub-->
                                         </div>
                                         <!--end:Menu item-->
                                     </div>

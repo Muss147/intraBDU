@@ -52,7 +52,7 @@ class UsersType extends AbstractType
                                 'image/jpeg',
                                 'image/png',
                             ],
-                            'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG)',
+                            'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG)',
                         ])
                     ],
                 ])
@@ -94,7 +94,7 @@ class UsersType extends AbstractType
                                 'image/jpeg',
                                 'image/png',
                             ],
-                            'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG)',
+                            'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG)',
                         ])
                     ],
                 ])

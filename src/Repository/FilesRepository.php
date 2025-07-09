@@ -29,13 +29,15 @@ class FilesRepository extends ServiceEntityRepository
            ;
        }
 
-    //    public function findOneBySomeField($value): ?Files
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+       public function findAllBy($value): array
+       {
+           return $this->createQueryBuilder('f')
+               ->andWhere('f.type = :val')
+               ->setParameter('val', $value)
+                ->andWhere('f.deletedAt IS NULL')
+                ->orderBy('f.id', 'DESC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 }

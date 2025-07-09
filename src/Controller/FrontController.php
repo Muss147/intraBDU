@@ -2,17 +2,30 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Agents;
+use App\Entity\NotesPublications;
+use App\Repository\FilesRepository;
+use App\Repository\AgentsRepository;
+use App\Repository\SlidersRepository;
+use App\Repository\DocumentsRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\NotesPublicationsRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class FrontController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
-    public function home(): Response
+    public function home(
+        SlidersRepository $slidersRepository,
+        NotesPublicationsRepository $notesPublicationsRepository
+        ): Response
     {
         return $this->render('front/home.html.twig', [
-            'controller_name' => 'FrontController',
+            'slides' => $slidersRepository->findAllOnline(),
+            'notes' => $notesPublicationsRepository->findAllOnline(3),
         ]);
     }
     
@@ -23,15 +36,20 @@ final class FrontController extends AbstractController
     }
 
     #[Route('/documents-de-reference/prodecures', name: 'procedures')]
-    public function procedures(): Response
+    public function procedures(DocumentsRepository $documentsRepository): Response
     {
-        return $this->render('front/documents-reference/procedures.html.twig');
+        return $this->render('front/documents-reference/procedures.html.twig', [
+            'moreViewed' => $documentsRepository->moreViewed(),
+            'documents' => $documentsRepository->findByType('procedures')
+        ]);
     }
 
     #[Route('/documents-de-reference/autres-documents', name: 'autres_docs')]
-    public function autresDocs(): Response
+    public function autresDocs(DocumentsRepository $documentsRepository): Response
     {
-        return $this->render('front/documents-reference/autres-doc.html.twig');
+        return $this->render('front/documents-reference/autres-doc.html.twig', [
+            'documents' => $documentsRepository->findByType('Autres documents')
+        ]);
     }
 
     #[Route('/dispositif-d-alerte', name: 'dispositif_alerte')]
@@ -52,16 +70,44 @@ final class FrontController extends AbstractController
         return $this->render('front/dispositif-alerte/fiche-declaration.html.twig');
     }
 
-    #[Route('/mediatheque', name: 'app_media')]
-    public function media(): Response
+    #[Route('/mediatheque', name: 'mediatheque')]
+    public function media(FilesRepository $filesRepository): Response
     {
-        return $this->render('front/mediatheque.html.twig');
+        return $this->render('front/mediatheque.html.twig', [
+            'medias' => $filesRepository->findAllBy('medias')
+        ]);
     }
 
-    #[Route('/annuaire-bdu', name: 'annuaire')]
-    public function annuaire(): Response
+    #[Route('/annuaire', name: 'annuaire')]
+    public function annuaire(Request $request, AgentsRepository $agentsRepository, PaginatorInterface $paginator): Response
     {
-        return $this->render('front/annuaire.html.twig');
+        $term = $request->request->get('research', $request->query->get('research', ''));
+
+        $query = $agentsRepository->getFilteredQuery($term);
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            9 // 9 agents par page
+        );
+
+        if ($request->isXmlHttpRequest() || $request->headers->get('Turbo-Frame')) {
+            return $this->render('front/annuaire/_agents.html.twig', [
+                'pagination' => $pagination,
+                'term' => $term
+            ]);
+        }
+        return $this->render('front/annuaire/index.html.twig', [
+            'pagination' => $pagination,
+            'term' => $term
+        ]);
+    }
+
+    #[Route('/annuaire/agent/{id}', name: 'agent_modal')]
+    public function showAgentModal(Agents $agent): Response
+    {
+        return $this->render('front/annuaire/_agent_modal.html.twig', [
+            'agent' => $agent,
+        ]);
     }
 
     #[Route('/mot-du-dg', name: 'mot_du_dg')]
@@ -77,9 +123,11 @@ final class FrontController extends AbstractController
     }
 
     #[Route('/notes-et-publications', name: 'notes_publications')]
-    public function notesPublications(): Response
+    public function notesPublications(NotesPublicationsRepository $notesPublicationsRepository): Response
     {
-        return $this->render('front/notes-publications.html.twig');
+        return $this->render('front/notes-publications/liste.html.twig', [
+            'notes' => $notesPublicationsRepository->findAllOnline(),
+        ]);
     }
 
     #[Route('/le-guide-du-banquier/my-faq', name: 'guide_myFaq')]

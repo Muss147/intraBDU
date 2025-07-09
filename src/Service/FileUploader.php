@@ -31,6 +31,9 @@ class FileUploader
             throw new \Exception("Type de fichier non pris en charge.");
         }
 
+        $fileSize = $file->getSize();
+        $originalFilename = $file->getClientOriginalName();
+
         if ($file->getSize() > $this->maxFileSize[$fileType]) {
             throw new FileException("Le fichier est trop volumineux. La taille maximale autorisée est de " . $this->maxFileSize[$fileType] / 1024 / 1024 . "MB.");
         }
@@ -43,7 +46,9 @@ class FileUploader
             $file->move($this->targetDirectory . '/' . $fileType, $fileName);
             return [
                 'type' => $fileType,
-                'filename' => $filePath
+                'filename' => $filePath,
+                'originalName' => $originalFilename,
+                'size' => round($fileSize / 1024, 0) . ' Ko'
             ];
         } catch (FileException $e) {
             throw new FileException("Échec du téléchargement du fichier : " . $e->getMessage());

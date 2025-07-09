@@ -39,9 +39,16 @@ class Parametres extends EntityBase
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
     private Collection $children;
 
+    /**
+     * @var Collection<int, Agents>
+     */
+    #[ORM\OneToMany(targetEntity: Agents::class, mappedBy: 'service')]
+    private Collection $agents;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->agents = new ArrayCollection();
     }
 
     
@@ -150,6 +157,36 @@ class Parametres extends EntityBase
             // set the owning side to null (unless already changed)
             if ($child->getParent() === $this) {
                 $child->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Agents>
+     */
+    public function getAgents(): Collection
+    {
+        return $this->agents;
+    }
+
+    public function addAgents(Agents $agents): static
+    {
+        if (!$this->agents->contains($agents)) {
+            $this->agents->add($agents);
+            $agents->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgents(Agents $agents): static
+    {
+        if ($this->agents->removeElement($agents)) {
+            // set the owning side to null (unless already changed)
+            if ($agents->getService() === $this) {
+                $agents->setService(null);
             }
         }
 

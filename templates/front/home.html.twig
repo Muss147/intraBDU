@@ -13,46 +13,23 @@
 
         <div class="swiper carouselSwiper w-full max-w-5xl mx-auto">
             <div class="swiper-wrapper">
+                {% for slide in slides %}
                 <div class="swiper-slide relative rounded-sm">
-                    <img src="{{asset('assets/media/covers/cover1.png')}}" class="h-64 w-full object-cover rounded-sm" />
+                    <img src="{{asset(slide.image.filename)}}" class="h-64 w-full object-cover rounded-sm" />
                     <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center md:justify-start px-5 md:px-12">
-                        {# <div class="text-center md:text-start">
-                            <h3 class="font-medium text-primary text-3xl mb-5">Titre 1</h3>
-                            <p class="text-gray-600 text-lg">Texte de description 1</p>
-                            <a href="#" class="inline-flex items-center font-bold text-xl text-secondary hover:text-green-700 transition-colors duration-300 group">
-                                En savoir plus
+                        {% if slide.titre or slide.description or slide.bouton %}
+                        <div class="text-center md:text-start">
+                            {{slide.titre ? '<h3 class="font-medium text-primary text-3xl mb-5">'~ slide.titre ~'</h3>' : ''}}
+                            {{slide.description ? '<p class="text-gray-600 text-lg">'~ slide.description ~'</p>' : ''}}
+                            {{slide.bouton ? '<a href="'~ slide.lien ~'" class="inline-flex items-center font-bold text-xl text-secondary hover:text-green-700 transition-colors duration-300 group">
+                                '~ slide.bouton ~'
                                 <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
-                            </a>
-                        </div> #}
+                            </a>' : ''}}
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="swiper-slide relative rounded-sm">
-                    <img src="{{asset('assets/media/covers/cover2.png')}}" class="h-64 w-full object-cover rounded-sm" />
-                    <div class="absolute top-0 left-0 w-full h-full flex items-center px justify-center md:justify-start-5 md:px-12">
-                        {# <div class="text-center md:text-start">
-                            <h3 class="font-medium text-primary text-3xl mb-5">Titre 2</h3>
-                            <p class="text-gray-600 text-lg">Texte de description 2</p>
-                            <a href="#" class="inline-flex items-center font-bold text-xl text-secondary hover:text-green-700 transition-colors duration-300 group">
-                                En savoir plus
-                                <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
-                            </a>
-                        </div> #}
-                    </div>
-                </div>
-                <div class="swiper-slide relative rounded-sm">
-                    <img src="{{asset('assets/media/covers/cover3.png')}}" class="h-64 w-full object-cover rounded-sm" />
-                    <div class="absolute top-0 left-0 w-full h-full flex items-center px justify-center md:justify-start-5 md:px-12">
-                        {# <div class="text-center md:text-start">
-                            <h3 class="font-medium text-primary text-3xl mb-5">Titre 3</h3>
-                            <p class="text-gray-600 text-lg">Texte de description 3</p>
-                            <a href="#" class="inline-flex items-center font-bold text-xl text-secondary hover:text-green-700 transition-colors duration-300 group">
-                                En savoir plus
-                                <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
-                            </a>
-                        </div> #}
-                    </div>
-                </div>
-                <!-- Ajoute d'autres slides -->
+                {% endfor %}
             </div>
 
             <div class="swiper-pagination mt-4"></div>
@@ -95,24 +72,14 @@
             </div>
 
             <ul class="mt-4 space-y-3">
+                {% for note in notes %}
                 <li class="flex items-center gap-3">
                     <span class="flex-none w-4 h-4 bg-[#6ca942]"></span>
                     <a href="" class="text-sm leading-snug inline-flex items-center font-bold hover:text-primary transition-colors duration-300 group">
-                        INNOVATION'S DAY 2025
+                        {{note.titre}}
                     </a>
                 </li>
-                <li class="flex items-center gap-3">
-                    <span class="flex-none w-4 h-4 bg-[#6ca942]"></span>
-                    <a href="" class="text-sm leading-snug inline-flex items-center font-bold hover:text-primary transition-colors duration-300 group">
-                        Excellente Journée Internationale des Droits de la Femme 2025
-                    </a>
-                </li>
-                <li class="flex items-center gap-3">
-                    <span class="flex-none w-4 h-4 bg-[#6ca942]"></span>
-                    <a href="" class="text-sm leading-snug inline-flex items-center font-bold hover:text-primary transition-colors duration-300 group">
-                        Lancement de la campagne RAMADAN-PAKINOU 2025 – « Les 10 Ans de Partage : Une Décennie de Lumière et de Générosité »
-                    </a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
 

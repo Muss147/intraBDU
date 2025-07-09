@@ -30,6 +30,9 @@ class Sliders extends EntityBase
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Files $image = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $online = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +99,18 @@ class Sliders extends EntityBase
     public function setImage(?Files $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function isOnline(): ?bool
+    {
+        return $this->online;
+    }
+
+    public function setOnline(?bool $online): static
+    {
+        $this->online = $online;
 
         return $this;
     }

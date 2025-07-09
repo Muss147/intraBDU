@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Doctrine\ORM\EntityRepository;
 
 class ParametresType extends AbstractType
 {
@@ -16,13 +16,20 @@ class ParametresType extends AbstractType
     {
         $builder
             ->add('libelle')
-            // ->add('description')
+            ->add('description')
             // ->add('type', HiddenType::class)
-            // ->add('parent', HiddenType::class)
-            // ->add('parent', EntityType::class, [
-            //     'class' => Parametres::class,
-            //     'choice_label' => 'id',
-            // ])
+            ->add('parent', EntityType::class, [
+                'class' => Parametres::class,
+                'choice_label' => 'libelle',
+                'required' => false,
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('p')
+                        ->where('p.type = :type')
+                        ->andWhere('p.deletedAt IS NULL')
+                        ->setParameter('type', $options['type'])
+                    ;
+                },
+            ])
         ;
     }
 
@@ -30,6 +37,7 @@ class ParametresType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Parametres::class,
+            'type' => '',
         ]);
     }
 }

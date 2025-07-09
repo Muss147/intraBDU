@@ -1,0 +1,100 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Annuaire BDU" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-primary text-xl font-semibold mb-4">Annuaire BDU</h2>
+
+        <form class="max-w-lg mx-auto" method="get" action="{{ path('annuaire') }}">   
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" name="research" value="{{ term }}" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary focus:border-primary" placeholder="Rechercher un nom, un poste ou une direction..." required />
+                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Rechercher</button>
+            </div>
+        </form>
+
+        <turbo-frame id="annuaire_results">
+            {% include 'front/annuaire/_agents.html.twig' %}
+        </turbo-frame>
+
+    </section>
+    
+    <!-- Modals -->
+    <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <!-- Modal content -->
+        <div class="relative w-full max-w-md max-h-full bg-white rounded-lg shadow-sm">
+            <!-- Modal body -->
+            <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                <div class="flex justify-end px-4 pt-4"></div>
+                <div class="flex flex-col items-center pb-10">
+                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{asset('assets/media/actualites/image6.png')}}" alt="Bonnie image"/>
+                    <h5 class="mb-1 text-xl font-medium text-gray-900">Idrissa Welle Diallo</h5>
+                    <span class="text-sm text-gray-500">Directeur Général</span>
+                    
+                    <div class="flex mt-4 md:mt-6 gap-2" data-tabs-toggle="#default-tab-content" role="tablist">
+                        <button id="vote-tab"
+                            type="button"
+                            role="tab"
+                            data-tabs-target="#vote"
+                            aria-controls="vote"
+                            aria-selected="true"
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                            Voter
+                        </button>
+                        <button id="contact-tab"
+                            type="button"
+                            role="tab"
+                            data-tabs-target="#contact"
+                            aria-controls="contact"
+                            aria-selected="false"
+                            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary">
+                            Contact
+                        </button>
+                    </div>
+
+                    <!-- Tabs content -->
+                    <div id="default-tab-content">
+                        <div class="hidden p-4 rounded-lg bg-gray-50" id="vote" role="tabpanel" aria-labelledby="vote-tab">
+                            <p class="text-sm text-gray-500">Contenu de l'onglet Vote</p>
+                        </div>
+                        <div class="hidden p-4 rounded-lg bg-gray-50" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <p class="text-sm text-gray-500">Contenu de l'onglet Message</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('small-modal');
+
+        document.querySelectorAll('[data-modal-toggle="small-modal"]').forEach(button => {
+            button.addEventListener('click', () => {
+                const data = JSON.parse(button.dataset.agent);
+
+                modal.querySelector('img').src = data.photo;
+                modal.querySelector('h5').textContent = `${data.nom} ${data.prenoms}`;
+                modal.querySelector('span.text-sm').textContent = data.fonction;
+                // modal.querySelector('a[href^="mailto"]').href = `mailto:${data.email}`;
+            });
+        });
+    });
+</script>
+{% endblock %}

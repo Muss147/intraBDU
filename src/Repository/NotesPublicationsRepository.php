@@ -16,28 +16,29 @@ class NotesPublicationsRepository extends ServiceEntityRepository
         parent::__construct($registry, NotesPublications::class);
     }
 
-    //    /**
-    //     * @return NotesPublications[] Returns an array of NotesPublications objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('n.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       /**
+        * @return NotesPublications[] Returns an array of NotesPublications objects
+        */
+       public function findAll(): array
+       {
+           return $this->createQueryBuilder('n')
+                ->andWhere('n.deletedAt IS NULL')
+               ->orderBy('n.id', 'ASC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
-    //    public function findOneBySomeField($value): ?NotesPublications
-    //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+       public function findAllOnline($nombre = 20): array
+       {
+           return $this->createQueryBuilder('n')
+                ->andWhere('n.deletedAt IS NULL')
+               ->andWhere('n.online = :val')
+               ->setParameter('val', true)
+                ->orderBy('n.createdAt', 'DESC')
+                ->setMaxResults($nombre)
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 }

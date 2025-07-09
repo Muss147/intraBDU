@@ -11,61 +11,28 @@
     <section class="">
         <h2 class="text-primary text-xl font-semibold mb-4">Médiatèque</h2>
         
-        <div class="flex items-center justify-center py-4 md:py-8 flex-wrap">
-            <button type="button" class="text-primary hover:text-white border border-primary bg-white hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Toute categorie</button>
-            <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Banque</button>
-            <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Social</button>
-            <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Electroniques</button>
-            <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Fun</button>
-        </div>
+        {# <div class="flex items-center py-4 md:py-8 flex-wrap">
+            <button type="button" class="text-primary hover:text-white border border-primary bg-white hover:bg-primary focus:ring-1 focus:outline-none focus:ring-blue-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Toute categorie</button>
+            <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-1 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Banque</button>
+            <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-1 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Social</button>
+            <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-1 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Electroniques</button>
+            <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-1 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Fun</button>
+        </div> #}
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="grid grid-rows-7 gap-4">
-                <a href="javascript:;" class="row-span-3" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/visuel-Bank-to-Wallet.png')}}" alt="">
-                </a>
-                <a href="javascript:;" class="row-span-2" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/E-Banking.jpg')}}" alt="">
-                </a>
-                <a href="javascript:;" class="row-span-2" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/Avance.jpg')}}" alt="">
-                </a>
-            </div>
-            <div class="grid gap-4">
-                <a href="javascript:;" class="row-span-2" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/BDU-Mobile-1.jpg')}}" alt="">
-                </a>
-                <a href="javascript:;" class="row-span-4" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/jeune-fille-Wave.jpg')}}" alt="">
-                </a>
-                <a href="javascript:;" class="row-span-1" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/Credit-Spot.jpg')}}" alt="">
-                </a>
-            </div>
-            <div class="grid gap-4">
-                <a href="javascript:;" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/Escompte.jpg')}}" alt="">
-                </a>
-                <a href="javascript:;" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/Meeting.jpg')}}" alt="">
-                </a>
-                <a href="javascript:;" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/Pret-Scolaire2023-1024x968.png')}}" alt="">
-                </a>
-            </div>
-            <div class="grid gap-4">
-                <a href="javascript:;" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/Retraite-BG.jpg')}}" alt="">
-                </a>
-                <a href="javascript:;" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/jeune-fille-Wave.jpg')}}" alt="">
-                </a>
-                <a href="javascript:;" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
-                    <img class="h-full max-w-full object-cover rounded-lg" src="{{asset('assets/media/galery/jeune-fille-WU.jpg')}}" alt="">
-                </a>
-            </div>
+        {% set columns = medias|batch((medias|length / 4)|round(0, 'ceil')) %}
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+            {% for column in columns %}
+                <div class="grid gap-4">
+                    {% for media in column %}
+                        <a href="javascript:;" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
+                            <img class="h-full max-w-full object-cover rounded-lg" src="{{ asset(media.filename) }}" alt="{{ media.alt ?? '' }}">
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </div>
-        
+
         <nav aria-label="Page navigation example" class="flex justify-center mt-8">
             <ul class="inline-flex -space-x-px text-base h-10">
                 <li>
@@ -131,7 +98,7 @@
                     </div>
                     <!-- Slider controls -->
                     <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                             <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
                             </svg>
@@ -139,7 +106,7 @@
                         </span>
                     </button>
                     <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-1 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                             <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                             </svg>

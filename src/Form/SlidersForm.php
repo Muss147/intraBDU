@@ -20,18 +20,19 @@ class SlidersForm extends AbstractType
             ->add('description')
             ->add('bouton')
             ->add('lien')
+            ->add('online')
             ->add('image', FileType::class, [
                 'label' => false,
                 'required' => false,
                 'mapped' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '2M', // Optionnel si vous souhaitez définir la taille ici aussi
+                        'maxSize' => '2M',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Veuillez cherger un fichier d\'image valide file (JPEG, PNG)',
+                        'mimeTypesMessage' => 'Veuillez charger un fichier d\'image valide file (JPEG, PNG)',
                     ])
                 ],
             ])

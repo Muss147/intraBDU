@@ -25,23 +25,31 @@ final class ParametresController extends AbstractController
     #[Route('/liste-{type}/{parent?}', name: 'param_type')]
     public function param_type(Request $request, $parent, $type, ParametresRepository $parametresRepository, SessionInterface $session): Response
     {
-        $session->set('menu', 'bpu');
+        $session->set('menu', 'parametres');
+        $session->set('subMenu', $type);
+
         $dataParent = null;
         if ($parent) {
-            $dataParent = $parametresRepository->find($parent);
-            $parametres = $this->em->getRepository(Parametres::class)->findBy([
-                'type' => $type,
-                'parent' => $dataParent
-            ], []);
+            if (ctype_digit($parent)) {
+                $dataParent = $parametresRepository->find($parent);
+                $parametres = $this->em->getRepository(Parametres::class)->findBy([
+                    'type' => $type,
+                    'parent' => $dataParent
+                ], []);
+            }
+            else {
+                $dataParent = $parametresRepository->findOneByType($parent);
+                $parametres = $this->em->getRepository(Parametres::class)->findByType($type);
+            }
         }
         else $parametres = $this->em->getRepository(Parametres::class)->findByType($type);
 
         $parametre = new Parametres();
         // Pré-remplir les actions possibles de cette permission
         $parametre->setType($type);
-        $parametre->setParent($dataParent);
+        // $parametre->setParent($dataParent);
 
-        $form = $this->createForm(ParametresType::class, $parametre);
+        $form = $this->createForm(ParametresType::class, $parametre, ['type' => $dataParent ? $dataParent->getType() : null]);
         $form->handleRequest($request);
         
         // dd($parent);
@@ -56,9 +64,9 @@ final class ParametresController extends AbstractController
             $this->addFlash('success', $type .' ajouté(e) avec succès.');
             return $this->redirectToRoute('param_type', ['type' => $type, 'parent' => $parent ?? null]);
         }
-        return $this->render('parametres/liste.html.twig', [
+        return $this->render('back/parametres/liste.html.twig', [
             'parametres' => $parametres,
-            'new_form' => $form,
+            'new_param' => $form,
             'type' => $type,
             'parent' => $dataParent
         ]);

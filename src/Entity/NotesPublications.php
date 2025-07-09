@@ -24,8 +24,8 @@ class NotesPublications extends EntityBase
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $lien = null;
+    #[ORM\Column(nullable: true)]
+    private ?bool $online = true;
 
     public function getId(): ?int
     {
@@ -73,14 +73,14 @@ class NotesPublications extends EntityBase
         return $this;
     }
 
-    public function getLien(): ?string
+    public function isOnline(): ?bool
     {
-        return $this->lien;
+        return $this->online;
     }
 
-    public function setLien(?string $lien): static
+    public function setOnline(?bool $online): static
     {
-        $this->lien = $lien;
+        $this->online = $online;
 
         return $this;
     }

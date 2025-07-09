@@ -29,13 +29,14 @@ class SlidersRepository extends ServiceEntityRepository
            ;
        }
 
-    //    public function findOneBySomeField($value): ?Sliders
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+       public function findAllOnline(): array
+       {
+           return $this->createQueryBuilder('s')
+                ->andWhere('s.deletedAt IS NULL')
+               ->andWhere('s.online = :val')
+               ->setParameter('val', true)
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 }
