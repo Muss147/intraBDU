@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Votes;
 use App\Entity\Agents;
-use App\Entity\NotesPublications;
+use App\Form\VotesForm;
+use App\Entity\VoteNote;
 use App\Repository\FilesRepository;
 use App\Repository\AgentsRepository;
 use App\Repository\SlidersRepository;
 use App\Repository\DocumentsRepository;
+use App\Repository\ParametresRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,13 +23,66 @@ final class FrontController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
     public function home(
+        Request $request,
+        EntityManagerInterface $em,
         SlidersRepository $slidersRepository,
+        ParametresRepository $criteresRepository,
+        AgentsRepository $agentsRepository,
         NotesPublicationsRepository $notesPublicationsRepository
         ): Response
     {
+        $criteres = $criteresRepository->findByType('criteres'); // Tous les critères
+        $vote = new Votes();
+        $vote->setVotedAt(new \DateTime());
+
+        foreach ($criteres as $critere) {
+            $voteNote = new VoteNote();
+            $voteNote->setCritere($critere);
+            $vote->addNote($voteNote);
+        }
+
+        $form = $this->createForm(VotesForm::class, $vote);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $votantInput = $form->get('votant')->getData();
+                if (!$votant = $agentsRepository->findVotantByTerms($votantInput)) {
+                    $this->addFlash('error', 'Cette information ne correspond à aucun agent dans notre base de données. Veuillez réessayer.');
+                    return $this->render('front/vote/_form.html.twig', [
+                        'form' => $form->createView(),
+                    ]);
+                }
+                elseif ($votant->getVote()) {
+                    $this->addFlash('error', 'Vous avez déjà effectué un vote. Veuillez attendre les résultats.');
+                    return $this->render('front/vote/_form.html.twig', [
+                        'form' => $form->createView(),
+                    ]);
+                }
+
+                $vote->setVotant($votant);
+                $em->persist($vote);
+                $em->flush();
+
+                $this->addFlash('success', 'Merci pour votre vote !');
+                if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
+                    return $this->render('front/vote/_thanks.html.twig');
+                }
+                return $this->redirectToRoute('annuaire');
+            }
+
+            // Formulaire invalide : on renvoie dans le bon Turbo Frame
+            if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
+                return $this->render('front/vote/_form.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
+        }
         return $this->render('front/home.html.twig', [
             'slides' => $slidersRepository->findAllOnline(),
             'notes' => $notesPublicationsRepository->findAllOnline(3),
+            'agents' => $agentsRepository->findAll(),
+            'form' => $form->createView(),
         ]);
     }
     
@@ -79,26 +136,83 @@ final class FrontController extends AbstractController
     }
 
     #[Route('/annuaire', name: 'annuaire')]
-    public function annuaire(Request $request, AgentsRepository $agentsRepository, PaginatorInterface $paginator): Response
-    {
+    public function annuaire(
+        Request $request,
+        ParametresRepository $criteresRepository,
+        EntityManagerInterface $em,
+        AgentsRepository $agentsRepository,
+        PaginatorInterface $paginator
+    ): Response {
+        //////// FEATURES DE VOTE ///////////
+        $criteres = $criteresRepository->findByType('criteres'); // Tous les critères
+        $vote = new Votes();
+        $vote->setVotedAt(new \DateTime());
+
+        foreach ($criteres as $critere) {
+            $voteNote = new VoteNote();
+            $voteNote->setCritere($critere);
+            $vote->addNote($voteNote);
+        }
+
+        $form = $this->createForm(VotesForm::class, $vote);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $votantInput = $form->get('votant')->getData();
+                if (!$votant = $agentsRepository->findVotantByTerms($votantInput)) {
+                    $this->addFlash('error', 'Cette information ne correspond à aucun agent dans notre base de données. Veuillez réessayer.');
+                    return $this->render('front/vote/_form.html.twig', [
+                        'form' => $form->createView(),
+                    ]);
+                }
+                elseif ($votant->getVote()) {
+                    $this->addFlash('error', 'Vous avez déjà effectué un vote. Veuillez attendre les résultats.');
+                    return $this->render('front/vote/_form.html.twig', [
+                        'form' => $form->createView(),
+                    ]);
+                }
+
+                $vote->setVotant($votant);
+                $em->persist($vote);
+                $em->flush();
+
+                $this->addFlash('success', 'Merci pour votre vote !');
+                if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
+                    return $this->render('front/vote/_thanks.html.twig');
+                }
+                return $this->redirectToRoute('annuaire');
+            }
+
+            // Formulaire invalide : on renvoie dans le bon Turbo Frame
+            if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
+                return $this->render('front/vote/_form.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
+        }
+
+        //////// FEATURES DE L'ANNUAIRE ///////////
         $term = $request->request->get('research', $request->query->get('research', ''));
 
         $query = $agentsRepository->getFilteredQuery($term);
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            9 // 9 agents par page
+            9
         );
 
-        if ($request->isXmlHttpRequest() || $request->headers->get('Turbo-Frame')) {
+        if ($request->headers->get('Turbo-Frame') === 'annuaire_results') {
             return $this->render('front/annuaire/_agents.html.twig', [
                 'pagination' => $pagination,
-                'term' => $term
+                'term' => $term,
             ]);
         }
+
         return $this->render('front/annuaire/index.html.twig', [
             'pagination' => $pagination,
-            'term' => $term
+            'term' => $term,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -107,6 +221,38 @@ final class FrontController extends AbstractController
     {
         return $this->render('front/annuaire/_agent_modal.html.twig', [
             'agent' => $agent,
+        ]);
+    }
+    
+    #[Route('/vote', name: 'vote_agent')]
+    public function vote(Request $request, ParametresRepository $criteresRepository, EntityManagerInterface $em): Response
+    {
+        $criteres = $criteresRepository->findByType('criteres'); // Tous les critères
+        $vote = new Votes();
+        $vote->setVotedAt(new \DateTime());
+
+        foreach ($criteres as $critere) {
+            $voteNote = new VoteNote();
+            $voteNote->setCritere($critere);
+            $vote->addNote($voteNote); // méthode générée automatiquement si relations bien faites
+        }
+
+        $form = $this->createForm(VotesForm::class, $vote);
+        $form->handleRequest($request);
+
+        // dd($request->headers->get('Turbo-Frame'));
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($vote);
+            $em->flush();
+
+            $this->addFlash('success', 'Merci pour votre vote !');
+
+            // Pour Turbo, on renvoie un fragment (Turbo Frame)
+            return $this->render('front/vote/_thanks.html.twig');
+        }
+
+        return $this->render('front/vote/index.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

@@ -4,8 +4,8 @@
                 {% for agent in pagination %}
                 <a href="javascript:;"
                     class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl md:max-h-48 hover:bg-gray-100"
-                    data-modal-target="small-modal"
-                    data-modal-toggle="small-modal"
+                    data-modal-target="agent-modal"
+                    data-modal-toggle="agent-modal"
                     data-agent='{
                         "id": "{{ agent.id|e('js') }}",
                         "nom": "{{ agent.nom|e('js') }}",
@@ -15,7 +15,7 @@
                         "photo": "{{ asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg')) }}"
                     }'>
                     <img class="object-cover w-full rounded-t-lg h-28 md:size-full md:max-w-24 md:rounded-none md:rounded-s-lg" src="{{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}}" alt="">
-                    <div class="flex flex-col justify-between p-4 leading-normal">
+                    <div class="flex flex-col justify-between p-4 leading-normal w-full">
                         <h5 class="text-xl font-bold tracking-tight text-primary uppercase">{{agent.nom ~' '~ agent.prenoms}}</h5>
                         <span class="text-sm text-gray-500">{{agent.fonction}}</span>
                         <ul class="my-3 font-normal text-gray-700">

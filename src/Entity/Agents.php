@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Files;
+use App\Entity\Votes;
+use App\Entity\Parametres;
 use App\Mapping\EntityBase;
-use App\Repository\AgentsRepository;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use App\Repository\AgentsRepository;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: AgentsRepository::class)]
 class Agents extends EntityBase
@@ -54,6 +59,25 @@ class Agents extends EntityBase
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $anniversaire = null;
 
+    #[ORM\OneToMany(mappedBy: 'agent', targetEntity: Votes::class)]
+    private Collection $votes;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $matricule = null;
+
+    #[ORM\OneToOne(mappedBy: 'votant', cascade: ['persist', 'remove'])]
+    private ?Votes $vote = null;
+
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->prenoms . ' ' . $this->nom;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,7 +85,7 @@ class Agents extends EntityBase
 
     public function getEntityLibelle(): ?string
     {
-        return $this->nom;
+        return $this->prenoms . ' ' . $this->nom;
     }
 
     public function getNom(): ?string
@@ -216,6 +240,65 @@ class Agents extends EntityBase
     public function setAnniversaire(?\DateTime $anniversaire): static
     {
         $this->anniversaire = $anniversaire;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Votes>
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Votes $vote): static
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+            $vote->setAgent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Votes $vote): static
+    {
+        if ($this->votes->removeElement($vote)) {
+            // set the owning side to null (unless already changed)
+            if ($vote->getAgent() === $this) {
+                $vote->setAgent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getMatricule(): ?string
+    {
+        return $this->matricule;
+    }
+
+    public function setMatricule(?string $matricule): static
+    {
+        $this->matricule = $matricule;
+
+        return $this;
+    }
+
+    public function getVote(): ?Votes
+    {
+        return $this->vote;
+    }
+
+    public function setVote(Votes $vote): static
+    {
+        // set the owning side of the relation if necessary
+        if ($vote->getVotant() !== $this) {
+            $vote->setVotant($this);
+        }
+
+        $this->vote = $vote;
 
         return $this;
     }

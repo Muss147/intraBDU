@@ -3,6 +3,53 @@
 {% block title "Annuaire BDU" %}
 
 {% block stylesheets %}
+<style type="text/css">
+select#votes_form_agent {
+    display: none;
+}
+.range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+}
+
+/* Track */
+.range-input::-webkit-slider-runnable-track {
+  height: 1rem;
+  background: #e5e7eb; /* Tailwind bg-gray-200 */
+  border-radius: 0.25rem;
+}
+.range-input::-moz-range-track {
+  height: 1rem;
+  background: #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+/* Thumb */
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  background: #6ca942; /* Tailwind yellow-400 */
+  cursor: pointer;
+  position: relative;
+  z-index: 20;
+  margin-top: -0.25rem;
+}
+.range-input::-moz-range-thumb {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  background: #6ca942;
+  cursor: pointer;
+  border: none;
+}
+</style>
 {% endblock %}
 
 {% block body %}
@@ -31,9 +78,9 @@
     </section>
     
     <!-- Modals -->
-    <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div id="agent-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <!-- Modal content -->
-        <div class="relative w-full max-w-md max-h-full bg-white rounded-lg shadow-sm">
+        <div class="relative w-full max-w-lg max-h-full bg-white rounded-lg shadow-sm">
             <!-- Modal body -->
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                 <div class="flex justify-end px-4 pt-4"></div>
@@ -42,14 +89,14 @@
                     <h5 class="mb-1 text-xl font-medium text-gray-900">Idrissa Welle Diallo</h5>
                     <span class="text-sm text-gray-500">Directeur Général</span>
                     
-                    <div class="flex mt-4 md:mt-6 gap-2" data-tabs-toggle="#default-tab-content" role="tablist">
+                    <div class="flex mt-4 md:mt-6 gap-2" role="tablist">
                         <button id="vote-tab"
                             type="button"
                             role="tab"
                             data-tabs-target="#vote"
                             aria-controls="vote"
-                            aria-selected="true"
-                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                            aria-selected="false"
+                            class="tab-button inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                             Voter
                         </button>
                         <button id="contact-tab"
@@ -58,18 +105,22 @@
                             data-tabs-target="#contact"
                             aria-controls="contact"
                             aria-selected="false"
-                            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary">
-                            Contact
+                            class="tab-button py-2 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary">
+                            Détails
                         </button>
                     </div>
 
                     <!-- Tabs content -->
-                    <div id="default-tab-content">
-                        <div class="hidden p-4 rounded-lg bg-gray-50" id="vote" role="tabpanel" aria-labelledby="vote-tab">
-                            <p class="text-sm text-gray-500">Contenu de l'onglet Vote</p>
+                    <div id="default-tab-content" class="w-full">
+                        <div class="hidden p-4 md:p-8" id="vote" role="tabpanel" aria-labelledby="vote-tab">
+                            <hr>
+                            <h2 class="text-lg font-bold text-primary mt-3 mb-5">Noter l'agent pour voter</h2>
+
+                            {% include 'front/vote/_form.html.twig' with { form: form } %}
+                            
                         </div>
-                        <div class="hidden p-4 rounded-lg bg-gray-50" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <p class="text-sm text-gray-500">Contenu de l'onglet Message</p>
+                        <div class="hidden p-4" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis hic voluptatum ratione est quos repellendus asperiores. Ratione vel, quo aliquid dolorem magnam quibusdam officiis qui placeat, perferendis quam totam nostrum.</p>
                         </div>
                     </div>
                 </div>
@@ -81,18 +132,51 @@
 {% endblock %}
 
 {% block javascripts %}
+{{ parent() }}
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const modal = document.getElementById('small-modal');
+        const modal = document.getElementById('agent-modal');
+        const buttons = document.querySelectorAll('.tab-button');
 
-        document.querySelectorAll('[data-modal-toggle="small-modal"]').forEach(button => {
+        document.querySelectorAll('[data-modal-toggle="agent-modal"]').forEach(button => {
             button.addEventListener('click', () => {
                 const data = JSON.parse(button.dataset.agent);
 
                 modal.querySelector('img').src = data.photo;
                 modal.querySelector('h5').textContent = `${data.nom} ${data.prenoms}`;
                 modal.querySelector('span.text-sm').textContent = data.fonction;
-                // modal.querySelector('a[href^="mailto"]').href = `mailto:${data.email}`;
+                
+                // Pré-sélectionner le champ <select> du formulaire (agent)
+                const agentSelect = modal.querySelector('select#votes_form_agent');
+                if (agentSelect) {
+                    agentSelect.value = data.id;
+                    // Forcer le trigger d'un éventuel plugin JS (comme Select2)
+                    agentSelect.dispatchEvent(new Event('change'));
+                }
+
+            });
+        });
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                const targetSelector = button.getAttribute('data-tabs-target');
+                const targetPanel = document.querySelector(targetSelector);
+                const isOpen = !targetPanel.classList.contains('hidden');
+
+                // Fermer tous les panels et réinitialiser les boutons
+                document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+                    panel.classList.add('hidden');
+                });
+
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.setAttribute('aria-selected', 'false');
+                });
+
+                // Si le panel était fermé, on l’ouvre et on marque le bouton comme actif
+                if (!isOpen) {
+                    targetPanel.classList.remove('hidden');
+                    button.setAttribute('aria-selected', 'true');
+                }
             });
         });
     });

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250707014450 extends AbstractMigration
+final class Version20250711040953 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,7 @@ final class Version20250707014450 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE agents CHANGE poste fonction VARCHAR(255) NOT NULL
+            ALTER TABLE vote_note ADD CONSTRAINT FK_78DF0B259E5F45AB FOREIGN KEY (critere_id) REFERENCES parametres (id)
         SQL);
     }
 
@@ -29,7 +29,7 @@ final class Version20250707014450 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE agents CHANGE fonction poste VARCHAR(255) NOT NULL
+            ALTER TABLE vote_note DROP FOREIGN KEY FK_78DF0B259E5F45AB
         SQL);
     }
 }

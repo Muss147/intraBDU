@@ -192,4 +192,26 @@ class Parametres extends EntityBase
 
         return $this;
     }
+
+    public function addAgent(Agents $agent): static
+    {
+        if (!$this->agents->contains($agent)) {
+            $this->agents->add($agent);
+            $agent->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgent(Agents $agent): static
+    {
+        if ($this->agents->removeElement($agent)) {
+            // set the owning side to null (unless already changed)
+            if ($agent->getService() === $this) {
+                $agent->setService(null);
+            }
+        }
+
+        return $this;
+    }
 }

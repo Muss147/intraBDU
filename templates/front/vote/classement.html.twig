@@ -1,0 +1,12 @@
+<turbo-frame id="classement_mensuel">
+    {% if top %}
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="text-lg font-bold mb-2">🏆 Agent du mois</h3>
+            <p class="text-gray-800">{{ top.agent.prenom ~ ' ' ~ top.agent.nom }}</p>
+            <p class="text-sm text-gray-500">Votes reçus : {{ top.nbVotes }}</p>
+            <p class="text-sm text-gray-500">Note moyenne : {{ top.moyenne|number_format(1) }}/5</p>
+        </div>
+    {% else %}
+        <div class="text-gray-500">Aucun vote pour ce mois.</div>
+    {% endif %}
+</turbo-frame>

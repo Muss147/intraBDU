@@ -40,6 +40,15 @@ class AgentsRepository extends ServiceEntityRepository
                 ->getQuery();
         }
         
+       public function findVotantByTerms(string $term = ''): ?Agents
+        {
+            return $this->createQueryBuilder('a')
+                ->andWhere('a.nom LIKE :term OR a.prenoms LIKE :term OR a.matricule LIKE :term')
+                ->setParameter('term', '%' . $term . '%')
+                ->getQuery()
+                ->getOneOrNullResult();
+        }
+        
     //    public function findOneBySomeField($value): ?Agents
     //    {
     //        return $this->createQueryBuilder('a')

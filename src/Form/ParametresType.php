@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Users;
 use App\Entity\Parametres;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
