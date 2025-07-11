@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
 <style type="text/css">
-/* select#votes_form_agent {
+select#votes_form_agent {
     display: none;
-} */
+}
 .range-input {
   -webkit-appearance: none;
   appearance: none;
@@ -349,10 +349,10 @@
                         {% for agent in agents %}
                         <div class="hidden bg-primary rounded-lg duration-700 ease-in-out" 
                             data-carousel-item{% if loop.first %}="active"{% endif %} 
-                            data-agent='{
-                                "id": "{{ agent.id|e('js') }}",
-                                "matricule": "{{ agent.matricule|e('js') }}",
-                            }'>
+                            data-agent="{{ {
+                                id: agent.id,
+                                matricule: agent.matricule
+                            }|json_encode|e('html_attr') }}">
                             <div class="flex flex-col items-center pb-10">
                                 <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}}" alt="{{agent.nom ~' '~ agent.prenoms}}"/>
                                 <h5 class="mb-1 text-xl font-medium text-white">{{agent.nom ~' '~ agent.prenoms}}</h5>
@@ -364,11 +364,9 @@
                     </div>
                     <!-- Slider indicators -->
                     <div class="absolute w-full z-30 flex justify-center space-x-3 rtl:space-x-reverse inset-x-0 bottom-5">
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                        {% for i, agent in agents %}
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="{{ loop.first ? true : false }}" aria-label="Slide {{i+1}}" data-carousel-slide-to="{{i}}"></button>
+                        {% endfor %}
                     </div>
                     <!-- Slider controls -->
                     <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
@@ -406,6 +404,7 @@
 {{ parent() }}
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script type="module" src="{{ asset('assets/js/carousel-agent.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         var carouselSwiper = new Swiper('.carouselSwiper', {
@@ -444,35 +443,5 @@
             },
         });
     });
-        
-    // var swiperInstance;
-    // document.getElementById('agent-modal').addEventListener('show.bs.modal', () => {
-    //     if (!swiperInstance) {
-    //         swiperInstance = new Swiper('.agentsSwiper', {
-    //             slidesPerView: 3,
-    //             spaceBetween: 20,
-    //             loop: true,
-    //             pagination: {
-    //             el: '.swiper-pagination',
-    //             clickable: true,
-    //             },
-    //             navigation: {
-    //             nextEl: '.swiper-button-next',
-    //             prevEl: '.swiper-button-prev',
-    //             },
-    //             breakpoints: {
-    //             0: {
-    //                 slidesPerView: 1,
-    //             },
-    //             768: {
-    //                 slidesPerView: 2,
-    //             },
-    //             1024: {
-    //                 slidesPerView: 3,
-    //             },
-    //             }
-    //         });
-    //     }
-    // });
 </script>
 {% endblock %}
