@@ -656,7 +656,6 @@ Contact: +225 07 471 612 21
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Agences</span>
-                                                        <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>
@@ -669,7 +668,6 @@ Contact: +225 07 471 612 21
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Directions</span>
-                                                        <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>
@@ -682,6 +680,18 @@ Contact: +225 07 471 612 21
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Services</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'criteres' %} active{% endif %}" href="{{path('param_type', {type: 'criteres'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Critères de vote</span>
                                                         <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->

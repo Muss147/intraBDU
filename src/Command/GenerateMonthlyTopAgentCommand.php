@@ -2,6 +2,8 @@
 
 namespace App\Command;
 
+use App\Entity\Agents;
+use App\Entity\VoteNote;
 use App\Repository\VotesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -27,24 +29,29 @@ class GenerateMonthlyTopAgentCommand extends Command
         $startOfMonth = (new \DateTime('first day of this month'))->setTime(0, 0);
         $endOfMonth = (new \DateTime('last day of this month'))->setTime(23, 59, 59);
 
-        $top = $this->voteRepo->createQueryBuilder('vn')
-            ->select('a as agent, COUNT(v.id) as nbVotes, AVG(vn.note) as moyenne')
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('a.id AS agent_id, a.nom, a.prenoms, a.civilite, COUNT(v.id) as nbVotes, AVG(vn.note) as moyenne')
+            ->from(VoteNote::class, 'vn')
             ->join('vn.vote', 'v')
             ->join('v.agent', 'a')
             ->where('v.votedAt BETWEEN :start AND :end')
-            ->setParameter('start', $startOfMonth)
-            ->setParameter('end', $endOfMonth)
-            ->groupBy('a.id')
+            ->groupBy('a.id, a.nom, a.prenoms, a.civilite')
             ->orderBy('nbVotes', 'DESC')
             ->addOrderBy('moyenne', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
+            ->setParameter('start', $startOfMonth)
+            ->setParameter('end', $endOfMonth)
+            ->setMaxResults(1);
+
+        $top = $qb->getQuery()->getOneOrNullResult();
 
         if ($top) {
-            $agent = $top['agent'];
-            $output->writeln("🏆 L’agent du mois est : " . $agent->getCivilite() . ' ' . $agent->getPrenoms() . ' ' . $agent->getNom());
-            $output->writeln("🔢 Moyenne : " . round($top['moyenne'], 2) . ' / Nombre de votes : ' . $top['nbVotes']);
+
+            // Récupère l'entité agent
+            $agent = $this->em->getRepository(Agents::class)->find($top['agent_id']);
+
+            $output->writeln("✅ L’agent du mois est : " . $agent->getCivilite() . ' ' . $agent->getPrenoms() . ' ' . $agent->getNom());
+            $output->writeln("📊 Moyenne : " . round($top['moyenne'], 2) . ' | Nombre de votes : ' . $top['nbVotes']);
+            $output->writeln("📅 Mois concerné : " . $startOfMonth->format('F Y'));
         } else {
             $output->writeln("⚠️ Aucun vote ce mois-ci.");
         }
