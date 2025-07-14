@@ -2,12 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Roles;
-use App\Entity\Permissions;
 use App\Entity\Autorisations;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 

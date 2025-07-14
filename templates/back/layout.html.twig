@@ -549,7 +549,7 @@ Contact: +225 07 471 612 21
                                                         <span class="path3"></span>
                                                     </i>
                                                 </span>
-                                                <span class="menu-title">Agents employés</span>
+                                                <span class="menu-title">Agents / employés</span>
                                                 <span class="badge badge-light-danger">New</span>
                                             </a>
                                             <!--end:Menu link-->
@@ -602,18 +602,61 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'offres' %} here show{% endif %}">
                                             <!--begin:Menu link-->
-                                            <a href="javascript:;" class="menu-link{% if app.session.get('menu') == 'bpu' %} active{% endif %} disabled cursor-not-allowed">
+                                            <span class="menu-link">
                                                 <span class="menu-icon">
-                                                    <i class="ki-duotone ki-briefcase fs-2">
+                                                    <i class="ki-duotone ki-some-files fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
                                                 </span>
                                                 <span class="menu-title">Offres d'emploi</span>
-                                            </a>
+                                                <span class="badge badge-light-danger">New</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
                                             <!--end:Menu link-->
+                                            <!--begin:Menu sub-->
+                                            <div class="menu-sub menu-sub-accordion">
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'liste' %} active{% endif %}" href="{{path('list_offres')}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Liste des offres</span>
+                                                        <span class="badge badge-light-danger">New</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'metiers' %} active{% endif %}" href="{{path('param_type', {type: 'metiers'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Métiers</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'secteurs' %} active{% endif %}" href="{{path('param_type', {type: 'secteurs'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Secteurs d'activité</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                            </div>
+                                            <!--end:Menu sub-->
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
@@ -627,7 +670,6 @@ Contact: +225 07 471 612 21
                                                     </i>
                                                 </span>
                                                 <span class="menu-title">Médiathèque</span>
-                                                <span class="badge badge-light-danger">New</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>

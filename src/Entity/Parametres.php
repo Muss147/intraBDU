@@ -45,10 +45,17 @@ class Parametres extends EntityBase
     #[ORM\OneToMany(targetEntity: Agents::class, mappedBy: 'service')]
     private Collection $agents;
 
+    /**
+     * @var Collection<int, OffresEmploi>
+     */
+    #[ORM\OneToMany(targetEntity: OffresEmploi::class, mappedBy: 'direction')]
+    private Collection $offresEmplois;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->agents = new ArrayCollection();
+        $this->offresEmplois = new ArrayCollection();
     }
 
     
@@ -209,6 +216,36 @@ class Parametres extends EntityBase
             // set the owning side to null (unless already changed)
             if ($agent->getService() === $this) {
                 $agent->setService(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OffresEmploi>
+     */
+    public function getOffresEmplois(): Collection
+    {
+        return $this->offresEmplois;
+    }
+
+    public function addOffresEmploi(OffresEmploi $offresEmploi): static
+    {
+        if (!$this->offresEmplois->contains($offresEmploi)) {
+            $this->offresEmplois->add($offresEmploi);
+            $offresEmploi->setDirection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffresEmploi(OffresEmploi $offresEmploi): static
+    {
+        if ($this->offresEmplois->removeElement($offresEmploi)) {
+            // set the owning side to null (unless already changed)
+            if ($offresEmploi->getDirection() === $this) {
+                $offresEmploi->setDirection(null);
             }
         }
 

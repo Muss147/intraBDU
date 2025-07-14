@@ -52,7 +52,6 @@ final class ParametresController extends AbstractController
         $form = $this->createForm(ParametresType::class, $parametre, ['type' => $dataParent ? $dataParent->getType() : null]);
         $form->handleRequest($request);
         
-        // dd($parent);
         if ($form->isSubmitted() && $form->isValid()) {
             $parametre->generateSlug();
             $parametre->updatedTimestamps();

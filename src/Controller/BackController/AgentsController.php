@@ -33,34 +33,36 @@ final class AgentsController extends AbstractController
         $form = $this->createForm(AgentsForm::class, $agent);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && !$form->isValid()) {
-            foreach ($form->getErrors(true) as $error) {
-                $this->addFlash('error', $error->getMessage());
+        if ($form->isSubmitted()) {
+            if(!$form->isValid()) {
+                foreach ($form->getErrors(true) as $error) {
+                    $this->addFlash('error', $error->getMessage());
+                }
             }
-        }
-        elseif ($form->isSubmitted() && $form->isValid()) {
-            $service = $parametresRepository->find($request->get('service'));
-            // Gestion de l'upload des fichiers
-            if ($file = $form->get('photo')->getData()) {
-                $data = $this->fileUploader->upload($file);
-                $fileEntity = (new Files())
-                    ->setFilename($data['filename'])
-                    ->setType($data['type'])
-                    ->setSize($data['size'])
-                    ->setAlt($agent->getNom());
-                $agent->setPhoto($fileEntity);
-                $this->em->persist($fileEntity);
+            else {
+                $service = $parametresRepository->find($request->get('service'));
+                // Gestion de l'upload des fichiers
+                if ($file = $form->get('photo')->getData()) {
+                    $data = $this->fileUploader->upload($file);
+                    $fileEntity = (new Files())
+                        ->setFilename($data['filename'])
+                        ->setType($data['type'])
+                        ->setSize($data['size'])
+                        ->setAlt($agent->getNom());
+                    $agent->setPhoto($fileEntity);
+                    $this->em->persist($fileEntity);
+                }
+                $agent->setService($service)->updatedTimestamps();
+                $agent->updatedUserstamps($this->getUser());
+
+                $this->em->persist($agent);
+                $this->em->flush();
+
+                // if ($request->get('welcomeMail') && $request->get('welcomeMail') != !0)
+        
+                $this->addFlash('success', 'Agent ajouté avec succès.');
+                return $this->redirectToRoute('app_agents');
             }
-            $agent->setService($service)->updatedTimestamps();
-            $agent->updatedUserstamps($this->getUser());
-
-            $this->em->persist($agent);
-            $this->em->flush();
-
-            // if ($request->get('welcomeMail') && $request->get('welcomeMail') != !0)
-    
-            $this->addFlash('success', 'Agent ajouté avec succès.');
-            return $this->redirectToRoute('app_agents');
         }
         return $this->render('back/agents/list.html.twig', [
             'form' => $form,

@@ -2,12 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Actions;
-use App\Entity\Autorisations;
 use App\Entity\ActionsAutorisation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 

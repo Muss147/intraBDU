@@ -8,6 +8,7 @@ use App\Form\VotesForm;
 use App\Entity\VoteNote;
 use App\Repository\FilesRepository;
 use App\Repository\AgentsRepository;
+use App\Repository\ClassementMensuelRepository;
 use App\Repository\SlidersRepository;
 use App\Repository\DocumentsRepository;
 use App\Repository\ParametresRepository;
@@ -28,6 +29,7 @@ final class FrontController extends AbstractController
         SlidersRepository $slidersRepository,
         ParametresRepository $criteresRepository,
         AgentsRepository $agentsRepository,
+        ClassementMensuelRepository $classementMensuelRepository,
         NotesPublicationsRepository $notesPublicationsRepository
         ): Response
     {
@@ -83,6 +85,7 @@ final class FrontController extends AbstractController
             'notes' => $notesPublicationsRepository->findAllOnline(3),
             'agents' => $agentsRepository->findAll(),
             'form' => $form->createView(),
+            'top' => $classementMensuelRepository->findOneByMois(new \DateTime('first day of this month'))
         ]);
     }
     

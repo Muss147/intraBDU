@@ -62,8 +62,8 @@ select#votes_form_agent {
         <div class="swiper carouselSwiper w-full max-w-5xl mx-auto">
             <div class="swiper-wrapper">
                 {% for slide in slides %}
-                <div class="swiper-slide relative rounded-sm">
-                    <img src="{{asset(slide.image.filename)}}" class="h-64 w-full object-cover rounded-sm" />
+                <div class="swiper-slide relative rounded">
+                    <img src="{{asset(slide.image.filename)}}" class="h-64 w-full object-cover rounded" />
                     <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center md:justify-start px-5 md:px-12">
                         {% if slide.titre or slide.description or slide.bouton %}
                         <div class="text-center md:text-start">
@@ -95,13 +95,13 @@ select#votes_form_agent {
             </div>
 
             <div class="mt-4 flex flex-wrap md:flex-nowrap justify-between gap-6">
-                <a href="" class="flex bg-gray-100 rounded-sm shadow w-full md:w-1/2">
+                <a href="" class="flex bg-gray-100 rounded shadow w-full md:w-1/2">
                     <div class=""><img src="{{asset('assets/media/actualites/image6.png')}}" alt="" class="min-w-[150px] h-full rounded-l-sm object-cover"></div>
                     <div class="p-4">
                         <p class="font-semibold">Les veux de la nouvelle annee du DG </p>
                     </div>
                 </a>
-                <a href="" class="flex bg-gray-100 rounded-sm shadow w-full md:w-1/2">
+                <a href="" class="flex bg-gray-100 rounded shadow w-full md:w-1/2">
                     <div class=""><img src="{{asset('assets/media/actualites/image2.png')}}" alt="" class="min-w-[150px] h-full rounded-l-sm object-cover"></div>
                     <div class="p-4">
                         <p class="font-semibold">La BDU-CI réaffirme son engagement envers les jeunes talents en lançant la Saison 2 du Programme Pépinière d’Excellence BDU-CI</p>
@@ -136,7 +136,7 @@ select#votes_form_agent {
                 <h2 class="text-primary font-bold text-xl">Votez pour l’Étoile du Mois !</h2>
             </div>
 
-            <div class="relative bg-gray-100 p-6 rounded-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="relative bg-gray-100 p-6 rounded flex flex-col md:flex-row items-center justify-between gap-6">
                 <!-- Logo -->
                 <div class="flex-none">
                     <img src="{{asset('assets/media/employees/best-employee.png')}}" alt="Best Employee" class="w-32 h-32 object-contain" />
@@ -145,26 +145,11 @@ select#votes_form_agent {
                 <!-- Carrousel -->
                 <div class="swiper voteSwiper grow max-w-[300px] sm:max-w-[400px]">
                     <div id="carousel-track" class="swiper-wrapper">
-                        <!-- Slide 1 -->
+                        {% for agent in agents %}
                         <div class="swiper-slide bg-center bg-cover w-[25vw] h-[25vw] max-w-[150px] max-h-[150px]">
-                            <img src="{{asset('assets/media/employees/image20.png')}}" class="w-full h-full block object-cover border rounded-sm" />
+                            <img src="{{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}}" class="w-full h-full block object-cover border rounded" />
                         </div>
-                        <!-- Slide 2 -->
-                        <div class="swiper-slide bg-center bg-cover w-[25vw] h-[25vw] max-w-[150px] max-h-[150px]">
-                            <img src="{{asset('assets/media/employees/image19.png')}}" class="w-full h-full block object-cover border rounded-sm" />
-                        </div>
-                        <!-- Slide 3 -->
-                        <div class="swiper-slide bg-center bg-cover w-[25vw] h-[25vw] max-w-[150px] max-h-[150px]">
-                            <img src="{{asset('assets/media/employees/image11.png')}}" class="w-full h-full block object-cover border rounded-sm" />
-                        </div>
-                        <!-- Slide 4 -->
-                        <div class="swiper-slide bg-center bg-cover w-[25vw] h-[25vw] max-w-[150px] max-h-[150px]">
-                            <img src="{{asset('assets/media/employees/image16.png')}}" class="w-full h-full block object-cover border rounded-sm" />
-                        </div>
-                        <!-- Slide 5 -->
-                        <div class="swiper-slide bg-center bg-cover w-[25vw] h-[25vw] max-w-[150px] max-h-[150px]">
-                            <img src="{{asset('assets/media/employees/image5.png')}}" class="w-full h-fullblock object-cover border rounded-sm" />
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -193,21 +178,21 @@ select#votes_form_agent {
                 <!-- Élément 1 -->
                 <a href="" class="flex flex-col justify-center items-center gap-4 flex-1">
                     <img src="{{ asset('assets/media/features/Meeting1.png') }}"
-                        class="w-full h-[134px] object-cover rounded-sm" />
+                        class="w-full h-[134px] object-cover rounded" />
                     <span class="text-primary font-semibold hover:underline">Ma mutuelle</span>
                 </a>
 
                 <!-- Élément 2 -->
                 <a href="" class="flex flex-col justify-center items-center gap-4 flex-1">
                     <img src="{{ asset('assets/media/features/image.png') }}"
-                        class="w-full h-[134px] object-cover rounded-sm" />
+                        class="w-full h-[134px] object-cover rounded" />
                     <span class="text-primary font-semibold hover:underline">Mon livret d’accueil</span>
                 </a>
 
                 <!-- Élément 3 -->
                 <a href="" class="flex flex-col justify-center items-center gap-4 flex-1">
                     <img src="{{ asset('assets/media/features/image7.png') }}"
-                        class="w-full h-[134px] object-cover rounded-sm" />
+                        class="w-full h-[134px] object-cover rounded" />
                     <span class="text-primary font-semibold hover:underline">My Bdu mobile</span>
                 </a>
             </div>
@@ -321,15 +306,20 @@ select#votes_form_agent {
         </div>
         <div class="flex flex-col border border-primary rounded">
             <turbo-frame id="classement_mensuel">
-                {% if top is defined %}
+                {% if top %}
                     <div class="bg-white p-4 rounded shadow">
-                        <h3 class="text-lg font-bold mb-2">🏆 Agent du mois</h3>
-                        <p class="text-gray-800">{{ top.agent.prenom ~ ' ' ~ top.agent.nom }}</p>
-                        <p class="text-sm text-gray-500">Votes reçus : {{ top.nbVotes }}</p>
-                        <p class="text-sm text-gray-500">Note moyenne : {{ top.moyenne|number_format(1) }}/5</p>
+                        <h3 class="text-lg text-center font-bold mb-2">🏆 Agent du mois de {{ top.mois|date('F', null, 'fr')|upper }}</h3>
+                        <div class="flex gap-2">
+                            <div class=""><img src="{{asset(top.agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}}" alt="Top agent" class="w-16 h-16 object-cover rounded border border-gray-600"></div>
+                            <div class="">
+                                <p class="text-gray-800">{{ top.agent.prenoms ~ ' ' ~ top.agent.nom }}</p>
+                                <p class="text-sm text-gray-500">Votes reçus : {{ top.nombreVotes }}</p>
+                                <p class="text-sm text-gray-500">Note moyenne : {{ top.moyenne|number_format(1) }}/5</p>
+                            </div>
+                        </div>
                     </div>
                 {% else %}
-                    <div class="text-gray-500">Aucun vote pour ce mois.</div>
+                    <div class="text-gray-500 text-center">Aucun vote pour ce mois.</div>
                 {% endif %}
             </turbo-frame>
         </div>
