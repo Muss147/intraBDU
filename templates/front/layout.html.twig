@@ -98,6 +98,19 @@ Contact: +225 07 471 612 21
 
                     mainAfter.classList.add("hidden");
                 }
+
+                const research = document.querySelector('[name="research"]');
+                const div = research.closest('div.relative');
+                const label = research.closest('form').querySelector('label');
+
+                research.addEventListener('focus', (e) => {
+                    label.classList.add('hidden');
+                    div.classList.add('w-[296px]');
+                });
+                research.addEventListener('blur', (e) => {
+                    label.classList.remove('hidden');
+                    div.classList.remove('w-[296px]');
+                })
             })
         </script>
     </body>
