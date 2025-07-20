@@ -27,7 +27,7 @@ class OffresEmploi extends EntityBase
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lieu = null;
 
-    #[ORM\ManyToOne(inversedBy: 'offresEmplois')]
+    #[ORM\ManyToOne(inversedBy: 'offresDirection')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Parametres $direction = null;
 
@@ -40,10 +40,10 @@ class OffresEmploi extends EntityBase
     #[ORM\Column(length: 255)]
     private ?string $niveauFormation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'offresEmplois')]
+    #[ORM\ManyToOne(inversedBy: 'offresSecteur')]
     private ?Parametres $secteurActivite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'offresEmplois')]
+    #[ORM\ManyToOne(inversedBy: 'offresMetier')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Parametres $metier = null;
 

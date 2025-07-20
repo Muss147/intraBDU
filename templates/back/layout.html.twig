@@ -477,7 +477,6 @@ Contact: +225 07 471 612 21
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Home carousel</span>
-                                                        <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>
@@ -485,11 +484,12 @@ Contact: +225 07 471 612 21
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item">
                                                     <!--begin:Menu link-->
-                                                    <a class="menu-link{% if app.session.get('subMenu') == 'actualites' %} active{% endif %} disabled cursor-not-allowed" href="javascript:;">
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'actualites' %} active{% endif %}" href="{{path('list_actualites')}}">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Actualités</span>
+                                                        <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>
@@ -502,7 +502,6 @@ Contact: +225 07 471 612 21
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Notes & Publications</span>
-                                                        <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>

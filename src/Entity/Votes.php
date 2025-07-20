@@ -16,7 +16,7 @@ class Votes
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'votes')]
     private ?Agents $agent = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

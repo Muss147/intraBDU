@@ -23,12 +23,12 @@
                 <span class="font-semibold">Procedures</span>
             </a>
 
-            <a href="" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+            <a href="{{path('politique_ethique')}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
                 <img src="{{asset('assets/media/icons/politique.png')}}" alt="Politiques" class="w-12 h-12" />
                 <span class="font-semibold">Politiques</span>
             </a>
 
-            <a href="" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+            <a href="{{path('type_docs', {type: 'directives'})}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
                 <img src="{{asset('assets/media/icons/directive.png')}}" alt="Directives" class="w-12 h-12" />
                 <span class="font-semibold">Directives</span>
             </a>
@@ -38,7 +38,7 @@
                 <span class="font-semibold">Chartes</span>
             </a>
 
-            <a href="{{path('autres_docs')}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+            <a href="{{path('type_docs', {type: 'autres documents'})}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
                 <img src="{{asset('assets/media/icons/archives.png')}}" alt="Autres Documents" class="w-12 h-12" />
                 <span class="font-semibold">Autres Documents</span>
             </a>

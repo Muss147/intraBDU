@@ -49,13 +49,27 @@ class Parametres extends EntityBase
      * @var Collection<int, OffresEmploi>
      */
     #[ORM\OneToMany(targetEntity: OffresEmploi::class, mappedBy: 'direction')]
-    private Collection $offresEmplois;
+    private Collection $offresDirection;
+
+    /**
+     * @var Collection<int, OffresEmploi>
+     */
+    #[ORM\OneToMany(targetEntity: OffresEmploi::class, mappedBy: 'secteurActivite')]
+    private Collection $offresSecteur;
+
+    /**
+     * @var Collection<int, OffresEmploi>
+     */
+    #[ORM\OneToMany(targetEntity: OffresEmploi::class, mappedBy: 'metier')]
+    private Collection $offresMetier;
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->agents = new ArrayCollection();
-        $this->offresEmplois = new ArrayCollection();
+        $this->offresDirection = new ArrayCollection();
+        $this->offresSecteur = new ArrayCollection();
+        $this->offresMetier = new ArrayCollection();
     }
 
     
@@ -225,27 +239,109 @@ class Parametres extends EntityBase
     /**
      * @return Collection<int, OffresEmploi>
      */
-    public function getOffresEmplois(): Collection
+    public function getOffresDirection(): Collection
     {
-        return $this->offresEmplois;
+        return $this->offresDirection;
     }
 
-    public function addOffresEmploi(OffresEmploi $offresEmploi): static
+    public function addOffreDirection(OffresEmploi $offresEmploi): static
     {
-        if (!$this->offresEmplois->contains($offresEmploi)) {
-            $this->offresEmplois->add($offresEmploi);
+        if (!$this->offresDirection->contains($offresEmploi)) {
+            $this->offresDirection->add($offresEmploi);
             $offresEmploi->setDirection($this);
         }
 
         return $this;
     }
 
-    public function removeOffresEmploi(OffresEmploi $offresEmploi): static
+    public function removeOffreDirection(OffresEmploi $offresEmploi): static
     {
-        if ($this->offresEmplois->removeElement($offresEmploi)) {
+        if ($this->offresDirection->removeElement($offresEmploi)) {
             // set the owning side to null (unless already changed)
             if ($offresEmploi->getDirection() === $this) {
                 $offresEmploi->setDirection(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addOffresDirection(OffresEmploi $offresDirection): static
+    {
+        if (!$this->offresDirection->contains($offresDirection)) {
+            $this->offresDirection->add($offresDirection);
+            $offresDirection->setDirection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffresDirection(OffresEmploi $offresDirection): static
+    {
+        if ($this->offresDirection->removeElement($offresDirection)) {
+            // set the owning side to null (unless already changed)
+            if ($offresDirection->getDirection() === $this) {
+                $offresDirection->setDirection(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OffresEmploi>
+     */
+    public function getOffresSecteur(): Collection
+    {
+        return $this->offresSecteur;
+    }
+
+    public function addOffresSecteur(OffresEmploi $offresSecteur): static
+    {
+        if (!$this->offresSecteur->contains($offresSecteur)) {
+            $this->offresSecteur->add($offresSecteur);
+            $offresSecteur->setSecteurActivite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffresSecteur(OffresEmploi $offresSecteur): static
+    {
+        if ($this->offresSecteur->removeElement($offresSecteur)) {
+            // set the owning side to null (unless already changed)
+            if ($offresSecteur->getSecteurActivite() === $this) {
+                $offresSecteur->setSecteurActivite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OffresEmploi>
+     */
+    public function getOffresMetier(): Collection
+    {
+        return $this->offresMetier;
+    }
+
+    public function addOffresMetier(OffresEmploi $offresMetier): static
+    {
+        if (!$this->offresMetier->contains($offresMetier)) {
+            $this->offresMetier->add($offresMetier);
+            $offresMetier->setMetier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffresMetier(OffresEmploi $offresMetier): static
+    {
+        if ($this->offresMetier->removeElement($offresMetier)) {
+            // set the owning side to null (unless already changed)
+            if ($offresMetier->getMetier() === $this) {
+                $offresMetier->setMetier(null);
             }
         }
 

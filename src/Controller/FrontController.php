@@ -89,29 +89,6 @@ final class FrontController extends AbstractController
         ]);
     }
     
-    #[Route('/documents-de-reference', name: 'doc_reference')]
-    public function documents(): Response
-    {
-        return $this->render('front/documents-reference/index.html.twig');
-    }
-
-    #[Route('/documents-de-reference/prodecures', name: 'procedures')]
-    public function procedures(DocumentsRepository $documentsRepository): Response
-    {
-        return $this->render('front/documents-reference/procedures.html.twig', [
-            'moreViewed' => $documentsRepository->moreViewed(),
-            'documents' => $documentsRepository->findByType('procedures')
-        ]);
-    }
-
-    #[Route('/documents-de-reference/autres-documents', name: 'autres_docs')]
-    public function autresDocs(DocumentsRepository $documentsRepository): Response
-    {
-        return $this->render('front/documents-reference/autres-doc.html.twig', [
-            'documents' => $documentsRepository->findByType('Autres documents')
-        ]);
-    }
-
     #[Route('/dispositif-d-alerte', name: 'dispositif_alerte')]
     public function dispositifAlerte(): Response
     {
@@ -263,12 +240,6 @@ final class FrontController extends AbstractController
     public function motDuDG(): Response
     {
         return $this->render('front/mot-du-dg.html.twig');
-    }
-
-    #[Route('/politique-et-ethique', name: 'politique_ethique')]
-    public function politiqueEthique(): Response
-    {
-        return $this->render('front/politique-ethique.html.twig');
     }
 
     #[Route('/notes-et-publications', name: 'notes_publications')]

@@ -4,7 +4,8 @@ namespace App\Form;
 
 use App\Entity\Actualites;
 use App\Entity\Files;
-use App\Entity\Users;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,24 +18,21 @@ class ActualitesForm extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('deletedAt')
-            ->add('cover', EntityType::class, [
-                'class' => Files::class,
-                'choice_label' => 'id',
-            ])
-            ->add('createdUser', EntityType::class, [
-                'class' => Users::class,
-                'choice_label' => 'id',
-            ])
-            ->add('updatedUser', EntityType::class, [
-                'class' => Users::class,
-                'choice_label' => 'id',
-            ])
-            ->add('deletedUser', EntityType::class, [
-                'class' => Users::class,
-                'choice_label' => 'id',
+            ->add('online')
+            ->add('cover', FileType::class, [
+                'label' => false,
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez charger un fichier d\'image valide file (JPEG, PNG)',
+                    ])
+                ],
             ])
         ;
     }

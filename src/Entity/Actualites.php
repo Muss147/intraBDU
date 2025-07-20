@@ -24,6 +24,9 @@ class Actualites extends EntityBase
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Files $cover = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $online = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,6 +69,18 @@ class Actualites extends EntityBase
     public function setCover(?Files $cover): static
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function isOnline(): ?bool
+    {
+        return $this->online;
+    }
+
+    public function setOnline(?bool $online): static
+    {
+        $this->online = $online;
 
         return $this;
     }
