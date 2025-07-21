@@ -2,6 +2,7 @@
 
 namespace App\Controller\BackController;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\NotesPublications;
 use App\Form\NotesPublicationsForm;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,5 +47,55 @@ final class NotesPublicationsController extends AbstractController
             'new_note' => $form,
             'notes' => $notesPublicationsRepository->findAll()
         ]);
+    }
+
+    #[Route('/modification', name: 'note_update', methods: ['POST'])]
+    public function update(Request $request, NotesPublicationsRepository $notesRepository, EntityManagerInterface $em): Response
+    {
+        if ($request->isMethod('POST') && $note = $notesRepository->find($request->get('note_id'))) {
+            $titre = $request->get('note_titre');
+            $resume = $request->get('note_resume');
+            $online = $request->get('note_online') ?? null;
+            $description = $request->get('note_description');
+
+            // Timestamps et Userstamps
+            $note->setTitre($titre)
+                ->setResume($resume)
+                ->setOnline($online)
+                ->setDescription($description)
+                ->updatedTimestamps();
+            $note->updatedUserstamps($this->getUser());
+
+            $em->persist($note);
+            $em->flush();
+            $this->addFlash('success', 'Modification effectué avec succès');
+        }
+        else $this->addFlash('error', 'Publication introuvable !');
+        return $this->redirectToRoute('app_notes_publications', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/delete/{note}', name: 'note_delete', methods: ['POST'])]
+    public function delete(Request $request, NotesPublications $note, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$note->getId(), $request->getPayload()->getString('_token'))) {
+            $note->remove($this->getUser());
+            $em->flush();
+        }
+        return $this->redirectToRoute('app_notes_publications', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/delete-notes-selected', name: 'notes_selected_delete', methods: ['POST'])]
+    public function deleteNotesSelected(Request $request, EntityManagerInterface $em, NotesPublicationsRepository $notesRepository): Response
+    {
+        // Récupérer les données JSON de la requête
+        $data = json_decode($request->getContent(), true);
+
+        if ($request->isXmlHttpRequest()) {
+            foreach ($data['itemsDeleted'] as $id) {
+                if ($note = $notesRepository->find($id)) $note->remove($this->getUser());
+                $em->flush();
+            }
+        }
+        return new JsonResponse(true, 200);
     }
 }

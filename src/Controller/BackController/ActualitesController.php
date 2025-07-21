@@ -2,6 +2,7 @@
 
 namespace App\Controller\BackController;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Files;
 use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -64,5 +65,64 @@ final class ActualitesController extends AbstractController
             'new_form' => $form,
             'actualites' => $actualitesRepository->findAll()
         ]);
+    }
+
+    #[Route('/modification', name: 'actualite_update', methods: ['POST'])]
+    public function update(Request $request, ActualitesRepository $actualitesRepository, EntityManagerInterface $em): Response
+    {
+        if ($request->isMethod('POST') && $actualite = $actualitesRepository->find($request->get('actualite_id'))) {
+            $titre = $request->get('actualite_titre');
+            $online = $request->get('actualite_online') ?? null;
+            $description = $request->get('actualite_description');
+
+            // Gestion de l'upload de l'avatar
+            if ($file = $request->get('actualite_cover')) {
+                $data = $this->fileUploader->upload($file);
+                $fileEntity = (new Files())
+                    ->setFilename($data['filename'])
+                    ->setType($data['type'])
+                    ->setAlt('Cover de ' . $actualite->getTitre());
+                $actualite->setCover($fileEntity);
+                $this->em->persist($fileEntity);
+            }
+
+            // Timestamps et Userstamps
+            $actualite->setTitre($titre)
+                ->setOnline($online)
+                ->setDescription($description)
+                ->updatedTimestamps();
+            $actualite->updatedUserstamps($this->getUser());
+
+            $em->persist($actualite);
+            $em->flush();
+            $this->addFlash('success', 'Modification effectué avec succès');
+        }
+        else $this->addFlash('error', 'Actualité introuvable !');
+        return $this->redirectToRoute('list_actualites', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/delete/{actualite}', name: 'actualite_delete', methods: ['POST'])]
+    public function delete(Request $request, Actualites $actualite, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$actualite->getId(), $request->getPayload()->getString('_token'))) {
+            $actualite->remove($this->getUser());
+            $em->flush();
+        }
+        return $this->redirectToRoute('list_actualites', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/delete-actualites-selected', name: 'actualites_selected_delete', methods: ['POST'])]
+    public function deleteActualitesSelected(Request $request, EntityManagerInterface $em, ActualitesRepository $actualitesRepository): Response
+    {
+        // Récupérer les données JSON de la requête
+        $data = json_decode($request->getContent(), true);
+
+        if ($request->isXmlHttpRequest()) {
+            foreach ($data['itemsDeleted'] as $id) {
+                if ($actualite = $actualitesRepository->find($id)) $actualite->remove($this->getUser());
+                $em->flush();
+            }
+        }
+        return new JsonResponse(true, 200);
     }
 }

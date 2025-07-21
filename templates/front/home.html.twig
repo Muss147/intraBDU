@@ -88,25 +88,21 @@ select#votes_form_agent {
         <div class="">
             <div class="flex justify-between items-start">
                 <h2 class="text-primary font-bold text-xl">Actualités</h2>
-                <a href="#" class="inline-flex items-center font-bold text-primary hover:text-blue-700 transition-colors duration-300 group">
+                <a href="{{path('actualites')}}" class="inline-flex items-center font-bold text-primary hover:text-blue-700 transition-colors duration-300 group">
                     Autres actualités
                     <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
 
             <div class="mt-4 flex flex-wrap md:flex-nowrap justify-between gap-6">
+                {% for actu in actualites %}
                 <a href="" class="flex bg-gray-100 rounded shadow w-full md:w-1/2">
-                    <div class=""><img src="{{asset('assets/media/actualites/image6.png')}}" alt="" class="min-w-[150px] h-full rounded-l-sm object-cover"></div>
+                    <div class=""><img src="{{asset(actu.cover.filename)}}" alt="" class="min-w-[150px] h-full rounded-l-sm object-cover"></div>
                     <div class="p-4">
-                        <p class="font-semibold">Les veux de la nouvelle annee du DG </p>
+                        <p class="font-semibold">{{actu.titre}}</p>
                     </div>
                 </a>
-                <a href="" class="flex bg-gray-100 rounded shadow w-full md:w-1/2">
-                    <div class=""><img src="{{asset('assets/media/actualites/image2.png')}}" alt="" class="min-w-[150px] h-full rounded-l-sm object-cover"></div>
-                    <div class="p-4">
-                        <p class="font-semibold">La BDU-CI réaffirme son engagement envers les jeunes talents en lançant la Saison 2 du Programme Pépinière d’Excellence BDU-CI</p>
-                    </div>
-                </a>
+                {% endfor %}
             </div>
         </div>
         <!-- Autres actus ici -->

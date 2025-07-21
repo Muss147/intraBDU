@@ -1,0 +1,109 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Actualités" %}
+
+{% block stylesheets %}
+<style type="text/css">
+.modal-header::after {
+    content: '';
+    position: absolute;
+    size: 100%;
+    inset: 0;
+    background-color: #00000040;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-primary text-xl font-semibold mb-4">Actualités</h2>
+
+        <div class="grid md:grid-cols-3 gap-4 md:gap-x-5 md:gap-y-8">
+            {% for actu in pagination %}
+            <div class="flex flex-col bg-blue-100 border border-gray-300 rounded-sm shadow-sm">
+                <div class="">
+                    <img alt="" src="{{asset(actu.cover.filename)}}" class="w-full max-h-36 object-cover rounded-t-sm">
+                </div>
+                <div class="p-6">
+                    <a href="javascript:;" onclick="showModal({{ actu.id }})" data-modal-toggle="show-modal">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{actu.titre}}</h5>
+                    </a>
+                    <p class="mb-4 text-xs font-normal text-gray-700">{{actu.createdAt|date('d M Y')}}</p>
+                </div>
+                <div class="mt-auto p-6">
+                    <p class="mb-3 font-normal text-gray-700">{{actu.description|slice(0, 90)}}{{actu.description|length > 90 ? "..." : ""}}</p>
+                    <button data-modal-target="show-modal" onclick="showModal({{ actu.id }})" data-modal-toggle="show-modal" type="button" class="open-note-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-secondary rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        Lire le communiqué
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="flex justify-center mt-8">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </section>
+
+    <!-- Main modal -->
+    <div id="show-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm">
+                <!-- Modal header -->
+                <div class="modal-header relative flex items-center justify-between p-4 md:p-5 rounded-t h-52" style="background-size: cover; background-position: top; background-repeat: no-repeat;">
+                    <h3 id="actu_title" class="relative text-xl font-semibold text-gray-900"></h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="show-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 max-h-[400px] overflow-y-auto space-y-8">
+                    <p id="actu_desc" class="text-base leading-relaxed text-gray-500 text-justify"></p>
+                    <span id="actu_date" class="text-end font-normal italic text-gray-400"></span>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 rounded-b">
+                    <button data-modal-hide="show-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+    const pagination = {{ pagination|map(p => {
+        id: p.id,
+        titre: p.titre,
+        cover: p.cover ? p.cover.filename : null,
+        description: p.description|raw,
+        date: p.createdAt|date('d M Y'),
+    })|json_encode|raw }};
+
+    const showModal = (paramId) => {
+        const actualite = pagination.find(c => c.id == paramId);
+        if (!actualite) return;
+
+        document.querySelector('#actu_title').textContent = actualite.titre;
+        document.querySelector('#actu_desc').textContent = actualite.description;
+        document.querySelector('#actu_date').textContent = actualite.date;
+
+        // Image cover
+        if (actualite.cover) {
+            const wrapper = document.querySelector('.modal-header');
+            wrapper.style.backgroundImage = `url('${actualite.cover}')`;
+        }
+    };
+</script>
+{% endblock %}

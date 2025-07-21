@@ -6,11 +6,11 @@ use App\Entity\Votes;
 use App\Entity\Agents;
 use App\Form\VotesForm;
 use App\Entity\VoteNote;
+use App\Repository\ActualitesRepository;
 use App\Repository\FilesRepository;
 use App\Repository\AgentsRepository;
 use App\Repository\ClassementMensuelRepository;
 use App\Repository\SlidersRepository;
-use App\Repository\DocumentsRepository;
 use App\Repository\ParametresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -30,7 +30,8 @@ final class FrontController extends AbstractController
         ParametresRepository $criteresRepository,
         AgentsRepository $agentsRepository,
         ClassementMensuelRepository $classementMensuelRepository,
-        NotesPublicationsRepository $notesPublicationsRepository
+        NotesPublicationsRepository $notesPublicationsRepository,
+        ActualitesRepository $actualitesRepository
         ): Response
     {
         $criteres = $criteresRepository->findByType('criteres'); // Tous les critères
@@ -83,6 +84,7 @@ final class FrontController extends AbstractController
         return $this->render('front/home.html.twig', [
             'slides' => $slidersRepository->findAllOnline(),
             'notes' => $notesPublicationsRepository->findAllOnline(3),
+            'actualites' => $actualitesRepository->findAllOnline(2),
             'agents' => $agentsRepository->findAll(),
             'form' => $form->createView(),
             'top' => $classementMensuelRepository->findOneByMois(new \DateTime('first day of this month'))
@@ -250,21 +252,17 @@ final class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/le-guide-du-banquier/my-faq', name: 'guide_myFaq')]
-    public function myFAQ(): Response
+    #[Route('/actualites', name: 'actualites')]
+    public function actualites(Request $request, ActualitesRepository $actualitesRepository, PaginatorInterface $paginator): Response
     {
-        return $this->render('front/le-guide-du-banquier/my-faq.html.twig');
-    }
+        $pagination = $paginator->paginate(
+            $actualitesRepository->findAllOnline(),
+            $request->query->getInt('page', 1),
+            1 // Nombre d'éléments par page
+        );
 
-    #[Route('/le-guide-du-banquier/notes-et-publications', name: 'guide_convertisseur')]
-    public function guideConvertisseur(): Response
-    {
-        return $this->render('front/le-guide-du-banquier/convertisseur-devises.html.twig');
-    }
-
-    #[Route('/le-guide-du-banquier/simulateur-de-credit', name: 'guide_simulateur')]
-    public function guideSimulateur(): Response
-    {
-        return $this->render('front/le-guide-du-banquier/simulateur-credit.html.twig');
+        return $this->render('front/notes-publications/actualites.html.twig', [
+            'pagination' => $pagination,
+        ]);
     }
 }
