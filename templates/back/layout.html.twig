@@ -578,7 +578,6 @@ Contact: +225 07 471 612 21
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Procedures</span>
-                                                        <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>
@@ -586,11 +585,23 @@ Contact: +225 07 471 612 21
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item">
                                                     <!--begin:Menu link-->
-                                                    <a class="menu-link{% if app.session.get('subMenu') == 'autres_documents' %} active{% endif %}" href="{{path('app_documents', {type: 'Autres documents'})}}">
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'autres documents' %} active{% endif %}" href="{{path('app_documents', {type: 'Autres documents'})}}">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Autres documents</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'directives' %} active{% endif %}" href="{{path('app_documents', {type: 'Directives'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Directives</span>
                                                         <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->

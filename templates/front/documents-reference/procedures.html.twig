@@ -68,45 +68,45 @@
         </div> #}
     </section>
 
-    <!-- Tous les processus -->
+    <!-- Toutes les Procedures -->
     <section class="pb-8">
-        <h2 class="text-primary text-xl font-semibold mb-4">Tous les Processus</h2>
+        <h2 class="text-primary text-xl font-semibold mb-4">Toutes les Procedures</h2>
 
         <div class="space-y-4">
             {% if documents|length <= 6 %}
             <div class="bg-blue-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                {% for i, processus in documents|slice(0, 6) %}
+                {% for i, procedure in documents|slice(0, 6) %}
                 <div class="bg-white rounded shadow p-2 text-center">
                     <button type="button" id="dropdownRightButton_{{i}}" data-dropdown-toggle="dropdownRight_{{i}}" data-dropdown-placement="right">
                         <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
                     </button>
-                    <p class="text-sm mt-2">{{processus.libelle}}</p>
+                    <p class="text-sm mt-2">{{procedure.libelle}}</p>
 
                     <!-- Dropdown menu -->
                     <div id="dropdownRight_{{i}}" class="text-start z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                            <div class="font-medium truncate">{{processus.libelle}}</div>
-                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                            <div class="font-medium truncate">{{procedure.libelle}}</div>
+                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
                         </div>
                         <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_{{i}}">
-                            {% for sousProcessus in processus.children %}
-                                {% if sousProcessus.source %}
+                            {% for sousProcedure in procedure.children %}
+                                {% if sousProcedure.source %}
                                 <li>
-                                    <a href="{{sousProcessus.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcessus.libelle}}</a>
+                                    <a href="{{sousProcedure.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcedure.libelle}}</a>
                                 </li>
                                 {% else %}
                                 <li>
                                     <button id="doubleDropdownButton_{{i}}" data-dropdown-toggle="doubleDropdown_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        {{sousProcessus.libelle}}
+                                        {{sousProcedure.libelle}}
                                         <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
                                     </button>
                                     <div id="doubleDropdown_{{i}}" class="z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
                                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                            <div class="font-medium truncate">{{sousProcessus.libelle}}</div>
-                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                                            <div class="font-medium truncate">{{sousProcedure.libelle}}</div>
+                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
                                         </div>
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_{{i}}">
-                                            {% for item in sousProcessus.children %}
+                                            {% for item in sousProcedure.children %}
                                             <li>
                                                 <a href="{{item.source.filename}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
                                             </li>
@@ -129,33 +129,33 @@
                     <button type="button" id="dropdownRightButton_{{i}}" data-dropdown-toggle="dropdownRight_{{i}}" data-dropdown-placement="right">
                         <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
                     </button>
-                    <p class="text-sm mt-2">{{processus.libelle}}</p>
+                    <p class="text-sm mt-2">{{procedure.libelle}}</p>
 
                     <!-- Dropdown menu -->
                     <div id="dropdownRight_{{i}}" class="text-start z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                            <div class="font-medium truncate">{{processus.libelle}}</div>
-                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                            <div class="font-medium truncate">{{procedure.libelle}}</div>
+                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
                         </div>
                         <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_{{i}}">
-                            {% for sousProcessus in processus.children %}
-                                {% if sousProcessus.source %}
+                            {% for sousProcedure in procedure.children %}
+                                {% if sousProcedure.source %}
                                 <li>
-                                    <a href="{{sousProcessus.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcessus.libelle}}</a>
+                                    <a href="{{sousProcedure.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcedure.libelle}}</a>
                                 </li>
                                 {% else %}
                                 <li>
                                     <button id="doubleDropdownButton_{{i}}" data-dropdown-toggle="doubleDropdown_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        {{sousProcessus.libelle}}
+                                        {{sousProcedure.libelle}}
                                         <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
                                     </button>
                                     <div id="doubleDropdown_{{i}}" class="z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
                                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                            <div class="font-medium truncate">{{sousProcessus.libelle}}</div>
-                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                                            <div class="font-medium truncate">{{sousProcedure.libelle}}</div>
+                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
                                         </div>
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_{{i}}">
-                                            {% for item in sousProcessus.children %}
+                                            {% for item in sousProcedure.children %}
                                             <li>
                                                 <a href="{{item.source.filename}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
                                             </li>
@@ -178,33 +178,33 @@
                     <button type="button" id="dropdownRightButton_{{i}}" data-dropdown-toggle="dropdownRight_{{i}}" data-dropdown-placement="right">
                         <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
                     </button>
-                    <p class="text-sm mt-2">{{processus.libelle}}</p>
+                    <p class="text-sm mt-2">{{procedure.libelle}}</p>
 
                     <!-- Dropdown menu -->
                     <div id="dropdownRight_{{i}}" class="text-start z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                            <div class="font-medium truncate">{{processus.libelle}}</div>
-                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                            <div class="font-medium truncate">{{procedure.libelle}}</div>
+                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
                         </div>
                         <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_{{i}}">
-                            {% for sousProcessus in processus.children %}
-                                {% if sousProcessus.source %}
+                            {% for sousProcedure in procedure.children %}
+                                {% if sousProcedure.source %}
                                 <li>
-                                    <a href="{{sousProcessus.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcessus.libelle}}</a>
+                                    <a href="{{sousProcedure.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcedure.libelle}}</a>
                                 </li>
                                 {% else %}
                                 <li>
                                     <button id="doubleDropdownButton_{{i}}" data-dropdown-toggle="doubleDropdown_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        {{sousProcessus.libelle}}
+                                        {{sousProcedure.libelle}}
                                         <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
                                     </button>
                                     <div id="doubleDropdown_{{i}}" class="z-10 hidden bg-white border border-secondary min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
                                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                            <div class="font-medium truncate">{{sousProcessus.libelle}}</div>
-                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner le sous processus :</p>
+                                            <div class="font-medium truncate">{{sousProcedure.libelle}}</div>
+                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
                                         </div>
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_{{i}}">
-                                            {% for item in sousProcessus.children %}
+                                            {% for item in sousProcedure.children %}
                                             <li>
                                                 <a href="{{item.source.filename}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
                                             </li>

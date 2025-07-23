@@ -9,7 +9,8 @@ twig:
         decimals: 0
         decimal_point: ','
         thousands_separator: ' '
-    paths: []
+    paths: ['%kernel.project_dir%/templates']
+    form_themes: ['bootstrap_5_layout.html.twig']
 
 when@test:
     twig:

@@ -72,7 +72,7 @@ final class DocumentsController extends AbstractController
             $this->em->flush();
     
             $this->addFlash('success', $type .' ajouté(e) avec succès.');
-            return $this->redirectToRoute('app_documents', ['type' => $type, 'parent' => $parent->getId() ?? null]);
+            return $this->redirectToRoute('app_documents', ['type' => $type, 'parent' => $parent ? $parent->getId() : null]);
         }
         return $this->render('back/documents-reference/liste.html.twig', [
             'new_file' => $fileForm,

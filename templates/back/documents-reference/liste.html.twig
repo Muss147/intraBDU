@@ -1,6 +1,6 @@
 {% extends "back/layout.html.twig" %}
 
-{% block title 'Procedures' %}
+{% block title type %}
 
 {% block stylesheets %}
 	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
@@ -23,7 +23,7 @@
 					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
 					<!--begin::Title-->
 					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-						Liste des Procedures
+						Liste des {{type}}
 					</h1>
 					<!--end::Title-->
 
@@ -57,7 +57,7 @@
 
 						<!--begin::Item-->
 						<li class="breadcrumb-item text-muted">
-							Procedures
+							{{type}}
 						</li>
 						<!--end::Item-->
 
@@ -185,13 +185,14 @@
 									Nouveau dossier
 								</button>
 								<!--end::Export-->
-
+								{# {% if parent %} #}
 								<!--begin::Add customer-->
 								<button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
 									<i class="ki-duotone ki-folder-up fs-2"><span class="path1"></span><span class="path2"></span></i>
 									Ajouter un(e) {{type}}
 								</button>
 								<!--end::Add customer--> 
+								{# {% endif %} #}
 							</div>
 							<!--end::Toolbar-->
 

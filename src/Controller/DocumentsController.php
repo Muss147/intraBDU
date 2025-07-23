@@ -2,17 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Files;
-use App\Entity\Documents;
-use App\Form\DocumentsForm;
 use App\Service\FileUploader;
 use App\Repository\DocumentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/documents-de-reference')]
@@ -39,10 +35,17 @@ final class DocumentsController extends AbstractController
     }
 
     #[Route('/type-{type}', name: 'type_docs')]
-    public function autresDocs($type, DocumentsRepository $documentsRepository): Response
+    public function autresDocs($type, Request $request, PaginatorInterface $paginator, DocumentsRepository $documentsRepository): Response
     {
+        $pagination = $paginator->paginate(
+            $documentsRepository->findByType($type), // Doctrine query ou tableau
+            $request->query->getInt('page', 1),     // page actuelle
+            9                                       // éléments par page
+        );
+
         return $this->render('front/documents-reference/autres-doc.html.twig', [
-            'documents' => $documentsRepository->findByType($type)
+            'documents' => $pagination,
+            'type' => $type
         ]);
     }
 
@@ -50,5 +53,11 @@ final class DocumentsController extends AbstractController
     public function politiqueEthique(): Response
     {
         return $this->render('front/documents-reference/politique-ethique.html.twig');
+    }
+
+    #[Route('/charte-graphique', name: 'chartes')]
+    public function Chartes(): Response
+    {
+        return $this->render('front/documents-reference/charte-graphique.html.twig');
     }
 }

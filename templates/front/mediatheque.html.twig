@@ -33,37 +33,51 @@
             {% endfor %}
         </div>
 
+        {# --- PAGINATION --- #}
+        {% if medias.pageCount > 1 %}
         <nav aria-label="Page navigation example" class="flex justify-center mt-8">
             <ul class="inline-flex -space-x-px text-base h-10">
+                {% if medias.currentPageNumber > 1 %}
                 <li>
-                    <a href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">Précédent</a>
+                    <a href="{{ path('mediatheque', { page: medias.currentPageNumber - 1 }) }}"
+                        class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
+                        Précédent
+                    </a>
                 </li>
-                <li class="block sm:hidden">
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">...</a>
-                </li>
-                <li class="hidden sm:block">
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
-                </li>
-                <li class="hidden sm:block">
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
-                </li>
+                {% else %}
                 <li>
-                    <a href="#" aria-current="page" class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">3</a>
+                    <span class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-300 bg-white border border-e-0 border-gray-200 rounded-s-lg cursor-not-allowed">
+                        Précédent
+                    </span>
                 </li>
-                <li class="block sm:hidden">
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">...</a>
-                </li>
-                <li class="hidden sm:block">
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">4</a>
-                </li>
-                <li class="hidden sm:block">
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">5</a>
-                </li>
+                {% endif %}
+
+                {% for page in 1..medias.pageCount %}
+                    <li class="{{ page > 2 and page < medias.pageCount - 1 ? 'hidden sm:block' : '' }}">
+                        <a href="{{ path('mediatheque', { page: page }) }}"
+                        class="flex items-center justify-center px-4 h-10 leading-tight {{ page == medias.currentPageNumber ? 'text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700' }}">
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                {% if medias.currentPageNumber < medias.pageCount %}
                 <li>
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">Suivant</a>
+                    <a href="{{ path('mediatheque', { page: medias.currentPageNumber + 1 }) }}"
+                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
+                        Suivant
+                    </a>
                 </li>
+                {% else %}
+                <li>
+                    <span class="flex items-center justify-center px-4 h-10 leading-tight text-gray-300 bg-white border border-gray-200 rounded-e-lg cursor-not-allowed">
+                        Suivant
+                    </span>
+                </li>
+                {% endif %}
             </ul>
         </nav>
+        {% endif %}
     </section>
 
     <!-- Main modal -->

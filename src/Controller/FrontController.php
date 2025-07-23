@@ -110,10 +110,16 @@ final class FrontController extends AbstractController
     }
 
     #[Route('/mediatheque', name: 'mediatheque')]
-    public function media(FilesRepository $filesRepository): Response
+    public function media(Request $request, FilesRepository $filesRepository, PaginatorInterface $paginator): Response
     {
+        $pagination = $paginator->paginate(
+            $filesRepository->findAllBy('medias'), // Doctrine query ou tableau
+            $request->query->getInt('page', 1),     // page actuelle
+            12                                       // éléments par page
+        );
+
         return $this->render('front/mediatheque.html.twig', [
-            'medias' => $filesRepository->findAllBy('medias')
+            'medias' => $pagination
         ]);
     }
 
@@ -245,10 +251,16 @@ final class FrontController extends AbstractController
     }
 
     #[Route('/notes-et-publications', name: 'notes_publications')]
-    public function notesPublications(NotesPublicationsRepository $notesPublicationsRepository): Response
+    public function notesPublications(Request $request, NotesPublicationsRepository $notesPublicationsRepository, PaginatorInterface $paginator): Response
     {
+        $pagination = $paginator->paginate(
+            $notesPublicationsRepository->findAllOnline(), // Doctrine query ou tableau
+            $request->query->getInt('page', 1),     // page actuelle
+            6                                       // éléments par page
+        );
+
         return $this->render('front/notes-publications/liste.html.twig', [
-            'notes' => $notesPublicationsRepository->findAllOnline(),
+            'notes' => $pagination,
         ]);
     }
 
@@ -256,13 +268,13 @@ final class FrontController extends AbstractController
     public function actualites(Request $request, ActualitesRepository $actualitesRepository, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
-            $actualitesRepository->findAllOnline(),
-            $request->query->getInt('page', 1),
-            1 // Nombre d'éléments par page
+            $actualitesRepository->findAllOnline(), // Doctrine query ou tableau
+            $request->query->getInt('page', 1),     // page actuelle
+            6                                       // éléments par page
         );
 
         return $this->render('front/notes-publications/actualites.html.twig', [
-            'pagination' => $pagination,
+            'actualites' => $pagination,
         ]);
     }
 }
