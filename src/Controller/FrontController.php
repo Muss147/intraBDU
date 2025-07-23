@@ -46,6 +46,7 @@ final class FrontController extends AbstractController
 
         $form = $this->createForm(VotesForm::class, $vote);
         $form->handleRequest($request);
+        dd($agentsRepository->findAnniversairesDuMois());
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -86,6 +87,7 @@ final class FrontController extends AbstractController
             'notes' => $notesPublicationsRepository->findAllOnline(3),
             'actualites' => $actualitesRepository->findAllOnline(2),
             'agents' => $agentsRepository->findAll(),
+            'anniversaires' => $agentsRepository->findAnniversairesDuMois(),
             'form' => $form->createView(),
             'top' => $classementMensuelRepository->findOneByMois(new \DateTime('first day of this month'))
         ]);

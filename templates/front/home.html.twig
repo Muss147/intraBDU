@@ -202,16 +202,41 @@ select#votes_form_agent {
 
     <!-- Colonne latérale -->
     <aside class="md:col-span-1 space-y-4">
-
+        {% if anniversaires is not empty %}
         <div class="flex flex-col border border-primary rounded">
-            <h3 class="bg-primary text-lg font-semibold text-gray-50 p-2 md:px-3">Happy Birthday</h3>
+            <h3 class="bg-primary text-lg font-semibold text-gray-50 p-2 md:px-3">🎉 Anniversaires du mois</h3>
             <div class="flex justify-between items-center p-3">
-                <div class="border border-gray-500"><img class="h-75px max-w-[100px]" src="{{asset('assets/media/employees/image5.png')}}" alt="photo 1"></div>
-                <div class="border border-gray-500"><img class="h-75px max-w-[100px]" src="{{asset('assets/media/employees/image11.png')}}" alt="photo 2"></div>
-                <div class="border border-gray-500"><img class="h-75px max-w-[100px]" src="{{asset('assets/media/employees/image16.png')}}" alt="photo 3"></div>
+                {% for user in anniversaires %}
+                <button class="border border-gray-500" type="button"
+                    data-modal-target="annivModal{{ user.id }}"
+                    data-modal-toggle="annivModal{{ user.id }}">
+                    {# {{ user.dateNaissance|date('d F', locale='fr') }} #}
+                    <img class="h-auto max-w-[80px]" src="{{ asset(user.photo.filename|default('assets/media/svg/avatars/blank.svg')) }}" alt="{{ user.prenoms ~ ' ' ~ user.nom }}">
+                </button>
+                {# Modal #}
+                <div id="annivModal{{ user.id }}" tabindex="-1" class="hidden fixed z-50 overflow-y-auto inset-0 bg-black/50">
+                    <div class="modal-content bg-white p-6 rounded shadow max-w-md mx-auto mt-24">
+                        <h2 class="text-lg font-bold mb-4">🎂 Souhaiter un joyeux anniversaire</h2>
+                        <p><strong>{{ user.prenoms ~ ' ' ~ user.nom }}</strong></p>
+                        <p class="text-sm text-gray-600">{{ user.email }}</p>
+                        {% if user.telephone %}
+                            <p class="text-sm text-gray-600">{{ user.telephone }}</p>
+                        {% endif %}
+                        <div class="mt-4 flex gap-4">
+                            {% if user.email %}
+                                <a href="mailto:{{ user.email }}" class="btn btn-sm btn-primary">Envoyer un mail</a>
+                            {% endif %}
+                            {% if user.telephone %}
+                                <a href="tel:{{ user.telephone }}" class="btn btn-sm btn-success">Appeler</a>
+                            {% endif %}
+                            <button data-modal-hide="annivModal{{ user.id }}" class="btn btn-sm btn-light">Fermer</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
-
+        {% endif %}
         <div class="flex flex-col border border-primary rounded">
         
         </div>

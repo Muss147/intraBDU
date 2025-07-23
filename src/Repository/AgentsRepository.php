@@ -49,6 +49,17 @@ class AgentsRepository extends ServiceEntityRepository
                 ->getOneOrNullResult();
         }
         
+        public function findAnniversairesDuMois(): Query
+        {
+            $moisActuel = (new \DateTime())->format('m');
+
+            return $this->createQueryBuilder('a')
+                ->where('MONTH(a.anniversaire) = :mois')
+                ->setParameter('mois', $moisActuel)
+                ->getQuery()
+                ->getResult();
+        }
+        
     //    public function findOneBySomeField($value): ?Agents
     //    {
     //        return $this->createQueryBuilder('a')
