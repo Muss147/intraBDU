@@ -49,7 +49,7 @@ class AgentsRepository extends ServiceEntityRepository
                 ->getOneOrNullResult();
         }
         
-        public function findAnniversairesDuMois(): Query
+        public function findAnniversairesDuMois(): array
         {
             $moisActuel = (new \DateTime())->format('m');
 
@@ -60,6 +60,21 @@ class AgentsRepository extends ServiceEntityRepository
                 ->getResult();
         }
         
+        public function findAkwabaDuMois(): array
+        {
+            $now = new \DateTime();
+            $moisActuel = $now->format('m');
+            $anneeActuelle = $now->format('Y');
+
+            return $this->createQueryBuilder('a')
+                ->where('MONTH(a.createdAt) = :mois')
+                ->andWhere('YEAR(a.createdAt) = :annee')
+                ->setParameter('mois', $moisActuel)
+                ->setParameter('annee', $anneeActuelle)
+                ->getQuery()
+                ->getResult();
+        }
+
     //    public function findOneBySomeField($value): ?Agents
     //    {
     //        return $this->createQueryBuilder('a')

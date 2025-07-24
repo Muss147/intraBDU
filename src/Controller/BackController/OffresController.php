@@ -69,7 +69,6 @@ final class OffresController extends AbstractController
             'offre' => $offre,
             'form_offre' => $form,
             'metiers' => $parametresRepository->findByType('metiers'),
-            'secteurs' => $parametresRepository->findByType('secteurs'),
             'agences' => $parametresRepository->findByType('agences'),
             'directions' => $parametresRepository->findByType('directions'),
         ]);

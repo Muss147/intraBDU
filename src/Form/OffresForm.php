@@ -101,17 +101,6 @@ class OffresForm extends AbstractType
                     ;
                 },
             ])
-            ->add('secteurActivite', EntityType::class, [
-                'class' => Parametres::class,
-                'choice_label' => 'libelle',
-                'query_builder' => function (EntityRepository $er) use ($options) {
-                    return $er->createQueryBuilder('p')
-                        ->where('p.type = :type')
-                        ->andWhere('p.deletedAt IS NULL')
-                        ->setParameter('type', 'secteurs')
-                    ;
-                },
-            ])
             ->add('metier', EntityType::class, [
                 'class' => Parametres::class,
                 'choice_label' => 'libelle',

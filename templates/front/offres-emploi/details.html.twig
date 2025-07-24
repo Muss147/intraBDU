@@ -1,0 +1,89 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title offre.titre %}
+
+{% block stylesheets %}
+<style type="text/css">
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="rounded shadow pb-8 min-h-screen space-y-8 md:space-y-10">
+        <div class="grid md:grid-cols-2 p-4 md:px-8">
+            <h3 class="text-2xl font-semibold md:mx-w-lg">{{offre.titre}}</h3>
+            <div class="flex flex-wrap sm:flex-nowrap gap-4 justify-between md:justify-end items-center">
+                <a href="mailto:?subject=Annonce consultée sur intranet.bduci.com - {{offre.titre}}&body=Bonjour,%0D%0A%0D%0AVoici une annonce sur l'Intranet qui me semble intéressante : {{offre.titre}} : https://www.intranet.bduci.com/offres-emploi/details/{{offre.slug}}" target="_blank">
+                    <svg class="w-10 h-10 text-primary" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z"/>
+                    <path d="M20.677 4.117A1.996 1.996 0 0 0 20 4H4c-.225 0-.44.037-.642.105l.758.607L12 10.742 19.9 4.7l.777-.583Z"/>
+                    </svg>
+                </a>
+                <a href="" target="_blank">
+                    <svg class="w-10 h-10 text-primary" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.5 3a3.5 3.5 0 0 0-3.456 4.06L8.143 9.704a3.5 3.5 0 1 0-.01 4.6l5.91 2.65a3.5 3.5 0 1 0 .863-1.805l-5.94-2.662a3.53 3.53 0 0 0 .002-.961l5.948-2.667A3.5 3.5 0 1 0 17.5 3Z"/>
+                    </svg>
+                </a>
+                <button type="button" class="inline-flex items-center px-4 py-2 font-medium text-white bg-primary rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">Postuler</button>
+            </div>
+        </div>
+        <hr>
+        <div class="p-4 md:px-8">
+            <table border="0" class="">
+                <tr>
+                    <td class="font-semibold">Direction</td>
+                    <td class="p-0 md:pl-8">{{offre.metier.libelle}} | {{offre.direction.libelle}}</td>
+                </tr>
+                <tr>
+                    <td class="font-semibold">Date d'expiration</td>
+                    <td class="p-0 md:pl-8">{{offre.dateExpiration|date('d m Y')}}</td>
+                </tr>
+                <tr>
+                    <td class="font-semibold">Niveau de poste</td>
+                    <td class="p-0 md:pl-8">{{offre.niveauPoste}}</td>
+                </tr>
+                <tr>
+                    <td class="font-semibold">Niveau d'étude (diplome)</td>
+                    <td class="p-0 md:pl-8">{{offre.niveauFormation}}</td>
+                </tr>
+                <tr>
+                    <td class="font-semibold">Expérience recherchée</td>
+                    <td class="p-0 md:pl-8">{{offre.experience}}</td>
+                </tr>
+                <tr>
+                    <td class="font-semibold">Nombre de postes</td>
+                    <td class="p-0 md:pl-8">{{offre.postes|length < 10 ? '0' : '' }}{{offre.postes}}</td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <div class="p-4 md:px-8">
+            <h4 class="font-semibold uppercase mb-4 md:mb-8">Missions du poste :</h4>
+
+            <ul class="mb-8 list-disc">
+                {% for mission in offre.missions %}<li>{{mission}}</li>{% endfor %}
+            </ul>
+
+
+            <h4 class="font-semibold uppercase mb-4 md:mb-8">Profil recherché :</h4>
+
+            <ul class="mb-8 list-disc">
+                {% for profil in offre.profils %}<li>{{profil}}</li>{% endfor %}
+            </ul>
+
+            <div>
+                {{offre.description|raw}}
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    document.addEventListener('turbo:load', function () {
+    });
+</script>
+{% endblock %}

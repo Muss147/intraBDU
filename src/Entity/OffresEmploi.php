@@ -40,9 +40,6 @@ class OffresEmploi extends EntityBase
     #[ORM\Column(length: 255)]
     private ?string $niveauFormation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'offresSecteur')]
-    private ?Parametres $secteurActivite = null;
-
     #[ORM\ManyToOne(inversedBy: 'offresMetier')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Parametres $metier = null;
@@ -138,18 +135,6 @@ class OffresEmploi extends EntityBase
     public function setNiveauFormation(string $niveauFormation): static
     {
         $this->niveauFormation = $niveauFormation;
-
-        return $this;
-    }
-
-    public function getSecteurActivite(): ?Parametres
-    {
-        return $this->secteurActivite;
-    }
-
-    public function setSecteurActivite(?Parametres $secteurActivite): static
-    {
-        $this->secteurActivite = $secteurActivite;
 
         return $this;
     }

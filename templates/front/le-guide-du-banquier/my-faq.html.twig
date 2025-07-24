@@ -200,18 +200,18 @@
 {% endblock %}
 
 {% block javascripts %}
-<!-- ============ MIXITUP FILTER ============ -->
 <script src="{{asset('assets/js/mixitup.min.js')}}"></script>
 
 <script>
-/*=============== MIXITUP FILTER PORTFOLIO ===============*/
-let mixerFAQ = mixitup('.collapse__container', {
-    selectors: {
-        target: '.faq__card'
-    },
-    animation: {
-        duration: 300
-    }
-});
+document.addEventListener('turbo:load', function () {
+    let mixerFAQ = mixitup('.collapse__container', {
+        selectors: {
+            target: '.faq__card'
+        },
+        animation: {
+            duration: 300
+        }
+    });
+})
 </script>
 {% endblock %}

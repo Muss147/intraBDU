@@ -91,22 +91,22 @@
 
 {% block javascripts %}
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbo:load', function () {
     document.querySelectorAll('.counter').forEach((el) => {
-      const end = parseInt(el.dataset.count);
-      let current = 0;
-      const step = Math.ceil(end / 50);
+        const end = parseInt(el.dataset.count);
+        let current = 0;
+        const step = Math.ceil(end / 50);
 
-      const interval = setInterval(() => {
-        current += step;
-        if (current >= end) {
-          el.textContent = end;
-          clearInterval(interval);
-        } else {
-          el.textContent = current;
-        }
-      }, 50);
+        const interval = setInterval(() => {
+            current += step;
+            if (current >= end) {
+            el.textContent = end;
+            clearInterval(interval);
+            } else {
+            el.textContent = current;
+            }
+        }, 50);
     });
-  });
+});
 </script>
 {% endblock %}

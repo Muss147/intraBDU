@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\OffresEmploi;
 use App\Repository\ParametresRepository;
 use App\Repository\OffresEmploiRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -10,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/offres')]
+#[Route('/offres-emploi')]
 final class OffresController extends AbstractController
 {
     #[Route('/', name: 'app_offres')]
@@ -53,13 +54,11 @@ final class OffresController extends AbstractController
         ]);
     }
 
-    #[Route('/details', name: 'details_offres')]
-    public function details(OffresEmploiRepository $offresEmploiRepository, ParametresRepository $parametresRepository): Response
+    #[Route('/details/{offre}', name: 'details_offre')]
+    public function details(OffresEmploi $offre, OffresEmploiRepository $offresEmploiRepository): Response
     {
-        return $this->render('front/offres-emploi/index.html.twig', [
-            'offres' => $offresEmploiRepository->findAll(),
-            'metiers' => $parametresRepository->findByType('metiers'),
-            'secteurs' => $parametresRepository->findByType('secteurs'),
+        return $this->render('front/offres-emploi/details.html.twig', [
+            'offre' => $offre,
         ]);
     }
 }

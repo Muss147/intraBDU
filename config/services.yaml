@@ -37,10 +37,6 @@ services:
     
     App\Twig\CustomTwigExtension:
         tags: ['twig.extension']
-    
-    twig.extension.intl:
-        class: Twig\Extra\Intl\IntlExtension
-        tags: [ 'twig.extension' ]
 
     App\Service\FileUploader:
         arguments:

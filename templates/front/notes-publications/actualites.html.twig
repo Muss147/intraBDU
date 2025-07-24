@@ -125,6 +125,7 @@
 
 {% block javascripts %}
 <script type="text/javascript">
+document.addEventListener('turbo:load', function () {
     const actualites = {{ actualites|map(p => {
         id: p.id,
         titre: p.titre,
@@ -147,5 +148,6 @@
             wrapper.style.backgroundImage = `url('${actualite.cover}')`;
         }
     };
+})
 </script>
 {% endblock %}

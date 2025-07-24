@@ -34,10 +34,9 @@ class OffresEmploiRepository extends ServiceEntityRepository
         {
             $qb = $this->createQueryBuilder('o')
                 ->leftJoin('o.metier', 'm')
-                ->leftJoin('o.secteurActivite', 's')
                 ->leftJoin('o.direction', 'd')
                 ->leftJoin('d.parent', 'a')
-                ->andWhere('o.titre LIKE :term1 OR o.experience LIKE :term1 OR o.niveauPoste LIKE :term1 OR o.niveauFormation LIKE :term1 OR m.libelle LIKE :term1 OR s.libelle LIKE :term1')
+                ->andWhere('o.titre LIKE :term1 OR o.experience LIKE :term1 OR o.niveauPoste LIKE :term1 OR o.niveauFormation LIKE :term1 OR m.libelle LIKE :term1')
                 ->andWhere('d.libelle LIKE :term2 OR a.libelle LIKE :term2')
                 ->setParameter('term1', '%' . $search['keywords'] . '%')
                 ->setParameter('term2', '%' . $search['lieu'] . '%');
@@ -61,11 +60,6 @@ class OffresEmploiRepository extends ServiceEntityRepository
             if (!empty($filters['niveau_formation'])) {
                 $qb->andWhere('o.niveauFormation = :niveau_formation')
                 ->setParameter('niveau_formation', $filters['niveau_formation']);
-            }
-
-            if (!empty($filters['secteur'])) {
-                $qb->andWhere('s.id = :secteur')
-                ->setParameter('secteur', $filters['secteur']);
             }
 
             return $qb->getQuery();

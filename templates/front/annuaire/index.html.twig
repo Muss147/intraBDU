@@ -134,7 +134,7 @@ select#votes_form_agent {
 {% block javascripts %}
 {{ parent() }}
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('turbo:load', function () {
         const modal = document.getElementById('agent-modal');
         const buttons = document.querySelectorAll('.tab-button');
 

@@ -85,15 +85,6 @@
                             </select>
                         </div>
                         <div class="flex-shrink-0 w-auto sm:w-full">
-                            <label for="secteur" class="hidden sm:block mb-2 text-sm font-medium text-gray-900 ">Secteur d'activité</label>
-                            <select id="secteur" name="secteur" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                <option value="" selected>Toutes les offres d'emploi</option>
-                                {% for secteur in secteurs %}
-                                <option value="{{secteur.id}}" {% if filters.secteur == secteur.id %}selected{% endif %}>{{secteur.libelle}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="flex-shrink-0 w-auto sm:w-full">
                             <label for="niveau_formation" class="hidden sm:block mb-2 text-sm font-medium text-gray-900 ">Niveau de formation</label>
                             <select id="niveau_formation" name="niveau_formation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 <option value="" selected>Toutes les offres d'emploi</option>
@@ -132,7 +123,7 @@
 {% block javascripts %}
 {{ parent() }}
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('turbo:load', function () {
         filtersForm = document.querySelector('#filters_form');
         selectFields = filtersForm.querySelectorAll('select').forEach(element => {
             element.addEventListener('change', (e) => {

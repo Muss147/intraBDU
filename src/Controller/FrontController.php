@@ -46,7 +46,6 @@ final class FrontController extends AbstractController
 
         $form = $this->createForm(VotesForm::class, $vote);
         $form->handleRequest($request);
-        dd($agentsRepository->findAnniversairesDuMois());
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -88,6 +87,7 @@ final class FrontController extends AbstractController
             'actualites' => $actualitesRepository->findAllOnline(2),
             'agents' => $agentsRepository->findAll(),
             'anniversaires' => $agentsRepository->findAnniversairesDuMois(),
+            'akwaba' => $agentsRepository->findAkwabaDuMois(),
             'form' => $form->createView(),
             'top' => $classementMensuelRepository->findOneByMois(new \DateTime('first day of this month'))
         ]);
@@ -278,5 +278,11 @@ final class FrontController extends AbstractController
         return $this->render('front/notes-publications/actualites.html.twig', [
             'actualites' => $pagination,
         ]);
+    }
+
+    #[Route('/politique-de-confidentialite', name: 'politique_de_conf')]
+    public function politiqueDeConf(): Response
+    {
+        return $this->render('front/politique-de-conf.html.twig');
     }
 }

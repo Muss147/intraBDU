@@ -252,7 +252,7 @@
 {% block javascripts %}
 {{ parent() }}
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener('turbo:load', function () {
         const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
         const tabPanels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
         const prevBtn = document.getElementById("prevTab");

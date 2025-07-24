@@ -84,32 +84,34 @@
 
 {% block javascripts %}
 <script type="text/javascript">
-function simulateLoan() {
-    const amount = parseFloat(document.getElementById("amount").value);
-    const months = parseInt(document.getElementById("months").value);
-    const annualRate = parseFloat(document.getElementById("rate").value);
+document.addEventListener('turbo:load', function () {
+    function simulateLoan() {
+        const amount = parseFloat(document.getElementById("amount").value);
+        const months = parseInt(document.getElementById("months").value);
+        const annualRate = parseFloat(document.getElementById("rate").value);
 
-    if (!amount || !months || !annualRate || amount <= 0 || months <= 0 || annualRate < 0) {
-        alert("Veuillez remplir correctement tous les champs.");
-        return;
+        if (!amount || !months || !annualRate || amount <= 0 || months <= 0 || annualRate < 0) {
+            alert("Veuillez remplir correctement tous les champs.");
+            return;
+        }
+
+        const t = annualRate / (12 * 100); // Taux mensuel
+        const M = (amount * t) / (1 - Math.pow(1 + t, -months)); // Formule exacte
+        const totalCost = M * months;
+
+        document.getElementById("monthly-payment").value = M.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        document.getElementById("total-cost").innerText = totalCost.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        document.getElementById("results").classList.remove("hidden");
     }
 
-    const t = annualRate / (12 * 100); // Taux mensuel
-    const M = (amount * t) / (1 - Math.pow(1 + t, -months)); // Formule exacte
-    const totalCost = M * months;
-
-    document.getElementById("monthly-payment").value = M.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    document.getElementById("total-cost").innerText = totalCost.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    document.getElementById("results").classList.remove("hidden");
-}
-
-function resetForm() {
-    document.getElementById("amount").value = '';
-    document.getElementById("months").value = '';
-    document.getElementById("rate").value = '';
-    document.getElementById("monthly-payment").value = '';
-    document.getElementById("total-cost").innerText = '';
-    document.getElementById("results").classList.add("hidden");
-}
+    function resetForm() {
+        document.getElementById("amount").value = '';
+        document.getElementById("months").value = '';
+        document.getElementById("rate").value = '';
+        document.getElementById("monthly-payment").value = '';
+        document.getElementById("total-cost").innerText = '';
+        document.getElementById("results").classList.add("hidden");
+    }
+})
 </script>
 {% endblock %}

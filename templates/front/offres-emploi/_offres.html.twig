@@ -2,10 +2,10 @@
                 {% for offre in pagination %}
                 <div class="first:rounded-t-lg last:rounded-b-lg p-4 md:p-8 hover:bg-slate-200 flex flex-wrap sm:flex-nowrap gap-4">
                     <div class="rounded-md text-center hidden sm:flex w-20 bg-white items-center justify-center">
-                        <img src="{{asset('assets/media/logos/Logo-BDUCI-dark.png')}}" alt="photo" class="max-w-16">
+                        <a href="{{path('details_offre', {offre: offre.id})}}" data-turbo="false"><img src="{{asset('assets/media/logos/Logo-BDUCI-dark.png')}}" alt="photo" class="max-w-16"></a>
                     </div>
                     <div class="">
-                        <h4 class="font-semibold text-xl">{{offre.titre}}</h4>
+                        <a href="{{path('details_offre', {offre: offre.id})}}" data-turbo="false"><h4 class="font-semibold text-xl">{{offre.titre}}</h4></a>
                         <span class="text-primary">{{offre.metier.libelle}} | {{offre.direction.libelle}}</span>
                         <div class="flex flex-wrap gap-0 sm:gap-4 items-center text-sm">
                             <span class="flex gap-2">

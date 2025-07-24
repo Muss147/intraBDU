@@ -111,6 +111,7 @@
 
 {% block javascripts %}
 <script type="text/javascript">
+document.addEventListener('turbo:load', function () {
     const notes = {{ notes|map(p => {
         id: p.id,
         titre: p.titre,
@@ -126,5 +127,6 @@
         document.querySelector('#note_desc').textContent = note.description;
         document.querySelector('#note_date').textContent = note.date;
     };
+})
 </script>
 {% endblock %}
