@@ -74,6 +74,15 @@ final class OffresController extends AbstractController
         ]);
     }
 
+    #[Route('/candidatures/{offre}', name: 'candidatures_offres')]
+    public function candidatures(Request $request, OffresEmploi $offre): Response
+    {
+        return $this->render('back/offres/candidatures.html.twig', [
+            'agents' => $offre->getPostulants(),
+            'offre' => $offre
+        ]);
+    }
+
     #[Route('/{offre}/delete', name: 'offre_delete', methods: ['POST'])]
     public function delete(Request $request, OffresEmploi $offre): Response
     {

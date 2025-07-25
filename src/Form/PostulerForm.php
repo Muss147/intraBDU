@@ -2,35 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Agents;
+use App\Entity\Files;
+use App\Entity\Postuler;
+use App\Entity\OffresEmploi;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class AgentsForm extends AbstractType
+class PostulerForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('prenoms')
-            ->add('civilite', ChoiceType::class, [
-                'choices' => [
-                    'Monsieur' => 'M.',
-                    'Madame' => 'Mme.',
-                    'Mademoiselle' => 'Mlle.',
-                ],
-                'placeholder' => 'Choisir une civilité',
-                'required' => true,
-                'label' => false,
-            ])
-            ->add('telephone')
+            ->add('nomAgent')
+            ->add('posteOccupe')
             ->add('email', EmailType::class, [
                 'label' => false,
                 'constraints' => [
@@ -42,20 +33,23 @@ class AgentsForm extends AbstractType
                     ]),
                 ],
             ])
-            ->add('fonction')
-            ->add('anniversaire')
-            ->add('photo', FileType::class, [
+            ->add('telephone')
+            ->add('motivations')
+            ->add('cv', FileType::class, [
                 'label' => false,
                 'required' => false,
                 'mapped' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '2M',
+                        'maxSize' => '10M',
                         'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
+                            'application/pdf',
+                            'application/msword', // .doc
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+                            'application/vnd.ms-excel', // .xls
+                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG)',
+                        'mimeTypesMessage' => 'Veuillez charger un document valide (PDF, Word, Excel).',
                     ])
                 ],
             ])
@@ -65,7 +59,7 @@ class AgentsForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Agents::class,
+            'data_class' => Postuler::class,
         ]);
     }
 }

@@ -3,11 +3,16 @@
 namespace App\Entity;
 
 use App\Mapping\EntityBase;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OffresEmploiRepository;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[UniqueEntity('slug', message: 'Ce slug est déjà utilisé.')]
 #[ORM\Entity(repositoryClass: OffresEmploiRepository::class)]
 class OffresEmploi extends EntityBase
 {
@@ -59,8 +64,20 @@ class OffresEmploi extends EntityBase
     #[ORM\Column(type: Types::SIMPLE_ARRAY)]
     private array $profils = [];
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
     private ?string $slug = null;
+
+    /**
+     * @var Collection<int, Postuler>
+     */
+    #[ORM\OneToMany(targetEntity: Postuler::class, mappedBy: 'offre')]
+    private Collection $postulants;
+
+    public function __construct()
+    {
+        $this->postulants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -232,5 +249,35 @@ class OffresEmploi extends EntityBase
             $slug = $slugger->slug($this->titre)->lower();
             $this->slug = $slug;
         }
+    }
+
+    /**
+     * @return Collection<int, Postuler>
+     */
+    public function getPostulants(): Collection
+    {
+        return $this->postulants;
+    }
+
+    public function addPostulant(Postuler $postulant): static
+    {
+        if (!$this->postulants->contains($postulant)) {
+            $this->postulants->add($postulant);
+            $postulant->setOffre($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostulant(Postuler $postulant): static
+    {
+        if ($this->postulants->removeElement($postulant)) {
+            // set the owning side to null (unless already changed)
+            if ($postulant->getOffre() === $this) {
+                $postulant->setOffre(null);
+            }
+        }
+
+        return $this;
     }
 }

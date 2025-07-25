@@ -81,36 +81,38 @@ final class AgentsController extends AbstractController
         $form = $this->createForm(AgentsForm::class, $agent);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && !$form->isValid()) {
-            foreach ($form->getErrors(true) as $error) {
-                $this->addFlash('error', $error->getMessage());
+        if ($form->isSubmitted()) {
+            if (!$form->isValid()) {
+                foreach ($form->getErrors(true) as $error) {
+                    $this->addFlash('error', $error->getMessage());
+                }
             }
-        }
-        elseif ($form->isSubmitted() && $form->isValid()) {
-            $service = $request->get('service');
-            if ($service) $agent->setService($parametresRepository->find($request->get('service')));
+            else {
+                $service = $request->get('service');
+                if ($service) $agent->setService($parametresRepository->find($request->get('service')));
 
-            // Gestion de l'upload des fichiers
-            if ($file = $form->get('photo')->getData()) {
-                $data = $this->fileUploader->upload($file);
-                $fileEntity = (new Files())
-                    ->setFilename($data['filename'])
-                    ->setType($data['type'])
-                    ->setSize($data['size'])
-                    ->setAlt($agent->getNom());
-                $agent->setPhoto($fileEntity);
-                $this->em->persist($fileEntity);
+                // Gestion de l'upload des fichiers
+                if ($file = $form->get('photo')->getData()) {
+                    $data = $this->fileUploader->upload($file);
+                    $fileEntity = (new Files())
+                        ->setFilename($data['filename'])
+                        ->setType($data['type'])
+                        ->setSize($data['size'])
+                        ->setAlt($agent->getNom());
+                    $agent->setPhoto($fileEntity);
+                    $this->em->persist($fileEntity);
+                }
+                $agent->updatedTimestamps();
+                $agent->updatedUserstamps($this->getUser());
+
+                $this->em->persist($agent);
+                $this->em->flush();
+
+                // if ($request->get('welcomeMail') && $request->get('welcomeMail') != !0)
+        
+                $this->addFlash('success', 'Agent modifié avec succès.');
+                return $this->redirectToRoute('details_agents', ['agent' => $agent->getId()]);
             }
-            $agent->updatedTimestamps();
-            $agent->updatedUserstamps($this->getUser());
-
-            $this->em->persist($agent);
-            $this->em->flush();
-
-            // if ($request->get('welcomeMail') && $request->get('welcomeMail') != !0)
-    
-            $this->addFlash('success', 'Agent modifié avec succès.');
-            return $this->redirectToRoute('details_agents', ['agent' => $agent->getId()]);
         }
         return $this->render('back/agents/details.html.twig', [
             'form' => $form,
