@@ -2,18 +2,23 @@
 
 namespace App\Controller\BackController;
 
+use App\Entity\Postuler;
 use App\Form\OffresForm;
 use App\Entity\OffresEmploi;
+use Symfony\Component\Mime\Email;
+use App\Repository\PostulerRepository;
 use App\Repository\ParametresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OffresEmploiRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 #[Route('/espace-admin/offres')]
 final class OffresController extends AbstractController
@@ -77,6 +82,51 @@ final class OffresController extends AbstractController
     #[Route('/candidatures/{offre}', name: 'candidatures_offres')]
     public function candidatures(Request $request, OffresEmploi $offre): Response
     {
+        return $this->render('back/offres/candidatures.html.twig', [
+            'agents' => $offre->getPostulants(),
+            'offre' => $offre
+        ]);
+    }
+
+    #[Route('/candidatures/{candidature}/action', name: 'candidature_action')]
+    public function candidatureActions(Request $request, Postuler $candidature, MailerInterface $mailer): Response
+    {
+        $offre = $candidature->getOffre();
+        if ($request->isMethod('POST')) {
+            $isValid = $request->get('validated') === 'true';
+            $candidature->setValidated($isValid);
+
+            $this->em->persist($candidature);
+            $this->em->flush();
+                
+            // Envoi du mail au candidat
+            try {
+                $subject = $isValid
+                    ? "Votre candidature à l'offre « {$offre->getTitre()} » a été retenue"
+                    : "Suite à votre candidature à l'offre « {$offre->getTitre()} »";
+
+                $message = $isValid
+                    ? "<p>Bonjour <strong>{$candidature->getNomAgent()}</strong>,</p>
+                    <p>Votre candidature a été retenue pour l'offre <strong>{$offre->getTitre()}</strong>.</p>
+                    <p>Nous prendrons contact avec vous prochainement pour un entretien.</p>"
+                    : "<p>Bonjour <strong>{$candidature->getNomAgent()}</strong>,</p>
+                    <p>Après étude de votre candidature pour le poste <strong>{$offre->getTitre()}</strong>, nous sommes au regret de ne pas pouvoir y donner suite.</p>
+                    <p>Nous vous remercions pour l’intérêt porté à notre entreprise.</p>";
+
+                $email = (new Email())
+                    ->from('no-reply@bduci.com')
+                    ->to($candidature->getEmail())
+                    ->subject($subject)
+                    ->html($message . "<hr><p>BDU - Service Recrutement</p>");
+
+                $mailer->send($email);
+            } catch (TransportExceptionInterface $e) {
+                $this->addFlash('error', "Une erreur s'est produite lors de l'envoi de l'email au candidat : " . $e->getMessage());
+            }
+
+            $this->addFlash('success', 'Requête effectuée avec succès. Un mail de notification sera envoyé au candidat.');
+            return $this->redirectToRoute('candidatures_offres', ['offre' => $offre->getId()]);
+        }
         return $this->render('back/offres/candidatures.html.twig', [
             'agents' => $offre->getPostulants(),
             'offre' => $offre

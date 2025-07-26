@@ -8,6 +8,9 @@ use App\Entity\Postuler;
 use App\Form\PostulerForm;
 use App\Entity\OffresEmploi;
 use App\Repository\PostulerRepository;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Email;
 use App\Repository\ParametresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OffresEmploiRepository;
@@ -67,7 +70,7 @@ final class OffresController extends AbstractController
     }
 
     #[Route('/details/{offre}', name: 'details_offre')]
-    public function details(Request $request,#[MapEntity(expr: "repository.findOneBySlug(offre)")] OffresEmploi $offre, PostulerRepository $postulerRepository): Response
+    public function details(Request $request,#[MapEntity(expr: "repository.findOneBySlug(offre)")] OffresEmploi $offre, PostulerRepository $postulerRepository, MailerInterface $mailer): Response
     {
         $url = $request->getUri();
         $post = new Postuler();
@@ -112,6 +115,44 @@ final class OffresController extends AbstractController
             }
             $this->em->persist($post);
             $this->em->flush();
+
+            // Envoi de mail avec try/catch
+            try {
+                // Email au candidat
+                $emailCandidat = (new Email())
+                    ->from('no-reply@bduci.com')
+                    ->to($post->getEmail())
+                    ->subject('Confirmation de votre candidature')
+                    ->html("
+                        <p>Bonjour <b>{$post->getNomAgent()}</b>,</p>
+                        <p>Nous avons bien reçu votre candidature à l'offre <b>{$offre->getTitre()}</b>.</p>
+                        <p>Notre équipe RH la traitera dans les plus brefs délais.</p>
+                        <p>Merci et bonne chance !</p>
+                        <hr>
+                        <p>Service Recrutement - BDU</p>
+                    ");
+                $mailer->send($emailCandidat);
+            } catch (TransportExceptionInterface $e) {
+                $this->addFlash('error', "Une erreur s'est produite lors de l'envoi de l'email au candidat : " . $e->getMessage());
+            }
+
+            try {
+                // Email au RH
+                $emailRh = (new Email())
+                    ->from('no-reply@bduci.com')
+                    ->to('rh@bduci.com')
+                    ->subject("Nouvelle candidature : {$offre->getTitre()}")
+                    ->html("
+                        <p><strong>{$post->getNomAgent()}</strong> a postulé à l'offre <strong>{$offre->getTitre()}</strong>.</p>
+                        <p>Email : {$post->getEmail()}<br>
+                        Téléphone : {$post->getTelephone()}<br>
+                        Poste : {$post->getPosteOccupe()}</p>
+                        <p>Voir dans l'espace d'administration.</p>
+                    ");
+                $mailer->send($emailRh);
+            } catch (TransportExceptionInterface $e) {
+                $this->addFlash('error', "Erreur lors de la notification au service RH : " . $e->getMessage());
+            }
     
             $this->addFlash('success', 'Votre candidature a été enregistrée avec succès. Un mail vous sera envoyé pour le suivi de la candidature.');
             return $this->redirectToRoute('details_offre', [

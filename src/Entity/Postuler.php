@@ -42,6 +42,9 @@ class Postuler
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $validated = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -151,6 +154,18 @@ class Postuler
     public function setCreatedAt(\DateTime $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isValidated(): ?bool
+    {
+        return $this->validated;
+    }
+
+    public function setValidated(?bool $validated): static
+    {
+        $this->validated = $validated;
 
         return $this;
     }

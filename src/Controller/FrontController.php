@@ -105,12 +105,6 @@ final class FrontController extends AbstractController
         return $this->render('front/dispositif-alerte/faq.html.twig');
     }
 
-    #[Route('/fiche-de-declaration-d-incident', name: 'fiche_declaration')]
-    public function ficheDeclaration(): Response
-    {
-        return $this->render('front/dispositif-alerte/fiche-declaration.html.twig');
-    }
-
     #[Route('/mediatheque', name: 'mediatheque')]
     public function media(Request $request, FilesRepository $filesRepository, PaginatorInterface $paginator): Response
     {
@@ -284,5 +278,11 @@ final class FrontController extends AbstractController
     public function politiqueDeConf(): Response
     {
         return $this->render('front/politique-de-conf.html.twig');
+    }
+
+    #[Route('/organigramme', name: 'organigramme')]
+    public function organigramme(): Response
+    {
+        return $this->render('front/organigramme.html.twig');
     }
 }

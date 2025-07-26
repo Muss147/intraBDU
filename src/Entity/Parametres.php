@@ -54,22 +54,29 @@ class Parametres extends EntityBase
     /**
      * @var Collection<int, OffresEmploi>
      */
-    #[ORM\OneToMany(targetEntity: OffresEmploi::class, mappedBy: 'secteurActivite')]
-    private Collection $offresSecteur;
-
-    /**
-     * @var Collection<int, OffresEmploi>
-     */
     #[ORM\OneToMany(targetEntity: OffresEmploi::class, mappedBy: 'metier')]
     private Collection $offresMetier;
+
+    /**
+     * @var Collection<int, Incidents>
+     */
+    #[ORM\OneToMany(targetEntity: Incidents::class, mappedBy: 'direction')]
+    private Collection $incidents;
+
+    /**
+     * @var Collection<int, Incidents>
+     */
+    #[ORM\OneToMany(targetEntity: Incidents::class, mappedBy: 'directionImpacte')]
+    private Collection $incidentsByDirection;
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->agents = new ArrayCollection();
         $this->offresDirection = new ArrayCollection();
-        $this->offresSecteur = new ArrayCollection();
         $this->offresMetier = new ArrayCollection();
+        $this->incidents = new ArrayCollection();
+        $this->incidentsByDirection = new ArrayCollection();
     }
 
     
@@ -291,36 +298,6 @@ class Parametres extends EntityBase
     /**
      * @return Collection<int, OffresEmploi>
      */
-    public function getOffresSecteur(): Collection
-    {
-        return $this->offresSecteur;
-    }
-
-    public function addOffresSecteur(OffresEmploi $offresSecteur): static
-    {
-        if (!$this->offresSecteur->contains($offresSecteur)) {
-            $this->offresSecteur->add($offresSecteur);
-            $offresSecteur->setSecteurActivite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOffresSecteur(OffresEmploi $offresSecteur): static
-    {
-        if ($this->offresSecteur->removeElement($offresSecteur)) {
-            // set the owning side to null (unless already changed)
-            if ($offresSecteur->getSecteurActivite() === $this) {
-                $offresSecteur->setSecteurActivite(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, OffresEmploi>
-     */
     public function getOffresMetier(): Collection
     {
         return $this->offresMetier;
@@ -342,6 +319,66 @@ class Parametres extends EntityBase
             // set the owning side to null (unless already changed)
             if ($offresMetier->getMetier() === $this) {
                 $offresMetier->setMetier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Incidents>
+     */
+    public function getIncidents(): Collection
+    {
+        return $this->incidents;
+    }
+
+    public function addIncident(Incidents $incident): static
+    {
+        if (!$this->incidents->contains($incident)) {
+            $this->incidents->add($incident);
+            $incident->setDirection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncident(Incidents $incident): static
+    {
+        if ($this->incidents->removeElement($incident)) {
+            // set the owning side to null (unless already changed)
+            if ($incident->getDirection() === $this) {
+                $incident->setDirection(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Incidents>
+     */
+    public function getIncidentsByDirection(): Collection
+    {
+        return $this->incidentsByDirection;
+    }
+
+    public function addIncidentsByDirection(Incidents $incidentsByDirection): static
+    {
+        if (!$this->incidentsByDirection->contains($incidentsByDirection)) {
+            $this->incidentsByDirection->add($incidentsByDirection);
+            $incidentsByDirection->setDirectionImpacte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncidentsByDirection(Incidents $incidentsByDirection): static
+    {
+        if ($this->incidentsByDirection->removeElement($incidentsByDirection)) {
+            // set the owning side to null (unless already changed)
+            if ($incidentsByDirection->getDirectionImpacte() === $this) {
+                $incidentsByDirection->setDirectionImpacte(null);
             }
         }
 
