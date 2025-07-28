@@ -25,7 +25,7 @@ final class ParametresController extends AbstractController
     #[Route('/liste-{type}/{parent?}', name: 'param_type')]
     public function param_type(Request $request, $parent, $type, ParametresRepository $parametresRepository, SessionInterface $session): Response
     {
-        $session->set('menu', 'parametres');
+        $session->set('menu', null);
         $session->set('subMenu', $type);
 
         $dataParent = null;

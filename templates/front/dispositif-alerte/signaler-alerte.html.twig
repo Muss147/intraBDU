@@ -1,6 +1,6 @@
 {% extends 'front/layout.html.twig' %}
 
-{% block title "Fiche de déclaration d'incident" %}
+{% block title "Deposer une alerte" %}
 
 {% block stylesheets %}
 {% endblock %}
@@ -9,7 +9,7 @@
 <div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
     <!-- Sujets les plus consultés -->
     {{form_start(form, {'attr': {'id': '', 'class': 'pb-8 min-h-screen space-y-16 md:space-y-10'}})}}
-        <h2 class="text-primary text-xl font-semibold mb-4">Fiche de déclaration d'incident</h2>
+        <h2 class="text-primary text-xl font-semibold mb-4">Deposer une alerte</h2>
 
         <div class="p-4 md:px-8 rounded-lg bg-gray-100">
             <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 sm:text-base" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" data-tabs-active-classes="text-secondary hover:text-secondary border-secondary" data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 border-gray-100 hover:border-gray-300" role="tablist">
@@ -18,19 +18,19 @@
                         <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
                         </svg>
-                        Information <span class="hidden sm:inline-flex sm:ms-2">de l'incident</span>
+                        Catégorie <span class="hidden sm:inline-flex sm:ms-2">du signalement</span>
                     </span>
                 </li>
                 <li class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border after:border-gray-400 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10">
                     <span class="flex flex-wrap items-center justify-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200" id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">
                         <span class="me-2">2</span>
-                        Qualification <span class="hidden sm:inline-flex sm:ms-2">de l'incident</span>
+                        Détails <span class="hidden sm:inline-flex sm:ms-2">personnels</span>
                     </span>
                 </li>
                 <li class="flex items-center">
                     <span id="contacts-styled-tab" data-tabs-target="#styled-contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">
                         <span class="me-2">3</span>
-                        Conséquences <span class="hidden sm:inline-flex sm:ms-2">de l'incident</span>
+                        Description <span class="hidden sm:inline-flex sm:ms-2">du signalement</span>
                     </span>
                 </li>
             </ol>
@@ -38,13 +38,13 @@
 
         <div id="default-styled-tab-content" class="">
             <div class="space-y-5" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
-                <h2 class="font-semibold text-lg">1. Information de l'incident</h2>
+                <h2 class="font-semibold text-lg">1. Entité et Catégorie du signalement</h2>
                 <div class="p-8 md:px-16 rounded-lg bg-gray-100">
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>
-                            {{ form_label(form.etape) }}
+                            <label for="alertes_form_categorie" class="block mb-2 text-sm font-medium text-gray-900">Parmi les choix ci-dessous, cochez celui qui vous convient</label>
                             <div class="grid md:grid-cols-3 gap-2">
-                                {% for radio in form.etape %}
+                                {% for radio in form.categorie %}
                                 <div class="flex items-center ps-4 border border-gray-300 bg-gray-50 rounded-md py-2">
                                     {{ form_widget(radio, {
                                         attr: {
@@ -60,74 +60,22 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div>
-                            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900">Code fiche</label>
-                            {{form_widget(form.code, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full p-2.5', 'placeholder': 'DDF-002'}})}}
-                        </div>
-                        <div>
-                            <label for="incidents_form_dateDebut" class="block mb-2 text-sm font-medium text-gray-900">Date de début de l'incident</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                    </svg>
-                                </div>
-                                {{form_widget(form.dateDebut)}}
-                            </div>
-                        </div>
-                        <div>
-                            <label for="incidents_form_dateRemonte" class="block mb-2 text-sm font-medium text-gray-900">Date de remontée</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                    </svg>
-                                </div>
-                                {{form_widget(form.dateRemonte)}}
-                            </div>
-                        </div>
                     </div>
-                </div>
-                <div class="p-8 md:px-16 rounded-lg bg-gray-100">
-                    <div class="grid gap-6 mb-6 md:grid-cols-2">
-                        <div>
-                            <label for="incidents_form_agence" class="block mb-2 text-sm font-medium text-gray-900">Agence</label>
-                            {{form_widget(form.agence, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full p-2.5', 'placeholder': ''}})}}
-                        </div>
-                        <div>
-                            <label for="incidents_form_region" class="block mb-2 text-sm font-medium text-gray-900">Région</label>
-                            {{form_widget(form.region, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full p-2.5', 'placeholder': ''}})}}
-                        </div>
-                        <div>
-                            <label for="incidents_form_direction" class="block mb-2 text-sm font-medium text-gray-900">Direction / Service</label>
-                            {{form_widget(form.direction, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full p-2.5', 'placeholder': 'Sélectionner une direction'}})}}
-                        </div>  
-                        <div>
-                            <label for="incidents_form_rapporteur" class="block mb-2 text-sm font-medium text-gray-900">Incident rémonté par</label>
-                            {{form_widget(form.rapporteur, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full p-2.5', 'placeholder': ''}})}}
-                        </div>
-                        <div>
-                            <label for="incidents_form_fonction" class="block mb-2 text-sm font-medium text-gray-900">Fonction</label>
-                            {{form_widget(form.fonction, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full p-2.5', 'placeholder': ''}})}}
-                        </div>  
-                        <div>
-                            <label for="incidents_form_telephone" class="block mb-2 text-sm font-medium text-gray-900">Poste téléphonique</label>
-                            {{form_widget(form.telephone, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full p-2.5', 'placeholder': ''}})}}
-                        </div>
-                        <div>
-                            <label for="incidents_form_email" class="block mb-2 text-sm font-medium text-gray-900">Email (facultatif)</label>
-                            {{form_widget(form.email, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full p-2.5', 'placeholder': ''}})}}
-                        </div>
-                    </div>
-                    <div class="mb-6">
-                        <label for="incidents_form_description" class="block mb-2 text-sm font-medium text-gray-900">Description succincte de l'incident</label>
-                        {{form_widget(form.description, {'attr': {'rows': '4', 'class': 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-0 focus:border-primary', 'placeholder': 'Écrivez la description ici...'}})}}
-                    </div> 
                 </div>
             </div>
             <div class="hidden space-y-5" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-                <h2 class="font-semibold text-lg">2. Qualification de l'incident</h2>
+                <h2 class="font-semibold text-lg">2. Détails personnels</h2>
                 <div class="p-8 md:px-16 rounded-lg bg-gray-100">
+                    <p>Le dispositif d'alerte garantit toutes les conditions de sécurité et de confidentialité.</p>
+
+                    <p>C’est pourquoi Orange vous conseille de révéler vos coordonnées : cela facilite la poursuite du traitement de votre signalement ou de votre question et la mise en œuvre de mesures de protection prévues par la loi . Vous avez cependant la possibilité de rester anonyme si vous le souhaitez.</p>
+
+                    <p>Vous êtes informé(e) que les données collectées et enregistrées dans la plateforme de signalement sont strictement nécessaires pour traiter le signalement ou la question.</p>
+
+                    <p>Pour en savoir plus sur le traitement de vos données à caractère personnel, cliquez ici
+                    Informations personnelles :<br>
+                    Que votre signalement ou question soit anonyme ou pas, vous pourrez revenir consulter votre dossier sur Hello Ethics sur votre espace personnel qui est sécurisé par un numéro de référence de dossier et un mot de passe personnel.*</p>
+
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>
                             <label for="incidents_form_categorie" class="block mb-2 text-sm font-medium text-gray-900">Catégorisation baloise de risques</label>

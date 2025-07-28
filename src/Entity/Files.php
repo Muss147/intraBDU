@@ -26,6 +26,9 @@ class Files extends EntityBase
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $size = null;
 
+    #[ORM\ManyToOne(inversedBy: 'fichiers')]
+    private ?Alertes $alertes = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,6 +83,18 @@ class Files extends EntityBase
     public function setSize(?string $size): static
     {
         $this->size = $size;
+
+        return $this;
+    }
+
+    public function getAlertes(): ?Alertes
+    {
+        return $this->alertes;
+    }
+
+    public function setAlertes(?Alertes $alertes): static
+    {
+        $this->alertes = $alertes;
 
         return $this;
     }

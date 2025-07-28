@@ -4,19 +4,24 @@ namespace App\Controller;
 
 use App\Entity\Votes;
 use App\Entity\Agents;
+use App\Entity\Alertes;
 use App\Form\VotesForm;
 use App\Entity\VoteNote;
-use App\Repository\ActualitesRepository;
+use App\Form\AlertesForm;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Email;
 use App\Repository\FilesRepository;
 use App\Repository\AgentsRepository;
-use App\Repository\ClassementMensuelRepository;
 use App\Repository\SlidersRepository;
+use App\Repository\ActualitesRepository;
 use App\Repository\ParametresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\ClassementMensuelRepository;
 use App\Repository\NotesPublicationsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -99,7 +104,70 @@ final class FrontController extends AbstractController
         return $this->render('front/dispositif-alerte/index.html.twig');
     }
 
-    #[Route('/foire-aux-questions', name: 'faq_alerte')]
+    #[Route('/dispositif-d-alerte/deposer-une-alerte', name: 'signaler_alerte')]
+    public function signalerAlerte(Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
+    {
+        $alerte = new Alertes();
+        $form = $this->createForm(AlertesForm::class, $alerte);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if (!$form->isValid()) {
+                foreach ($form->getErrors(true) as $error) {
+                    $this->addFlash('error', $error->getMessage());
+                }
+            }
+            else {
+                $em->persist($alerte);
+                $em->flush();
+
+                // Envoi de mail avec try/catch
+                try {
+                    // Email au rapproteur
+                    $emailCandidat = (new Email())
+                        ->from('no-reply@bduci.com')
+                        ->to($alerte->getEmail())
+                        ->subject('Détails de votre déclaration d\incident')
+                        ->html("
+                            <p>Bonjour <b>{$alerte->getPrenoms()}</b>,</p>
+                            <p>Nous avons bien reçu votre déclaration à l'incident <b>N°{$alerte->getCode()}</b>.</p>
+                            <p>Notre équipe la traitera dans les plus brefs délais.</p>
+                            <p>Merci pour la confiance !</p>
+                            <hr>
+                            <p>Service Incidents - BDU</p>
+                        ");
+                    $mailer->send($emailCandidat);
+                } catch (TransportExceptionInterface $e) {
+                    $this->addFlash('error', "Une erreur s'est produite lors de l'envoi de l'email au rapporteur : " . $e->getMessage());
+                }
+
+                try {
+                    // Email au RH
+                    $emailRh = (new Email())
+                        ->from('no-reply@bduci.com')
+                        ->to('support@bduci.com')
+                        ->subject("Nouvelle incident : {$alerte->getCode()}")
+                        ->html("
+                            <p><strong>{$alerte->getPrenoms()}</strong> a déclaré l'incident <strong>{$alerte->getCode()}</strong>.</p>
+                            <p>Email : {$alerte->getEmail()}<br>
+                            Téléphone : {$alerte->getTelephone()}<br>
+                            <p>Voir dans l'espace d'administration.</p>
+                        ");
+                    $mailer->send($emailRh);
+                } catch (TransportExceptionInterface $e) {
+                    $this->addFlash('error', "Erreur lors de la notification au service RH : " . $e->getMessage());
+                }
+        
+                $this->addFlash('success', 'Le formulaire a été enregistrée avec succès. Nous vous enverrons un email sur les détails de votre déclaration.');
+                return $this->redirectToRoute('signaler_alerte');
+            }
+        }
+        return $this->render('front/dispositif-alerte/faq.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/dispositif-d-alerte/foire-aux-questions', name: 'faq_alerte')]
     public function faqAlerte(): Response
     {
         return $this->render('front/dispositif-alerte/faq.html.twig');

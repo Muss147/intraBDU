@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use App\Mapping\EntityBase;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\IncidentsParamsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IncidentsParamsRepository::class)]
-class IncidentsParams
+class IncidentsParams extends EntityBase
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

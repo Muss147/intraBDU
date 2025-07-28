@@ -28,6 +28,7 @@ final class AgentsController extends AbstractController
     public function index(Request $request, AgentsRepository $agentsRepository, ParametresRepository $parametresRepository, SessionInterface $session): Response
     {
         $session->set('menu', 'agents');
+        $session->set('subMenu', null);
 
         $agent = new Agents();
         $form = $this->createForm(AgentsForm::class, $agent);

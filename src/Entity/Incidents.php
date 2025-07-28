@@ -78,24 +78,24 @@ class Incidents
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $consequences = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $solutions = null;
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $solutions = [];
 
     #[ORM\ManyToOne(inversedBy: 'incidentsByCateg')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?IncidentsParams $categorie = null;
+    private ?Parametres $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'incidentsBySousCateg')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?IncidentsParams $sousCategorie = null;
+    private ?Parametres $sousCategorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'incidentsByProcessus')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?IncidentsParams $processus = null;
+    private ?Parametres $processus = null;
 
     #[ORM\ManyToOne(inversedBy: 'incidentsBySousProcessus')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?IncidentsParams $sousProcessus = null;
+    private ?Parametres $sousProcessus = null;
 
     public function getId(): ?int
     {
@@ -366,48 +366,48 @@ class Incidents
         return $this;
     }
 
-    public function getCategorie(): ?IncidentsParams
+    public function getCategorie(): ?Parametres
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?IncidentsParams $categorie): static
+    public function setCategorie(?Parametres $categorie): static
     {
         $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function getSousCategorie(): ?IncidentsParams
+    public function getSousCategorie(): ?Parametres
     {
         return $this->sousCategorie;
     }
 
-    public function setSousCategorie(?IncidentsParams $sousCategorie): static
+    public function setSousCategorie(?Parametres $sousCategorie): static
     {
         $this->sousCategorie = $sousCategorie;
 
         return $this;
     }
 
-    public function getProcessus(): ?IncidentsParams
+    public function getProcessus(): ?Parametres
     {
         return $this->processus;
     }
 
-    public function setProcessus(?IncidentsParams $processus): static
+    public function setProcessus(?Parametres $processus): static
     {
         $this->processus = $processus;
 
         return $this;
     }
 
-    public function getSousProcessus(): ?IncidentsParams
+    public function getSousProcessus(): ?Parametres
     {
         return $this->sousProcessus;
     }
 
-    public function setSousProcessus(?IncidentsParams $sousProcessus): static
+    public function setSousProcessus(?Parametres $sousProcessus): static
     {
         $this->sousProcessus = $sousProcessus;
 

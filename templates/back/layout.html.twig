@@ -540,7 +540,7 @@ Contact: +225 07 471 612 21
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <!--begin:Menu link-->
-                                            <a href="{{path('app_agents')}}" class="menu-link{% if app.session.get('menu') == 'fournisseurs' %} active{% endif %}">
+                                            <a href="{{path('app_agents')}}" class="menu-link{% if app.session.get('menu') == 'agents' %} active{% endif %}">
                                                 <span class="menu-icon">
                                                     <i class="ki-duotone ki-address-book fs-2">
                                                         <span class="path1"></span>
@@ -616,7 +616,7 @@ Contact: +225 07 471 612 21
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
                                                 <span class="menu-icon">
-                                                    <i class="ki-duotone ki-some-files fs-2">
+                                                    <i class="ki-duotone ki-briefcase fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
@@ -685,11 +685,70 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'parametres' %} here show{% endif %}">
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if (app.session.get('menu') == 'incidents') or (app.session.get('subMenu') in ['categories', 'processus']) %} here show{% endif %}">
                                             <!--begin:Menu link-->
                                             <span class="menu-link">
                                                 <span class="menu-icon">
-                                                    <i class="ki-duotone ki-some-files fs-2">
+                                                    <i class="ki-duotone ki-notification-on fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                        <span class="path4"></span>
+                                                        <span class="path5"></span>
+                                                    </i>
+                                                </span>
+                                                <span class="menu-title">Déclarations d'incidents</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu sub-->
+                                            <div class="menu-sub menu-sub-accordion">
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'déclarations' %} active{% endif %}" href="{{path('param_type', {type: 'agences'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Déclarations reçues</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'categories' %} active{% endif %}" href="{{path('param_type', {type: 'categories'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Categories</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'processus' %} active{% endif %}" href="{{path('param_type', {type: 'processus'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Processus</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                            </div>
+                                            <!--end:Menu sub-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                        <!--begin:Menu item-->
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('subMenu') in ['agences', 'directions', 'services', 'criteres'] %} here show{% endif %}">
+                                            <!--begin:Menu link-->
+                                            <span class="menu-link">
+                                                <span class="menu-icon">
+                                                    <i class="ki-duotone ki-switch fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>

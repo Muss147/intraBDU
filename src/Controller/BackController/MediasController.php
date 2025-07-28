@@ -25,6 +25,7 @@ final class MediasController extends AbstractController
     public function index(Request $request, FilesRepository $filesRepository, SessionInterface $session): Response
     {
         $session->set('menu', 'medias');
+        $session->set('subMenu', null);
 
         $form = $this->createForm(MediasForm::class);
         $form->handleRequest($request);
