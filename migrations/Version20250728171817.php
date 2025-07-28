@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250724131553 extends AbstractMigration
+final class Version20250728171817 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,7 @@ final class Version20250724131553 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE postuler ADD motivations LONGTEXT NOT NULL
+            ALTER TABLE incidents CHANGE created_at created_at DATETIME NOT NULL
         SQL);
     }
 
@@ -29,7 +29,7 @@ final class Version20250724131553 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE postuler DROP motivations
+            ALTER TABLE incidents CHANGE created_at created_at DATETIME DEFAULT NULL
         SQL);
     }
 }

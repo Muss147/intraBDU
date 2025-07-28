@@ -6,7 +6,11 @@ use App\Mapping\EntityBase;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use App\Repository\ActualitesRepository;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[UniqueEntity('slug', message: 'Ce slug est déjà utilisé.')]
 #[ORM\Entity(repositoryClass: ActualitesRepository::class)]
 class Actualites extends EntityBase
 {
@@ -26,6 +30,10 @@ class Actualites extends EntityBase
 
     #[ORM\Column(nullable: true)]
     private ?bool $online = true;
+
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -83,5 +91,28 @@ class Actualites extends EntityBase
         $this->online = $online;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function generateSlug(): void
+    {
+        if ($this->titre) {
+            $slugger = new AsciiSlugger('fr'); // Support du français
+            $slug = $slugger->slug($this->titre)->lower();
+            $this->slug = $slug;
+        }
     }
 }

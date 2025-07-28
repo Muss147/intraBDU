@@ -28,7 +28,7 @@ final class IncidentsController extends AbstractController
             'delai' => '',
         ]);
 
-        $incident->setSolutions($solutions);
+        $incident->setSolutions($solutions)->setCreatedAt(new \DateTime());
         $form = $this->createForm(IncidentsForm::class, $incident);
         $form->handleRequest($request);
 

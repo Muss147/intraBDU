@@ -66,6 +66,12 @@ class Parametres extends EntityBase
     /**
      * @var Collection<int, Incidents>
      */
+    #[ORM\OneToMany(targetEntity: Incidents::class, mappedBy: 'agence')]
+    private Collection $incidentsByAgence;
+
+    /**
+     * @var Collection<int, Incidents>
+     */
     #[ORM\OneToMany(targetEntity: Incidents::class, mappedBy: 'directionImpacte')]
     private Collection $incidentsByDirection;
 
@@ -105,6 +111,7 @@ class Parametres extends EntityBase
         $this->incidentsBySousCateg = new ArrayCollection();
         $this->incidentsByProcessus = new ArrayCollection();
         $this->incidentsBySousProcessus = new ArrayCollection();
+        $this->incidentsByAgence = new ArrayCollection();
     }
 
     
@@ -527,6 +534,36 @@ class Parametres extends EntityBase
             // set the owning side to null (unless already changed)
             if ($incidentsBySousProcessu->getSousProcessus() === $this) {
                 $incidentsBySousProcessu->setSousProcessus(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Incidents>
+     */
+    public function getIncidentsByAgence(): Collection
+    {
+        return $this->incidentsByAgence;
+    }
+
+    public function addIncidentsByAgence(Incidents $incidentsByAgence): static
+    {
+        if (!$this->incidentsByAgence->contains($incidentsByAgence)) {
+            $this->incidentsByAgence->add($incidentsByAgence);
+            $incidentsByAgence->setAgence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncidentsByAgence(Incidents $incidentsByAgence): static
+    {
+        if ($this->incidentsByAgence->removeElement($incidentsByAgence)) {
+            // set the owning side to null (unless already changed)
+            if ($incidentsByAgence->getAgence() === $this) {
+                $incidentsByAgence->setAgence(null);
             }
         }
 

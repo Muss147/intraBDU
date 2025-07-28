@@ -26,8 +26,8 @@ class Incidents
     #[ORM\Column]
     private ?\DateTime $dateRemonte = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $agence = null;
+    #[ORM\ManyToOne(inversedBy: 'incidentsByAgence')]
+    private ?Parametres $agence = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $region = null;
@@ -97,6 +97,9 @@ class Incidents
     #[ORM\JoinColumn(nullable: false)]
     private ?Parametres $sousProcessus = null;
 
+    #[ORM\Column(nullable: false)]
+    private ?\DateTime $createdAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -146,18 +149,6 @@ class Incidents
     public function setDateRemonte(\DateTime $dateRemonte): static
     {
         $this->dateRemonte = $dateRemonte;
-
-        return $this;
-    }
-
-    public function getAgence(): ?string
-    {
-        return $this->agence;
-    }
-
-    public function setAgence(?string $agence): static
-    {
-        $this->agence = $agence;
 
         return $this;
     }
@@ -410,6 +401,30 @@ class Incidents
     public function setSousProcessus(?Parametres $sousProcessus): static
     {
         $this->sousProcessus = $sousProcessus;
+
+        return $this;
+    }
+
+    public function getAgence(): ?Parametres
+    {
+        return $this->agence;
+    }
+
+    public function setAgence(?Parametres $agence): static
+    {
+        $this->agence = $agence;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTime $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

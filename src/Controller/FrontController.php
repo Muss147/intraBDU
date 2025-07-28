@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Files;
+use App\Service\FileUploader;
 use App\Entity\Votes;
 use App\Entity\Agents;
 use App\Entity\Alertes;
@@ -105,9 +107,12 @@ final class FrontController extends AbstractController
     }
 
     #[Route('/dispositif-d-alerte/deposer-une-alerte', name: 'signaler_alerte')]
-    public function signalerAlerte(Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
+    public function signalerAlerte(Request $request, EntityManagerInterface $em, MailerInterface $mailer, FileUploader $fileUploader): Response
     {
         $alerte = new Alertes();
+        $code = 'ALRT-' . strtoupper(bin2hex(random_bytes(3))); // ex : ALRT-8F3A2B
+        $alerte->setCode($code)->setCreatedAt(new \DateTime());
+
         $form = $this->createForm(AlertesForm::class, $alerte);
         $form->handleRequest($request);
 
@@ -118,27 +123,44 @@ final class FrontController extends AbstractController
                 }
             }
             else {
+                $files = $form->get('fichiers')->getData();
+                if ($files) {
+                    foreach ($files as $file) {
+                        $data = $fileUploader->upload($file);
+
+                        $media = new Files();
+                        $media
+                            ->setFilename($data['filename'])
+                            ->setType('medias')
+                            ->setSize($data['size'])
+                            ->setAlt($data['originalName']);
+                        $em->persist($media);
+                        $alerte->addFichier($media);
+                    }
+                }
                 $em->persist($alerte);
                 $em->flush();
 
                 // Envoi de mail avec try/catch
-                try {
-                    // Email au rapproteur
-                    $emailCandidat = (new Email())
-                        ->from('no-reply@bduci.com')
-                        ->to($alerte->getEmail())
-                        ->subject('Détails de votre déclaration d\incident')
-                        ->html("
-                            <p>Bonjour <b>{$alerte->getPrenoms()}</b>,</p>
-                            <p>Nous avons bien reçu votre déclaration à l'incident <b>N°{$alerte->getCode()}</b>.</p>
-                            <p>Notre équipe la traitera dans les plus brefs délais.</p>
-                            <p>Merci pour la confiance !</p>
-                            <hr>
-                            <p>Service Incidents - BDU</p>
-                        ");
-                    $mailer->send($emailCandidat);
-                } catch (TransportExceptionInterface $e) {
-                    $this->addFlash('error', "Une erreur s'est produite lors de l'envoi de l'email au rapporteur : " . $e->getMessage());
+                if ($form->get('email')->getData()) {
+                    try {
+                        // Email au rapproteur
+                        $emailCandidat = (new Email())
+                            ->from('no-reply@bduci.com')
+                            ->to($alerte->getEmail())
+                            ->subject('Détails de votre signalement d\incident')
+                            ->html("
+                                <p>Bonjour <b>{$alerte->getPrenoms()}</b>,</p>
+                                <p>Nous avons bien reçu votre signalement à l'alerte <b>N°{$alerte->getCode()}</b>.</p>
+                                <p>Notre équipe la traitera dans les plus brefs délais.</p>
+                                <p>Merci pour la confiance !</p>
+                                <hr>
+                                <p>Service Incidents - BDU</p>
+                            ");
+                        $mailer->send($emailCandidat);
+                    } catch (TransportExceptionInterface $e) {
+                        $this->addFlash('error', "Une erreur s'est produite lors de l'envoi de l'email au rapporteur : " . $e->getMessage());
+                    }
                 }
 
                 try {
@@ -146,9 +168,10 @@ final class FrontController extends AbstractController
                     $emailRh = (new Email())
                         ->from('no-reply@bduci.com')
                         ->to('support@bduci.com')
-                        ->subject("Nouvelle incident : {$alerte->getCode()}")
+                        ->subject("Nouvelle alerte : {$alerte->getCode()}")
                         ->html("
-                            <p><strong>{$alerte->getPrenoms()}</strong> a déclaré l'incident <strong>{$alerte->getCode()}</strong>.</p>
+                            <p><strong>{$alerte->getPrenoms()}</strong> a signalé l'alerte <strong>{$alerte->getCode()}</strong>.</p>
+                            <p>Catégorie : {$alerte->getCategorie()}<br>
                             <p>Email : {$alerte->getEmail()}<br>
                             Téléphone : {$alerte->getTelephone()}<br>
                             <p>Voir dans l'espace d'administration.</p>
@@ -158,11 +181,11 @@ final class FrontController extends AbstractController
                     $this->addFlash('error', "Erreur lors de la notification au service RH : " . $e->getMessage());
                 }
         
-                $this->addFlash('success', 'Le formulaire a été enregistrée avec succès. Nous vous enverrons un email sur les détails de votre déclaration.');
+                $this->addFlash('success', 'Le formulaire a été enregistrée avec succès. Nous vous enverrons un email sur les détails de votre signalement.');
                 return $this->redirectToRoute('signaler_alerte');
             }
         }
-        return $this->render('front/dispositif-alerte/faq.html.twig', [
+        return $this->render('front/dispositif-alerte/signaler-alerte.html.twig', [
             'form' => $form
         ]);
     }

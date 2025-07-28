@@ -4,12 +4,12 @@
 
 {% block stylesheets %}
 <style type="text/css">
-.modal-header::after {
+.modal-header::before {
     content: '';
     position: absolute;
     size: 100%;
     inset: 0;
-    background-color: #00000040;
+    background-color: #00000060;
 }
 </style>
 {% endblock %}
@@ -28,7 +28,7 @@
                 </div>
                 <div class="p-6">
                     <a href="javascript:;" onclick="showModal({{ actu.id }})" data-modal-toggle="show-modal">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{actu.titre}}</h5>
+                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">{{actu.titre}}</h5>
                     </a>
                     <p class="mb-4 text-xs font-normal text-gray-700">{{actu.createdAt|date('d M Y')}}</p>
                 </div>
@@ -99,7 +99,7 @@
             <div class="relative bg-white rounded-lg shadow-sm">
                 <!-- Modal header -->
                 <div class="modal-header relative flex items-center justify-between p-4 md:p-5 rounded-t h-52" style="background-size: cover; background-position: top; background-repeat: no-repeat;">
-                    <h3 id="actu_title" class="relative text-xl font-semibold text-gray-900"></h3>
+                    <h3 id="actu_title" class="relative text-xl font-semibold text-white"></h3>
                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="show-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -125,9 +125,9 @@
 
 {% block javascripts %}
 <script type="text/javascript">
-document.addEventListener('turbo:load', function () {
     const actualites = {{ actualites|map(p => {
         id: p.id,
+        slug: p.slug,
         titre: p.titre,
         cover: p.cover ? p.cover.filename : null,
         description: p.description|raw,
@@ -142,12 +142,39 @@ document.addEventListener('turbo:load', function () {
         document.querySelector('#actu_desc').textContent = actualite.description;
         document.querySelector('#actu_date').textContent = actualite.date;
 
-        // Image cover
         if (actualite.cover) {
             const wrapper = document.querySelector('.modal-header');
             wrapper.style.backgroundImage = `url('${actualite.cover}')`;
         }
+
+        const modal = document.getElementById('show-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
     };
-})
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Récupérer le hash dans l'URL
+        const hash = window.location.hash;
+        if (!hash || !hash.startsWith('#')) return;
+
+        const slug = decodeURIComponent(hash.substring(1)); // Supprime le "#"
+        
+        // 2. Chercher l'actualité par slug
+        const actu = actualites.find(actu => actu.slug === slug);
+        if (actu) {
+            // strl
+            showModal(actu.id);
+        }
+
+        // 3. Ajouter bouton "Fermer"
+        const closeButtons = document.querySelectorAll('[data-modal-hide="show-modal"]');
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = document.getElementById('show-modal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+        });
+    });
 </script>
 {% endblock %}

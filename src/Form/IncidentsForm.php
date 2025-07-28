@@ -21,24 +21,19 @@ class IncidentsForm extends AbstractType
             ->add('etape', ChoiceType::class, [
                 'label' => "Étape de suivi de l'incident",
                 'choices' => [
-                    'Début' => 'debut',
-                    'En cours' => 'encours',
-                    'Fin' => 'fin',
+                    'Début' => 'Début',
+                    'En cours' => 'En cours',
+                    'Fin' => 'Fin',
                 ],
-                'expanded' => true,  // Radio buttons
-                'multiple' => false, // Choix unique
-                'attr' => ['class' => 'grid md:grid-cols-3 gap-2'], // pour wrapper
-                'choice_attr' => function($choice, $key, $value) {
-                    return [
-                        'class' => 'peer hidden',
-                    ];
-                },
-                'label_attr' => ['class' => 'block mb-2 text-sm font-medium text-gray-900'],
+                'expanded' => true,
+                'multiple' => false,
             ])
             ->add('code')
             ->add('dateDebut', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
+                'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
                 'attr' => [
                     'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full ps-10 p-2.5',
@@ -51,6 +46,8 @@ class IncidentsForm extends AbstractType
             ->add('dateRemonte', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
+                'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
                 'attr' => [
                     'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full ps-10 p-2.5',
@@ -60,7 +57,17 @@ class IncidentsForm extends AbstractType
                     'datepicker-autohide' => true
                 ]
             ])
-            ->add('agence')
+            ->add('agence', EntityType::class, [
+                'class' => Parametres::class,
+                'choice_label' => 'libelle',
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('p')
+                        ->where('p.type = :type')
+                        ->andWhere('p.deletedAt IS NULL')
+                        ->setParameter('type', 'agences')
+                    ;
+                },
+            ])
             ->add('region')
             ->add('rapporteur')
             ->add('fonction')
@@ -71,6 +78,8 @@ class IncidentsForm extends AbstractType
             ->add('datePerte', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
+                'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
                 'attr' => [
                     'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full ps-10 p-2.5',
@@ -84,6 +93,8 @@ class IncidentsForm extends AbstractType
             ->add('dateRecup', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
+                'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
                 'attr' => [
                     'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full ps-10 p-2.5',
@@ -96,6 +107,8 @@ class IncidentsForm extends AbstractType
             ->add('dateCompta', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
+                'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
                 'attr' => [
                     'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 focus:border-primary block w-full ps-10 p-2.5',
@@ -159,7 +172,7 @@ class IncidentsForm extends AbstractType
                     return $er->createQueryBuilder('p')
                         ->where('p.type = :type')
                         ->andWhere('p.deletedAt IS NULL')
-                        ->setParameter('type', 'sousCategories')
+                        ->setParameter('type', 'Sous catégories')
                     ;
                 },
             ])
@@ -170,7 +183,7 @@ class IncidentsForm extends AbstractType
                     return $er->createQueryBuilder('p')
                         ->where('p.type = :type')
                         ->andWhere('p.deletedAt IS NULL')
-                        ->setParameter('type', 'processus')
+                        ->setParameter('type', 'Processus')
                     ;
                 },
             ])
@@ -181,7 +194,7 @@ class IncidentsForm extends AbstractType
                     return $er->createQueryBuilder('p')
                         ->where('p.type = :type')
                         ->andWhere('p.deletedAt IS NULL')
-                        ->setParameter('type', 'sousProcessus')
+                        ->setParameter('type', 'Sous processus')
                     ;
                 },
             ])
