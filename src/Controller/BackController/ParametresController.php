@@ -90,6 +90,42 @@ final class ParametresController extends AbstractController
         return $this->redirectToRoute('param_type', ['type' => $parametre->getType(), 'parent' => $parametre->getParent() ?? null]);
     }
 
+    #[Route('/ajout-de-sous-element', name: 'add_children')]
+    public function addChildren(Request $request, ParametresRepository $parametresRepository): Response
+    {
+        if ($request->isMethod('POST') &&
+            $parent = $parametresRepository->find($request->get('element_parent'))) {
+            
+            $type = str_replace(['/', '\\'], '-', $request->get('element_titre'));
+            $libelle = $request->get('element_libelle');
+            $description = $request->get('element_description');
+            $child = new Parametres();
+
+            $child->setLibelle($libelle)
+                ->setParent($parent)
+                ->setType($type)
+                ->setDescription($description)
+                ->updatedTimestamps();
+            $child->generateSlug();
+            $child->updatedUserstamps($this->getUser());
+
+            foreach ($parametresRepository->findByParent($parent) as $key => $param) {
+                $param->setType($type);
+                $this->em->persist($param);
+            }
+
+            $this->em->persist($child);
+            $this->em->flush();
+            $this->addFlash('success', 'Ajout de <b>'. $libelle .'</b> effectuée avec succès.');
+            return $this->redirectToRoute('param_type', ['type' => $type, 'parent' => $parent->getId() ?? null]);
+        }
+        else {
+            $this->addFlash('error', 'Identifiant du parent introuvable.');
+            return $this->redirect($request->headers->get('referer'));
+        }
+        
+    }
+
     #[Route('/delete/{param}', name: 'param_delete', methods: ['POST'])]
     public function deleteCategorie(Request $request, Parametres $param): Response
     {

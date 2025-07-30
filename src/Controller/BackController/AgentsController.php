@@ -41,7 +41,6 @@ final class AgentsController extends AbstractController
                 }
             }
             else {
-                $service = $parametresRepository->find($request->get('service'));
                 // Gestion de l'upload des fichiers
                 if ($file = $form->get('photo')->getData()) {
                     $data = $this->fileUploader->upload($file);
@@ -53,7 +52,7 @@ final class AgentsController extends AbstractController
                     $agent->setPhoto($fileEntity);
                     $this->em->persist($fileEntity);
                 }
-                $agent->setService($service)->updatedTimestamps();
+                $agent->updatedTimestamps();
                 $agent->updatedUserstamps($this->getUser());
 
                 $this->em->persist($agent);

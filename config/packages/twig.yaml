@@ -10,7 +10,7 @@ twig:
         thousands_separator: ' '
     paths: ['%kernel.project_dir%/templates']
     form_themes: ['bootstrap_5_layout.html.twig']
-
+    
 when@test:
     twig:
         strict_variables: true

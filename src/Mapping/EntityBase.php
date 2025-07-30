@@ -72,7 +72,7 @@ class EntityBase implements EntityBaseInterface
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTime $deletedAt = null) : void
+    public function setDeletedAt(?\DateTimeInterface $deletedAt = null) : void
     {
         $this->deletedAt = $deletedAt;
     }

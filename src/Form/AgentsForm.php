@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Agents;
+use App\Entity\Parametres;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -43,6 +46,19 @@ class AgentsForm extends AbstractType
                 ],
             ])
             ->add('fonction')
+            ->add('service', EntityType::class, [
+                'class' => Parametres::class,
+                'choice_label' => 'libelle',
+                'placeholder' => 'Sélectionner un service',
+                'required' => true,
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('p')
+                        ->where('p.type = :type')
+                        ->andWhere('p.deletedAt IS NULL')
+                        ->setParameter('type', 'services')
+                    ;
+                },
+            ])
             ->add('anniversaire')
             ->add('photo', FileType::class, [
                 'label' => false,

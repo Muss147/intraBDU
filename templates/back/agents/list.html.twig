@@ -478,7 +478,7 @@
                                                     <!--end::Label-->
 
                                                     <!--begin::Input-->
-                                                    <select name="direction" aria-label="Sélectionner une direction" data-control="select2" data-placeholder="Sélectionner une direction..." data-dropdown-parent="#kt_modal_add_customer" data-hide-search="true" class="form-select form-select-solid fw-bold">
+                                                    <select name="direction" disabled aria-label="Sélectionner une direction" data-control="select2" data-placeholder="Sélectionner une direction..." data-dropdown-parent="#kt_modal_add_customer" data-hide-search="true" class="form-select form-select-solid fw-bold">
                                                         <option value="">Sélectionner une direction...</option>
                                                     </select>
                                                     <!--end::Input-->
@@ -492,9 +492,7 @@
                                                     <!--end::Label-->
 
                                                     <!--begin::Input-->
-                                                    <select name="service" aria-label="Sélectionner un service" data-control="select2" data-placeholder="Sélectionner un service..." data-dropdown-parent="#kt_modal_add_customer" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                        <option value="">Sélectionner un service...</option>
-                                                    </select>
+                                                    {{form_widget(form.service, {'attr': {'class': 'form-select form-select-solid fw-bold', 'disabled': 'true', 'data-control': 'select2', 'data-dropdown-parent': '#kt_modal_add_customer', 'data-hide-search': 'true', 'aria-label': 'Selectionner un service', 'data-placeholder': 'Selectionner un service'}})}}
                                                     <!--end::Input-->
                                                 </div>
                                                 <!--end::Col-->
@@ -590,58 +588,50 @@
     });
 
 	const directions = {{ directions|map(d => {
-		id: d.id,
-		libelle: d.libelle,
-		parent: d.parent.id,
-	})|json_encode|raw }};
+        id: d.id,
+        libelle: d.libelle,
+        parent: d.parent.id,
+    })|json_encode|raw }};
 
-	const services = {{ services|map(d => {
-		id: d.id,
-		libelle: d.libelle,
-		parent: d.parent.id,
-	})|json_encode|raw }};
+    const services = {{ services|map(s => {
+        id: s.id,
+        libelle: s.libelle,
+        parent: s.parent.id,
+    })|json_encode|raw }};
 
     $('select[name="agence"]').change((e) => {
-		const selectedValue = $(e.target).val();
-		const directionsFinded = directions.filter(d => d.parent == selectedValue);
-		// if (!directionsFinded) return;
+        const selectedValue = $(e.target).val();
+        const directionsFinded = directions.filter(d => d.parent == selectedValue);
 
         const $directionSelect = $('select[name="direction"]');
-        const $serviceSelect = $('select[name="service"]');
+        const $serviceSelect = $('#agents_form_service');
 
-        // On vide les options précédentes
-        $directionSelect.empty();
-        $serviceSelect.empty();
+        // Réinitialise les champs
+        $directionSelect.empty().append('<option value="">Sélectionner une direction</option>').prop('disabled', false);
+        $serviceSelect.empty().append('<option value="">Sélectionner un service</option>').prop('disabled', true);
 
-        // On ajoute une option par défaut
-        $directionSelect.append('<option value="">Sélectionner une direction</option>');
-
-        // On ajoute les nouvelles options
+        // Ajoute les directions trouvées
         directionsFinded.forEach(dir => {
             $directionSelect.append(`<option value="${dir.id}">${dir.libelle}</option>`);
         });
         $directionSelect.trigger('change.select2');
-    })
+    });
 
     $('select[name="direction"]').change((e) => {
-		const selectedValue = $(e.target).val();
-		const servicesFinded = services.filter(s => s.parent == selectedValue);
-		// if (!servicesFinded) return;
+        const selectedValue = $(e.target).val();
+        const servicesFinded = services.filter(s => s.parent == selectedValue);
 
-        const $serviceSelect = $('select[name="service"]');
+        const $serviceSelect = $('#agents_form_service');
 
-        // On vide les options précédentes
-        $serviceSelect.empty();
+        // Réinitialise et active le select service
+        $serviceSelect.empty().append('<option value="">Sélectionner un service</option>').prop('disabled', false);
 
-        // On ajoute une option par défaut
-        $serviceSelect.append('<option value="">Sélectionner un service</option>');
-
-        // On ajoute les nouvelles options
+        // Ajoute les services trouvés
         servicesFinded.forEach(serv => {
             $serviceSelect.append(`<option value="${serv.id}">${serv.libelle}</option>`);
         });
         $serviceSelect.trigger('change.select2');
-    })
+    });
 
     {% for type, messages in app.flashes %}
         {% for message in messages %}
