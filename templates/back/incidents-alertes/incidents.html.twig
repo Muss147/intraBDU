@@ -220,7 +220,7 @@
                                 {% for incident in incidents %}
 								<tr>
 									<td class="">
-										<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold">{{incident.code}}</a>
+										<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-bs-toggle="modal" data-bs-target="#kt_modal_open_fiche" data-bs-ident="{{incident.id}}">{{incident.code}}</a>
 									</td>
 									<td>
 										<div
@@ -285,6 +285,148 @@
 				</div>
 				<!--end::Products-->
 
+				<div class="modal fade" tabindex="-1" id="kt_modal_open_fiche">
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h3 class="modal-title">Ouverture de fiche</h3>
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+									<i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+								</div>
+								<!--end::Close-->
+							</div>
+
+							<div class="modal-body row">
+								<div id="code" class="mb-4 col-md-6">
+									<label class="font-semibold">Code fiche</label>
+									<h4>TEST</h4>
+								</div>
+								<div id="etape" class="mb-4 col-md-6">
+									<label class="font-semibold">Étape de suivi de l'incident</label>
+									<h4>TEST</h4>
+								</div>
+								<div id="debut" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de début de l'incident</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="remontee" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de remontée</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="agence" class="mb-4 col-md-6">
+									<label class="font-semibold">Agence</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="region" class="mb-4 col-md-6">
+									<label class="font-semibold">Région</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="direction" class="mb-4 col-md-6">
+									<label class="font-semibold">Direction / Service</label>
+									<h4>Oui</h4>
+								</div>
+								<div id="rapporteur" class="mb-4 col-md-6">
+									<label class="font-semibold">Incident rémonté par</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="fonction" class="mb-4 col-md-6">
+									<label class="font-semibold">Fonction</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="telephone" class="mb-4 col-md-6">
+									<label class="font-semibold">Poste téléphonique</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="email" class="mb-4 col-md-6">
+									<label class="font-semibold">Email</label>
+									<h4>Oui</h4>
+								</div>
+								<div id="description" class="mb-4 col-12">
+									<label class="font-semibold">Description succincte de l'incident</label>
+									<p class="fw-bold fs-4"></p>
+								</div>
+
+								<div id="categorie" class="mb-4 col-md-6">
+									<label class="font-semibold">Catégorisation baloise de risques</label>
+									<h4>Non</h4>
+								</div>
+								<div id="sous_categorie" class="mb-4 col-md-6">
+									<label class="font-semibold">Sous-catégorie d'incidents</label>
+									<h4>Non</h4>
+								</div>
+								<div id="processus" class="mb-4 col-md-6">
+									<label class="font-semibold">Processus</label>
+									<h4>Non</h4>
+								</div>
+								<div id="sous_processus" class="mb-4 col-md-6">
+									<label class="font-semibold">Sous processus</label>
+									<h4>Non</h4>
+								</div>
+								<div id="montant_estime" class="mb-4 col-md-6">
+									<label class="font-semibold">Montant estimé de la perte (TTC/HT)</label>
+									<h4>Non</h4>
+								</div>
+								<div id="date_perte" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de comptabilisation de la perte</label>
+									<h4>Non</h4>
+								</div>
+								<div id="direction_impactee" class="mb-4 col-md-6">
+									<label class="font-semibold">Direction / Département / Service impacté</label>
+									<h4>Non</h4>
+								</div>
+								<div id="montant_recup" class="mb-4 col-md-6">
+									<label class="font-semibold">Montant des récupérations obtenues (TTC/HT)</label>
+									<h4>Non</h4>
+								</div>
+								<div id="date_recup" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de la récupération</label>
+									<h4>Non</h4>
+								</div>
+								<div id="date_compta_recup" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de comptabilisation du montant récupéré</label>
+									<h4>Non</h4>
+								</div>
+								<div id="nature_recup" class="mb-4 col-md-6">
+									<label class="font-semibold">Nature de la récupération</label>
+									<h4>Non</h4>
+								</div>
+								<div id="montant_perte" class="mb-4 col-md-6">
+									<label class="font-semibold">Montant net de la perte</label>
+									<h4>Non</h4>
+								</div>
+
+								<div id="consequences" class="mb-4 col-12">
+									<label class="font-semibold">Conséquences</label>
+									<p class="fw-bold fs-4"></p>
+								</div>
+								<div id="fichiers" class="mb-4 col-12">
+									<label class="font-semibold">Fichiers joints</label>
+									<div class="d-flex flex-wrap gap-3 mt-2"></div>
+								</div>
+								<div id="solutions" class="mb-4 col-12">
+									<label class="font-semibold">Proposition de solutions</label>
+									<table class="table align-middle table-row-dashed gy-5">
+										<thead>
+											<tr class="text-start text-dark fw-bold fs-7 text-uppercase gs-0">
+												<th>Solution</th>
+												<th>Responsable</th>
+												<th>Délai</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light" data-bs-dismiss="modal">Rejeter</button>
+								<button type="submit" class="btn btn-primary">Corriger</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<!--end::Content container-->
 		</div>
@@ -297,18 +439,119 @@
     <script src="{{asset('assets/js/custom/apps/offres-emploi/candidates/table.js')}}"></script>
     {#<script src="{{asset('assets/js/custom/apps/offres-emploi/candidates/export.js')}}"></script>#}
 	<script type="text/javascript">
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            Swal.fire({
-                html: `{{message|raw}}`,
-                icon: "{{ type }}",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, compris !",
-                customClass: {
-                    confirmButton: "btn btn-primary"
-                }
-            });
-        {% endfor %}
-    {% endfor %}
+		const incidents = {{ incidents|map(m => {
+			id: m.id,
+			code: m.code,
+			etape: m.etape ?? null,
+			dateDebut: m.dateDebut ? m.dateDebut|date('d/m/Y') : null,
+			dateRemonte: m.dateRemonte ? m.dateRemonte|date('d/m/Y') : null,
+			agence: m.agence ? m.agence.libelle : null,
+			region: m.region ?? null,
+			direction: m.direction ? m.direction.libelle : null,
+			rapporteur: m.rapporteur ?? null,
+			fonction: m.fonction ?? null,
+			email: m.email ?? null,
+			telephone: m.telephone ?? null,
+			description: m.description ?? null,
+			solutions: m.solutions ?? [],
+			montantEstime: m.montantEstime ?? null,
+			datePerte: m.datePerte ? m.datePerte|date('d/m/Y') : null,
+			directionImpacte: m.directionImpacte ? m.directionImpacte.libelle : null,
+			montantObtenu: m.montantObtenu ?? null,
+			dateRecup: m.dateRecup ? m.dateRecup|date('d/m/Y') : null,
+			dateCompta: m.dateCompta ? m.dateCompta|date('d/m/Y') : null,
+			natureRecup: m.natureRecup ?? null,
+			montantNet: m.montantNet ?? null,
+			categorie: m.categorie ? m.categorie.libelle : null,
+			sousCategorie: m.sousCategorie ? m.sousCategorie.libelle : null,
+			processus: m.processus ? m.processus.libelle : null,
+			sousProcessus: m.sousProcessus ? m.sousProcessus.libelle : null,
+			createdAt: m.createdAt ?? null,
+			consequences: m.consequences ?? null,
+			pieceJointe: m.pieceJointe|map(f => ({
+				filename: f.filename,
+				alt: f.alt
+			}))
+		})|json_encode|raw }};
+
+		const openModal = document.getElementById('kt_modal_open_fiche');
+
+		openModal.addEventListener('show.bs.modal', e => {
+			const id = e.relatedTarget.getAttribute('data-bs-ident');
+			const alert = incidents.find(c => c.id == id);
+			if (!alert) return;
+
+			// Mapping clé → ID HTML
+			const fields = {
+				etape: '#etape',
+				code: '#code',
+				dateDebut: '#debut',
+				dateRemonte: '#remontee',
+				agence: '#agence',
+				region: '#region',
+				direction: '#direction',
+				rapporteur: '#rapporteur',
+				fonction: '#fonction',
+				telephone: '#telephone',
+				email: '#email',
+				description: '#description',
+				categorie: '#categorie',
+				sousCategorie: '#sous_categorie',
+				processus: '#processus',
+				sousProcessus: '#sous_processus',
+				montantEstime: '#montant_estime',
+				datePerte: '#date_perte',
+				directionImpacte: '#direction_impactee',
+				montantObtenu: '#montant_recup',
+				dateRecup: '#date_recup',
+				dateCompta: '#date_compta_recup',
+				natureRecup: '#nature_recup',
+				montantNet: '#montant_perte',
+				consequences: '#consequences'
+			};
+
+			// Remplissage dynamique
+			for (const [key, selector] of Object.entries(fields)) {
+				const el = openModal.querySelector(`${selector} label`)?.nextElementSibling;
+				if (el) el.textContent = alert[key] ?? '';
+			}
+
+			const solutionsTable = openModal.querySelector('#solutions tbody');
+			solutionsTable.innerHTML = '';
+			(alert.solutions || []).forEach(solution => {
+				solutionsTable.insertAdjacentHTML('beforeend', `
+					<tr>
+						<td>${solution['action']}</td>
+						<td>${solution['responsable']}</td>
+						<td>${solution['delai']}</td>
+					</tr>
+				`);
+			});
+
+			// Gestion des fichiers
+			const fichiersContainer = openModal.querySelector('#fichiers .d-flex');
+			fichiersContainer.innerHTML = '';
+			(alert.pieceJointe || []).forEach(file => {
+				fichiersContainer.insertAdjacentHTML('beforeend', `
+					<a href="${file.filename}" target="_blank">
+						<img src="${file.filename}" class="h-150px" style="min-width: 125px">
+					</a>
+				`);
+			});
+		});
+
+		{% for type, messages in app.flashes %}
+			{% for message in messages %}
+				Swal.fire({
+					html: `{{message|raw}}`,
+					icon: "{{ type }}",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, compris !",
+					customClass: {
+						confirmButton: "btn btn-primary"
+					}
+				});
+			{% endfor %}
+		{% endfor %}
 	</script>
 {% endblock %}

@@ -179,7 +179,7 @@
 
 											<!--begin::Link-->
 											<span class="text-muted fw-bold text-hover-white position-relative fs-5">
-												Ajouté {{media.createdAt|time_ago}}
+												Ajouté {{media.createdAt ? media.createdAt|time_ago : null}}
 											</span>
 											<!--end::Link-->
 										</div>

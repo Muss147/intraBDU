@@ -53,35 +53,45 @@ final class FrontController extends AbstractController
 
         $form = $this->createForm(VotesForm::class, $vote);
         $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $votantInput = $form->get('votant')->getData();
+            $votant = $agentsRepository->findVotantByTerms($votantInput);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $votantInput = $form->get('votant')->getData();
-                if (!$votant = $agentsRepository->findVotantByTerms($votantInput)) {
-                    $this->addFlash('error', 'Cette information ne correspond à aucun agent dans notre base de données. Veuillez réessayer.');
-                    return $this->render('front/vote/_form.html.twig', [
-                        'form' => $form->createView(),
-                    ]);
-                }
-                elseif ($votant->getVote()) {
-                    $this->addFlash('error', 'Vous avez déjà effectué un vote. Veuillez attendre les résultats.');
-                    return $this->render('front/vote/_form.html.twig', [
-                        'form' => $form->createView(),
-                    ]);
-                }
+            if (!$votant) {
+                $this->addFlash('error', 'Ce matricule ne correspond à aucun agent dans notre base de données. Veuillez réessayer.');
+            } else {
+                // Vérifie s’il a déjà voté ce mois-ci
+                $now = new \DateTime();
+                $hasVotedThisMonth = $votant->getVotesEffectues()->exists(function ($key, $vote) use ($now) {
+                    return $vote->getVotedAt()->format('Y-m') === $now->format('Y-m');
+                });
 
-                $vote->setVotant($votant);
-                $em->persist($vote);
-                $em->flush();
+                if ($hasVotedThisMonth) {
+                    $this->addFlash('error', 'Vous avez déjà effectué un vote ce mois-ci. Veuillez attendre le mois prochain.');
+                } else {
+                    $vote->setVotant($votant);
+                    $em->persist($vote);
+                    $em->flush();
 
-                $this->addFlash('success', 'Merci pour votre vote !');
-                if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
-                    return $this->render('front/vote/_thanks.html.twig');
+                    $this->addFlash('success', 'Merci pour votre vote !');
+
+                    if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
+                        return $this->render('front/vote/_thanks.html.twig');
+                    }
+
+                    return $this->redirectToRoute('annuaire');
                 }
-                return $this->redirectToRoute('annuaire');
             }
 
-            // Formulaire invalide : on renvoie dans le bon Turbo Frame
+            // Si on est ici, c’est qu’il y a eu une erreur
+            return $this->render('front/vote/_form.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
+
+        // Formulaire invalide (ex. champ requis non rempli)
+        if ($form->isSubmitted()) {
             if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
                 return $this->render('front/vote/_form.html.twig', [
                     'form' => $form->createView(),
@@ -231,42 +241,51 @@ final class FrontController extends AbstractController
 
         $form = $this->createForm(VotesForm::class, $vote);
         $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $votantInput = $form->get('votant')->getData();
+            $votant = $agentsRepository->findVotantByTerms($votantInput);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $votantInput = $form->get('votant')->getData();
-                if (!$votant = $agentsRepository->findVotantByTerms($votantInput)) {
-                    $this->addFlash('error', 'Cette information ne correspond à aucun agent dans notre base de données. Veuillez réessayer.');
-                    return $this->render('front/vote/_form.html.twig', [
-                        'form' => $form->createView(),
-                    ]);
-                }
-                elseif ($votant->getVote()) {
-                    $this->addFlash('error', 'Vous avez déjà effectué un vote. Veuillez attendre les résultats.');
-                    return $this->render('front/vote/_form.html.twig', [
-                        'form' => $form->createView(),
-                    ]);
-                }
+            if (!$votant) {
+                $this->addFlash('error', 'Ce matricule ne correspond à aucun agent dans notre base de données. Veuillez réessayer.');
+            } else {
+                // Vérifie s’il a déjà voté ce mois-ci
+                $now = new \DateTime();
+                $hasVotedThisMonth = $votant->getVotesEffectues()->exists(function ($key, $vote) use ($now) {
+                    return $vote->getVotedAt()->format('Y-m') === $now->format('Y-m');
+                });
 
-                $vote->setVotant($votant);
-                $em->persist($vote);
-                $em->flush();
+                if ($hasVotedThisMonth) {
+                    $this->addFlash('error', 'Vous avez déjà effectué un vote ce mois-ci. Veuillez attendre le mois prochain.');
+                } else {
+                    $vote->setVotant($votant);
+                    $em->persist($vote);
+                    $em->flush();
 
-                $this->addFlash('success', 'Merci pour votre vote !');
-                if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
-                    return $this->render('front/vote/_thanks.html.twig');
+                    $this->addFlash('success', 'Merci pour votre vote !');
+
+                    if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
+                        return $this->render('front/vote/_thanks.html.twig');
+                    }
+
+                    return $this->redirectToRoute('annuaire');
                 }
-                return $this->redirectToRoute('annuaire');
             }
 
-            // Formulaire invalide : on renvoie dans le bon Turbo Frame
+            // Si on est ici, c’est qu’il y a eu une erreur
+            return $this->render('front/vote/_form.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
+
+        // Formulaire invalide (ex. champ requis non rempli)
+        if ($form->isSubmitted()) {
             if ($request->headers->get('Turbo-Frame') === 'vote_form_frame') {
                 return $this->render('front/vote/_form.html.twig', [
                     'form' => $form->createView(),
                 ]);
             }
         }
-
         //////// FEATURES DE L'ANNUAIRE ///////////
         $term = $request->request->get('research', $request->query->get('research', ''));
 

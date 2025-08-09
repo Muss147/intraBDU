@@ -230,7 +230,7 @@ select#votes_form_agent {
         <div class="flex flex-col border border-primary rounded">
             <h3 class="bg-primary text-lg font-semibold text-gray-50 p-2 md:px-3">Akwaba aux nouveaux collègues</h3>
             <div class="flex items-center gap-3 p-3 overflow-x-auto">
-                {% for user in akwaba %}
+                {% for user in akwaba|reverse|slice(0,3) %}
                 <button data-tooltip-target="tooltip-{{user.id}}" type="button">
                     <img class="h-20 w-20 rounded-sm border border-gray-500" src="{{ asset(user.photo.filename|default('assets/media/svg/avatars/blank.svg')) }}" alt="{{ user.prenoms ~ ' ' ~ user.nom }}">
                 </button>
@@ -353,7 +353,7 @@ select#votes_form_agent {
     <!-- Modals Vote -->
     <div id="agent-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <!-- Modal content -->
-        <div class="relative w-full max-w-lg max-h-full bg-white rounded-lg shadow-sm">
+        <div class="relative w-full max-w-xl max-h-full bg-white rounded-lg shadow-sm">
             <!-- Modal body -->
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                 <div id="indicators-carousel" class="relative w-full bg-primary rounded-lg py-8" data-carousel="static">

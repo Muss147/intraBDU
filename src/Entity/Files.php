@@ -29,6 +29,9 @@ class Files extends EntityBase
     #[ORM\ManyToOne(inversedBy: 'fichiers')]
     private ?Alertes $alertes = null;
 
+    #[ORM\ManyToOne(inversedBy: 'pieceJointe')]
+    private ?Incidents $incidents = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,6 +98,18 @@ class Files extends EntityBase
     public function setAlertes(?Alertes $alertes): static
     {
         $this->alertes = $alertes;
+
+        return $this;
+    }
+
+    public function getIncidents(): ?Incidents
+    {
+        return $this->incidents;
+    }
+
+    public function setIncidents(?Incidents $incidents): static
+    {
+        $this->incidents = $incidents;
 
         return $this;
     }

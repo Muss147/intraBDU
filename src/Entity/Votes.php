@@ -16,7 +16,7 @@ class Votes
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'votes')]
+    #[ORM\ManyToOne(inversedBy: 'votesRecus')]
     private ?Agents $agent = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -25,7 +25,7 @@ class Votes
     #[ORM\OneToMany(mappedBy: 'vote', targetEntity: VoteNote::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $notes;
 
-    #[ORM\OneToOne(inversedBy: 'vote', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'votesEffectues')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Agents $votant = null;
 
@@ -98,10 +98,11 @@ class Votes
         return $this->votant;
     }
 
-    public function setVotant(Agents $votant): static
+    public function setVotant(?Agents $votant): static
     {
         $this->votant = $votant;
 
         return $this;
     }
+
 }

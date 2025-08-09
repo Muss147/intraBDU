@@ -135,8 +135,8 @@
 								<div
 									class="pb-5 fs-6">
 									<!--begin::Details item-->
-									<div class="fw-bold mt-5">Account ID</div>
-									<div class="text-gray-600">ID-{{agent.id}}</div>
+									<div class="fw-bold mt-5">Matricule</div>
+									<div class="text-gray-600">{{agent.matricule}}</div>
 									<!--begin::Details item-->
 									<!--begin::Details item-->
 									<div class="fw-bold mt-5">Anniversaire</div>
@@ -151,7 +151,7 @@
 									</div>
 									<!--begin::Details item-->
 									<!--begin::Details item-->
-									<div class="fw-bold mt-5">Fixe</div>
+									<div class="fw-bold mt-5">Numéro IP</div>
 									<div class="text-gray-600">
 										<a href="#" class="text-gray-600 text-hover-primary">{{agent.fixe}}</a>
 									</div>
@@ -160,8 +160,6 @@
 									<div class="fw-bold mt-5">Adresse</div>
 									<div class="text-gray-600">
                                         {{agent.adresse}}
-										{{agent.commune ? ',<br/>'~ agent.commune : ''}}
-                                        {{agent.ville ? '<br/>'~ agent.ville : ''}}
                                     </div>
 									<!--begin::Details item-->
 									<!--begin::Details item-->
@@ -173,8 +171,8 @@
 									<div class="text-gray-600">{{agent.service.parent.libelle}}</div>
 									<!--begin::Details item-->
 									<!--begin::Details item-->
-									<div class="fw-bold mt-5">Agence</div>
-									<div class="text-gray-600">{{agent.service.parent.parent.libelle}}</div>
+									<div class="fw-bold mt-5">Bureau / Lieu de travail</div>
+									<div class="text-gray-600">{{agent.bureau.libelle ?? null}}</div>
 									<!--begin::Details item-->
 								</div>
 								<!--end::Details content-->
@@ -221,7 +219,7 @@
 												class="card-header border-0">
 												<!--begin::Card title-->
 												<div class="card-title">
-													<h2 class="fw-bold">Points de recompenses</h2>
+													<h2 class="fw-bold">Points de vote</h2>
 												</div>
 												<!--end::Card title-->
 											</div>
@@ -236,11 +234,11 @@
 															<span class="path2"></span>
 														</i>
 														<div class="ms-2">
-															4,571
+															{{agent.points}}
 															<span class="text-muted fs-4 fw-semibold">Points obtenus</span>
 														</div>
 													</div>
-													<div class="fs-7 fw-normal text-muted">Le total de points obtenus durant le mois.</div>
+													<div class="fs-7 fw-normal text-muted">Total de points obtenus durant le mois en cours.</div>
 												</div>
 											</div>
 											<!--end::Card body-->
@@ -265,7 +263,7 @@
 												</div>
 
 												<div class="fw-semibold text-white">
-													Mois de {{"now"|date('M Y')}}
+													{{ rang }}{{ rang == 1 ? 'er' : 'e' }} du classement
 												</div>
 											</div>
 											<!--end::Body-->
@@ -296,55 +294,21 @@
 										<table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
 											<thead class="border-bottom border-gray-200 fs-7 fw-bold">
 												<tr class="text-start text-muted text-uppercase gs-0">
-													<th class="min-w-100px">No.</th>
-													<th>Rang</th>
-													<th class="min-w-100px">Points</th>
+													<th class="min-w-100px">Rang</th>
+													<th>Points</th>
+													<th class="min-w-100px">Moyenne</th>
 													<th class="min-w-100px">Date</th>
 												</tr>
 											</thead>
 											<tbody class="fs-6 fw-semibold text-gray-600">
+												{% for row in historique %}
 												<tr>
-													<td>
-														#1
-													</td>
-													<td>
-														$1,200.00
-													</td>
-													<td>
-														120
-													</td>
-													<td>
-														14 Dec 2020, 8:43 pm
-													</td>
+													<td>{{ row.rang }}e</td>
+													<td>{{ row.points }} points</td>
+													<td>{{ row.moyenne }}</td>
+													<td>{{ row.date|format_date(pattern='MMMM YYYY', locale='fr') }}</td>
 												</tr>
-												<tr>
-													<td>
-														<a href="/metronic8/demo1/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#14620</a>
-													</td>
-													<td>
-														$79.00
-													</td>
-													<td>
-														7
-													</td>
-													<td>
-														01 Dec 2020, 10:12 am
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<a href="/metronic8/demo1/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#14956</a>
-													</td>
-													<td>
-														$5,500.00
-													</td>
-													<td>
-														550
-													</td>
-													<td>
-														12 Nov 2020, 2:01 pm
-													</td>
-												</tr>
+												{% endfor %}
 											</tbody>
 										</table>
 										<!--end::Table-->

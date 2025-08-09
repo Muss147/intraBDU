@@ -75,7 +75,7 @@
                 <form data-turbo="false" class="flex items-center gap-2 border-l pl-4" method="get" action="{{ path('annuaire') }}">   
                     <label for="search" class="text-sm">Annuaire BDU</label>
                     <div class="relative transition-all duration-400 ease-in-out">
-                        <input type="search" name="research" value="{{ term|default(null) }}" id="default-search" class="block w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-0" placeholder="Nom, ou direction..." />
+                        <input type="search" name="research" value="{{ term|default(null) }}" id="default-search" class="block w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-0" placeholder="Nom, direction, ou numéro..." />
                         <button type="submit" class="text-white absolute end-1.5 bottom-1.5 bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1 uppercase">Ok</button>
                     </div>
                 </form>

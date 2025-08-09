@@ -35,7 +35,14 @@ class AgentsRepository extends ServiceEntityRepository
             return $this->createQueryBuilder('a')
                 ->leftJoin('a.service', 's')
                 ->leftJoin('s.parent', 'p')
-                ->andWhere('a.nom LIKE :term OR a.prenoms LIKE :term OR a.email LIKE :term OR a.fonction LIKE :term OR s.libelle LIKE :term OR p.libelle LIKE :term')
+                ->andWhere('a.nom LIKE :term OR 
+                    a.prenoms LIKE :term OR 
+                    a.email LIKE :term OR 
+                    a.fonction LIKE :term OR 
+                    a.fixe LIKE :term OR 
+                    a.telephone LIKE :term OR 
+                    s.libelle LIKE :term OR 
+                    p.libelle LIKE :term')
                 ->setParameter('term', '%' . $term . '%')
                 ->getQuery();
         }
@@ -43,7 +50,7 @@ class AgentsRepository extends ServiceEntityRepository
        public function findVotantByTerms(string $term = ''): ?Agents
         {
             return $this->createQueryBuilder('a')
-                ->andWhere('a.nom LIKE :term OR a.prenoms LIKE :term OR a.matricule LIKE :term')
+                ->where('a.matricule LIKE :term')
                 ->setParameter('term', '%' . $term . '%')
                 ->getQuery()
                 ->getOneOrNullResult();
@@ -75,6 +82,23 @@ class AgentsRepository extends ServiceEntityRepository
                 ->getResult();
         }
 
+        public function getClassement(): array
+        {
+            $now = new \DateTime();
+            $moisActuel = $now->format('m');
+
+            return $this->createQueryBuilder('a')
+                ->select('a as agent, SUM(n.note) AS totalPoints')
+                ->leftJoin('a.votesRecus', 'v')
+                ->leftJoin('v.notes', 'n')
+                ->where('MONTH(v.votedAt) = :mois')
+                ->setParameter('mois', $moisActuel)
+                ->groupBy('a.id')
+                ->orderBy('totalPoints', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
+        
     //    public function findOneBySomeField($value): ?Agents
     //    {
     //        return $this->createQueryBuilder('a')

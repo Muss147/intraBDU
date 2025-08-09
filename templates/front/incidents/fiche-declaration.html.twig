@@ -8,7 +8,7 @@
 {% block body %}
 <div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
     <!-- Sujets les plus consultés -->
-    {{form_start(form, {'attr': {'id': '', 'class': 'pb-8 min-h-screen space-y-16 md:space-y-10'}})}}
+    {{form_start(form, {'attr': {'data-turbo': 'false', 'id': '', 'class': 'pb-8 min-h-screen space-y-16 md:space-y-10'}})}}
         <h2 class="text-primary text-xl font-semibold mb-4">Fiche de déclaration d'incident</h2>
 
         <div class="p-4 md:px-8 rounded-lg bg-gray-100">
@@ -211,6 +211,11 @@
                         {{form_widget(form.consequences, {'attr': {'rows': '10', 'class': 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-0 focus:border-primary', 'placeholder': 'Écrivez les conséquences ici...'}})}}
                     </div> 
                     
+                    <div class="mb-6">
+                        <label for="incidents_form_consequences" class="block mb-2 text-sm font-medium text-gray-900">Joindre un ou plusieurs fichiers</label>
+                        {{form_widget(form.pieceJointe, {'attr': {'multiple': 'true', 'class': 'block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-0 focus:border-primary'}})}}
+                    </div> 
+                    
                     <div class="relative overflow-x-auto mb-8" id="solutions-table">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Proposition de solutions</label>
 
@@ -258,7 +263,10 @@
                 <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/></svg>
             </button>
         </div>
-    {{form_end(form)}}
+        {# CSRF token explicitement affiché #}
+        {{ form_row(form._token) }}
+
+    {{form_end(form, { render_rest: false })}}
 
     <!-- Notification messages -->
     {% for label, messages in app.flashes %}

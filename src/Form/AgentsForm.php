@@ -23,6 +23,7 @@ class AgentsForm extends AbstractType
         $builder
             ->add('nom')
             ->add('prenoms')
+            ->add('matricule')
             ->add('civilite', ChoiceType::class, [
                 'choices' => [
                     'Monsieur' => 'M.',
@@ -46,6 +47,20 @@ class AgentsForm extends AbstractType
                 ],
             ])
             ->add('fonction')
+            ->add('bureau', EntityType::class, [
+                'class' => Parametres::class,
+                'choice_label' => 'libelle',
+                'placeholder' => 'Sélectionner un lieu',
+                'required' => true,
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('p')
+                        ->where('p.type = :type')
+                        ->andWhere('p.deletedAt IS NULL')
+                        ->setParameter('type', 'bureaux')
+                    ;
+                },
+            ])
+            ->add('fixe')
             ->add('service', EntityType::class, [
                 'class' => Parametres::class,
                 'choice_label' => 'libelle',

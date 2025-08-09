@@ -602,6 +602,18 @@ Contact: +225 07 471 612 21
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                                                         <span class="menu-title">Directives</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'chartes' %} active{% endif %}" href="{{path('app_documents', {type: 'Chartes'})}}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">Chartes</span>
                                                         <span class="badge badge-light-danger">New</span>
                                                     </a>
                                                     <!--end:Menu link-->
@@ -762,11 +774,11 @@ Contact: +225 07 471 612 21
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item">
                                                     <!--begin:Menu link-->
-                                                    <a class="menu-link{% if app.session.get('subMenu') == 'agences' %} active{% endif %}" href="{{path('param_type', {type: 'agences'})}}">
+                                                    <a class="menu-link{% if app.session.get('subMenu') == 'bureaux' %} active{% endif %}" href="{{path('param_type', {type: 'bureaux'})}}">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                                                        <span class="menu-title">Agences</span>
+                                                        <span class="menu-title">Bureaux</span>
                                                     </a>
                                                     <!--end:Menu link-->
                                                 </div>

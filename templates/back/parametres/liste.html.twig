@@ -563,7 +563,7 @@
 		id: a.id,
 		libelle: a.libelle,
 		type: a.type,
-		childType: a.children|first.type,
+		childType: (a.children|length != 0) ? a.children|first.type : null,
 		description: a.description,
 	})|json_encode|raw }};
 

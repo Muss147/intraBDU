@@ -4,12 +4,15 @@ namespace App\Form;
 
 use App\Entity\Incidents;
 use App\Entity\Parametres;
+use App\Form\SolutionsType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -32,6 +35,7 @@ class IncidentsForm extends AbstractType
             ->add('dateDebut', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'required' => false,
                 'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
                 'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
@@ -46,6 +50,7 @@ class IncidentsForm extends AbstractType
             ->add('dateRemonte', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'required' => false,
                 'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
                 'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
@@ -78,6 +83,7 @@ class IncidentsForm extends AbstractType
             ->add('datePerte', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'required' => false,
                 'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
                 'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
@@ -93,6 +99,7 @@ class IncidentsForm extends AbstractType
             ->add('dateRecup', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'required' => false,
                 'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
                 'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
@@ -107,6 +114,7 @@ class IncidentsForm extends AbstractType
             ->add('dateCompta', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
+                'required' => false,
                 'format' => 'MM/dd/yyyy',  // Symfony attend ce format pour parser
                 'input' => 'datetime',     // par défaut : transmet un \DateTime
                 'html5' => false, // on désactive le datepicker natif HTML5
@@ -197,6 +205,24 @@ class IncidentsForm extends AbstractType
                         ->setParameter('type', 'Sous processus')
                     ;
                 },
+            ])
+            ->add('pieceJointe', FileType::class, [
+                'label' => false,
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '10M',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/msword', // .doc
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+                            'application/vnd.ms-excel', // .xls
+                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+                        ],
+                        'mimeTypesMessage' => 'Veuillez charger un document valide (PDF, Word, Excel).',
+                    ])
+                ],
             ])
         ;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\IncidentsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,7 +25,7 @@ class Incidents
     #[ORM\Column(nullable: true)]
     private ?\DateTime $dateDebut = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTime $dateRemonte = null;
 
     #[ORM\ManyToOne(inversedBy: 'incidentsByAgence')]
@@ -99,6 +101,17 @@ class Incidents
 
     #[ORM\Column(nullable: false)]
     private ?\DateTime $createdAt = null;
+
+    /**
+     * @var Collection<int, Files>
+     */
+    #[ORM\OneToMany(targetEntity: Files::class, mappedBy: 'incidents')]
+    private Collection $pieceJointe;
+
+    public function __construct()
+    {
+        $this->pieceJointe = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -425,6 +438,36 @@ class Incidents
     public function setCreatedAt(?\DateTime $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Files>
+     */
+    public function getPieceJointe(): Collection
+    {
+        return $this->pieceJointe;
+    }
+
+    public function addPieceJointe(Files $pieceJointe): static
+    {
+        if (!$this->pieceJointe->contains($pieceJointe)) {
+            $this->pieceJointe->add($pieceJointe);
+            $pieceJointe->setIncidents($this);
+        }
+
+        return $this;
+    }
+
+    public function removePieceJointe(Files $pieceJointe): static
+    {
+        if ($this->pieceJointe->removeElement($pieceJointe)) {
+            // set the owning side to null (unless already changed)
+            if ($pieceJointe->getIncidents() === $this) {
+                $pieceJointe->setIncidents(null);
+            }
+        }
 
         return $this;
     }

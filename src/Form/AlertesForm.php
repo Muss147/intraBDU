@@ -19,13 +19,13 @@ class AlertesForm extends AbstractType
         $builder
             ->add('categorie', ChoiceType::class, [
                 'choices' => [
-                    'Corruption, conflit d\'intérêts, fraude dans le cadre des activités du Groupe' => 'Corruption, conflit d\'intérêts, fraude dans le cadre des activités du Groupe',
-                    'Manquements à l\'éthique dans le cadre des activités du Groupe' => 'Manquements à l\'éthique dans le cadre des activités du Groupe',
-                    'Atteintes graves à l\'environnement résultant de l\'activité du Groupe' => 'Atteintes graves à l\'environnement résultant de l\'activité du Groupe',
-                    'Atteintes graves aux droits humains et libertés fondamentales résultant de l\'activité du Groupe' => 'Atteintes graves aux droits humains et libertés fondamentales résultant de l\'activité du Groupe',
-                    'Atteintes graves à la santé et à la sécurité des personnes résultant de l\'activité du Groupe' => 'Atteintes graves à la santé et à la sécurité des personnes résultant de l\'activité du Groupe',
-                    'Harcèlement, sexisme, violence au travail dans le cadre des activités du Groupe' => 'Harcèlement, sexisme, violence au travail dans le cadre des activités du Groupe',
-                    'Autres violations des lois et règlements dans le cadre des activités du Groupe' => 'Autres violations des lois et règlements dans le cadre des activités du Groupe'
+                    'Corruption, conflit d\'intérêts, fraude dans le cadre des activités de la BDU' => 'Corruption, conflit d\'intérêts, fraude dans le cadre des activités de la BDU',
+                    'Manquements à l\'éthique dans le cadre des activités de la BDU' => 'Manquements à l\'éthique dans le cadre des activités de la BDU',
+                    'Atteintes graves à l\'environnement résultant de l\'activité de la BDU' => 'Atteintes graves à l\'environnement résultant de l\'activité de la BDU',
+                    'Atteintes graves aux droits humains et libertés fondamentales résultant de l\'activité de la BDU' => 'Atteintes graves aux droits humains et libertés fondamentales résultant de l\'activité de la BDU',
+                    'Atteintes graves à la santé et à la sécurité des personnes résultant de l\'activité de la BDU' => 'Atteintes graves à la santé et à la sécurité des personnes résultant de l\'activité de la BDU',
+                    'Harcèlement, sexisme, violence au travail dans le cadre des activités de la BDU' => 'Harcèlement, sexisme, violence au travail dans le cadre des activités de la BDU',
+                    'Autres violations des lois et règlements dans le cadre des activités de la BDU' => 'Autres violations des lois et règlements dans le cadre des activités de la BDU'
                 ],
                 'expanded' => true,
                 'multiple' => false,

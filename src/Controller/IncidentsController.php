@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Files;
+use App\Service\FileUploader;
 use App\Entity\Incidents;
 use App\Form\IncidentsForm;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class IncidentsController extends AbstractController
 {
     #[Route('/incidents/fiche-de-declaration', name: 'fiche_declaration')]
-    public function ficheDeclaration(Request $request, IncidentsParamsRepository $paramsRepository, EntityManagerInterface $em, MailerInterface $mailer): Response
+    public function ficheDeclaration(Request $request, IncidentsParamsRepository $paramsRepository, EntityManagerInterface $em, MailerInterface $mailer, FileUploader $fileUploader): Response
     {
         $incident = new Incidents();
         // Initialisation propre de 3 lignes de solutions vides
@@ -39,27 +41,44 @@ final class IncidentsController extends AbstractController
                 }
             }
             else {
+                $files = $form->get('pieceJointe')->getData();
+                if ($files) {
+                    foreach ($files as $file) {
+                        $data = $fileUploader->upload($file);
+
+                        $media = new Files();
+                        $media
+                            ->setFilename($data['filename'])
+                            ->setType('medias')
+                            ->setSize($data['size'])
+                            ->setAlt($data['originalName']);
+                        $em->persist($media);
+                        $incident->addPieceJointe($media);
+                    }
+                }
                 $em->persist($incident);
                 $em->flush();
 
                 // Envoi de mail avec try/catch
-                try {
-                    // Email au rapproteur
-                    $emailCandidat = (new Email())
-                        ->from('no-reply@bduci.com')
-                        ->to($incident->getEmail())
-                        ->subject('Détails de votre déclaration d\incident')
-                        ->html("
-                            <p>Bonjour <b>{$incident->getRapporteur()}</b>,</p>
-                            <p>Nous avons bien reçu votre déclaration à l'incident <b>N°{$incident->getCode()}</b>.</p>
-                            <p>Notre équipe la traitera dans les plus brefs délais.</p>
-                            <p>Merci pour la confiance !</p>
-                            <hr>
-                            <p>Service Incidents - BDU</p>
-                        ");
-                    $mailer->send($emailCandidat);
-                } catch (TransportExceptionInterface $e) {
-                    $this->addFlash('error', "Une erreur s'est produite lors de l'envoi de l'email au rapporteur : " . $e->getMessage());
+                if ($incident->getEmail()) {
+                    try {
+                        // Email au rapproteur
+                        $emailCandidat = (new Email())
+                            ->from('no-reply@bduci.com')
+                            ->to($incident->getEmail())
+                            ->subject('Détails de votre déclaration d\incident')
+                            ->html("
+                                <p>Bonjour <b>{$incident->getRapporteur()}</b>,</p>
+                                <p>Nous avons bien reçu votre déclaration à l'incident <b>N°{$incident->getCode()}</b>.</p>
+                                <p>Notre équipe la traitera dans les plus brefs délais.</p>
+                                <p>Merci pour la confiance !</p>
+                                <hr>
+                                <p>Service Incidents - BDU</p>
+                            ");
+                        $mailer->send($emailCandidat);
+                    } catch (TransportExceptionInterface $e) {
+                        $this->addFlash('error', "Une erreur s'est produite lors de l'envoi de l'email au rapporteur : " . $e->getMessage());
+                    }
                 }
 
                 try {

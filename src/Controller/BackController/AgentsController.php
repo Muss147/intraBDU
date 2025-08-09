@@ -67,19 +67,31 @@ final class AgentsController extends AbstractController
         return $this->render('back/agents/list.html.twig', [
             'form' => $form,
             'agents' => $agentsRepository->findAll(),
-            'agences' => $parametresRepository->findByType('agences'),
             'directions' => $parametresRepository->findByType('directions'),
             'services' => $parametresRepository->findByType('services'),
         ]);
     }
 
     #[Route('/details/{agent}/', name: 'details_agents')]
-    public function details(Request $request, Agents $agent, ParametresRepository $parametresRepository, SessionInterface $session): Response
+    public function details(Request $request, Agents $agent, AgentsRepository $agentsRepository, ParametresRepository $parametresRepository, SessionInterface $session): Response
     {
         $session->set('menu', 'agents');
 
         $form = $this->createForm(AgentsForm::class, $agent);
         $form->handleRequest($request);
+
+        // Classement
+        $classement = $agentsRepository->getClassement();
+        $rang = count($agentsRepository->findAll()); // Par défaut, rang = nombre total d'agents
+        $index = 1;
+
+        foreach ($classement as $entry) {
+            if ($entry['agent']->getId() === $agent->getId()) {
+                $rang = $index;
+                break; // Dès qu'on trouve l'agent, on arrête
+            }
+            $index++;
+        }
 
         if ($form->isSubmitted()) {
             if (!$form->isValid()) {
@@ -117,6 +129,8 @@ final class AgentsController extends AbstractController
         return $this->render('back/agents/details.html.twig', [
             'form' => $form,
             'agent' => $agent,
+            'rang' => $rang,
+            'historique' => $agent->getHistoriqueMensuel($this->em),
             'agences' => $parametresRepository->findByType('agences'),
             'directions' => $parametresRepository->findByType('directions'),
             'services' => $parametresRepository->findByType('services'),
