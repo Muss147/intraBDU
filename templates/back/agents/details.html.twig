@@ -419,87 +419,103 @@
 											<!--end::Input group-->
 
 											<!--begin::Input group-->
-											<div
-												class="row row-cols-1 row-cols-md-2 fv-row mb-7">
-												<div
-													class="col">
-                                                    <!--begin::Label-->
-                                                    <label class="fs-6 fw-semibold mb-2 required">Nom</label>
-                                                    <!--end::Label-->
+											<div class="fv-row mb-7">
+												<!--begin::Label-->
+												<label class="fs-6 fw-semibold mb-2">Matricule</label>
+												<!--end::Label-->
 
-                                                    <!--begin::Input-->
-                                                    {{form_widget(form.nom, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Nom de l\'agent'}})}}
-                                                    <!--end::Input-->
-                                                </div>
-												<div
-													class="col">
-                                                    <!--begin::Label-->
-                                                    <label class="fs-6 fw-semibold mb-2 required">Prénoms</label>
-                                                    <!--end::Label-->
-
-                                                    <!--begin::Input-->
-                                                    {{form_widget(form.prenoms, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Prénoms de l\'agent'}})}}
-                                                    <!--end::Input-->
-                                                </div>
+												<!--begin::Input-->
+												{{form_widget(form.matricule, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Numéro matricule'}})}}
+												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
 
 											<!--begin::Input group-->
-											<div
-												class="row row-cols-1 row-cols-md-2 fv-row mb-7">
-												<div
-													class="col">
-                                                    <!--begin::Label-->
-                                                    <label class="fs-6 fw-semibold mb-2 required">Civilité</label>
-                                                    <!--end::Label-->
+											<div class="row fv-row mb-7">
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="required fs-6 fw-semibold mb-2">Nom</label>
+													<!--end::Label-->
 
-                                                    <!--begin::Input-->
-                                                    {{form_widget(form.civilite, {'attr': {'class': 'form-select form-select-solid fw-bold', 'data-control': 'select2', 'aria-label': 'Sélectionner une civilité', 'data-placeholder': 'Sélectionner une civilité...', 'data-hide-search': 'true'}})}}
-                                                    <!--end::Input-->
-                                                </div>
-												<div
-													class="col">
-                                                    <!--begin::Label-->
-                                                    <label class="fs-6 fw-semibold mb-2 required">Date d'anniversaire</label>
-                                                    <!--end::Label-->
+													<!--begin::Input-->
+													{{form_widget(form.nom, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Nom de l\'agent'}})}}
+													<!--end::Input-->
+												</div>
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="fs-6 fw-semibold mb-2">Prénoms</label>
+													<!--end::Label-->
 
-                                                    <!--begin::Input-->
-                                                    {{form_widget(form.anniversaire, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Sélectionner une date'}})}}
-                                                    <!--end::Input-->
-                                                </div>
+													<!--begin::Input-->
+													{{form_widget(form.prenoms, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Prénoms de l\'agent'}})}}
+													<!--end::Input-->
+												</div>
 											</div>
 											<!--end::Input group-->
 
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="fs-6 fw-semibold mb-2">
-                                                    <span class="required">Email</span>
+											<!--begin::Input group-->
+											<div class="row fv-row mb-7">
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="required fs-6 fw-semibold mb-2">Civilité</label>
+													<!--end::Label-->
 
-                                                    
-                                                    <span class="ms-1"  data-bs-toggle="tooltip" title="L'adresse Email doit être active" >
-                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-                                                    </span>
-                                                </label>
-                                                <!--end::Label-->
+													<!--begin::Input-->
+													{{form_widget(form.civilite, {'attr': {'class': 'form-select form-select-solid fw-bold', 'data-control': 'select2', 'aria-label': 'Sélectionner une civilité', 'data-placeholder': 'Sélectionner une civilité...', 'data-hide-search': 'true'}})}}
+													<!--end::Input-->
+												</div>
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="required fs-6 fw-semibold mb-2">Date d'anniversaire</label>
+													<!--end::Label-->
 
-                                                <!--begin::Input-->
-                                                {{form_widget(form.email, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Adresse email de service'}})}}
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
+													<!--begin::Input-->
+													{{form_widget(form.anniversaire, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Sélectionner une date'}})}}
+													<!--end::Input-->
+												</div>
+											</div>
+											<!--end::Input group-->
 
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="fs-6 fw-semibold mb-2">Téléphone</label>
-                                                <!--end::Label-->
+											<div class="row fv-row mb-7">
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="fs-6 fw-semibold mb-2">
+														<span class="required">Email</span>
 
-                                                <!--begin::Input-->
-                                                {{form_widget(form.telephone, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Téléphone de service'}})}}
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
+														
+														<span class="ms-1"  data-bs-toggle="tooltip" title="L'adresse Email doit être active" >
+															<i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+														</span>
+													</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.email, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Adresse email de service'}})}}
+													<!--end::Input-->
+												</div>
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="fs-6 fw-semibold mb-2">Téléphone</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.telephone, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Téléphone de service'}})}}
+													<!--end::Input-->
+												</div>
+											</div>
+											<div class="row fv-row mb-7">
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="fs-6 fw-semibold mb-2 required">Numéro IP</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.fixe, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer votre Numéro IP'}})}}
+													<!--end::Input-->
+												</div>
+											</div>
+											<!--end::Input group-->
+
                                         </div>
                                         <!--end::Card body-->
                                     </div>
@@ -533,11 +549,10 @@
                                             </div>
                                             <!--end::Input group-->
 
-                                            <!--begin::Input group-->
                                             <div class="d-flex flex-column mb-7 fv-row">
                                                 <!--begin::Label-->
                                                 <label class="fs-6 fw-semibold mb-2">
-                                                    <span class="required">Agence</span>
+                                                    <span class="required">Bureau / Lieu de travail</span>
 
                                                     
                                                     <span class="ms-1"  data-bs-toggle="tooltip" title="Agence de fonction" >
@@ -546,12 +561,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select name="agence" aria-label="Sélectionner une agence" data-control="select2" data-placeholder="Sélectionner une agence..." data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                    <option value="">Sélectionner une agence...</option>
-                                                    {% for agence in agences %}
-                                                    <option value="{{agence.id}}" >{{agence.libelle}}</option>
-                                                    {% endfor %}
-                                                </select>
+                                                {{form_widget(form.bureau, {'attr': {'class': 'form-select form-select-solid fw-bold', 'data-control': 'select2', 'data-hide-search': 'true', 'aria-label': 'Selectionner votre lieu de travail', 'data-placeholder': 'Selectionner votre lieu de travail'}})}}
                                                 <!--end::Input-->
                                             </div>
                                             <!--end::Input group-->
@@ -567,6 +577,9 @@
                                                     <!--begin::Input-->
                                                     <select name="direction" aria-label="Sélectionner une direction" data-control="select2" data-placeholder="Sélectionner une direction..." data-hide-search="true" class="form-select form-select-solid fw-bold">
                                                         <option value="">Sélectionner une direction...</option>
+                                                        {% for direction in directions %}
+                                                        <option value="{{direction.id}}" >{{direction.libelle}}</option>
+                                                        {% endfor %}
                                                     </select>
                                                     <!--end::Input-->
                                                 </div>
@@ -579,9 +592,7 @@
                                                     <!--end::Label-->
 
                                                     <!--begin::Input-->
-                                                    <select name="service" aria-label="Sélectionner un service" data-control="select2" data-placeholder="Sélectionner un service..." data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                        <option value="">Sélectionner un service...</option>
-                                                    </select>
+                                                    {{form_widget(form.service, {'attr': {'class': 'form-select form-select-solid fw-bold', 'disabled': 'true', 'data-control': 'select2', 'data-hide-search': 'true', 'aria-label': 'Selectionner un service', 'data-placeholder': 'Selectionner un service'}})}}
                                                     <!--end::Input-->
                                                 </div>
                                                 <!--end::Col-->
@@ -658,47 +669,22 @@
             parent: d.parent.id,
         })|json_encode|raw }};
 
-        $('select[name="agence"]').change((e) => {
-            const selectedValue = $(e.target).val();
-            const directionsFinded = directions.filter(d => d.parent == selectedValue);
-            // if (!directionsFinded) return;
+		$('select[name="direction"]').change((e) => {
+			const selectedValue = $(e.target).val();
+			const servicesFinded = services.filter(s => s.parent == selectedValue);
 
-            const $directionSelect = $('select[name="direction"]');
-            const $serviceSelect = $('select[name="service"]');
+			const $serviceSelect = $('#agents_form_service');
 
-            // On vide les options précédentes
-            $directionSelect.empty();
-            $serviceSelect.empty();
+			// Réinitialise et active le select service
+			$serviceSelect.empty().append('<option value="">Sélectionner un service</option>').prop('disabled', false);
 
-            // On ajoute une option par défaut
-            $directionSelect.append('<option value="">Sélectionner une direction</option>');
+			// Ajoute les services trouvés
+			servicesFinded.forEach(serv => {
+				$serviceSelect.append(`<option value="${serv.id}">${serv.libelle}</option>`);
+			});
+			$serviceSelect.trigger('change.select2');
+		});
 
-            // On ajoute les nouvelles options
-            directionsFinded.forEach(dir => {
-                $directionSelect.append(`<option value="${dir.id}">${dir.libelle}</option>`);
-            });
-            $directionSelect.trigger('change.select2');
-        })
-
-        $('select[name="direction"]').change((e) => {
-            const selectedValue = $(e.target).val();
-            const servicesFinded = services.filter(s => s.parent == selectedValue);
-            // if (!servicesFinded) return;
-
-            const $serviceSelect = $('select[name="service"]');
-
-            // On vide les options précédentes
-            $serviceSelect.empty();
-
-            // On ajoute une option par défaut
-            $serviceSelect.append('<option value="">Sélectionner un service</option>');
-
-            // On ajoute les nouvelles options
-            servicesFinded.forEach(serv => {
-                $serviceSelect.append(`<option value="${serv.id}">${serv.libelle}</option>`);
-            });
-            $serviceSelect.trigger('change.select2');
-        })
     });
 
     {% for type, messages in app.flashes %}

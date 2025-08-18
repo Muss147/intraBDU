@@ -130,11 +130,11 @@
 						<table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_trash_table">
 							<thead>
 								<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-									<th class="min-w-250px">{{type|capitalize}}</th>
-									{% if parent %}<th class="min-w-125px">{{parent.type|capitalize}}</th>{% endif %}
-									<th class="min-w-125px">Éléments</th>
+									<th class="min-w-300px">{{type|capitalize}}</th>
+									{% if parent %}<th class="max-w-28">{{parent.type|capitalize}}</th>{% endif %}
+									<th class="min-w-100px">Éléments</th>
 									<th class="min-w-125px">Date</th>
-									<th class="text-end min-w-200px">Actions</th>
+									<th class="text-end min-w-250px">Actions</th>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
@@ -146,7 +146,7 @@
 										{% else %}<span class="text-gray-800 fs-5">{{ item.libelle }}</span>{% endif %}
 									</td>
 									{% if parent %}
-									<td>
+									<td class="max-w-28">
 										<div class="badge badge-light-{{random(['success', 'danger', 'primary', 'info', 'warning'])}}">{{ item.parent.libelle }}</div>
 									</td>
 									{% endif %}

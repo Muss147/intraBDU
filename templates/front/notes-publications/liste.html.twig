@@ -13,7 +13,7 @@
 
         <div class="grid md:grid-cols-3 gap-4 md:gap-x-5 md:gap-y-8">
             {% for note in notes %}
-            <div class="flex flex-col p-6 bg-blue-100 border border-gray-300 rounded-sm shadow-sm">
+            <div id="note_{{note.id}}" class="flex flex-col p-6 bg-blue-100 border border-gray-300 rounded-sm shadow-sm">
                 <a href="javascript:;" onclick="showModal({{ note.id }})" data-modal-toggle="show-modal">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{note.titre}}</h5>
                 </a>
@@ -111,10 +111,10 @@
 
 {% block javascripts %}
 <script type="text/javascript">
-document.addEventListener('turbo:load', function () {
     const notes = {{ notes|map(p => {
         id: p.id,
         titre: p.titre,
+        slug: p.slug,
         description: p.description|raw,
         date: p.createdAt|date('d M Y'),
     })|json_encode|raw }};
@@ -127,6 +127,45 @@ document.addEventListener('turbo:load', function () {
         document.querySelector('#note_desc').textContent = note.description;
         document.querySelector('#note_date').textContent = note.date;
     };
-})
+
+    // À placer après avoir inclus flowbite.min.js (ou sinon on écoute 'load')
+    (function () {
+        function openModalFromHash() {
+            const hash = window.location.hash;
+            if (!hash || !hash.startsWith('#')) return;
+
+            const slug = decodeURIComponent(hash.slice(1));
+            console.log(slug);
+
+            // -> Si tu as la variable JS 'notes' côté client :
+            const note = (notes || []).find(n => n.slug === slug);
+            if (!note) return;
+            console.log(note);
+
+            // On cible le bon bouton (tu as déjà la classe 'open-note-btn')
+            const btn = document.querySelector(`#note_${note.id} .open-note-btn`);
+            if (!btn) return;
+
+            // Important : initialiser Flowbite si dispo (utile si contenu dynamique)
+            if (typeof window.initFlowbite === 'function') {
+            window.initFlowbite();
+            }
+
+            // Simuler un "vrai" clic utilisateur
+            const evt = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+            btn.dispatchEvent(evt);
+        }
+
+        // Si Flowbite et le DOM sont déjà prêts, petit micro-délai puis clic
+        if (document.readyState === 'complete') {
+            setTimeout(openModalFromHash, 0);
+        } else {
+            // Attendre que TOUT soit chargé (DOM + scripts Flowbite)
+            window.addEventListener('load', () => setTimeout(openModalFromHash, 0), { once: true });
+        }
+    })();
+
+    document.addEventListener('turbo:load', function () {
+    })
 </script>
 {% endblock %}

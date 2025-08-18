@@ -3,14 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Files;
-use App\Service\FileUploader;
 use App\Entity\Votes;
 use App\Entity\Agents;
 use App\Entity\Alertes;
 use App\Form\VotesForm;
 use App\Entity\VoteNote;
 use App\Form\AlertesForm;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use App\Entity\Actualites;
+use App\Service\FileUploader;
 use Symfony\Component\Mime\Email;
 use App\Repository\FilesRepository;
 use App\Repository\AgentsRepository;
@@ -26,6 +26,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ClassementMensuelRepository;
 use App\Repository\NotesPublicationsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 final class FrontController extends AbstractController
 {
@@ -379,8 +380,16 @@ final class FrontController extends AbstractController
             6                                       // éléments par page
         );
 
-        return $this->render('front/notes-publications/actualites.html.twig', [
+        return $this->render('front/actualites/liste.html.twig', [
             'actualites' => $pagination,
+        ]);
+    }
+
+    #[Route('/actualites/{slug}', name: 'actualite.details')]
+    public function detailsActualite(Request $request, $slug, ActualitesRepository $actualitesRepository): Response
+    {
+        return $this->render('front/actualites/details.html.twig', [
+            'actu' => $actualitesRepository->findOneBySlug($slug),
         ]);
     }
 

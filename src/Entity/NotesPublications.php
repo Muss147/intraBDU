@@ -6,7 +6,11 @@ use App\Mapping\EntityBase;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use App\Repository\NotesPublicationsRepository;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[UniqueEntity('slug', message: 'Ce slug est déjà utilisé.')]
 #[ORM\Entity(repositoryClass: NotesPublicationsRepository::class)]
 class NotesPublications extends EntityBase
 {
@@ -17,6 +21,10 @@ class NotesPublications extends EntityBase
 
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
+
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
+    private ?string $slug = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $resume = null;
@@ -47,6 +55,29 @@ class NotesPublications extends EntityBase
         $this->titre = $titre;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function generateSlug(): void
+    {
+        if ($this->titre) {
+            $slugger = new AsciiSlugger('fr'); // Support du français
+            $slug = $slugger->slug($this->titre)->lower();
+            $this->slug = $slug;
+        }
     }
 
     public function getResume(): ?string
