@@ -1,0 +1,25 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Organigramme" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <div class="w-full overflow-x-auto">
+            <img src="{{ asset('assets/media/bg/organigramme.png') }}" alt="Image" class="w-full h-auto max-w-full">
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+</script>
+{% endblock %}

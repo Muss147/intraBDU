@@ -1,0 +1,94 @@
+{% extends "layout.html.twig" %}
+
+{% block title "Transfert de Stock de "~ projet.nom %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack "></div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+
+				<!--begin::Navbar-->
+				{% include "projets/_details_navbar.html.twig" %}
+				<!--end::Navbar-->
+
+				<!--begin::Card-->
+				<div
+					class="card min-h-500px"> <!--begin::Card header-->
+					
+				</div>
+				<!--end::Card-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/projects/details/settings.js')}}"></script>
+
+    <script type="text/javascript">
+        
+        $(".kt_datepicker").flatpickr();
+        
+        // Format options
+        var optionFormat = function(item) {
+            if ( !item.id ) {
+                return item.text;
+            }
+
+            var span = document.createElement('span');
+            var imgUrl = item.element.getAttribute('data-kt-select2-user');
+            var template = '';
+
+            template += '<img src="' + imgUrl + '" class="border border-gray-200 rounded-circle h-20px me-2" alt="image"/>';
+            template += item.text;
+            span.innerHTML = template;
+            return $(span);
+        }
+
+        // Init Select2 --- more info: https://select2.org/
+        $('#projets_client').select2({
+            templateSelection: optionFormat,
+            templateResult: optionFormat
+        });
+
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+            Swal.fire({
+                html: `{{message|raw}}`,
+                icon: "{{type}}",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, compris !",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
+            {% endfor %}
+        {% endfor %}
+    </script>
+{% endblock %}

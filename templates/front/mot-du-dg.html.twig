@@ -1,0 +1,66 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Mot du DG" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">Mot du DG</h2>
+
+        <div class="md:py-10 grid md:grid-cols-4 gap-6 items-start">
+            <!-- Image -->
+            <div class="flex-shrink-0 md:col-span-1">
+                <img src="{{asset('assets/media/employees/dg.png')}}" alt="Directeur" class="w-full md:w-40 border border-gray-300">
+                <p class="mt-2 text-sm font-bold">M. Idrissa Wélé Diallo</p>
+                <p class="text-xs">Directeur Général de la BDU-CI</p>
+            </div>
+
+            <!-- Grande lettre "A" et titre -->
+            <div class="md:col-span-3 relative">
+                <div class="flex justify-end items-center py-4 md:py-16 mb-10 w-full md:max-w-lg h-full bg-contain bg-no-repeat" style="background-image: url('{{ asset('assets/media/icons/letter-A.png') }}')">
+                    <h2 class="text-4xl font-semibold italic md:ms-16">AKWABA à la Banque de l’Union - Côte d’Ivoire.</h2>
+                </div>
+
+                <!-- Contenu texte -->
+                <div class="md:columns-2 md:gap-24 text-justify leading-relaxed space-y-4">
+                    <!-- Texte -->
+                    <p>
+                    Cher (e) s Collègue (s),
+                    </p>
+                    <p>
+                    Nous vous exprimons nos chaleureuses félicitations d’avoir fait le choix de notre institution, la BDU-CI.
+                    </p>
+                    <p>
+                    Vous venez de rejoindre une équipe jeune, déterminée et engagée à apporter les réponses les plus innovantes et adaptées aux besoins de nos clients.
+                    </p>
+                    <p>
+                    Retenez que c’est la conjugaison de nos efforts, de nos compétences, de nos qualités individuels qui nous permettront de faire de la BDU-CI,
+                    <strong>une Banque de détail de référence, choisie par ses clients pour la qualité de ses produits et services.</strong>
+                    </p>
+                    <p>
+                    Et sur ces points, nous voudrions compter sur votre contribution, non seulement sur la position qui vous est confiée, mais à tous les niveaux où vous vous sentirez en mesure d’exprimer vos talents.
+                    </p>
+                    <p>
+                    Pour notre part, nous prenons l’engagement de vous accompagner dans vos projets professionnels et personnels, pour votre épanouissement au sein de notre maison commune.
+                    </p>
+                    <p class="font-bold">
+                    Nous vous disons AKWABA à la Banque De l’Union Côte - d’Ivoire.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+</script>
+{% endblock %}

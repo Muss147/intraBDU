@@ -1,0 +1,412 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title 'Chartes graphiques' %}
+
+{% block stylesheets %}
+<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+.badge {
+	white-space: collapse;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Chartes graphiques
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Pages builder
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Chartes graphiques
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div
+					class="d-flex align-items-center gap-2 gap-lg-3">
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+
+				<!--begin::Card-->
+				<div
+					class="card card-flush ">
+					<!--begin::Card header-->
+					<div
+						class="card-header mt-6">
+						<!--begin::Card title-->
+						<div
+							class="card-title">
+							<!--begin::Search-->
+							<div class="d-flex align-items-center position-relative my-1 me-5">
+								<i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<input type="text" data-kt-params-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Rechercher une charte"/>
+							</div>
+							<!--end::Search-->
+						</div>
+						<!--end::Card title-->
+
+						<!--begin::Card toolbar-->
+						<div
+							class="card-toolbar">
+							<!--begin::Button-->
+							<button type="submit" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_param">
+								<i class="ki-duotone ki-plus-square fs-3">
+									<span class="path1"></span>
+									<span class="path2"></span>
+									<span class="path3"></span>
+								</i>
+								Ajouter une charte
+							</button>
+							<!--end::Button-->
+						</div>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body pt-0">
+						<!--begin::Table-->
+						<table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_params_table">
+							<thead>
+								<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-300px">Charte</th>
+									<th></th>
+									<th class="min-w-100px">Taille</th>
+									<th class="min-w-125px">Date</th>
+									<th class="text-end min-w-250px">Actions</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+                                {% for item in chartes %}
+								<tr>
+									<td>
+										<div data-kt-params-table-filter="product_name">
+											<a href="#" class="text-gray-800 text-hover-primary fs-5" data-bs-toggle="modal" data-bs-target="#kt_modal_edit_param" data-bs-ident="{{item.id}}">{{ item.alt }}</a>
+										</div>
+									</td>
+									<td></td>
+									<td>{{ item.size }}</td>
+									<td>{{ item.createdAt|time_ago }}</td>
+									<td class="text-end">
+										<a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+											Actions
+											<i class="ki-duotone ki-down fs-5 ms-1"></i>
+										</a>
+										<!--begin::Menu-->
+										<div
+											class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+											<!--begin::Menu item-->
+											<div class="menu-item px-3">
+												<a href="{{ item.filename ? asset(item.filename) : '#'}}" target="_blank" class="menu-link px-3">
+													Voir
+												</a>
+											</div>
+											<div class="menu-item px-3">
+												<a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_edit_param" data-bs-ident="{{item.id}}">
+													Modifier
+												</a>
+											</div>
+											<!--end::Menu item-->
+											<!--begin::Menu item-->
+											<form class="menu-item px-3" method="post" action="{{ path('charte_delete', {'charte': item.id}) }}">
+												<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+												<a href="#" class="menu-link px-3" data-kt-params-table-filter="delete_row">
+													Supprimer
+												</a>
+											</form>
+											<!--end::Menu item-->
+										</div>
+										<!--end::Menu-->
+									</td>
+								</tr>
+                                {% endfor %}
+							</tbody>
+						</table>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Card-->
+
+				<!--begin::Modals-->
+				<!--begin::Modal - Add permissions-->
+				<div
+					class="modal fade" id="kt_modal_add_param" tabindex="-1" aria-hidden="true"> <!--begin::Modal dialog-->
+					<div
+						class="modal-dialog modal-dialog-centered mw-650px">
+						<!--begin::Modal content-->
+						<div
+							class="modal-content">
+							<!--begin::Modal header-->
+							<div
+								class="modal-header">
+								<!--begin::Modal title-->
+								<h2 class="fw-bold">Ajout de charte</h2>
+								<!--end::Modal title-->
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-permissions-modal-action="close">
+									<i class="ki-duotone ki-cross fs-1">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</div>
+								<!--end::Close-->
+							</div>
+							<!--end::Modal header-->
+
+							<!--begin::Modal body-->
+							<div
+								class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+								<!--begin::Form-->
+                                {{form_start(form, {'attr': {'id': 'kt_modal_add_param_form', 'class': 'form'}})}}
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2 required">Fichier</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(form.filename, {'attr': {'class': 'form-control form-control-solid'}})}}
+										<!--end::Input-->
+									</div>
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2 required">Libellé</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(form.alt, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer un libellé'}})}}
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Actions-->
+									<div class="text-center pt-15">
+										<button type="reset" class="btn btn-light me-3" data-kt-permissions-modal-action="cancel">
+											Annuler
+										</button>
+
+										<button type="submit" class="btn btn-primary" data-kt-permissions-modal-action="submit">
+											<span class="indicator-label">
+												Soumettre
+											</span>
+											<span class="indicator-progress">
+												Veuillez patienter...
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+											</span>
+										</button>
+									</div>
+									<!--end::Actions-->
+
+									{# CSRF token explicitement affiché #}
+									{{ form_row(form._token) }}
+
+								{{form_end(form, { render_rest: false })}}
+								<!--end::Form-->
+							</div>
+							<!--end::Modal body-->
+						</div>
+						<!--end::Modal content-->
+					</div>
+					<!--end::Modal dialog-->
+				</div>
+				<!--end::Modal - Add permissions-->
+				<!--begin::Modal - Edit permissions-->
+				<div
+					class="modal fade" id="kt_modal_edit_param" tabindex="-1" aria-hidden="true"> <!--begin::Modal dialog-->
+					<div
+						class="modal-dialog modal-dialog-centered mw-650px">
+						<!--begin::Modal content-->
+						<div
+							class="modal-content">
+							<!--begin::Modal header-->
+							<div
+								class="modal-header">
+								<!--begin::Modal title-->
+								<h2 class="fw-bold">Modification de charte</h2>
+								<!--end::Modal title-->
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-permissions-modal-action="close">
+									<i class="ki-duotone ki-cross fs-1">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</div>
+								<!--end::Close-->
+							</div>
+							<!--end::Modal header-->
+
+							<!--begin::Modal body-->
+							<div
+								class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+								<!--begin::Form-->
+                                <form id="kt_modal_edit_param_form" class="form" method="POST" enctype="multipart/form-data">
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2 required">Fichier</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        <input type="hidden" name="fileid">
+                                        <input type="file" name="filename" class="form-control form-control-solid">
+										<!--end::Input-->
+									</div>
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2 required">Libellé</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        <input type="text" name="filealt" class="form-control form-control-solid" placeholder="Entrer un libellé">
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Actions-->
+									<div class="text-center pt-15">
+										<button type="reset" class="btn btn-light me-3" data-kt-permissions-modal-action="cancel">
+											Annuler
+										</button>
+
+										<button type="submit" class="btn btn-primary" data-kt-permissions-modal-action="submit">
+											<span class="indicator-label">
+												Soumettre
+											</span>
+											<span class="indicator-progress">
+												Veuillez patienter...
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+											</span>
+										</button>
+									</div>
+									<!--end::Actions-->
+								</form>
+								<!--end::Form-->
+							</div>
+							<!--end::Modal body-->
+						</div>
+						<!--end::Modal content-->
+					</div>
+					<!--end::Modal dialog-->
+				</div>
+				<!--end::Modal - Edit permissions-->
+				<!--end::Modals-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+<script src="{{asset('assets/js/custom/apps/parametres/listing.js')}}"></script>
+{# <script src="{{asset('assets/js/custom/apps/user-management/trash.js')}}"></script> #}
+
+<script type="text/javascript">
+	const chartes = {{ chartes|map(m => {
+		id: m.id,
+		alt: m.alt,
+		filename: m.filename,
+	})|json_encode|raw }};
+
+	const editModal = document.getElementById('kt_modal_edit_param');
+	editModal.addEventListener('show.bs.modal', event => {
+		const paramId = event.relatedTarget.attributes['data-bs-ident'].value;
+		const charte = chartes.find(c => c.id == paramId);
+		if (!charte) return;
+
+		editModal.querySelector('input[name="fileid"]').value = charte.id;
+		editModal.querySelector('input[name="filealt"]').value = charte.alt;
+        editModal.querySelector('form').action = `/espace-admin/chartes-graphiques/edit/${charte.id}/`;
+	});
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+        Swal.fire({
+            html: `{{message|raw}}`,
+            icon: "{{type}}",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, compris !",
+            customClass: {
+                confirmButton: "btn btn-primary"
+            }
+        });
+        {% endfor %}
+    {% endfor %}
+</script>
+{% endblock %}

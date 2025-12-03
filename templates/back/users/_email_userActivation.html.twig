@@ -1,0 +1,197 @@
+<!--begin::Body-->
+<div class="scroll-y flex-column-fluid px-10 py-10"
+    data-kt-scroll="true" 
+    data-kt-scroll-activate="true" 
+    data-kt-scroll-height="auto" 
+    data-kt-scroll-dependencies="#kt_app_header_nav"  
+    data-kt-scroll-offset="5px" 
+    data-kt-scroll-save-state="true" 
+
+    style="background-color:#D5D9E2; --kt-scrollbar-color: #d9d0cc; --kt-scrollbar-hover-color: #d9d0cc"
+>
+    <!--begin::Email template-->
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Inter, Helvetica, "sans-serif";
+        }
+
+        a {
+            color: rgba(23, 198, 83);
+            text-decoration: none;
+        }
+        a:hover {
+            color: #009ef7;
+        }
+        
+        .py-10 {
+            padding-top: 2.5rem !important;
+            padding-bottom: 2.5rem !important;
+        }
+        .px-10 {
+            padding-right: 2.5rem !important;
+            padding-left: 2.5rem !important;
+        }
+    </style>
+
+    <div id="#kt_app_body_content" style="background-color:#D5D9E2; font-family:Arial,Helvetica,sans-serif; line-height: 1.5; min-height: 100%; font-weight: normal; font-size: 15px; color: #2F3044; margin:0; padding:0; width:100%;">
+        <div style="background-color:#ffffff; padding: 45px 0 34px 0; border-radius: 24px; margin:40px auto; max-width: 600px;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" height="auto" style="border-collapse:collapse">
+                <tbody>
+                    <tr>
+                        <td
+                            align="center" valign="center" style="padding-bottom: 10px">
+
+                            <!--begin:Email content-->
+                            <div
+                                style="margin:0 15px 34px 15px">
+                                <!--begin:Logo-->
+                                <div style="margin-bottom: 10px">
+                                    <a href="" rel="noopener" target="_blank">
+                                        <img alt="Logo" src="{{ email_asset('assets/media/email/logo-1.svg') }}" style="height: 35px"/>
+                                    </a>
+                                </div>
+                                <!--end:Logo-->
+
+                                <!--begin:Media-->
+                                <div style="margin-bottom: 15px">
+                                    <img alt="IntranetBDU" src="{{ email_asset('assets/media/email/icon-positive-vote-1.svg') }}"/>
+                                </div>
+                                <!--end:Media-->
+
+                                <!--begin:Text-->
+                                <div style="font-size: 14px; font-weight: 500; margin-bottom: 27px; font-family:Arial,Helvetica,sans-serif;">
+                                    <p style="margin-bottom:9px; color:#181C32; font-size: 22px; font-weight:700">Bienvenue {{user.nomComplet}},</p>
+                                    <p style="margin-bottom:2px; color:#7E8299">Vous recevez cet e-mail car votre compte vient d'être créé sur notre plateforme.</p>
+                                    <p style="margin-bottom:2px; color:#7E8299">Pour accéder à votre espace et ainsi redefinir votre mot de passe,</p>
+                                    <p style="margin-bottom:2px; color:#7E8299">veuillez cliquer sur le bouton ci-dessous :</p>
+                                </div>
+                                <!--end:Text-->
+
+                                <!--begin:Action-->
+                                <a href='{{ resetLink }}' target="_blank" style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">
+                                    Activer mon compte
+                                </a>
+                                <!--begin:Action-->
+                            </div>
+                            <!--end:Email content-->
+                        </td>
+                    </tr>
+
+                    <tr style="display: flex; justify-content: center; margin:0 60px 35px 60px">
+                        <td align="start" valign="start" style="padding-bottom: 10px; width: 100%;">
+                            <p style="color:#181C32; font-size: 18px; font-weight: 600; margin-bottom:13px">Que faire ensuite</p>
+
+                            <!--begin::Wrapper-->
+                            <div style="background: #F9F9F9; border-radius: 12px; padding:35px 30px">
+                                <!--begin::Item-->
+                                <div style="display:flex">                    
+                                    <!--begin::Media-->
+                                    <div style="display: flex; justify-content: center; align-items: center; width:40px; height:40px; margin-right:13px">
+                                        <img alt="" src="{{ email_asset('assets/media/email/icon-polygon.svg') }}"/>  
+                                        <span style="position: absolute; color:#50CD89; font-size: 16px; font-weight: 600;">
+                                            1
+                                        </span>
+                                    </div>
+                                    <!--end::Media-->
+
+                                    <!--begin::Block-->
+                                    <div>
+                                        <!--begin::Content-->
+                                        <div>
+                                            <!--begin::Title-->
+                                            <a href="#" style="color:#181C32; font-size: 14px; font-weight: 600;font-family:Arial,Helvetica,sans-serif">Activation</a>
+                                            <!--end::Title-->
+
+                                            <!--begin::Desc-->
+                                            <p style="color:#5E6278; font-size: 13px; font-weight: 500; padding-top:3px; margin:0;font-family:Arial,Helvetica,sans-serif">Cliquer sur le bouton "Activer mon compte", ci-dessus, pour accéder à la plateforme d'activation</p>   
+                                            <!--end::Desc-->                                     
+                                        </div>
+                                        <!--end::Content-->  
+                                        <!--begin::Separator-->
+                                        <div class="separator separator-dashed" style="margin:17px 0 15px 0"></div>
+                                        <!--end::Separator-->                                    
+                                    </div>
+                                    <!--end::Block-->  
+                                </div>                                           
+                                <!--end::Item-->                                          
+                                <!--begin::Item-->
+                                <div style="display:flex">                    
+                                    <!--begin::Media-->
+                                    <div style="display: flex; justify-content: center; align-items: center; width:40px; height:40px; margin-right:13px">
+                                        <img alt="" src="{{ email_asset('assets/media/email/icon-polygon.svg') }}"/>  
+                                        <span style="position: absolute; color:#50CD89; font-size: 16px; font-weight: 600;">
+                                            2
+                                        </span>
+                                    </div>
+                                    <!--end::Media-->                   
+
+                                    <!--begin::Block-->
+                                    <div>
+                                        <!--begin::Content-->
+                                        <div>
+                                            <!--begin::Title-->
+                                            <a href="#" style="color:#181C32; font-size: 14px; font-weight: 600;font-family:Arial,Helvetica,sans-serif">Mot de passe</a>
+                                            <!--end::Title-->
+
+                                            <!--begin::Desc-->
+                                            <p style="color:#5E6278; font-size: 13px; font-weight: 500; padding-top:3px; margin:0;font-family:Arial,Helvetica,sans-serif">Redefinir votre mot de passe et le confirmer en renseignant les zones appropriées. Veuillez à tenir compte des contraintes de validité</p>   
+                                            <!--end::Desc-->                                     
+                                        </div>
+                                        <!--end::Content-->  
+                                        <!--begin::Separator-->
+                                        <div class="separator separator-dashed" style="margin:17px 0 15px 0"></div>
+                                        <!--end::Separator-->
+                                    </div>
+                                    <!--end::Block-->  
+                                </div>                                           
+                                <!--end::Item-->
+                                <!--begin::Item-->
+                                <div style="display:flex">                    
+                                    <!--begin::Media-->
+                                    <div style="display: flex; justify-content: center; align-items: center; width:40px; height:40px; margin-right:13px">
+                                        <img alt="" src="{{ email_asset('assets/media/email/icon-polygon.svg') }}"/>  
+                                        <span style="position: absolute; color:#50CD89; font-size: 16px; font-weight: 600;">
+                                            3
+                                        </span>
+                                    </div>
+                                    <!--end::Media-->                   
+
+                                    <!--begin::Block-->
+                                    <div>
+                                        <!--begin::Content-->
+                                        <div>
+                                            <!--begin::Title-->
+                                            <a href="#" style="color:#181C32; font-size: 14px; font-weight: 600;font-family:Arial,Helvetica,sans-serif">Enjoy !</a>
+                                            <!--end::Title-->
+
+                                            <!--begin::Desc-->
+                                            <p style="color:#5E6278; font-size: 13px; font-weight: 500; padding-top:3px; margin:0;font-family:Arial,Helvetica,sans-serif">Une fois votre compte activé, n'hésitez pas à completer votre profil avec le maximum d'informations.</p>   
+                                            <!--end::Desc-->                                     
+                                        </div>
+                                        <!--end::Content-->  
+                                    </div>
+                                    <!--end::Block-->  
+                                </div>                                           
+                                <!--end::Item-->                                              
+                            </div> 
+                            <!--end::Wrapper-->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" valign="center" style="font-size: 13px; padding:0 15px; text-align:center; font-weight: 500; color: #A1A5B7;font-family:Arial,Helvetica,sans-serif">
+                            <p>
+                                © Copyright Intranet-BDU 
+                                <a href="https://intranet-bdu.local" rel="noopener" target="_blank" style="font-weight: 600;font-family:Arial,Helvetica,sans-serif"><small>By Aguima</small></a>.
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--end::Email template-->
+</div>

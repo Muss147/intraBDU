@@ -1,0 +1,31 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Charte graphique" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10 mb-12">
+    <!-- Section principale -->
+    <section class="">
+        <h2 class="text-[#2b62aa] font-semibold text-xl mb-6">Charte graphique</h2>
+      
+        <div class="bg-blue-100 p-10 md:py-15 rounded-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for charte in chartes %}            
+            <a href="{{charte.filename ? asset(charte.filename) : '#'}}" target="_blank" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+                <img src="{{asset('assets/media/icons/politique.png')}}" alt="Politiques" class="w-12 h-12" />
+                <span class="font-semibold">{{charte.alt}}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+</script>
+{% endblock %}

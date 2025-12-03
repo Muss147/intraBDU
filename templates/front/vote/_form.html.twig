@@ -1,0 +1,40 @@
+                                
+                            <turbo-frame id="vote_form_frame">
+                                {{ form_start(form, {'attr': {'data-turbo-frame': 'vote_form_frame'}}) }}
+                                    {{ form_widget(form.agent) }}
+                                    <label for="first_name" class="block mb-3 text-gray-900">Critères de vote</label>
+                                    {% for noteField in form.notes %}
+                                        {% set critereLabel = noteField.critere.vars.data.libelle %}
+                                        <div class="grid grid-cols-1 md:grid-cols-5 justify-between items-center gap-2 mb-2">
+                                            <label class="col-span-2 text-sm font-medium text-[#2b62aa]">{{ critereLabel }}</label>
+                                            
+                                            <div class="col-span-3 w-full flex gap-4">
+                                                <div class="flex-1">
+                                                    {{ form_widget(noteField.note, {
+                                                        'attr': {
+                                                            'data-target': 'note_display_' ~ loop.index
+                                                        }
+                                                    }) }}
+                                                </div>
+
+                                                <span id="note_display_{{ loop.index }}" class="flex-none text-sm font-medium text-gray-500">3 pts</span>
+
+                                                {{ form_widget(noteField.critere) }} {# champ masqué #}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                    <div>
+                                        <label for="first_name" class="block mb-2 text-gray-900">Votant</label>
+                                        {{ form_widget(form.votant, {'attr': {
+                                            'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:border-blue-500 block w-full p-2.5',
+                                            'placeholder': 'Saisissez votre matricule...'
+                                        }}) }}
+                                        <div id="alert-container" class="hidden" role="alert"></div>
+                                    </div>
+                                    
+                                    <button type="submit" class="inline-flex items-center px-4 py-2 font-medium text-white bg-[#2b62aa] rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mt-6">
+                                        Soumettre le vote
+                                    </button>
+                                {{ form_end(form) }}
+                            </turbo-frame>

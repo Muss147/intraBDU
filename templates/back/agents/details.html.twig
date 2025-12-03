@@ -1,0 +1,704 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title agent.nom ~' '~ agent.prenoms %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+	<style></style>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						{{agent.nom ~' '~ agent.prenoms}}
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							App
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Détails de l'agent
+						</li>
+						<!--end::Item-->
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div class="d-flex align-items-center gap-2 gap-lg-3"></div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Layout-->
+				<div
+					class="d-flex flex-column flex-xl-row">
+					<!--begin::Sidebar-->
+					<div
+						class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
+
+						<!--begin::Card-->
+						<div
+							class="card mb-5 mb-xl-8">
+							<!--begin::Card body-->
+							<div
+								class="card-body pt-15">
+								<!--begin::Summary-->
+								<div
+									class="d-flex flex-center flex-column mb-5">
+									<!--begin::Avatar-->
+									<div class="symbol symbol-150px symbol-circle mb-7">
+										<img src="{{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}}" alt="image"/>
+									</div>
+									<!--end::Avatar-->
+
+									<!--begin::Name-->
+									<a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">
+										{{agent.nom ~' '~ agent.prenoms}}
+									</a>
+									<!--end::Name-->
+
+									<!--begin::Email-->
+									<a href="#" class="fs-5 fw-semibold text-muted text-hover-primary mb-6">
+										{{agent.email}}
+									</a>
+									<!--end::Email-->
+								</div>
+								<!--end::Summary-->
+
+								<!--begin::Details toggle-->
+								<div class="d-flex flex-stack fs-4 py-3">
+									<div class="fw-bold">
+										Details
+									</div>
+
+									<!--begin::Badge-->
+									<div class="badge badge-light-info d-inline">{{agent.fonction}}</div>
+									<!--begin::Badge-->
+								</div>
+								<!--end::Details toggle-->
+
+								<div class="separator separator-dashed my-3"></div>
+
+								<!--begin::Details content-->
+								<div
+									class="pb-5 fs-6">
+									<!--begin::Details item-->
+									<div class="fw-bold mt-5">Matricule</div>
+									<div class="text-gray-600">{{agent.matricule}}</div>
+									<!--begin::Details item-->
+									<!--begin::Details item-->
+									<div class="fw-bold mt-5">Anniversaire</div>
+									<div class="text-gray-600">
+										<a href="#" class="text-gray-600 text-hover-primary">{{agent.anniversaire|date('l, d M Y')}}</a>
+									</div>
+									<!--begin::Details item-->
+									<!--begin::Details item-->
+									<div class="fw-bold mt-5">Téléphone</div>
+									<div class="text-gray-600">
+										<a href="#" class="text-gray-600 text-hover-primary">{{agent.telephone}}</a>
+									</div>
+									<!--begin::Details item-->
+									<!--begin::Details item-->
+									<div class="fw-bold mt-5">Numéro IP</div>
+									<div class="text-gray-600">
+										<a href="#" class="text-gray-600 text-hover-primary">{{agent.fixe}}</a>
+									</div>
+									<!--begin::Details item-->
+									<!--begin::Details item-->
+									<div class="fw-bold mt-5">Adresse</div>
+									<div class="text-gray-600">
+                                        {{agent.adresse}}
+                                    </div>
+									<!--begin::Details item-->
+									<!--begin::Details item-->
+									<div class="fw-bold mt-5">Service</div>
+									<div class="text-gray-600">{{agent.service ? agent.service.libelle : null}}</div>
+									<!--begin::Details item-->
+									<!--begin::Details item-->
+									<div class="fw-bold mt-5">Direction</div>
+									<div class="text-gray-600">{{agent.service ? agent.service.parent.libelle}}</div>
+									<!--begin::Details item-->
+									<!--begin::Details item-->
+									<div class="fw-bold mt-5">Bureau / Lieu de travail</div>
+									<div class="text-gray-600">{{agent.bureau.libelle ?? null}}</div>
+									<!--begin::Details item-->
+								</div>
+								<!--end::Details content-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Card-->
+					</div>
+					<!--end::Sidebar-->
+
+					<!--begin::Content-->
+					<div
+						class="flex-lg-row-fluid ms-lg-15">
+						<!--begin:::Tabs-->
+						<ul
+							class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8">
+							<!--begin:::Tab item-->
+							<li class="nav-item">
+								<a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_customer_overview">Aperçu</a>
+							</li>
+							<!--end:::Tab item-->
+
+							<!--begin:::Tab item-->
+							<li class="nav-item">
+								<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_customer_general">Modification</a>
+							</li>
+							<!--end:::Tab item-->
+						</ul>
+						<!--end:::Tabs-->
+
+						<!--begin:::Tab content-->
+						<div
+							class="tab-content" id="myTabContent">
+							<!--begin:::Tab pane-->
+							<div class="tab-pane fade show active" id="kt_ecommerce_customer_overview" role="tabpanel">
+								<div class="row row-cols-1 row-cols-md-2 mb-6 mb-xl-9">
+									<div
+										class="col">
+										<!--begin::Card-->
+										<div
+											class="card pt-4 h-md-100 mb-6 mb-md-0">
+											<!--begin::Card header-->
+											<div
+												class="card-header border-0">
+												<!--begin::Card title-->
+												<div class="card-title">
+													<h2 class="fw-bold">Points de vote</h2>
+												</div>
+												<!--end::Card title-->
+											</div>
+											<!--end::Card header-->
+
+											<!--begin::Card body-->
+											<div class="card-body pt-0">
+												<div class="fw-bold fs-2">
+													<div class="d-flex">
+														<i class="ki-duotone ki-heart text-info fs-2x">
+															<span class="path1"></span>
+															<span class="path2"></span>
+														</i>
+														<div class="ms-2">
+															{{agent.points}}
+															<span class="text-muted fs-4 fw-semibold">Points obtenus</span>
+														</div>
+													</div>
+													<div class="fs-7 fw-normal text-muted">Total de points obtenus durant le mois en cours.</div>
+												</div>
+											</div>
+											<!--end::Card body-->
+										</div>
+										<!--end::Card-->
+									</div>
+
+									<div
+										class="col">
+										<!--begin::Reward Tier-->
+										<a
+											href="#" class="card bg-info hoverable h-md-100">
+											<!--begin::Body-->
+											<div class="card-body">
+												<i class="ki-duotone ki-award text-white fs-3x ms-n1">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+												</i>
+												<div class="text-white fw-bold fs-2 mt-5">
+													Étoile du mois
+												</div>
+
+												<div class="fw-semibold text-white">
+													{{ rang }}{{ rang == 1 ? 'er' : 'e' }} du classement
+												</div>
+											</div>
+											<!--end::Body-->
+										</a>
+										<!--end::Reward Tier-->
+									</div>
+								</div>
+
+
+								<!--begin::Card-->
+								<div
+									class="card pt-4 mb-6 mb-xl-9">
+									<!--begin::Card header-->
+									<div
+										class="card-header border-0">
+										<!--begin::Card title-->
+										<div class="card-title">
+											<h2>Historique des participations</h2>
+										</div>
+										<!--end::Card title-->
+									</div>
+									<!--end::Card header-->
+
+									<!--begin::Card body-->
+									<div
+										class="card-body pt-0 pb-5">
+										<!--begin::Table-->
+										<table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
+											<thead class="border-bottom border-gray-200 fs-7 fw-bold">
+												<tr class="text-start text-muted text-uppercase gs-0">
+													<th class="min-w-100px">Rang</th>
+													<th>Points</th>
+													<th class="min-w-100px">Moyenne</th>
+													<th class="min-w-100px">Date</th>
+												</tr>
+											</thead>
+											<tbody class="fs-6 fw-semibold text-gray-600">
+												{% for row in historique %}
+												<tr>
+													<td>{{ row.rang }}e</td>
+													<td>{{ row.points }} points</td>
+													<td>{{ row.moyenne }}</td>
+													<td>{{ row.date|date_fr('d F Y') }}</td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+										<!--end::Table-->
+									</div>
+									<!--end::Card body-->
+								</div>
+								<!--end::Card-->
+							</div>
+							<!--end:::Tab pane-->
+
+							<!--begin:::Tab pane-->
+							<div
+								class="tab-pane fade" id="kt_ecommerce_customer_general" role="tabpanel">
+                                <!--begin::Form-->
+                                {{form_start(form, {'attr': {'id': 'kt_ecommerce_customer_profile', 'class': 'form'}})}}
+                                    <!--begin::Card-->
+                                    <div
+                                        class="card pt-4 mb-6 mb-xl-9">
+                                        <!--begin::Card header-->
+                                        <div
+                                            class="card-header border-0">
+                                            <!--begin::Card title-->
+                                            <div class="card-title">
+                                                <h2>Profil</h2>
+                                            </div>
+                                            <!--end::Card title-->
+                                        </div>
+                                        <!--end::Card header-->
+
+                                        <!--begin::Card body-->
+                                        <div
+                                            class="card-body pt-0 pb-5">
+											<!--begin::Input group-->
+											<div
+												class="mb-7">
+												<!--begin::Label-->
+												<label class="fs-6 fw-semibold mb-2">
+													<span>Photo</span>
+
+													<span class="ms-1" data-bs-toggle="tooltip" title="Allowed file types: png, jpg, jpeg.">
+														<i class="ki-duotone ki-information fs-7">
+															<span class="path1"></span>
+															<span class="path2"></span>
+															<span class="path3"></span>
+														</i>
+													</span>
+												</label>
+												<!--end::Label-->
+
+												<!--begin::Image input wrapper-->
+												<div
+													class="mt-1">
+													<!--begin::Image input placeholder-->
+													<style>
+														.image-input-placeholder {
+															background-image: url({{asset('assets/media/svg/avatars/blank.svg')}});
+														}
+
+														[data-bs-theme="dark"] .image-input-placeholder {
+															background-image: url({{asset('assets/media/svg/avatars/blank-dark.svg')}});
+														}
+													</style>
+													<!--end::Image input placeholder-->
+
+													<!--begin::Image input-->
+													<div
+														class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
+														<!--begin::Preview existing avatar-->
+														<div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}})"></div>
+														<!--end::Preview existing avatar-->
+
+														<!--begin::Edit-->
+														<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Changer la photo">
+															<i class="ki-duotone ki-pencil fs-7">
+																<span class="path1"></span>
+																<span class="path2"></span>
+															</i>
+															<!--begin::Inputs-->
+															{{ form_row(form.photo) }}
+															<input
+															type="hidden" name="avatar_remove"/>
+														<!--end::Inputs-->
+														</label>
+														<!--end::Edit-->
+
+														<!--begin::Cancel-->
+														<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Annuler">
+															<i class="ki-duotone ki-cross fs-2">
+																<span class="path1"></span>
+																<span class="path2"></span>
+															</i>
+														</span>
+														<!--end::Cancel-->
+
+														<!--begin::Remove-->
+														<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Supprimer la photo">
+															<i class="ki-duotone ki-cross fs-2">
+																<span class="path1"></span>
+																<span class="path2"></span>
+															</i>
+														</span>
+														<!--end::Remove-->
+													</div>
+													<!--end::Image input-->
+												</div>
+												<!--end::Image input wrapper-->
+											</div>
+											<!--end::Input group-->
+
+											<!--begin::Input group-->
+											<div class="fv-row mb-7">
+												<!--begin::Label-->
+												<label class="fs-6 fw-semibold mb-2">Matricule</label>
+												<!--end::Label-->
+
+												<!--begin::Input-->
+												{{form_widget(form.matricule, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Numéro matricule'}})}}
+												<!--end::Input-->
+											</div>
+											<!--end::Input group-->
+
+											<!--begin::Input group-->
+											<div class="row fv-row mb-7">
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="required fs-6 fw-semibold mb-2">Nom</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.nom, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Nom de l\'agent'}})}}
+													<!--end::Input-->
+												</div>
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="fs-6 fw-semibold mb-2">Prénoms</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.prenoms, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Prénoms de l\'agent'}})}}
+													<!--end::Input-->
+												</div>
+											</div>
+											<!--end::Input group-->
+
+											<!--begin::Input group-->
+											<div class="row fv-row mb-7">
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="required fs-6 fw-semibold mb-2">Civilité</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.civilite, {'attr': {'class': 'form-select form-select-solid fw-bold', 'data-control': 'select2', 'aria-label': 'Sélectionner une civilité', 'data-placeholder': 'Sélectionner une civilité...', 'data-hide-search': 'true'}})}}
+													<!--end::Input-->
+												</div>
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="required fs-6 fw-semibold mb-2">Date d'anniversaire</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.anniversaire, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Sélectionner une date'}})}}
+													<!--end::Input-->
+												</div>
+											</div>
+											<!--end::Input group-->
+
+											<div class="row fv-row mb-7">
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="fs-6 fw-semibold mb-2">
+														<span class="required">Email</span>
+
+														
+														<span class="ms-1"  data-bs-toggle="tooltip" title="L'adresse Email doit être active" >
+															<i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+														</span>
+													</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.email, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Adresse email de service'}})}}
+													<!--end::Input-->
+												</div>
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="fs-6 fw-semibold mb-2">Téléphone</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.telephone, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Téléphone de service'}})}}
+													<!--end::Input-->
+												</div>
+											</div>
+											<div class="row fv-row mb-7">
+												<div class="col-md-6 mb-5">
+													<!--begin::Label-->
+													<label class="fs-6 fw-semibold mb-2 required">Numéro IP</label>
+													<!--end::Label-->
+
+													<!--begin::Input-->
+													{{form_widget(form.fixe, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer votre Numéro IP'}})}}
+													<!--end::Input-->
+												</div>
+											</div>
+											<!--end::Input group-->
+
+                                        </div>
+                                        <!--end::Card body-->
+                                    </div>
+                                    <!--end::Card-->
+
+                                    <!--begin::Card-->
+                                    <div
+                                        class="card pt-4 mb-6 mb-xl-9">
+                                        <!--begin::Card header-->
+                                        <div
+                                            class="card-header border-0">
+                                            <!--begin::Card title-->
+                                            <div class="card-title">
+                                                <h2>Informations de fonction</h2>
+                                            </div>
+                                            <!--end::Card title-->
+                                        </div>
+                                        <!--end::Card header-->
+
+                                        <!--begin::Card body-->
+                                        <div id="kt_ecommerce_customer_addresses" class="card-body pt-0 pb-5">
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-7">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 required fw-semibold mb-2">Fonction</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.fonction, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Fonction occupée'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <div class="d-flex flex-column mb-7 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 fw-semibold mb-2">
+                                                    <span class="required">Bureau / Lieu de travail</span>
+
+                                                    
+                                                    <span class="ms-1"  data-bs-toggle="tooltip" title="Agence de fonction" >
+                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i></span>
+                                                </label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.bureau, {'attr': {'class': 'form-select form-select-solid fw-bold', 'data-control': 'select2', 'data-hide-search': 'true', 'aria-label': 'Selectionner votre lieu de travail', 'data-placeholder': 'Selectionner votre lieu de travail'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="row g-9 mb-7">
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <!--begin::Label-->
+                                                    <label class="required fs-6 fw-semibold mb-2">Direction</label>
+                                                    <!--end::Label-->
+
+                                                    <!--begin::Input-->
+                                                    <select name="direction" aria-label="Sélectionner une direction" data-control="select2" data-placeholder="Sélectionner une direction..." data-hide-search="true" class="form-select form-select-solid fw-bold">
+                                                        <option value="">Sélectionner une direction...</option>
+                                                        {% for direction in directions %}
+                                                        <option value="{{direction.id}}" >{{direction.libelle}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <!--end::Input-->
+                                                </div>
+                                                <!--end::Col-->
+
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <!--begin::Label-->
+                                                    <label class="required fs-6 fw-semibold mb-2">Service</label>
+                                                    <!--end::Label-->
+
+                                                    <!--begin::Input-->
+                                                    {{form_widget(form.service, {'attr': {'class': 'form-select form-select-solid fw-bold', 'disabled': 'true', 'data-control': 'select2', 'data-hide-search': 'true', 'aria-label': 'Selectionner un service', 'data-placeholder': 'Selectionner un service'}})}}
+                                                    <!--end::Input-->
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <div
+                                                class="d-flex justify-content-end">
+                                                <!--begin::Button-->
+                                                <button type="submit" id="kt_ecommerce_customer_profile_submit" class="btn btn-light-primary">
+                                                    <span class="indicator-label">
+                                                        Sauvegarder
+                                                    </span>
+                                                    <span class="indicator-progress">
+                                                        Veuillez patienter...
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                    </span>
+                                                </button>
+                                                <!--end::Button-->
+                                            </div>
+                                        </div>
+                                        <!--end::Card body-->
+                                    </div>
+                                    <!--end::Card-->
+                                {{form_end(form)}}
+                                <!--end::Form-->
+							</div>
+							<!--end:::Tab pane-->
+						</div>
+						<!--end:::Tab content-->
+					</div>
+					<!--end::Content-->
+				</div>
+				<!--end::Layout-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+	<script src="{{asset('assets/js/custom/apps/ecommerce/customers/details/update-profile.js')}}"></script>
+	<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        const hash = window.location.hash;
+
+        if (hash === "#modification") {
+            const tabTrigger = document.querySelector('a[href="#kt_ecommerce_customer_general"]');
+            if (tabTrigger) {
+                const tab = new bootstrap.Tab(tabTrigger);
+                tab.show();
+            }
+        }
+
+        const today = new Date();
+        const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+        const minDate = new Date(today.getFullYear() - 80, today.getMonth(), today.getDate());
+        $("#agents_form_anniversaire").flatpickr({
+            maxDate: maxDate,
+            minDate: minDate,
+        });
+
+        const directions = {{ directions|map(d => {
+            id: d.id,
+            libelle: d.libelle,
+            parent: d.parent.id,
+        })|json_encode|raw }};
+
+        const services = {{ services|map(d => {
+            id: d.id,
+            libelle: d.libelle,
+            parent: d.parent.id,
+        })|json_encode|raw }};
+
+		$('select[name="direction"]').change((e) => {
+			const selectedValue = $(e.target).val();
+			const servicesFinded = services.filter(s => s.parent == selectedValue);
+
+			const $serviceSelect = $('#agents_form_service');
+
+			// Réinitialise et active le select service
+			$serviceSelect.empty().append('<option value="">Sélectionner un service</option>').prop('disabled', false);
+
+			// Ajoute les services trouvés
+			servicesFinded.forEach(serv => {
+				$serviceSelect.append(`<option value="${serv.id}">${serv.libelle}</option>`);
+			});
+			$serviceSelect.trigger('change.select2');
+		});
+
+    });
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            Swal.fire({
+                html: `{{message|raw}}`,
+                icon: "{{ type }}",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, compris !",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
+        {% endfor %}
+    {% endfor %}
+	</script>
+{% endblock %}

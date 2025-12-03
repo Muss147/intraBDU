@@ -1,0 +1,126 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title type %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">{{type}}</h2>
+
+        <div class="space-y-4">
+            <div class="rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {% for i, doc in documents %}
+                <div class="p-2 text-center">
+                    {% if not doc.source %}
+                    <button type="button" id="dropdownRightButton_{{i}}" data-dropdown-toggle="dropdownRight_{{i}}" data-dropdown-placement="right">
+                        <img src="{{asset('assets/media/icons/folder-green.png')}}" class="mx-auto w-32 h-w-32" alt="Dossier" />
+                    </button>
+                    {% else %}
+                    <a href="{{doc.source.filename}}" target="_blank">
+                        <img src="{{asset('assets/media/icons/folder-green.png')}}" class="mx-auto w-32 h-w-32" alt="Dossier" />
+                    </a>
+                    {% endif %}
+                    <p class="text-sm mt-2">{{doc.libelle}}</p>
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdownRight_{{i}}" class="text-start z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                        <div class="px-4 py-3 text-sm text-gray-900">
+                            <div class="font-medium truncate">{{doc.libelle}}</div>
+                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500">Veuillez sélectionner un sous élément :</p>
+                        </div>
+                        <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700" aria-labelledby="dropdownRightButton_{{i}}">
+                            {% for sousDoc in doc.children %}
+                                {% if sousDoc.source %}
+                                <li>
+                                    <a href="{{sousDoc.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousDoc.libelle}}</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <button id="doubleDropdownButton_{{i}}" data-dropdown-toggle="doubleDropdown_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        {{sousDoc.libelle}}
+                                        <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                                    </button>
+                                    <div id="doubleDropdown_{{i}}" class="z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                            <div class="font-medium truncate">{{sousDoc.libelle}}</div>
+                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner un sous élément :</p>
+                                        </div>
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_{{i}}">
+                                            {% for item in sousDoc.children %}
+                                            <li>
+                                                <a href="{{item.source.filename}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# --- PAGINATION --- #}
+        {% if documents.pageCount > 1 %}
+        <nav aria-label="Page navigation example" class="flex justify-center mt-8">
+            <ul class="inline-flex -space-x-px text-base h-10">
+                {% if documents.currentPageNumber > 1 %}
+                <li>
+                    <a href="{{ path('type_docs', { page: documents.currentPageNumber - 1, type: type }) }}"
+                        class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
+                        Précédent
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <span class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-300 bg-white border border-e-0 border-gray-200 rounded-s-lg cursor-not-allowed">
+                        Précédent
+                    </span>
+                </li>
+                {% endif %}
+
+                {% for page in 1..documents.pageCount %}
+                    <li class="{{ page > 2 and page < documents.pageCount - 1 ? 'hidden sm:block' : '' }}">
+                        <a href="{{ path('type_docs', { page: page, type: type }) }}"
+                        class="flex items-center justify-center px-4 h-10 leading-tight {{ page == documents.currentPageNumber ? 'text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700' }}">
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                {% if documents.currentPageNumber < documents.pageCount %}
+                <li>
+                    <a href="{{ path('type_docs', { page: documents.currentPageNumber + 1, type: type }) }}"
+                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
+                        Suivant
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <span class="flex items-center justify-center px-4 h-10 leading-tight text-gray-300 bg-white border border-gray-200 rounded-e-lg cursor-not-allowed">
+                        Suivant
+                    </span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  });
+</script>
+{% endblock %}

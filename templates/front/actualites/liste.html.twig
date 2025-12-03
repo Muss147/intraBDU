@@ -1,0 +1,102 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Actualités" %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style type="text/css">
+.modal-header::before {
+    content: '';
+    position: absolute;
+    size: 100%;
+    inset: 0;
+    background-color: #00000060;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">Actualités</h2>
+
+        <div class="grid md:grid-cols-3 gap-4 md:gap-x-5 md:gap-y-8">
+            {% for actu in actualites %}
+            <div class="flex flex-col bg-blue-100 border border-gray-300 rounded-sm shadow-sm">
+                <div class="">
+                    <img alt="" src="{{asset(actu.cover.filename)}}" class="w-full max-h-36 object-cover rounded-t-sm">
+                </div>
+                <div class="p-6">
+                    <a href="{{path('actualite.details', {slug: actu.slug})}}">
+                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">{{actu.titre|length >= 70 ? actu.titre|slice(0, 70) ~'...' : actu.titre}}</h5>
+                    </a>
+                    <p class="mb-4 text-xs font-normal text-gray-700">{{actu.createdAt|date('d M Y')}}</p>
+                </div>
+                <div class="mt-auto p-6">
+                    <p class="mb-3 font-normal text-gray-700">{{actu.description|slice(0, 90)}}{{actu.description|length > 90 ? "..." : ""}}</p>
+                    <a href="{{path('actualite.details', {slug: actu.slug})}}" class="open-note-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#6ca942] rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        Lire le communiqué
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {# --- PAGINATION --- #}
+        {% if actualites.pageCount > 1 %}
+        <nav aria-label="Page navigation example" class="flex justify-center mt-8">
+            <ul class="inline-flex -space-x-px text-base h-10">
+                {% if actualites.currentPageNumber > 1 %}
+                <li>
+                    <a href="{{ path('actualites', { page: actualites.currentPageNumber - 1 }) }}"
+                        class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
+                        Précédent
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <span class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-300 bg-white border border-e-0 border-gray-200 rounded-s-lg cursor-not-allowed">
+                        Précédent
+                    </span>
+                </li>
+                {% endif %}
+
+                {% for page in 1..actualites.pageCount %}
+                    <li class="{{ page > 2 and page < actualites.pageCount - 1 ? 'hidden sm:block' : '' }}">
+                        <a href="{{ path('actualites', { page: page }) }}"
+                        class="flex items-center justify-center px-4 h-10 leading-tight {{ page == actualites.currentPageNumber ? 'text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700' }}">
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                {% if actualites.currentPageNumber < actualites.pageCount %}
+                <li>
+                    <a href="{{ path('actualites', { page: actualites.currentPageNumber + 1 }) }}"
+                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
+                        Suivant
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <span class="flex items-center justify-center px-4 h-10 leading-tight text-gray-300 bg-white border border-gray-200 rounded-e-lg cursor-not-allowed">
+                        Suivant
+                    </span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+</script>
+{% endblock %}

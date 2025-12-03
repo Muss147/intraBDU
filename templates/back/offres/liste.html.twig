@@ -1,0 +1,272 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title "Liste des offres" %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Liste des offres
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							App
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Offres d'emploi
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div
+					class="d-flex align-items-center gap-2 gap-lg-3">
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Card-->
+				<div
+					class="card">
+					<!--begin::Card header-->
+					<div
+						class="card-header border-0 pt-6">
+						<!--begin::Card title-->
+						<div
+							class="card-title">
+							<!--begin::Search-->
+							<div class="d-flex align-items-center position-relative my-1">
+								<i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5"><span class="path1"></span><span class="path2"></span></i>
+								<input type="text" data-kt-offre-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Rechercher une offre"/>
+							</div>
+							<!--end::Search-->
+						</div>
+						<!--begin::Card title-->
+
+						<!--begin::Card toolbar-->
+						<div
+							class="card-toolbar">
+							<!--begin::Toolbar-->
+							<div
+								class="d-flex justify-content-end" data-kt-offre-table-toolbar="base">
+								<!--begin::Add offre-->
+								<a href="{{path('add_offre')}}" type="button" class="btn btn-primary">
+									<i class="ki-duotone ki-plus fs-2"></i>
+									Ajouter un utilisateur
+								</a>
+								<!--end::Add offre-->
+							</div>
+							<!--end::Toolbar-->
+
+							<!--begin::Group actions-->
+							<div class="d-flex justify-content-end align-items-center d-none" data-kt-offre-table-toolbar="selected">
+								<div class="fw-bold me-5">
+									<span class="me-2" data-kt-offre-table-select="selected_count"></span>
+									Sélectioné(s)
+								</div>
+
+								<button type="button" class="btn btn-danger" data-kt-offre-table-select="delete_selected" data-deleted-root="{{path('offres_selected_delete')}}">
+									Supprimer la sélection
+								</button>
+							</div>
+							<!--end::Group actions-->
+
+						</div>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body py-4">
+
+						<!--begin::Table-->
+						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_offres">
+							<thead>
+								<tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+									<th class="w-10px pe-2">
+										<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+											<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_offres .form-check-input" value="0"/>
+										</div>
+									</th>
+									<th class="min-w-250px">Offres</th>
+									<th class="min-w-125px">Candidatures</th>
+									<th class="max-w-100px">Date expiration</th>
+									<th class="max-w-100px">Statut</th>
+									<th class="min-w-125px">Date création</th>
+									<th class="text-end min-w-100px">Actions</th>
+								</tr>
+							</thead>
+							<tbody class="text-gray-600 fw-semibold">
+								{% for offre in offres %}
+									<tr>
+										<td>
+											<div class="form-check form-check-sm form-check-custom form-check-solid">
+												<input class="form-check-input" type="checkbox" value="{{offre.id}}"/>
+											</div>
+										</td>
+										<td
+											class="d-flex align-items-center">
+											<!--begin:: Avatar -->
+											<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+												<a href="{{ path('add_offre', {'offre': offre.id}) }}">
+													<div class="symbol-label">
+														<img src="{{asset('assets/media/logos/Logo-BDUCI-dark.png')}}" alt="{{offre.titre}}" class="w-100 object-fit-cover"/>
+													</div>
+												</a>
+											</div>
+											<!--end::Avatar-->
+											<!--begin::Offre details-->
+											<div class="d-flex flex-column">
+												<a href="{{ path('add_offre', {'offre': offre.id}) }}" class="text-gray-800 text-hover-primary mb-1">{{offre.titre}}</a>
+												<span>{{offre.metier.libelle}}</span>
+											</div>
+										</td>
+										<td>
+											<a href="{{ path('candidatures_offres', {'offre': offre.id}) }}" class="text-gray-800 text-hover-primary">
+												{{offre.postulants|length > 0 and offre.postulants|length < 10 ? '0' : null }}{{offre.postulants|length ~' postulant'}}{{offre.postulants|length > 1 ? 's' : null }}
+											</a>
+										</td>
+										<td>
+											{% if offre.dateExpiration %}
+												<div class="badge badge-light fw-bold">{{offre.dateExpiration|date('d m Y')}}</div>
+											{% endif %}
+										</td>
+										<td>
+											{% if offre.dateExpiration|date('U') >= "now"|date('U') %}
+												<div class="badge badge-light-success fw-bold">Actif</div>
+											{% else %}
+												<div class="badge badge-light-danger fw-bold">Expiré</div>
+											{% endif %}
+										</td>
+										<td>
+											{{ offre.createdAt ? offre.createdAt|time_ago : '' }}
+										</td>
+										<td class="text-end">
+											<a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+												Actions
+												<i class="ki-duotone ki-down fs-5 ms-1"></i>
+											</a>
+											<!--begin::Menu-->
+											<div
+												class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+												<!--begin::Menu item-->
+												<div class="menu-item px-3">
+													<a href="{{ path('candidatures_offres', {'offre': offre.id}) }}" class="menu-link px-3">
+														Candidatures
+													</a>
+												</div>
+												<!--end::Menu item-->
+
+												<!--begin::Menu item-->
+												<div class="menu-item px-3">
+													<a href="{{ path('add_offre', {'offre': offre.id}) }}" class="menu-link px-3">
+														Modifier
+													</a>
+												</div>
+												<!--end::Menu item-->
+
+												<!--begin::Menu item-->
+												<form class="menu-item px-3" method="post" action="{{ path('offre_delete', {'offre': offre.id}) }}">
+													<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ offre.id) }}">
+													<a href="#" class="menu-link px-3" data-kt-offres-table-filter="delete_row">
+														Supprimer
+													</a>
+												</form>
+												<!--end::Menu item-->
+											</div>
+											<!--end::Menu-->
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Card-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+	<script src="{{asset('assets/js/custom/apps/offres-emploi/table.js')}}"></script>
+
+	<script type="text/javascript">
+		{% for type, messages in app.flashes %}
+			{% for message in messages %}
+				Swal.fire({
+					html: `{{message|raw}}`,
+					icon: "{{ type }}",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, compris !",
+					customClass: {
+					confirmButton: "btn btn-primary"
+				}
+			});{% endfor %}
+		{% endfor %}
+	</script>
+{% endblock %}

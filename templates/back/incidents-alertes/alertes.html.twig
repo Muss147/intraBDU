@@ -1,0 +1,405 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title "Alertes signalées" %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+	<style></style>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Liste des alertes
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							App
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Alertes signalées
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div
+					class="d-flex align-items-center gap-2 gap-lg-3">
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Products-->
+				<div
+					class="card card-flush">
+					<!--begin::Card header-->
+					<div
+						class="card-header align-items-center py-5 gap-2 gap-md-5">
+						<!--begin::Card title-->
+						<div
+							class="card-title">
+							<!--begin::Search-->
+							<div class="d-flex align-items-center position-relative my-1">
+								<i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<input type="text" data-kt-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Rechercher une alerte"/>
+							</div>
+							<!--end::Search-->
+							<!--begin::Export buttons-->
+							<div id="kt_datatable_example_1_export" class="d-none"></div>
+							<!--end::Export buttons-->
+						</div>
+						<!--end::Card title-->
+
+						<!--begin::Card toolbar-->
+						<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+							<!--begin::Export dropdown-->
+							<button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+								<i class="ki-duotone ki-exit-down fs-2"><span class="path1"></span><span class="path2"></span></i>
+								Exporter la liste
+							</button>
+							<!--begin::Menu-->
+							<div id="kt_datatable_example_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+								<!--begin::Menu item-->
+								<div class="menu-item px-3">
+									<a href="#" class="menu-link px-3" data-kt-export="copy">
+									Copier dans le presse-papiers
+									</a>
+								</div>
+								<!--end::Menu item-->
+								<!--begin::Menu item-->
+								<div class="menu-item px-3">
+									<a href="#" class="menu-link px-3" data-kt-export="excel">
+									Exporter en Excel
+									</a>
+								</div>
+								<!--end::Menu item-->
+								<!--begin::Menu item-->
+								<div class="menu-item px-3">
+									<a href="#" class="menu-link px-3" data-kt-export="csv">
+									Exporter en CSV
+									</a>
+								</div>
+								<!--end::Menu item-->
+								<!--begin::Menu item-->
+								<div class="menu-item px-3">
+									<a href="#" class="menu-link px-3" data-kt-export="pdf">
+									Exporter en PDF
+									</a>
+								</div>
+								<!--end::Menu item-->
+							</div>
+							<!--end::Menu-->
+							<!--end::Export dropdown-->
+
+							<!--begin::Hide default export buttons-->
+							<div id="kt_datatable_example_buttons" class="d-none"></div>
+							<!--end::Hide default export buttons-->
+						</div>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body pt-0">
+
+						<!--begin::Table-->
+						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+							<thead>
+								<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-150px">Alerte</th>
+									<th class="min-w-200px">Rapporteur</th>
+									<th class="min-w-100px">Catégorie</th>
+									<th class="text-end min-w-100px pe-0">Salarié BDU</th>
+									<th class="text-end min-w-150px pe-0">Date</th>
+									<th class="text-end min-w-70px">Actions</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+                                {% for alerte in alertes %}
+								<tr>
+									<td class="">
+										<a href="javascript" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-bs-toggle="modal" data-bs-target="#kt_modal_open_alert" data-bs-ident="{{alerte.id}}">{{alerte.code}}</a>
+									</td>
+									<td>
+										{% if alerte.prenoms or alerte.nom or alerte.email or alerte.telephone %}
+										<div
+											class="d-flex align-items-center">
+											<!--begin::Thumbnail-->
+											<a href="#" class="symbol symbol-50px">
+												<span class="symbol-label" style="background-image:url({{asset('assets/media/svg/avatars/blank.svg')}});"></span>
+											</a>
+											<!--end::Thumbnail-->
+											<div
+												class="ms-5">
+												<!--begin::Title-->
+												<a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-customer-filter="agent_name">{{alerte.prenoms|default(null) ~' '~ alerte.nom|default(null)}}</a>
+												<!--end::Title-->
+                                                <div class="text-muted fs-7 fw-bold">{{alerte.email|default(null) ~' | '~ alerte.telephone|default(null)}}</div>
+											</div>
+										</div>
+										{% endif %}
+									</td>
+									<td class="pe-0">
+										<span class="fw-bold">{{alerte.categorie}}</span>
+									</td>
+									<td class="text-end pe-0">
+										<span class="fw-bold">{{alerte.salarie ? 'Oui' : 'Nom'}}</span>
+									</td>
+									<td class="text-end pe-0" data-order="rating-4">
+                                        {{alerte.createdAt|date('d/m/Y')}}
+									</td>
+									<td class="text-end">
+										<a href="javascript" 
+											class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
+											data-bs-toggle="modal"
+											data-bs-target="#kt_modal_open_alert"
+											data-bs-ident="{{ alerte.id }}">
+											<i class="ki-duotone ki-file-down fs-5 me-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+											Voir détails
+										</a>
+									</td>
+								</tr>
+                                {% endfor %}
+							</tbody>
+						</table>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Products-->
+
+				<div class="modal fade" tabindex="-1" id="kt_modal_open_alert">
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h3 class="modal-title">Ouverture alerte</h3>
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+									<i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+								</div>
+								<!--end::Close-->
+							</div>
+
+							<div class="modal-body row">
+								<div id="code" class="mb-4 col-12">
+									<label class="font-semibold">Code</label>
+									<h4>TEST</h4>
+								</div>
+								<div id="categorie" class="mb-4 col-12">
+									<label class="font-semibold">Catégorie du signalement</label>
+									<h4>TEST</h4>
+								</div>
+								<div id="nom" class="mb-4 col-md-6 d-none">
+									<label class="font-semibold">Rapporteur</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="telephone" class="mb-4 col-md-6 d-none">
+									<label class="font-semibold">Téléphone</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="email" class="mb-4 col-md-6 d-none">
+									<label class="font-semibold">Email</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="adresse" class="mb-4 col-md-6 d-none">
+									<label class="font-semibold">Adresse</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="accord" class="mb-4 col-md-6 d-none">
+									<label class="font-semibold">Accepte de recevoir des messages</label>
+									<h4>Oui</h4>
+								</div>
+
+								<div id="consequences" class="mb-4 col-12">
+									<label class="font-semibold">Conséquences</label>
+									<p class="fw-bold fs-4"></p>
+								</div>
+								<div id="salarie" class="mb-4 col-md-6">
+									<label class="font-semibold">Salarié BDU</label>
+									<h4>Non</h4>
+								</div>
+								<div id="fichiers" class="mb-4 col-12">
+									<label class="font-semibold">Fichiers joints</label>
+									<div class="d-flex flex-wrap gap-3 mt-2"></div>
+								</div>
+
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
+								<button type="submit" class="btn btn-primary">Exporter</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/alerts-incidents/export.js')}}"></script>
+	
+	<script type="text/javascript">
+		const alertes = {{ alertes|map(m => {
+			id: m.id,
+			code: m.code,
+			categorie: m.categorie,
+			nom: m.nom ?? null,
+			prenoms: m.prenoms ?? null,
+			email: m.email ?? null,
+			telephone: m.telephone ?? null,
+			adresse: m.adresse ?? null,
+			accord: m.accord,
+			salarie: m.salarie,
+			description: m.description,
+			fichiers: m.fichiers|map(f => {
+				filename: f.filename,
+				alt: f.alt,
+			}),
+		})|json_encode|raw }};
+
+		const openModal = document.getElementById('kt_modal_open_alert');
+		openModal.addEventListener('show.bs.modal', event => {
+			const paramId = event.relatedTarget.attributes['data-bs-ident'].value;
+			const alert = alertes.find(c => c.id == paramId);
+			if (!alert) return;
+
+			const el_nom = openModal.querySelector('#nom');
+			const el_email = openModal.querySelector('#email');
+			const el_telephone = openModal.querySelector('#telephone');
+			const el_adresse = openModal.querySelector('#adresse');
+			const el_accord = openModal.querySelector('#accord');
+
+			openModal.querySelector('#code label').nextElementSibling.textContent = alert.code;
+			openModal.querySelector('#categorie label').nextElementSibling.textContent = alert.categorie;
+			alert.nom ? (el_nom.classList.remove('d-none'), el_nom.lastElementChild.textContent = `${alert.nom} ${alert.prenoms}`) : el_nom.classList.add('d-none');
+			alert.email ? (el_email.classList.remove('d-none'), el_email.lastElementChild.textContent = alert.email) : el_email.classList.add('d-none');
+			alert.telephone ? (el_telephone.classList.remove('d-none'), el_telephone.lastElementChild.textContent = alert.telephone) : el_telephone.classList.add('d-none');
+			alert.adresse ? (el_adresse.classList.remove('d-none'), el_adresse.lastElementChild.textContent = alert.adresse) : el_adresse.classList.add('d-none');
+			alert.accord ? (el_accord.classList.remove('d-none'), el_accord.lastElementChild.textContent = alert.accord) : el_accord.classList.add('d-none');
+			openModal.querySelector('#salarie label').nextElementSibling.textContent = alert.salarie;
+			openModal.querySelector('#consequences label').nextElementSibling.textContent = alert.description;
+			
+			const fichiersContainer = openModal.querySelector('#fichiers .d-flex');
+			fichiersContainer.innerHTML = ''; // Réinitialiser avant d'ajouter
+
+			alert.fichiers.forEach(file => {
+				const link = `<a href="${file.filename}" target="_blank">
+					<img src="${file.filename}" class="h-150px" style="min-width: 125px">
+				</a>`;
+				fichiersContainer.insertAdjacentHTML('beforeend', link);
+			});
+
+		});
+		
+		// Bouton d'export CSV dans le modal
+		const exportBtn = openModal.querySelector('.btn.btn-primary');
+
+		exportBtn.addEventListener('click', () => {
+			const rows = [];
+			
+			// Exemple : récupérer toutes les sections visibles du modal
+			const sections = openModal.querySelectorAll('.modal-body > div');
+			sections.forEach(section => {
+				const label = section.querySelector('label')?.textContent.trim() ?? '';
+				const value = section.querySelector('h4, p')?.textContent.trim() ?? '';
+				if (label && value) {
+					rows.push([label, value]);
+				}
+			});
+
+			// Convertir en CSV
+			let csvContent = "data:text/csv;charset=utf-8," 
+				+ rows.map(e => e.map(v => `"${v.replace(/"/g, '""')}"`).join(",")).join("\n");
+
+			// Télécharger
+			const link = document.createElement("a");
+			link.setAttribute("href", encodeURI(csvContent));
+			link.setAttribute("download", "alerte.csv");
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		});
+
+		{% for type, messages in app.flashes %}
+			{% for message in messages %}
+				Swal.fire({
+					html: `{{message|raw}}`,
+					icon: "{{ type }}",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, compris !",
+					customClass: {
+						confirmButton: "btn btn-primary"
+					}
+				});
+			{% endfor %}
+		{% endfor %}
+	</script>
+{% endblock %}

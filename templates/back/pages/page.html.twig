@@ -1,0 +1,509 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title form.titre ? "Modification de page" : "Nouvelle page" %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						{{form.titre ? "Modification de page" : "Nouvelle page"}}
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Paramètres
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Pages
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div class="d-flex align-items-center gap-2 gap-lg-3"></div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Form-->
+				{{form_start(form, {'attr': {'id': 'kt_ecommerce_add_category_form', 'class': 'form d-flex flex-column flex-lg-row'}})}}
+					<!--begin::Aside column-->
+					<div
+						class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+						<!--begin::Couverture settings-->
+                        <div class="card card-flush py-4">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Couverture</h2>
+                                </div>
+                                <!--end::Card title-->
+                            </div>
+                            <!--end::Card header-->
+
+                            <!--begin::Card body-->
+                            <div class="card-body text-center pt-0">
+                                <!--begin::Image input-->
+                                            <!--begin::Image input placeholder-->
+                                    <style>
+                                        .image-input-placeholder {
+                                            background-image: url({{asset('assets/media/svg/files/blank-image.svg')}});
+                                        }
+
+                                        [data-bs-theme="dark"] .image-input-placeholder {
+                                            background-image: url({{asset('assets/media/svg/files/blank-image-dark.svg')}});
+                                        }                
+                                    </style>
+                                    <!--end::Image input placeholder-->
+                                        
+                                <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
+                                    <!--begin::Preview existing cover-->
+                                    <div class="image-input-wrapper w-150px h-150px" 
+                                        style="background-image: url({{ page.cover 
+                                            ? asset(page.cover.filename|default('assets/media/svg/avatars/blank-image.svg'))
+                                            : null
+                                        }})"></div>
+                                    <!--end::Preview existing cover-->
+
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Changer la couverture">
+                                        <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+                                        <!--begin::Inputs-->
+                                        {{ form_row(form.cover) }}
+                                        <input type="hidden" name="cover_remove" />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Annuler">
+                                        <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>            </span>
+                                    <!--end::Cancel-->
+
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Supprimer la couverture">
+                                        <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>            </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+
+                                <!--begin::Description-->
+                                <div class="text-muted fs-7">Définir l'image de couverture. Seuls les fichiers *.png, *.jpg et *.jpeg sont acceptés.</div>
+                                <!--end::Description-->
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Couverture settings-->
+                        
+                        <!--begin::Status-->
+						<div
+							class="card card-flush py-4">
+							<!--begin::Card header-->
+							<div
+								class="card-header">
+								<!--begin::Card title-->
+								<div class="card-title">
+									<h2>Statut</h2>
+								</div>
+								<!--end::Card title-->
+
+								<!--begin::Card toolbar-->
+								<div class="card-toolbar">
+									<div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
+								</div>
+								<!--begin::Card toolbar-->
+							</div>
+							<!--end::Card header-->
+
+							<!--begin::Card body-->
+							<div
+								class="card-body pt-0">
+								<!--begin::Select2-->
+                                {{form_widget(form.statut, {'attr': {'id': 'kt_ecommerce_add_category_status_select', 'class': 'form-select mb-2', 'data-control': 'select2', 'data-hide-search': 'true', 'data-placeholder': 'Sélectionner un statut'}})}}
+								<!--end::Select2-->
+
+								<!--begin::Description-->
+								<div class="text-muted fs-7">Définir le statut de la page.</div>
+								<!--end::Description-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Status-->
+
+						<!--begin::Category & tags-->
+						<div
+							class="card card-flush py-4">
+							<!--begin::Card header-->
+							<div
+								class="card-header">
+								<!--begin::Card title-->
+								<div class="card-title">
+									<h2>Emplacement</h2>
+								</div>
+								<!--end::Card title-->
+							</div>
+							<!--end::Card header-->
+
+							<!--begin::Card body-->
+							<div class="card-body pt-0">
+                                <!--begin::Select store template-->
+                                <label for="pages_form_emplacement" class="form-label required">Selectionner un emplacement</label>
+                                <!--end::Select store template-->
+
+                                <!--begin::Select2-->
+                                {{form_widget(form.emplacement, {'attr': {'class': 'form-select mb-2', 'data-control': 'select2', 'data-hide-search': 'true', 'data-placeholder': 'Sélectionner un emplacement'}})}}
+                                <!--end::Select2-->
+
+                                <!--begin::Description-->
+                                <div class="text-muted fs-7">Attribuez un emplacement à partir de l'affichage sur la page d'acceuil pour définir la manière dont les pages seront affichées.</div>
+                                <!--end::Description-->
+								<!--end::Input group-->
+
+								<!--begin::Input group-->
+								<!--begin::Label--><label class="form-label d-block"> Rang (affichage)</label>
+								<!--end::Label-->
+
+								<!--begin::Input-->
+								{{form_widget(form.rang, {'attr': {'class': 'form-control mb-2', 'min': '1', 'placeholder': 'Choisir un rang'}})}}
+								<!--end::Input-->
+								<!--end::Input group-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Category & tags-->
+					</div>
+					<!--end::Aside column-->
+
+					<!--begin::Main column-->
+					<div
+						class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+						<!--begin:::Tabs-->
+						<ul
+							class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
+							<!--begin:::Tab item-->
+							<li class="nav-item">
+								<a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Général</a>
+							</li>
+							<!--end:::Tab item-->
+
+							<!--begin:::Tab item-->
+							<li class="nav-item">
+								<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Paramètres avancée</a>
+							</li>
+							<!--end:::Tab item-->
+
+						</ul>
+						<!--end:::Tabs-->
+						<!--begin::Tab content-->
+						<div
+							class="tab-content">
+							<!--begin::Tab pane-->
+							<div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
+								<div
+									class="d-flex flex-column gap-7 gap-lg-10">
+
+									<!--begin::General options-->
+									<div
+										class="card card-flush py-4">
+										<!--begin::Card header-->
+										<div class="card-header">
+											<div class="card-title">
+												<h2>Général</h2>
+											</div>
+										</div>
+										<!--end::Card header-->
+
+										<!--begin::Card body-->
+										<div
+											class="card-body pt-0">
+                                            <!--begin::Input group-->
+                                            <div
+                                                class="mb-10 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">Nom de la page</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.titre, {'attr': {'class': 'form-control mb-2', 'placeholder': 'Entrer un nom'}})}}
+                                                <!--end::Input-->
+
+                                                <!--begin::Description--><div class="text-muted fs-7"> A category name is required and recommended to be unique.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div
+                                                class="mb-10">
+                                                <!--begin::Label-->
+                                                <label class="form-label">Lien de redirection</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.lien, {'attr': {'class': 'form-control mb-2', 'placeholder': 'https://'}})}}
+                                                <!--end::Input-->
+
+                                                <!--begin::Description--><div class="text-muted fs-7"> Laisser vide s'il s'agit d'une page de contenu.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+											<!--begin::Input group-->
+											<div class="content_div">
+												<!--begin::Label-->
+												<label class="form-label">Contenus</label>
+												<!--end::Label-->
+
+                                                {# Champ caché lié au form Symfony #}
+                                                {{ form_widget(form.contenu, {'id': 'hidden_page_content', 'attr': {'class': 'hidden_input'}}) }}
+
+                                                {# Quill container (éditeur visible) #}
+                                                <div id="page_content" class="min-h-200px mb-2"></div>
+
+												<!--begin::Description-->
+												<div class="text-muted fs-7">Set a description to the product for better visibility.</div>
+												<!--end::Description-->
+											</div>
+											<!--end::Input group-->
+										</div>
+										<!--end::Card header-->
+									</div>
+									<!--end::General options-->
+								</div>
+							</div>
+							<!--end::Tab pane-->
+
+							<!--begin::Tab pane-->
+							<div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
+								<div
+									class="d-flex flex-column gap-7 gap-lg-10">
+                                    <div
+                                        class="card card-flush py-4">
+                                        <!--begin::Card header-->
+                                        <div class="card-header">
+                                            <div class="card-title">
+                                                <h2>Style CSS</h2>
+                                            </div>
+                                        </div>
+                                        <!--end::Card header-->
+
+                                        <!--begin::Card body-->
+                                        <div
+                                            class="card-body pt-0">
+                                            <!--begin::Input group-->
+                                            <div
+                                                class="mb-10 content_div">
+                                                <!--begin::Editor-->
+                                                {{ form_widget(form.style, {'id': 'hidden_style_content', 'attr': {'class': 'hidden_input'}}) }}
+
+                                                {# Quill container (éditeur visible) #}
+                                                <div id="style_content" class="min-h-200px mb-2"></div>
+                                                <!--end::Editor-->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="card card-flush py-4">
+                                        <!--begin::Card header-->
+                                        <div class="card-header">
+                                            <div class="card-title">
+                                                <h2>Script JS (Javascript)</h2>
+                                            </div>
+                                        </div>
+                                        <!--end::Card header-->
+
+                                        <!--begin::Card body-->
+                                        <div
+                                            class="card-body pt-0">
+                                            <!--begin::Input group-->
+                                            <div
+                                                class="mb-10 content_div">
+                                                <!--begin::Editor-->
+                                                {{ form_widget(form.script, {'id': 'hidden_script_content', 'attr': {'class': 'hidden_input'}}) }}
+
+                                                {# Quill container (éditeur visible) #}
+                                                <div id="script_content" class="min-h-200px mb-2"></div>
+                                                <!--end::Editor-->
+                                            </div>
+                                        </div>
+                                    </div>
+									<!--begin::Meta options-->
+									{# <div
+										class="card card-flush py-4">
+										<!--begin::Card header-->
+										<div class="card-header">
+											<div class="card-title">
+												<h2>Meta Options</h2>
+											</div>
+										</div>
+										<!--end::Card header-->
+
+										<!--begin::Card body-->
+										<div
+											class="card-body pt-0">
+											<!--begin::Input group-->
+											<div
+												class="mb-10">
+												<!--begin::Label-->
+												<label class="form-label">Meta Tag Title</label>
+												<!--end::Label-->
+
+												<!--begin::Input-->
+												<input type="text" class="form-control mb-2" name="meta_title" placeholder="Meta tag name"/>
+												<!--end::Input-->
+
+												<!--begin::Description--><div class="text-muted fs-7"> Set a meta tag title. Recommended to be simple and precise keywords.</div>
+												<!--end::Description-->
+											</div>
+											<!--end::Input group-->
+
+											<!--begin::Input group-->
+											<div
+												class="mb-10">
+												<!--begin::Label-->
+												<label class="form-label">Meta Tag Description</label>
+												<!--end::Label-->
+
+												<!--begin::Editor-->
+												<div id="kt_ecommerce_add_product_meta_description" name="kt_ecommerce_add_product_meta_description" class="min-h-100px mb-2"></div>
+												<!--end::Editor-->
+
+												<!--begin::Description-->
+												<div class="text-muted fs-7">Set a meta tag description to the product for increased SEO ranking.</div>
+												<!--end::Description-->
+											</div>
+											<!--end::Input group-->
+
+											<!--begin::Input group-->
+											<div>
+												<!--begin::Label-->
+												<label class="form-label">Meta Tag Keywords</label>
+												<!--end::Label-->
+
+												<!--begin::Editor-->
+												<input id="kt_ecommerce_add_product_meta_keywords" name="kt_ecommerce_add_product_meta_keywords" class="form-control mb-2"/>
+												<!--end::Editor-->
+
+												<!--begin::Description--><div class="text-muted fs-7"> Set a list of keywords that the product is related to. Separate the keywords by adding a comma
+													<code>,</code>
+													between each keyword.</div>
+												<!--end::Description-->
+											</div>
+											<!--end::Input group-->
+										</div>
+										<!--end::Card header-->
+									</div> #}
+									<!--end::Meta options-->
+								</div>
+							</div>
+							<!--end::Tab pane-->
+
+						</div>
+						<!--end::Tab content-->
+
+						<div
+							class="d-flex justify-content-end">
+							<!--begin::Button-->
+							<a href="" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">
+								Annuler
+							</a>
+							<!--end::Button-->
+
+							<!--begin::Button-->
+							<button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+								<span class="indicator-label">
+									Enregistrer
+								</span>
+								<span class="indicator-progress">
+									Veuillez patienter...
+									<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+								</span>
+							</button>
+							<!--end::Button-->
+						</div>
+					</div>
+					<!--end::Main column-->
+				{{form_end(form)}}
+				<!--end::Form-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/js/custom/apps/pages-builder/pages/add-page.js')}}"></script>
+
+	<script type="text/javascript">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                Swal.fire({
+                    html: `{{message|raw}}`,
+                    icon: "{{ type }}",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, compris !",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            {% endfor %}
+        {% endfor %}
+	</script>
+{% endblock %}

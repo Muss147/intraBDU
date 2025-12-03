@@ -1,0 +1,688 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title "Modification" %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Modification
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Gestion d'utilisateurs
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Utilisateurs
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div
+					class="d-flex align-items-center gap-2 gap-lg-3">
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+
+				<!--begin::Navbar-->
+                {% include "back/users/_details_navbar.html.twig" %}
+				<!--end::Navbar-->
+
+                <!--begin::Basic info-->
+                <div
+                    class="card mb-5 mb-xl-10">
+                    <!--begin::Card header-->
+                    <div
+                        class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+                        <!--begin::Card title-->
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0">Détails du profil</h3>
+                        </div>
+                        <!--end::Card title-->
+                    </div>
+                    <!--begin::Card header-->
+
+                    <!--begin::Content-->
+                    <div
+                        id="kt_account_settings_profile_details" class="collapse show">
+                        <!--begin::Form-->
+						{{form_start(form_edit, {'attr': {'id': 'kt_account_profile_details_form', 'class': 'form'}})}}
+                            <!--begin::Card body-->
+                            <div
+                                class="card-body border-top p-9">
+                                <!--begin::Input group-->
+                                <div
+                                    class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Avatar</label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div
+                                        class="col-lg-8">
+                                        <!--begin::Image input-->
+                                        <div
+                                            class="image-input image-input-outline{% if not user.avatar %} image-input-placeholder image-input-empty{% endif %}" data-kt-image-input="true" style="background-image: url({{asset('assets/media/svg/avatars/blank.svg')}})">
+                                            <!--begin::Preview existing avatar-->
+                                            <div class="image-input-wrapper w-125px h-125px" {% if user.avatar %}style="background-image: url({{asset(user.avatar.filename)}})"{% endif %}></div>
+                                            <!--end::Preview existing avatar-->
+
+                                            <!--begin::Label-->
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Changer l'avatar">
+                                                <i class="ki-duotone ki-pencil fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                                <!--begin::Inputs-->
+												{{ form_row(form_edit.avatar) }}
+                                                <input
+                                                type="hidden" name="avatar_remove"/>
+                                            <!--end::Inputs-->
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Cancel-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Annuler">
+                                                <i class="ki-duotone ki-cross fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </span>
+                                            <!--end::Cancel-->
+
+                                            <!--begin::Remove-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Supprimer l'avatar">
+                                                <i class="ki-duotone ki-cross fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </span>
+                                            <!--end::Remove-->
+                                        </div>
+                                        <!--end::Image input-->
+
+                                        <!--begin::Hint-->
+                                        <div class="form-text">Types de fichiers autorisés : png, jpg, jpeg.</div>
+                                        <!--end::Hint-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div
+                                    class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nom complet</label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+										{{form_widget(form_edit.nomComplet, {'attr': {'class': 'form-control form-control-lg form-control-solid', 'placeholder': 'Nom & Prénom'}})}}
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div
+                                    class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Téléphone</label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+										{{form_widget(form_edit.telephone, {'attr': {'class': 'form-control form-control-lg form-control-solid', 'placeholder': 'Numéro de téléphone'}})}}
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div
+                                    class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                        <span class="">Rôle</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <button type="button" class="form-control form-control-lg form-control-solid d-flex align-items-center justify-content-between" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">
+                                            <span class="role_libelle">{{user.role ? user.role.libelle : null}}</span>
+                                            <span class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto">
+                                                <i class="ki-outline ki-pencil fs-3"></i>
+                                            </span>
+                                        </button>
+
+                                        <!--begin::Modal - Update role-->
+                                        <div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true">
+                                            <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Modal header-->
+                                                    <div class="modal-header">
+                                                        <!--begin::Modal title-->
+                                                        <h2 class="fw-bold">Mettre à jour le Rôle</h2>
+                                                        <!--end::Modal title-->
+
+                                                        <!--begin::Close-->
+                                                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                                            <i class="ki-outline ki-cross fs-1"></i>
+                                                        </div>
+                                                        <!--end::Close-->
+                                                    </div>
+                                                    <!--end::Modal header-->
+
+                                                    <!--begin::Modal body-->
+                                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                        <!--begin::Form-->
+                                                        <div id="kt_modal_update_role_form" class="form" action="#">
+                                                            <!--begin::Notice-->
+                                                            <div class="notice d-flex bg-light-primary rounded border-[#2b62aa] border border-dashed mb-9 p-6">
+                                                                <!--begin::Icon-->
+                                                                <i class="ki-outline ki-information fs-2tx text-[#2b62aa] me-4"></i>
+                                                                <!--end::Icon-->
+                                                                
+                                                                <!--begin::Wrapper-->
+                                                                <div class="d-flex flex-stack flex-grow-1 ">
+                                                                    <!--begin::Content-->
+                                                                    <div class=" fw-semibold">                                                                        
+                                                                        <div class="fs-6 text-gray-700 ">Veuillez noter qu'en réduisant le rang de rôle d'un utilisateur, celui-ci perdra tous les privilèges qui lui avaient été attribués dans le rôle précédent.</div>
+                                                                    </div>
+                                                                    <!--end::Content-->    
+                                                                </div>
+                                                                <!--end::Wrapper-->  
+                                                            </div>
+                                                            <!--end::Notice-->
+
+                                                            <!--begin::Input group-->
+                                                            <div class="fv-row mb-7">
+                                                                <!--begin::Label-->
+                                                                <label class="fs-6 fw-semibold form-label mb-5">
+                                                                    <span class="required">Selectionner un rôle</span>
+                                                                </label>
+                                                                <!--end::Label-->
+                                                                {% for role in form_edit.role %}
+                                                                <!--begin::Input row-->
+                                                                <div class="d-flex">
+                                                                    <!--begin::Radio-->
+                                                                    <div class="form-check form-check-custom form-check-solid">
+                                                                        <!--begin::Input-->
+                                                                        {{ form_widget(role, {'attr': {'class': 'form-check-input me-3'}, 'label': false}) }}
+                                                                        <!--end::Input-->
+
+                                                                        <!--begin::Label-->
+                                                                        <label class="form-check-label" for="{{ role.vars.id }}"> 
+                                                                            <div class="fw-bold text-gray-800">{{ role.vars.label }}</div>
+                                                                            <div class="text-gray-600">{{role.vars.attr['data-description']|raw}}</div>
+                                                                        </label>
+                                                                        <!--end::Label-->
+                                                                    </div>
+                                                                    <!--end::Radio-->
+                                                                </div>
+                                                                <!--end::Input row-->
+                                                                {% if not loop.last %}
+                                                                <div class='separator separator-dashed my-5'></div>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                            </div>
+                                                            <!--end::Input group-->
+
+                                                            <!--begin::Actions-->
+                                                            <div class="text-center pt-15">
+                                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">
+                                                                    Annuler
+                                                                </button>
+
+                                                                <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                                                                    Changer le rôle
+                                                                </button>
+                                                            </div>
+                                                            <!--end::Actions-->
+                                                        </div>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Modal body-->
+                                                </div>
+                                                <!--end::Modal content-->
+                                            </div>
+                                            <!--end::Modal dialog-->
+                                        </div>
+                                        <!--end::Modal - Update role-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                
+                                <!--begin::Input group-->
+                                <div class="row mb-0{% if user.activated %} d-none{% endif %}">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Statut du compte</label>
+                                    <!--begin::Label-->
+
+                                    <!--begin::Label-->
+                                    <div class="col-lg-8 d-flex align-items-center">
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            {{ form_row(form_edit.activated, {'attr': {'class': 'form-check-input w-45px h-30px'}}) }}
+                                            <label class="form-check-label" for="users_activated">Désactivé</label>
+                                        </div>
+                                    </div>
+                                    <!--begin::Label-->
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Card body-->
+
+                            <!--begin::Actions-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button type="reset" class="btn btn-light btn-active-light-primary me-2">Effacer</button>
+                                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">
+                                    <span class="indicator-label">
+                                        Sauvegarder
+                                    </span>
+                                    <span class="indicator-progress">
+                                        Veuillez patienter...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                            </div>
+                            <!--end::Actions-->
+                        {{form_end(form_edit)}}
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Basic info-->
+                <!--begin::Sign-in Method-->
+                <div
+                    class="card  mb-5 mb-xl-10">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0">Sécurité</h3>
+                        </div>
+                    </div>
+                    <!--end::Card header-->
+
+                    <!--begin::Content-->
+                    <div
+                        id="kt_account_settings_signin_method" class="collapse show">
+                        <!--begin::Card body-->
+                        <div
+                            class="card-body border-top p-9">
+                            <!--begin::Email Address-->
+                            <div
+                                class="d-flex flex-wrap align-items-center">
+                                <!--begin::Label-->
+                                <div id="kt_signin_email">
+                                    <div class="fs-6 fw-bold mb-1">Adresse Email</div>
+                                    <div class="fw-semibold text-gray-600">{{user.email}}</div>
+                                </div>
+                                <!--end::Label-->
+
+                                <!--begin::Edit-->
+                                <div
+                                    id="kt_signin_email_edit" class="flex-row-fluid d-none">
+                                    <!--begin::Form-->
+                                    {{ form_start(form_change_email, {'attr': {'class': 'form', 'id': 'kt_signin_change_email', 'novalidate': 'novalidate'}}) }}
+                                        <div class="row mb-6">
+                                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                                <div class="fv-row mb-0">
+                                                    <label for="emailaddress" class="form-label fs-6 fw-bold mb-3">Nouvel adresse Email</label>
+                                                    {# <input type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="emailaddress" value="support@keenthemes.com"/> #}
+                                                    {{ form_row(form_change_email.email, {'attr': {'class': 'form-control form-control-lg form-control-solid', 'placeholder': 'Adresse email'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="fv-row mb-0">
+                                                    <label for="confirmemailpassword" class="form-label fs-6 fw-bold mb-3">Confirmer avec le mot de passe</label>
+                                                    {# <input type="password" class="form-control form-control-lg form-control-solid" name="confirmemailpassword" id="confirmemailpassword"/> #}
+                                                    {{ form_row(form_change_email.currentPassword, {'attr': {'class': 'form-control form-control-lg form-control-solid'}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <button id="kt_signin_submit" type="button" class="btn btn-primary  me-2 px-6">
+                                                <span class="indicator-label">
+                                                    Mettre à jour
+                                                </span>
+                                                <span class="indicator-progress">
+                                                    Veuillez patienter...
+                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                </span>
+                                            </button>
+                                            <button id="kt_signin_cancel" type="button" class="btn btn-color-gray-500 btn-active-light-primary px-6">Annuler</button>
+                                        </div>
+                                    {{ form_end(form_change_email) }}
+                                    <!--end::Form-->
+                                </div>
+                                <!--end::Edit-->
+
+                                <!--begin::Action-->
+                                <div id="kt_signin_email_button" class="ms-auto">
+                                    <button class="btn btn-light btn-active-light-primary">Changer l'Email</button>
+                                </div>
+                                <!--end::Action-->
+                            </div>
+                            <!--end::Email Address-->
+
+                            <!--begin::Separator-->
+                            <div class="separator separator-dashed my-6"></div>
+                            <!--end::Separator-->
+
+                            <!--begin::Password-->
+                            <div
+                                class="d-flex flex-wrap align-items-center mb-10">
+                                <!--begin::Label-->
+                                <div id="kt_signin_password">
+                                    <div class="fs-6 fw-bold mb-1">Mot de passe</div>
+                                    <div class="fw-semibold text-gray-600">************</div>
+                                </div>
+                                <!--end::Label-->
+
+                                <!--begin::Edit-->
+                                <div
+                                    id="kt_signin_password_edit" class="flex-row-fluid d-none">
+                                    <!--begin::Form-->
+                                    {{ form_start(form_reset_password, {'attr': {'class': 'form', 'id': 'kt_signin_change_password', 'novalidate': 'novalidate'}}) }}
+                                        <div class="row mb-1">
+                                            <div class="col-lg-4">
+                                                <div class="fv-row mb-0">
+                                                    <label for="currentpassword" class="form-label fs-6 fw-bold mb-3">Mot de passe actuel</label>
+                                                    {# <input type="password" class="form-control form-control-lg form-control-solid " name="currentpassword" id="currentpassword"/> #}
+                                                    {{ form_row(form_reset_password.currentPassword, {'attr': {'class': 'form-control form-control-lg form-control-solid'}}) }}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4" data-kt-password-meter="true">
+                                                <div class="position-relative fv-row mb-0">
+                                                    <label for="newpassword" class="form-label fs-6 fw-bold mb-3">Nouveau mot de passe</label>
+                                                    {# <input type="password" class="form-control form-control-lg form-control-solid " name="newpassword" id="newpassword"/> #}
+                                                    {{ form_row(form_reset_password.password, {'attr': {'class': 'form-control form-control-lg form-control-solid'}}) }}
+
+                                                    <span class="btn btn-sm btn-icon position-absolute translate-middle top-75 end-0 me-n2" data-kt-password-meter-control="visibility">
+                                                        <i class="ki-duotone ki-eye-slash fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                                        <i class="ki-duotone ki-eye d-none fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                                    </span>
+                                                </div>
+                                                <!--begin::Meter-->
+                                                <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+                                                    <div class="flex-grow-1 bg-[#6ca942] bg-active-success rounded h-5px me-2"></div>
+                                                    <div class="flex-grow-1 bg-[#6ca942] bg-active-success rounded h-5px me-2"></div>
+                                                    <div class="flex-grow-1 bg-[#6ca942] bg-active-success rounded h-5px me-2"></div>
+                                                    <div class="flex-grow-1 bg-[#6ca942] bg-active-success rounded h-5px"></div>
+                                                </div>
+                                                <!--end::Meter-->
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="fv-row mb-0">
+                                                    <label for="confirmpassword" class="form-label fs-6 fw-bold mb-3">Confirmer le mot de passe</label>
+                                                    {# <input type="password" class="form-control form-control-lg form-control-solid " name="confirmpassword" id="confirmpassword"/> #}
+                                                    {{ form_row(form_reset_password.confirmPassword, {'attr': {'class': 'form-control form-control-lg form-control-solid'}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-text mb-5">Le mot de passe doit être composé d'au moins 8 caractères et contenir des symboles.</div>
+
+                                        <div class="d-flex">
+                                            <button id="kt_password_submit" type="button" class="btn btn-primary me-2 px-6">
+                                                <span class="indicator-label">
+                                                    Mettre à jour
+                                                </span>
+                                                <span class="indicator-progress">
+                                                    Veuillez patienter...
+                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                </span>
+                                            </button>
+                                            <button id="kt_password_cancel" type="button" class="btn btn-color-gray-500 btn-active-light-primary px-6">Annuler</button>
+                                        </div>
+                                    {{ form_end(form_reset_password) }}
+                                    <!--end::Form-->
+                                </div>
+                                <!--end::Edit-->
+
+                                <!--begin::Action-->
+                                <div id="kt_signin_password_button" class="ms-auto">
+                                    <button class="btn btn-light btn-active-light-primary">Changer le mot de passe</button>
+                                </div>
+                                <!--end::Action-->
+                            </div>
+                            <!--end::Password-->
+
+
+                            <!--begin::Notice-->
+                            <div
+                                class="notice d-flex bg-light-primary rounded border-[#2b62aa] border border-dashed  p-6">
+                                <!--begin::Icon-->
+                                <i class="ki-duotone ki-shield-tick fs-2tx text-[#2b62aa] me-4">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                <!--end::Icon-->
+                                {% if user == app.user %}
+                                <!--begin::Wrapper-->
+                                <div
+                                    class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                                    <!--begin::Content-->
+                                    <div class="mb-3 mb-md-0 fw-semibold">
+                                        <h4 class="text-gray-900 fw-bold">Sécurisation du compte</h4>
+                                        
+                                        <div class="fs-6 text-gray-700 pe-7">Si vous ne vous souvenez plus de votre mot de passe actuel et que vous avez du mal à changer de mot de passe, vous pouvez lancer la procedure de réinitialisation de mot de passe.</div>
+                                    </div>
+                                    <!--end::Content-->
+
+                                    <!--begin::Action-->
+                                    <a href="{{path('app_forgot_password_request')}}" class="btn btn-primary px-6 align-self-center text-nowrap" data-bs-toggle="modal" data-bs-target="#kt_modal_two_factor_authentication">
+                                        Mot de passe oublié
+                                    </a>
+                                    <!--end::Action-->
+                                </div>
+                                <!--end::Wrapper-->
+                                {% endif %}
+                            </div>
+                            <!--end::Notice-->
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Sign-in Method-->
+
+                <!--begin::Deactivate Account-->
+                {% if user.activated %}
+                <div
+                    class="card  ">
+
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_deactivate" aria-expanded="true" aria-controls="kt_account_deactivate">
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0">Désactiver le compte</h3>
+                        </div>
+                    </div>
+                    <!--end::Card header-->
+
+                    <!--begin::Content-->
+                    <div
+                        id="kt_account_settings_deactivate" class="collapse show">
+                        <!--begin::Form-->
+                        <form id="kt_account_deactivate_form" class="form" action="" method="post">
+                            <!--begin::Card body-->
+                            <div
+                                class="card-body border-top p-9">
+
+                                <!--begin::Notice-->
+                                <div
+                                    class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6">
+                                    <!--begin::Icon-->
+                                    <i class="ki-outline ki-information fs-2tx text-warning me-4"></i>
+                                    <!--end::Icon-->
+
+                                    <!--begin::Wrapper-->
+                                    <div
+                                        class="d-flex flex-stack flex-grow-1 ">
+                                        <!--begin::Content-->
+                                        <div class=" fw-semibold">
+                                            <h4 class="text-gray-900 fw-bold">Vous êtes sur le point de désactiver le compte.</h4>
+
+                                            <div class="fs-6 text-gray-700 ">La désactivation du compte n'entrainera pas immediatement sa suppression. Pour supprimer définitivement le compte veuillez 
+                                                <a class="fw-bold" href="#">contacter l'administrateur</a>
+                                            </div>
+                                        </div>
+                                        <!--end::Content-->
+
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                                <!--end::Notice-->
+
+                                <!--begin::Form input row-->
+                                <div class="form-check form-check-solid fv-row">
+                                    <input name="deactivate" class="form-check-input" type="checkbox" value="" id="deactivate"/>
+                                    <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate">Je confirme la désactivation du compte</label>
+                                </div>
+                                <!--end::Form input row-->
+                            </div>
+                            <!--end::Card body-->
+
+                            <!--begin::Card footer-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button id="kt_account_deactivate_account_submit" type="submit" class="btn btn-danger fw-semibold">Désactiver le compte</button>
+                            </div>
+                            <!--end::Card footer-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                {% endif %}
+                <!--end::Deactivate Account-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/custom/account/settings/signin-methods.js')}}"></script>
+    <script src="{{asset('assets/js/custom/account/settings/profile-details.js')}}"></script>
+    <script src="{{asset('assets/js/custom/account/settings/deactivate-account.js')}}"></script>
+
+    <script type="text/javascript">
+        // Téléphone inputmask
+        Inputmask({
+            "mask": "9",
+            "repeat": 10,
+            "greedy": false
+        }).mask("#users_telephone");
+
+        $('#users_activated').change(function(e) {
+            if ($(this).is(':checked')) $(this).parent().next('label').text('Activé');
+            else $(this).parent().next('label').text('Désactivé');
+        });
+
+        $('#form_delete_user').submit(function(e) {
+            e.preventDefault();
+            var form = $(this);
+            swal
+                .fire({
+                    html: "Êtes-vous sûr de vouloir supprimer <b>{{user.nomComplet}}</b> ?",
+                    icon: "warning",
+                    showCancelButton: !0,
+                    buttonsStyling: !1,
+                    confirmButtonText: "Oui, supprimer!",
+                    cancelButtonText: "Non, annuler",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-danger",
+                        cancelButton: "btn fw-bold btn-active-light-primary",
+                    },
+                })
+                .then(function(result) {
+                    if (result.isConfirmed) {
+                        form.off('submit').submit(); // Soumet le formulaire
+                    }
+                })
+        })
+
+		{% for type, messages in app.flashes %}
+			{% for message in messages %}
+				Swal.fire({
+					html: `{{message|raw}}`,
+					icon: "{{ type }}",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, compris !",
+					customClass: {
+					confirmButton: "btn btn-primary"
+				}
+			});{% endfor %}
+		{% endfor %}
+    </script>
+{% endblock %}

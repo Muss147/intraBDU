@@ -1,0 +1,10 @@
+/* Swiper CSS */
+@import "swiper/css/bundle";
+
+/* Tailwind v4 */
+@import "tailwindcss";
+
+/* Flowbite (v4 syntax) */
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
+@source "../../node_modules/flowbite-datepicker";

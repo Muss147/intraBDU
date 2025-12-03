@@ -1,0 +1,327 @@
+{% extends "layout.html.twig" %}
+
+{% block title projet.nom %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack "></div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+
+				<!--begin::Navbar-->
+				{% include "projets/_details_navbar.html.twig" %}
+				<!--end::Navbar-->
+
+				<!--begin::Card-->
+				<div
+					class="card"> <!--begin::Card header-->
+					<div
+						class="card-header">
+						<!--begin::Card title-->
+						<div class="card-title fs-3 fw-bold">Réglage du projet</div>
+						<!--end::Card title-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Form-->
+                    {{form_start(edit_form, {'attr': {'id': 'kt_project_settings_form', 'class': 'form'}})}}
+						<!--begin::Card body-->
+						<div
+							class="card-body p-9">
+							<!--begin::Row-->
+							{# <div
+								class="row mb-5">
+								<!--begin::Col-->
+								<div class="col-xl-3">
+									<div class="fs-6 fw-semibold mt-2 mb-3">Project Logo</div>
+								</div>
+								<!--end::Col-->
+
+								<!--begin::Col-->
+								<div
+									class="col-lg-8">
+									<!--begin::Image input-->
+									<div
+										class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/metronic8/demo1/assets/media/svg/avatars/blank.svg')">
+										<!--begin::Preview existing avatar-->
+										<div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 75%; background-image: url('/metronic8/demo1/assets/media/svg/brand-logos/volicity-9.svg')"></div>
+										<!--end::Preview existing avatar-->
+
+										<!--begin::Label-->
+										<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+											<i class="ki-duotone ki-pencil fs-7">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+											<!--begin::Inputs-->
+											<input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
+											<input
+											type="hidden" name="avatar_remove"/>
+										<!--end::Inputs-->
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Cancel-->
+										<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+											<i class="ki-duotone ki-cross fs-2">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+										</span>
+										<!--end::Cancel-->
+
+										<!--begin::Remove-->
+										<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+											<i class="ki-duotone ki-cross fs-2">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+										</span>
+										<!--end::Remove-->
+									</div>
+									<!--end::Image input-->
+
+									<!--begin::Hint-->
+									<div class="form-text">Allowed file types:  png, jpg, jpeg.</div>
+									<!--end::Hint-->
+								</div>
+								<!--end::Col-->
+							</div> #}
+							<!--end::Row-->
+
+							<!--begin::Row-->
+							<div
+								class="row mb-8 fv-row">
+								<!--begin::Col-->
+								<div class="col-xl-3">
+									<div class="fs-6 fw-semibold mt-2 mb-3 required">Nom du projet</div>
+								</div>
+								<!--end::Col-->
+
+								<!--begin::Col-->
+								<div class="col-xl-9 fv-row">
+                                    {{form_widget(edit_form.nom, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer un nom au projet'}})}}
+								</div>
+							</div>
+							<!--end::Row-->
+
+							<!--begin::Row-->
+							<div
+								class="row mb-8 fv-row">
+								<!--begin::Col-->
+								<div class="col-xl-3">
+									<div class="fs-6 fw-semibold mt-2 mb-3 required">Les Dates</div>
+								</div>
+								<!--end::Col-->
+
+								<div class="col-xl-9 fv-row">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <div
+                                            class="col-md-6 fv-row">
+                                            <div class="position-relative d-flex align-items-center">
+                                                <i class="ki-duotone ki-calendar-8 position-absolute ms-4 mb-1 fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                    <span class="path4"></span>
+                                                    <span class="path5"></span>
+                                                    <span class="path6"></span>
+                                                </i>
+                                                {{form_widget(edit_form.dateDebut, {'attr': {'class': 'form-control form-control-solid kt_datepicker ps-12', 'placeholder': 'Date de début'}})}}
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="col-md-6 fv-row">
+                                            <div class="position-relative d-flex align-items-center">
+                                                <i class="ki-duotone ki-calendar-8 position-absolute ms-4 mb-1 fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                    <span class="path4"></span>
+                                                    <span class="path5"></span>
+                                                    <span class="path6"></span>
+                                                </i>
+                                                {{form_widget(edit_form.dateFin, {'attr': {'class': 'form-control form-control-solid kt_datepicker ps-12', 'placeholder': 'Date de fin'}})}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--begin::Row-->
+                                </div>
+							</div>
+							<!--end::Row-->
+
+							<!--begin::Row-->
+							<div
+								class="row mb-8 fv-row">
+								<!--begin::Col-->
+								<div class="col-xl-3">
+									<div class="fs-6 fw-semibold mt-2 mb-3 required">Client</div>
+								</div>
+								<!--end::Col-->
+
+								<!--begin::Col-->
+								<div class="col-xl-9 fv-row">
+									{{form_widget(edit_form.client, {'attr': {'class': 'form-select form-select-solid', 'data-placeholder': 'Sélectionner un client'}})}}
+								</div>
+							</div>
+							<!--end::Row-->
+
+							<!--begin::Row-->
+							<div
+								class="row mb-8 fv-row">
+								<!--begin::Col-->
+								<div class="col-xl-3">
+									<div class="fs-6 fw-semibold mt-2 mb-3 required">Secteur d'adtivité</div>
+								</div>
+								<!--end::Col-->
+
+								<!--begin::Col-->
+								<div class="col-xl-9">
+									{{form_widget(edit_form.secteurActivite, {'attr': {'class': 'form-select form-select-solid', 'data-control': 'select2', 'data-hide-search': 'true', 'data-placeholder': 'Sélectionner un secteur'}})}}
+								</div>
+							</div>
+							<!--end::Row-->
+
+							<!--begin::Row-->
+							<div
+								class="row mb-8">
+								<!--begin::Col-->
+								<div class="col-xl-3">
+									<div class="fs-6 fw-semibold mt-2 mb-3">Conducteur des travaux</div>
+								</div>
+								<!--end::Col-->
+
+								<!--begin::Col-->
+								<div class="col-xl-9 fv-row">
+									{{form_widget(edit_form.conducteurTravaux, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer le nom et prénom'}})}}
+								</div>
+							</div>
+							<!--end::Row-->
+
+							<!--begin::Row-->
+							<div
+								class="row mb-8">
+								<!--begin::Col-->
+								<div class="col-xl-3">
+									<div class="fs-6 fw-semibold mt-2 mb-3">Description</div>
+								</div>
+								<!--end::Col-->
+
+								<!--begin::Col-->
+								<div class="col-xl-9 fv-row">
+									{{form_widget(edit_form.description, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer une description'}})}}
+								</div>
+								<!--begin::Col-->
+							</div>
+							<!--end::Row-->
+
+							<!--begin::Row-->
+							<div
+								class="row">
+								<!--begin::Col-->
+								<div class="col-xl-3">
+									<div class="fs-6 fw-semibold mt-2 mb-3">TVA</div>
+								</div>
+								<!--end::Col-->
+
+								<!--begin::Col-->
+								<div class="col-xl-9">
+									<div class="form-check form-switch form-check-custom form-check-solid">
+										{{form_widget(edit_form.tva, {'attr': {'class': 'form-check-input', 'checked': 'checked', 'placeholder': 'Entrer une description'}})}}
+										<label class="form-check-label  fw-semibold text-gray-500 ms-3" for="projets_tva">
+											Applicable ?
+										</label>
+									</div>
+								</div>
+								<!--end::Col-->
+							</div>
+							<!--end::Row-->
+						</div>
+						<!--end::Card body-->
+
+						<!--begin::Card footer-->
+						<div class="card-footer d-flex justify-content-end py-6 px-9">
+							<button type="reset" class="btn btn-light btn-active-light-primary me-2">Effacer</button>
+
+							<button type="submit" class="btn btn-primary" id="kt_project_settings_submit">Sauvegarder</button>
+						</div>
+						<!--end::Card footer-->
+					{{form_end(edit_form)}}
+					<!--end:Form-->
+				</div>
+				<!--end::Card-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/projects/details/settings.js')}}"></script>
+
+    <script type="text/javascript">
+        
+        $(".kt_datepicker").flatpickr();
+        
+        // Format options
+        var optionFormat = function(item) {
+            if ( !item.id ) {
+                return item.text;
+            }
+
+            var span = document.createElement('span');
+            var imgUrl = item.element.getAttribute('data-kt-select2-user');
+            var template = '';
+
+            template += '<img src="' + imgUrl + '" class="border border-gray-200 rounded-circle h-20px me-2" alt="image"/>';
+            template += item.text;
+            span.innerHTML = template;
+            return $(span);
+        }
+
+        // Init Select2 --- more info: https://select2.org/
+        $('#projets_client').select2({
+            templateSelection: optionFormat,
+            templateResult: optionFormat
+        });
+
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+            Swal.fire({
+                html: `{{message|raw}}`,
+                icon: "{{type}}",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, compris !",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
+            {% endfor %}
+        {% endfor %}
+    </script>
+{% endblock %}

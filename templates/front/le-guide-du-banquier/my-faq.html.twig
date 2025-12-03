@@ -1,0 +1,646 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "My F.A.Q" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">My F.A.Q</h2>
+
+        <!-- Filtres -->
+        <div class="mb-4 border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
+                <li class="me-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg" id="bourse-tab" data-tabs-target="#bourse" type="button" role="tab" aria-controls="bourse" aria-selected="false">Bourse</button>
+                </li>
+                <li class="me-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="connaissance-tab" data-tabs-target="#connaissance" type="button" role="tab" aria-controls="connaissance" aria-selected="false">Connaissance de la BDU</button>
+                </li>
+                <li class="me-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="dico-tab" data-tabs-target="#dico" type="button" role="tab" aria-controls="dico" aria-selected="false">DICO Bancaire</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- FAQ list -->
+        <div id="default-tab-content">
+            <div class="hidden rounded-lg" id="bourse" role="tabpanel" aria-labelledby="bourse-tab">
+                <div id="accordion-collapse-1" data-accordion="collapse">
+                    <h2 id="accordion-collapse-heading-1-1">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-1-1" aria-expanded="true" aria-controls="accordion-collapse-body-1-1">
+                        <span>Qu'est ce que la diversification de l'actif ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-1-1" class="hidden" aria-labelledby="accordion-collapse-heading-1-1">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                            La diversification de l'actif est une stratégie de placement à long terme qui consiste à repartir vos placements entre diverses catégories d'actif afin d'optimiser le ratio risque-rendement.C'est un argument de sécurité des capitaux investis. Il s'agit en fait d'appliquer cette ancienne maxime : « ne mettez pas tous vos oeufs dans le même panier ».
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden rounded-lg" id="connaissance" role="tabpanel" aria-labelledby="connaissance-tab">
+                <div id="accordion-collapse-2" data-accordion="collapse">
+                    <h2 id="accordion-collapse-heading-2-1">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-2-1" aria-expanded="true" aria-controls="accordion-collapse-body-2-1">
+                        <span>Qu'est ce que les Fonds Nationaux ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-2-1" class="hidden" aria-labelledby="accordion-collapse-heading-2-1">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Les Fonds Nationaux sont des Fonds à caractère sectoriel par lesquels l'Etat compte assurer avec davantage de dynamisme et plus de souplesse dans le fonctionnement de certains secteurs jugés prioritaires au regard des besoins des populations (eau et assainissement, habitat, téléphonie rurale, environnement, éducation, investissements communaux, emploi, agriculture, etc.)
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-2-2">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-2-2" aria-expanded="false" aria-controls="accordion-collapse-body-2-2">
+                        <span>Comment sont gérés les fonds nationaux délégués à la BNI ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-2-2" class="hidden" aria-labelledby="accordion-collapse-heading-2-2">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Chaque Fonds National fait l'objet au sein de l'institution, d'une gestion distincte dotée d'un budget propre et donnant lieu à la tenue d'une comptabilité séparée. La gestion administrative et comptable des Fonds est assurée par la Banque. A ce titre, elle assure le secrétariat du Comité de Gestion, prépare le budget, le rapport d'activités et les états financiers qui sont soumis au Comité de Gestion et exécute le budget.
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-2-3">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-2-3" aria-expanded="false" aria-controls="accordion-collapse-body-2-3">
+                        <span>Combien de Fonds Nationaux la BNI gère t-elle ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-2-3" class="hidden" aria-labelledby="accordion-collapse-heading-2-3">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Conformément aux dispositions des ordonnances régissant les Fonds Nationaux, la BNI assure la gestion déléguée de dix fonds scindés en deux grandes catégories que sont les Fonds d'Investissement et les Fonds de Prêts.Les Fonds d'Investissement:- Le Compte des Terrains Urbains;- Le Fonds National de l'eau;- Le Fonds de Soutien à l'emploi (FSE);- Le Fonds National de Télécommunications (FNT);- Le Fonds National de l'environnement (FNDE);- Le Fonds National de l'école (FNEC);- Le Fonds de Développement de l'évéaculture Villageoise (FDHEV).Les Fonds de Prêts:- Le Compte de Mobilisation pour l'habitat;- Le Fonds de Soutien de l'habitat;- Le Fonds de Prêts aux Collectivités Locales (FPCL).
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-2-4">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-2-4" aria-expanded="false" aria-controls="accordion-collapse-body-2-4">
+                        <span>Quelles sont les missions principales assignées à la BNI ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-2-4" class="hidden" aria-labelledby="accordion-collapse-heading-2-4">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            <ul>
+                                <li>Péréquation de l'Epargne;</li>
+                                <li>Refinancement des Banques et Etablissements Financiers;</li>
+                                <li>Acteur du Partenariat Public-Privé dans le Financement des Investissements Publics Rentables et des Petites et Moyennes Entreprises;</li>
+                                <li>Acteur sur le Marché des Capitaux;</li>
+                                <li>Agent d'Exécution de Missions Contractuelles de Service Public.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-2-5">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-2-5" aria-expanded="false" aria-controls="accordion-collapse-body-2-5">
+                        <span>Quels sont les métiers de la BNI ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-2-5" class="hidden" aria-labelledby="accordion-collapse-heading-2-5">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            <ul>
+                                <li>Investissement;</li>
+                                <li>Refinancement;</li>
+                                <li>Conseil;</li>
+                                <li>Gestion de Patrimoine.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-2-6">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-2-6" aria-expanded="false" aria-controls="accordion-collapse-body-2-6">
+                        <span>Qu'est ce que le financement structuré BNI ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-2-6" class="hidden" aria-labelledby="accordion-collapse-heading-2-6">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            C'est un crédit d'investissement dans lequel l'aspect sécurisation de la transaction est capital par son adossement à des flux financiers bien identifiés qui en assurent le bon dénouement. Exemple : financement des campagnes agricoles (café-cacao) et / ou le financement des investissements des entreprises.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden rounded-lg" id="dico" role="tabpanel" aria-labelledby="dico-tab">
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Compte Chèque</h3>
+
+                <div id="accordion-collapse-3" data-accordion="collapse">
+                    <h2 id="accordion-collapse-heading-3-1">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-3-1" aria-expanded="true" aria-controls="accordion-collapse-body-3-1">
+                        <span>Qu'est-ce qu'un Compte Chèque ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3-1" class="hidden" aria-labelledby="accordion-collapse-heading-3-1">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Le Compte Chèque est le service de base qui vous permet de déposer de l'argent à la banque, domicilier vos revenus, d'obtenir un crédit, disposer de moyens de paiement (chéquiers, cartes bancaires). 
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-3-2">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-3-2" aria-expanded="false" aria-controls="accordion-collapse-body-3-2">
+                        <span>Qui peut être titulaire d'un Compte Chèque ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3-2" class="hidden" aria-labelledby="accordion-collapse-heading-3-2">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Toute personne physique âgée d'au moins 21 ans (majorité civile) ou mineur avec l'accord parental. 
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-3-3">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-3-3" aria-expanded="false" aria-controls="accordion-collapse-body-3-3">
+                        <span>A quoi sert un Compte Chèque ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3-3" class="hidden" aria-labelledby="accordion-collapse-heading-3-3">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                            <p>Le Compte Chèque permet une infinité de choses, notamment :</p>
+                            <ul>
+                                <li>De domicilier un salaire ou des revenus (primes, rentes...)</li>
+                                <li>De disposer de moyens de paiements (chèques, cartes bancaires...)</li>
+                                <li>D'effectuer des virements, des prélèvements (Canal+, CIE/SODECI, Primes d'Assurances...)</li>
+                                <li>D'accéder à la gamme complète des offres de la banque</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-3-2-4">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-3-4" aria-expanded="false" aria-controls="accordion-collapse-body-3-4">
+                        <span>Quel est le montant des frais de tenue de compte du compte chèque ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3-4" class="hidden" aria-labelledby="accordion-collapse-heading-3-4">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Le montant des frais de tenue de compte, sera fonction de la nature du titulaire du compte chèque auquel l'on fait référence :
+                            <ul>
+                                <li>Clients « Patrimoniaux » : 4.000 FCFA HT</li>
+                                <li>Clients « Intermédiaires Plus » : 3.000 FCFA HT</li>
+                                <li>Clients « Intermédiaire » : 2.000 FCFA HT</li>
+                                <li>Clients « Mass » : 1.000 FCFA HT'Exécution de Missions Contractuelles de Service Public.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-3-5">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-3-5" aria-expanded="false" aria-controls="accordion-collapse-body-3-5">
+                        <span>Combien coûte l'ouverture d'un compte chèque ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3-5" class="hidden" aria-labelledby="accordion-collapse-heading-3-5">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Cette prestation est gratuite comme le stipule la note de la BCEAO d'octobre 2015. Pour preuve nous ne l'avons jamais facturée et n'avons aucun frais intitulé « frais d'ouverture de compte ». Les dépôts initiaux impactant directement le solde du compte ne sauraient être classés dans la catégorie de « frais ». 
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-3-6">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-3-6" aria-expanded="false" aria-controls="accordion-collapse-body-3-6">
+                        <span>Quelles sont les pièces à fournir pour ouvrir un compte ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3-6" class="hidden" aria-labelledby="accordion-collapse-heading-3-6">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            <ul>
+                                <li>CNI / attestation d'identité ou passeport en cours de validité</li>
+                                <li>2 photos d'identité du même tirage</li>
+                                <li>une quittance récente de CIE ou SODECI</li>
+                                <li>un certificat de résidence si la quittance ne porte pas le nom du client</li>
+                                <li>un justificatif de revenus pour les non salariés</li>
+                                <li>un bulletin de salaire récent pour les salariés</li>
+                                <li>une convention de compte dûment signée par le client.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Compte Épargne</h3>
+
+                <div id="accordion-collapse-4" data-accordion="collapse">
+                    <h2 id="accordion-collapse-heading-4-1">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-1" aria-expanded="true" aria-controls="accordion-collapse-body-4-1">
+                        <span>Qu'est-ce qu'un compte d'épargne ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-1" class="hidden" aria-labelledby="accordion-collapse-heading-4-1">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Le compte d'épargne est un compte de dépôt qui produit des intérêts.
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-4-2">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-2" aria-expanded="false" aria-controls="accordion-collapse-body-4-2">
+                        <span>Qui peut être titulaire d'un compte épargne ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-2" class="hidden" aria-labelledby="accordion-collapse-heading-4-2">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Toutes personnes physiques, y compris les mineurs sous tutelle.
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-4-3">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-3" aria-expanded="false" aria-controls="accordion-collapse-body-4-3">
+                        <span>Quel est le taux d'intérêt du compte épargne ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-3" class="hidden" aria-labelledby="accordion-collapse-heading-4-3">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                            Le taux d'intérêt annuel est de 3,5% (cf. tarif des conditions)
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-4-4">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-4" aria-expanded="false" aria-controls="accordion-collapse-body-4-4">
+                        <span>Quels sont les frais d'ouverture du compte épargne ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-4" class="hidden" aria-labelledby="accordion-collapse-heading-4-4">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Aucun frais n'est retenu pour l'ouverture du Compte Epargne. Par ailleurs, un dépôt initial n'est plus réquis 
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-4-5">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-5" aria-expanded="false" aria-controls="accordion-collapse-body-4-5">
+                        <span>Quel est le montant maximum à déposer sur un compte épargne ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-5" class="hidden" aria-labelledby="accordion-collapse-heading-4-5">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Pas de dépôt maximum. Par contre, la rémunération s'applique sur un montant maximum fixé à 5 000 000 FCFA. 
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-4-6">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-6" aria-expanded="false" aria-controls="accordion-collapse-body-4-6">
+                        <span>Quel est le montant minimum qui doit figurer sur un compte épargne ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-6" class="hidden" aria-labelledby="accordion-collapse-heading-4-6">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Le montant minimum est de 25 000 FCFA.
+                        </div>
+                    </div>
+                    
+                    <h2 id="accordion-collapse-heading-4-7">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-7" aria-expanded="false" aria-controls="accordion-collapse-body-4-7">
+                        <span>Puis-je effectuer des dépôts en devises étrangères ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-7" class="hidden" aria-labelledby="accordion-collapse-heading-4-7">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Oui, les montants sont automatiquement convertis en FCFA selon le cours du jour. 
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-4-8">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-8" aria-expanded="false" aria-controls="accordion-collapse-body-4-8">
+                        <span>Comment sont calculés les intérêts de ce compte ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-8" class="hidden" aria-labelledby="accordion-collapse-heading-4-8">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Les mouvements créditeurs portent intérêts le premier jour de la quinzaine suivante et les mouvements débiteurs le dernier jour de la quinzaine passée. 
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-4-9">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-9" aria-expanded="false" aria-controls="accordion-collapse-body-4-9">
+                        <span>Quand est ce que les intérêts sont-ils perçus ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-9" class="hidden" aria-labelledby="accordion-collapse-heading-4-9">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Les intérêts sont calculés une fois par an au 31 Décembre et sont portés au crédit du compte 
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-4-10">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-10" aria-expanded="false" aria-controls="accordion-collapse-body-4-10">
+                        <span>Le taux de rémunération du compte épargne peut-il varier ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-10" class="hidden" aria-labelledby="accordion-collapse-heading-4-10">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Le taux d'intérêt n'est pas négociable mais peut varier à la hausse comme à la baisse en fonction de l'évolution des taux du marché et par décision de la banque. 
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-4-11">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-11" aria-expanded="false" aria-controls="accordion-collapse-body-4-11">
+                        <span>Qu'est-ce qu'un intérêt capitalisé ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-11" class="hidden" aria-labelledby="accordion-collapse-heading-4-11">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Opération consistant à ajouter les intérêts au capital afin de les faire eux-mêmes fructifier. 
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-4-12">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-4-12" aria-expanded="false" aria-controls="accordion-collapse-body-4-12">
+                        <span>Comment fonctionne le Compte épargne après ouverture ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-4-12" class="hidden" aria-labelledby="accordion-collapse-heading-4-12">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Vous pouvez effectuer les opérations suivantes :
+                            <ul>
+                                <li>Créditer votre compte au moyen de versement d'espèces, virements compte à compte.</li>
+                                <li>Débiter votre compte par des retraits d'espèces, virements compte à compte. </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Découvert</h3>
+
+                <div id="accordion-collapse-5" data-accordion="collapse">
+                    <h2 id="accordion-collapse-heading-5-1">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-5-1" aria-expanded="true" aria-controls="accordion-collapse-body-5-1">
+                        <span>Qu'est-ce qu'un découvert ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5-1" class="hidden" aria-labelledby="accordion-collapse-heading-5-1">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Ce mot ramène à plusieurs réalités bancaires. Un découvert, c'est tout d'abord, lorsqu'un compte présente un solde négatif, non autorisé. Dans ce cas, l'on parlera de compte à découvert. C'est ensuite la possibilité offerte par la banque au client salarié domicilié, de pouvoir bénéficier d'une marge de manoeuvre financière, à importance relative et proportionnelle ; en attendant le virement de son salaire. Cette seconde approche est assujettie à une autorisation préalable de la banque : on parlera ici de bénéficier dun découvert.
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-5-2">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-5-2" aria-expanded="false" aria-controls="accordion-collapse-body-5-2">
+                        <span>Combien paye-t-on en frais de dossier pour un découvert ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5-2" class="hidden" aria-labelledby="accordion-collapse-heading-5-2">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Lors de la mise en place de l'autorisation de découvert, un taux de 2% du montant à sera prélevé au titre des frais de dossier. Cette mesure entrera en application au cours du premier semestre 2018. En attendant sa mise en vigueur, il n'y a pas de facturation.
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-5-3">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-5-3" aria-expanded="false" aria-controls="accordion-collapse-body-5-3">
+                        <span>Combien prélève la banque au titre des commissions sur découvert ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5-3" class="hidden" aria-labelledby="accordion-collapse-heading-5-3">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                            Pour l'heure, la banque ne prélève pas de commissions sur les découverts utilisés par les clients. 
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-5-4">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-5-4" aria-expanded="false" aria-controls="accordion-collapse-body-5-4">
+                        <span>Puis-je bénéficier d'un découvert pour un Compte Chèque ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5-4" class="hidden" aria-labelledby="accordion-collapse-heading-5-4">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            L'accès au découvert est conditionné par une domiciliation préalable de salaires ou de revenus réguliers. Ensuite le client devra en faire la demande (hors package) ou en bénéficier automatiquement (en package). Les éventuelles spécifications seront apportées par le conseiller de clientèle.
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-5-5">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-5-5" aria-expanded="false" aria-controls="accordion-collapse-body-5-5">
+                        <span>Quelles sont les conséquences en cas de compte à découvert ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5-5" class="hidden" aria-labelledby="accordion-collapse-heading-5-5">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Le client paiera des agios à la banque.
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-5-6">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-5-6" aria-expanded="false" aria-controls="accordion-collapse-body-5-6">
+                        <span>Qu'est-ce qu'un agio ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5-6" class="hidden" aria-labelledby="accordion-collapse-heading-5-6">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Ce sont les intérêts perçus par la banque, généralement à l'occasion d'un découvert sur le compte en date de valeur. 
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-5-7">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-5-7" aria-expanded="false" aria-controls="accordion-collapse-body-5-7">
+                        <span>Comment se calcule l'agio ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5-7" class="hidden" aria-labelledby="accordion-collapse-heading-5-7">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Il est calculé en fonction de la somme, de la durée et du taux d'intérêt du découvert auxquels s'ajoutent les frais et commissions. 
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-5-8">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-5-8" aria-expanded="false" aria-controls="accordion-collapse-body-5-8">
+                        <span>Qu'appelle t-on conditions de banque ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-5-8" class="hidden" aria-labelledby="accordion-collapse-heading-5-8">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            <p>Les conditions de banque sont un catalogue des frais des différentes prestations fournies par la banque, à la clientèle.
+                            <br>Cet état est mis à jour, en fonction de l'évolution du marché bancaire et des mesures internes de la banque, en termes de perspectives nouvelles ou de nouvelles offres (produits ou services).</p>
+                            <p>Règlementairement, les conditions de banque font l'objet de publications dans un Journal d'annonces légales et doivent impérativement faire l'objet d'affichage dans les différents points d'accueil clientèle (Agences et Cash Points) de la banque.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-gray-900 mt-4 mb-2">Packs Prioritaires</h3>
+
+                <div id="accordion-collapse-6" data-accordion="collapse">
+                    <h2 id="accordion-collapse-heading-6-1">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-6-1" aria-expanded="true" aria-controls="accordion-collapse-body-6-1">
+                        <span>Qu'est-ce qu'une offre packagée ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-6-1" class="hidden" aria-labelledby="accordion-collapse-heading-6-1">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Les Packages sont des offres globales de plusieurs produits, adressées par catégorie segmentée, à un groupe de clients, assorties d'un coût optimisé. Ces offres ont pour rôle d'améliorer l'expérience bancaire des clients avec leur banque, par un champ d'action plus vaste et une autonomie plus accrue.
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-6-2">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-6-2" aria-expanded="false" aria-controls="accordion-collapse-body-6-2">
+                        <span>Combien de packages propose la BNI ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-6-2" class="hidden" aria-labelledby="accordion-collapse-heading-6-2">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                        Pour l'heure, la BNI met à la disposition de sa clientèle 04 packages dit prioritaires. D'autres spécifiques suivront dans l'évolution de l'activité commerciale de la banque. 
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-6-3">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-6-3" aria-expanded="false" aria-controls="accordion-collapse-body-6-3">
+                        <span>Pourquoi opter pour un package ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-6-3" class="hidden" aria-labelledby="accordion-collapse-heading-6-3">
+                        <div class="p-5 border border-b-0 border-gray-200">
+                            L'option d'un package pour un client lui confère :<br>
+                            une autonomie plus importante dans la gestion de son compte, par la disposition d'une large palette de produits et services associés ; une économie réalisée sur les coûts pondérés des produits et services mis à disposition ; une gratuité sur certains services facturés hors packages.
+                        </div>
+                    </div>
+                    <h2 id="accordion-collapse-heading-6-4">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-6-4" aria-expanded="false" aria-controls="accordion-collapse-body-6-4">
+                        <span>Est-ce obligatoire pour un client de souscrire à une offre packagée ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-6-4" class="hidden" aria-labelledby="accordion-collapse-heading-6-4">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            Non, la souscription à une offre packagée n'est pas obligatoire. Le Conseiller de Clientèle devra s'appliquer à convaincre le client pour la souscription à un package ; à charge pour ce dernier d'y adhérer ou non, et se résoudre à une offre hors package.
+                        </div>
+                    </div>
+
+                    <h2 id="accordion-collapse-heading-6-5">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-6-5" aria-expanded="false" aria-controls="accordion-collapse-body-6-5">
+                        <span>Quelles sont les intérêts et avantages par Packages ?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-6-5" class="hidden" aria-labelledby="accordion-collapse-heading-6-5">
+                        <div class="p-5 border border-t-0 border-gray-200">
+                            1/4 PACK PRESTIGE<br>
+                            Plus d'Autonomie / Pratique Avec BNI ONLINE, le service de banque à distance, confère au client, une très grande autonomie d'action, dans la gestion de son compte, 24H / 7jr<br>
+                            Initiation de virements ponctuels et/ou permanents, Suivi des engagements, Consultation du cours des devises et de la bourse, Réception d'alertes mails et SMS.Une Relation privilégiée plus affinée<br>
+                            Conseils personnalisés pour la gestion de patrimoine, d'actifs ou pour de l'épargne rémunérée, grâce à la synergie avec nos filiales BNI GESTION et BNI FINANCES. Une carte bancaire avec un plafond adaptable à la demande (lors des déplacements à l'étranger).Tout ce traitement à seulement 12.000 FCFA HT/mois.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{# <script src="{{asset('assets/js/mixitup.min.js')}}"></script> #}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const faqCards = document.querySelectorAll('.faq__card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.getAttribute('data-filter');
+
+            // Set active tab
+            filterButtons.forEach(b => b.classList.remove('text-[#2b62aa]', 'bg-gray-100'));
+            button.classList.add('text-[#2b62aa]', 'bg-gray-100');
+
+            // Show/hide FAQ cards
+            faqCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

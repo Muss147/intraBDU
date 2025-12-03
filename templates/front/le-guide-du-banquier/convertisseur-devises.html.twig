@@ -1,0 +1,186 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Convertisseur de devises" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">Convertisseur de devises</h2>
+
+        <div class="max-w-7xl mx-auto py-4">
+            <!-- Titre -->
+            <h2 class="text-white bg-green-800 py-3 px-6 text-xl font-bold rounded-t-md">CONVERTISSEUR DE DEVISE</h2>
+
+            <!-- Bloc principal -->
+            <div class="bg-white p-6 rounded-b-md shadow grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Bloc 1 : Devise source -->
+                <div class="bg-gray-50 p-4 rounded shadow flex flex-col gap-3">
+                    <label class="text-sm font-semibold">Veuillez sélectionner une devise</label>
+                    <select id="fromCurrency" class="border rounded px-3 py-2">
+                        <option value="EUR">Union Européenne Euro - EURO</option>
+                        <option value="USD">Dollar Américain</option>
+                        <option value="FCFA">Franc CFA (BEAC) (XAF)</option>
+                        <option value="JPY">Yen Japonais</option>
+                        <option value="GBP">Livre sterling</option>
+                        <option value="CHF">Franc suisse</option>
+                        <option value="CAD">Dollar canadien</option>
+                    </select>
+
+                    <label class="text-sm mt-2">Merci d'entrer un montant</label>
+                    <div class="flex items-center gap-2">
+                        <input id="fromAmount" type="number" step="any" class="border rounded px-3 py-2 w-full" value="1">
+                        <span id="fromLabel" class="bg-green-700 text-white text-sm font-bold px-3 py-2 rounded">EURO</span>
+                    </div>
+                </div>
+
+                <!-- Bloc égal -->
+                <div class="flex items-center justify-center text-4xl font-bold">=</div>
+
+                <!-- Bloc 2 : Devise cible -->
+                <div class="bg-gray-50 p-4 rounded shadow flex flex-col gap-3">
+                    <label class="text-sm font-semibold">Veuillez sélectionner une devise</label>
+                    <select id="toCurrency" class="border rounded px-3 py-2">
+                        <option value="FCFA">Franc CFA (BEAC) (XAF)</option>
+                        <option value="USD">Dollar Américain</option>
+                        <option value="EUR">Union Européenne Euro - EURO</option>
+                        <option value="JPY">Yen Japonais</option>
+                        <option value="GBP">Livre sterling</option>
+                        <option value="CHF">Franc suisse</option>
+                        <option value="CAD">Dollar canadien</option>
+                    </select>
+
+                    <label class="text-sm mt-2">Merci d'entrer un montant</label>
+                    <div class="flex items-center gap-2">
+                        <input id="toAmount" type="text" class="border rounded px-3 py-2 w-full bg-gray-100" readonly>
+                        <span id="toLabel" class="bg-green-700 text-white text-sm font-bold px-3 py-2 rounded">FCFA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau de taux -->
+            <div class="overflow-x-auto mt-8">
+                <table class="min-w-full border border-gray-300 text-sm text-left">
+                    <thead class="bg-gray-100 font-bold">
+                        <tr>
+                            <th class="border px-4 py-2">Devise</th>
+                            <th class="border px-4 py-2">Libellé</th>
+                            <th class="border px-4 py-2" id="col-1">1</th>
+                            <th class="border px-4 py-2" id="col-5">5</th>
+                            <th class="border px-4 py-2" id="col-50">50</th>
+                            <th class="border px-4 py-2" id="col-250">250</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rateTableBody" class="bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+    const rates = {
+        EUR: 1,
+        FCFA: 655.957,
+        USD: 1.1031,
+        JPY: 119.4,
+        GBP: 0.87983,
+        CHF: 1.0983,
+        CAD: 1.4576
+    };
+
+    const currencyLabels = {
+        EUR: "Union Européenne Euro",
+        FCFA: "Franc CFA (BEAC) (XAF)",
+        USD: "Dollar Américain",
+        JPY: "Yen Japonais",
+        GBP: "Livre sterling",
+        CHF: "Franc suisse",
+        CAD: "Dollar canadien"
+    };
+
+    const fromCurrency = document.getElementById('fromCurrency');
+    const fromAmount = document.getElementById('fromAmount');
+    const fromLabel = document.getElementById('fromLabel');
+
+    const toCurrency = document.getElementById('toCurrency');
+    const toAmount = document.getElementById('toAmount');
+    const toLabel = document.getElementById('toLabel');
+
+    const rateTableBody = document.getElementById('rateTableBody');
+    const quantities = [1, 5, 50, 250];
+
+    function updateLabels() {
+        fromLabel.innerText = fromCurrency.value;
+        toLabel.innerText = toCurrency.value;
+    }
+
+    function convertAmount() {
+        const from = fromCurrency.value;
+        const to = toCurrency.value;
+        const amount = parseFloat(fromAmount.value) || 0;
+
+        if (rates[from] && rates[to]) {
+            const result = (amount * rates[to]) / rates[from];
+            toAmount.value = result.toFixed(3);
+        } else {
+            toAmount.value = '';
+        }
+    }
+
+    function updateRateTable() {
+        const baseCurrency = fromCurrency.value;
+        const amount = parseFloat(fromAmount.value) || 1;
+
+        // Met à jour les en-têtes du tableau
+        quantities.forEach(q => {
+            const header = document.getElementById(`col-${q}`);
+            if (header) {
+                header.innerText = `${q} ${baseCurrency}`;
+            }
+        });
+
+        rateTableBody.innerHTML = '';
+
+        for (const [currency, rate] of Object.entries(rates)) {
+            if (currency === baseCurrency) continue;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="border px-4 py-2 font-bold">${currency}</td>
+                <td class="border px-4 py-2">${currencyLabels[currency]}</td>
+                ${quantities.map(q => {
+                    const baseRate = rates[baseCurrency];
+                    const converted = (q * amount * rate) / baseRate;
+                    return `<td class="border px-4 py-2">${converted.toFixed(3)}</td>`;
+                }).join('')}
+            `;
+            rateTableBody.appendChild(row);
+        }
+    }
+
+    function updateAll() {
+        updateLabels();
+        convertAmount();
+        updateRateTable();
+    }
+
+    // Écouteurs
+    fromCurrency.addEventListener('change', updateAll);
+    toCurrency.addEventListener('change', updateAll);
+    fromAmount.addEventListener('input', updateAll);
+
+    // Initialisation
+    updateAll();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Politique de confidentialité" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">Politique de confidentialité</h2>
+        
+        <div id="default-styled-tab-content">
+            <div class="p-8 md:px-16 rounded-lg bg-gray-100 space-y-4" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
+                
+                <h3 class="font-semibold">1. Introduction</h3>
+
+                <p>La Banque de Développement de l’Union (BDU) accorde une importance primordiale à la protection des données personnelles de ses collaborateurs. Cette Politique de Confidentialité décrit les types d’informations collectées via l’Intranet BDU, la manière dont elles sont utilisées, protégées et les droits des utilisateurs.</p>
+
+                <h3 class="font-semibold">2. Données collectées</h3>
+
+                <p>Lors de l’utilisation de l’intranet, les types de données susceptibles d’être collectées comprennent :</p>
+                <ul>
+                    <li>Données d’identification : nom, prénom, adresse email professionnelle, matricule, service, photo de profil.</li>
+                    <li>Données de connexion : identifiants, adresse IP, date et heure de connexion.</li>
+                    <li>Contenus partagés : messages, documents, idées soumises, votes.</li>
+                    <li>Données de navigation : pages consultées, temps de connexion.</li>
+                </ul>
+
+                <h3 class="font-semibold">3. Finalités de la collecte</h3>
+
+                <p>Les données collectées sont utilisées exclusivement pour :</p>
+                <ul>
+                    <li>L’authentification et la gestion des accès à l’intranet.</li>
+                    <li>Le fonctionnement des services internes (messagerie, agenda, vote du salarié du mois, soumission d’idées, consultation de documents, etc.).</li>
+                    <li>Le suivi de l’engagement et de la participation des collaborateurs.</li>
+                    <li>La sécurité informatique et la prévention des usages non autorisés.</li>
+                </ul>
+
+                <h3 class="font-semibold">4. Base légale du traitement</h3>
+
+                <p>Le traitement des données repose sur l’intérêt légitime de la BDU à assurer une communication interne efficace, sécurisée et conforme aux exigences professionnelles, ainsi que sur le consentement des utilisateurs pour certaines fonctionnalités (ex. : photo de profil, participation volontaire à des votes).</p>
+            </div>
+            <div class="hidden p-8 md:px-16 rounded-lg bg-gray-100 space-y-4" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                <h3 class="font-semibold">5. Durée de conservation</h3>
+
+                <p>Les données sont conservées pour une durée n’excédant pas celle nécessaire aux finalités pour lesquelles elles sont collectées, sauf obligation légale spécifique. Par exemple :</p>
+                <ul>
+                    <li>>Données de connexion : 12 mois.</li>
+                    <li>>Contenus partagés : jusqu’à suppression ou anonymisation après départ du collaborateur.</li>
+                </ul>
+
+                <h3 class="font-semibold">6. Sécurité des données</h3>
+
+                <p>La BDU met en œuvre des mesures techniques et organisationnelles pour protéger les données contre toute perte, accès non autorisé ou divulgation. L’accès à l’intranet est sécurisé par des identifiants personnels et des contrôles d’accès.</p>
+
+                <h3 class="font-semibold">7. Accès et partage des données</h3>
+
+                <p>Les données sont accessibles uniquement :</p>
+                <ul>
+                    <li>>Aux collaborateurs habilités en interne (ex. : équipe RH, DSI).</li>
+                    <li>>À certains prestataires techniques agissant pour le compte de la BDU, dans le respect de la confidentialité et des lois applicables.</li>
+                </ul>
+
+                <p>Aucune donnée n’est vendue, louée ou transmise à des tiers non autorisés.</p>
+            </div>
+            <div class="hidden p-8 md:px-16 rounded-lg bg-gray-100 space-y-4" id="styled-contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                <h3 class="font-semibold">8. Droits des utilisateurs</h3>
+
+                <p>Conformément aux réglementations en vigueur (notamment la loi sur la protection des données à caractère personnel), chaque utilisateur dispose de :</p>
+                <ul>
+                    <li>>Un droit d’accès à ses données.</li>
+                    <li>>Un droit de rectification ou de mise à jour.</li>
+                    <li>>Un droit d’opposition ou de suppression dans certains cas.</li>
+                    <li>>Un droit à la limitation du traitement.</li>
+                </ul>
+
+                <p>Pour exercer ces droits, contacter : nkouamelan@bduci.com ou via le formulaire dédié sur l’intranet.</p>
+
+                <h3 class="font-semibold">9. Modification de la politique</h3>
+
+                <p>La BDU se réserve le droit de modifier cette politique de confidentialité à tout moment. Toute modification importante sera communiquée via l’intranet.</p>
+
+                <h3 class="font-semibold">10. Contact</h3>
+
+                <p>Pour toute question relative à cette politique, vous pouvez contacter notre Délégué à la Protection des Données (DPO) à l’adresse suivante : <b>Nadine KOUAMELAN</b> <a href="mailto:nkouamelan@bduci.com">nkouamelan@bduci.com</a></p>
+            </div>
+        </div>
+        <div class="flex justify-end gap-2 mt-4 items-center">
+            <button id="prevTab" class="bg-gray-300 text-gray-700 px-4 py-2 rounded text-center inline-flex items-center disabled:hidden" disabled>
+                <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/></svg>
+                Précédent
+            </button>
+            <button id="nextTab" class="bg-gray-300 text-gray-700 px-4 py-2 rounded text-center inline-flex items-center">
+                Suivant
+                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>
+            </button>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const steps = Array.from(document.querySelectorAll('#default-styled-tab-content > div'));
+        const nextBtn = document.getElementById('nextTab');
+        const prevBtn = document.getElementById('prevTab');
+        let currentStep = 0;
+
+        function showStep(index) {
+            steps.forEach((step, i) => {
+                if (i === index) {
+                    step.classList.remove('hidden');
+                } else {
+                    step.classList.add('hidden');
+                }
+            });
+
+            // Gérer les états des boutons
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === steps.length - 1;
+            prevBtn.classList.toggle('hidden', index === 0);
+            nextBtn.classList.toggle('hidden', index === steps.length - 1);
+            document.getElementById('default-styled-tab-content').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        nextBtn.addEventListener('click', function () {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        prevBtn.addEventListener('click', function () {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        // Initialisation
+        showStep(currentStep);
+
+    });
+</script>
+{% endblock %}

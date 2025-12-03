@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--
+Author: Moussa Fofana
+Product Name: IntraWeb BDU-CI
+Website: https://www.moussa-fofana.site
+Email: hello@moussa-fofana.com
+Contact: +225 07 471 612 21
+-->
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="author" content="EMF Technologies : Moussa Fofana" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %} | Intraweb BDU-CI</title>
+        <meta name="keywords" content="{% block keywords %}{% endblock %}">
+        <meta name="description" content="{% block description %}{% endblock %}">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicons/apple-touch-icon.png')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicons/favicon-32x32.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicons/favicon-16x16.png')}}">
+        <link rel="manifest" href="{{asset('assets/favicons/site.webmanifest')}}">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        
+        {# <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" /> #}
+        
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% if themeCovers.mobile %}
+        <style>
+            @media (max-width: 768px) {
+                body { background-image: url('{{ asset(themeCovers.mobile.filename) }}') !important; }
+            }
+        </style>
+        {% endif %}
+    </head>
+    <body class="bg-white text-gray-800 font-[Roboto] text-base bg-cover bg-center bg-no-repeat" 
+        {% if themeCovers.desktop %}style="background-image: url({{asset(themeCovers.desktop.filename)}});"{% endif %}>
+        <!-- Header -->
+        
+        {{ render(controller('App\\Controller\\FrontController::header')) }}
+
+        <!-- Contenu principal -->
+        <main class="relative">
+            {% if breadcrumbs is defined %}
+            <div class="max-w-screen-xl mx-auto px-4 mt-6">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                        {% for crumb in breadcrumbs %}
+                            {% if loop.first %}
+                            <li class="inline-flex items-center">
+                                <a href="{{ path(crumb.route) }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-[#2b62aa]">
+                                    <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+                                    </svg>
+                                    {{ crumb.label }}
+                                </a>
+                            </li>
+                            {% else %}
+                            <li {% if loop.last %}aria-current="page"{% endif %}>
+                                <div class="flex items-center">
+                                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                    </svg>
+                                    {% if not loop.last %}
+                                    <a href="{{ crumb.route ? path(crumb.route, crumb.params|default({})) }}" class="ms-1 text-sm font-medium text-gray-700 hover:text-[#2b62aa] md:ms-2">{{ crumb.label }}</a>
+                                    {% else %}
+                                        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2">{{ crumb.label }}</span>
+                                    {% endif %}
+                                </div>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
+                </nav>
+            </div>
+            {% endif %}
+
+            {% block body %}{% endblock %}
+            
+            <!-- Équivalent de ::after -->
+            <div id="mainAfter" class="hidden absolute inset-0 backdrop-blur-sm z-[9]"></div>
+        </main>
+
+        <!-- Footer -->
+        {% include "front/_footer.html.twig" %}
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script> -->
+        
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                const toggleBtn = document.getElementById("menu-toggle");
+                const topLine = toggleBtn.querySelector('.line-top');
+                const middleLine = toggleBtn.querySelector('.line-middle');
+                const bottomLine = toggleBtn.querySelector('.line-bottom');
+
+                const navMenu = document.querySelector('header.main-menu nav');
+                const navMenuForm = document.querySelector('header.main-menu form');
+                const supMenu = document.querySelector('.sup-menu');
+                const mainAfter = document.querySelector('#mainAfter');
+
+                toggleBtn.addEventListener("click", () => {
+                    toggleBtn.classList.toggle("is-menuDisplayed");
+
+                    if (toggleBtn.classList.contains("is-menuDisplayed")) {
+                        topLine.classList.add("rotate-45", "translate-y-1");
+                        bottomLine.classList.add("-rotate-45", "-translate-y-1");
+                        middleLine.classList.add("opacity-0");
+
+                        navMenu.classList.remove("hidden", "items-center");
+                        navMenu.classList.add("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
+                        navMenuForm.classList.remove("border-l");
+
+                        supMenu.classList.remove("hidden");
+                        supMenu.classList.add("absolute", "p-5", "shadow-xl");
+
+                        mainAfter.classList.remove("hidden");
+                    } else closeMenu();
+                });
+
+                mainAfter.addEventListener("click", () => {closeMenu()});
+                
+                function closeMenu() {
+                    topLine.classList.remove("rotate-45", "translate-y-1");
+                    bottomLine.classList.remove("-rotate-45", "-translate-y-1");
+                    middleLine.classList.remove("opacity-0");
+
+                    navMenu.classList.add("hidden", "items-center");
+                    navMenu.classList.remove("absolute", "flex", "flex-col", "w-full", "border-y-2", "px-5");
+                    navMenuForm.classList.add("border-l");
+
+                    supMenu.classList.add("hidden");
+                    supMenu.classList.remove("absolute", "p-5", "shadow-xl");
+
+                    mainAfter.classList.add("hidden");
+                }
+
+                const research = document.querySelector('[name="research"]');
+                const div = research.closest('div.relative');
+                const label = research.closest('form').querySelector('label');
+
+                research.addEventListener('focus', (e) => {
+                    label.classList.add('hidden');
+                    div.classList.add('w-[296px]');
+                });
+                research.addEventListener('blur', (e) => {
+                    label.classList.remove('hidden');
+                    div.classList.remove('w-[296px]');
+                })
+            })
+        </script>
+    </body>
+</html>

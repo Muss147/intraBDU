@@ -1,0 +1,154 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Mon livret d'acceuil" %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style type="text/css">
+    #flipbook {
+      width: 800px;
+      height: 600px;
+      margin: auto;
+    }
+    #flipbook .page {
+      width: 400px;
+      height: 600px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Boutons */
+    .flipbook-controls {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .flipbook-controls button {
+        background: #2b62aa;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    .flipbook-controls button:hover {
+        background: #1e467b;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">Mon livret d'acceuil</h2>
+        
+        <div class="bg-blue-100 p-10 rounded-sm relative">
+            <!-- Loader -->
+            <div id="flipbook-loader" class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 z-10">
+                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
+            </div>
+
+            <!-- Flipbook -->
+            <div id="flipbook"></div>
+
+            <!-- Boutons de navigation -->
+            <div class="flipbook-controls">
+                <button id="firstPage">⏮ Première</button>
+                <button id="prevPage">◀ Précédente</button>
+                <button id="nextPage">Suivante ▶</button>
+                <button id="lastPage">Dernière ⏭</button>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js"></script>
+<script src="{{ asset('assets/libs/turnjs/turn.min.js') }}"></script>
+
+<script type="text/javascript">
+    const url = "{{ asset('assets/docs/livret-dacceuilBDU-CI-AOUT.pdf') }}";
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
+
+    pdfjsLib.getDocument(url).promise.then(async (pdf) => {
+        const flipbook = document.getElementById('flipbook');
+        const loader = document.getElementById('flipbook-loader'); // 👈 loader
+
+        // largeur d'affichage souhaitée pour UNE page (en CSS pixels)
+        const targetDisplayWidth = 400;
+
+        function renderPageToCanvas(pageNum) {
+            return pdf.getPage(pageNum).then(page => {
+                const unscaledViewport = page.getViewport({ scale: 1 });
+                const scale = targetDisplayWidth / unscaledViewport.width;
+                const pxRatio = window.devicePixelRatio || 1;
+                const renderScale = scale * pxRatio;
+
+                const viewport = page.getViewport({ scale: renderScale });
+
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                canvas.width = Math.floor(viewport.width);
+                canvas.height = Math.floor(viewport.height);
+                canvas.style.width = Math.floor(unscaledViewport.width * scale) + 'px';
+                canvas.style.height = Math.floor(unscaledViewport.height * scale) + 'px';
+
+                return page.render({ canvasContext: context, viewport }).promise.then(() => canvas);
+            });
+        }
+
+        // Promises pour chaque page
+        const renderPromises = [];
+        for (let i = 1; i <= pdf.numPages; i++) {
+            renderPromises.push(renderPageToCanvas(i));
+        }
+
+        try {
+            const canvases = await Promise.all(renderPromises);
+
+            canvases.forEach(canvas => {
+                const pageDiv = document.createElement('div');
+                pageDiv.classList.add('page');
+                pageDiv.appendChild(canvas);
+                flipbook.appendChild(pageDiv);
+            });
+
+            // Initialiser turn.js
+            $('#flipbook').turn({
+                width: 800,
+                height: 600,
+                autoCenter: true
+            });
+
+            // Masquer le loader après le rendu complet
+            loader.style.display = 'none';
+
+            // Boutons navigation
+            $('#firstPage').on('click', () => $('#flipbook').turn('page', 1));
+            $('#lastPage').on('click', () => $('#flipbook').turn('page', pdf.numPages));
+            $('#nextPage').on('click', () => $('#flipbook').turn('next'));
+            $('#prevPage').on('click', () => $('#flipbook').turn('previous'));
+
+        } catch (err) {
+            console.error('Erreur lors du rendu des pages PDF :', err);
+            loader.innerHTML = "<p class='text-red-600 font-bold'>Erreur de chargement du document</p>";
+        }
+    }).catch(err => {
+        console.error('Impossible de charger le PDF :', err);
+        document.getElementById('flipbook-loader').innerHTML = "<p class='text-red-600 font-bold'>Impossible de charger le PDF</p>";
+    });
+</script>
+{% endblock %}

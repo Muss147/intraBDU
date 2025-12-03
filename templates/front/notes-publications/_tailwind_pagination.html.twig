@@ -1,0 +1,32 @@
+{% if pagination.pageCount > 1 %}
+<nav class="flex justify-center mt-8">
+    <ul class="inline-flex -space-x-px text-base h-10">
+        {% if pagination.previous is defined %}
+            <li>
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({ (pagination.parameterName): pagination.previous })) }}"
+                   class="px-4 py-2 border bg-white hover:bg-gray-100">Précédent</a>
+            </li>
+        {% endif %}
+
+        {% for page in pagination.pagesInRange %}
+            {% if page != pagination.current %}
+                <li>
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({ (pagination.parameterName): page })) }}"
+                       class="px-4 py-2 border bg-white hover:bg-gray-100">{{ page }}</a>
+                </li>
+            {% else %}
+                <li>
+                    <span class="px-4 py-2 border bg-blue-50 text-blue-600">{{ page }}</span>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if pagination.next is defined %}
+            <li>
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({ (pagination.parameterName): pagination.next })) }}"
+                   class="px-4 py-2 border bg-white hover:bg-gray-100">Suivant</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}

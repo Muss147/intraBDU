@@ -1,0 +1,258 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Procédures" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">Les sujets les plus consultés</h2>
+        {% set total = moreViewed|length %}
+        {% set col1 = moreViewed|slice(0, 3) %}
+        {% set col2 = total > 3 ? moreViewed|slice(3, 3) : [] %}
+        {% set col3 = total > 6 ? moreViewed|slice(6, 3) : [] %}
+        
+        <div class="grid grid-cols-1 md:grid-cols-{{ total > 6 ? 3 : (total > 3 ? 2 : 1) }} gap-4">
+            {% for column in [col1, col2, col3] %}
+                {% if column is not empty %}
+                <div class="border border-{{ loop.index == 2 ? 'blue' : 'green' }}-500 flex flex-col justify-between p-4">
+                    {% for doc in column %}
+                        <a href="{{ asset(doc.source.filename|default('#')) }}" target="_blank" onclick="return oneMoreViewed(event, {{ doc.id }}, this)" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                            {{ doc.libelle }}
+                            <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {# <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="border border-green-500 flex flex-col justify-between p-4">
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Gestion des Promotions <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Gestion des Prêts <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Traitement des Opérations Comptables <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+            <div class="border border-blue-500 flex flex-col justify-between p-4">
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Suivi de la mise en œuvre des recommandations <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Mise en place des Crédits sollicités <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Levée des garanties <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+            <div class="border border-green-500 flex flex-col justify-between p-4">
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Effectuer les blocages et clôtures de Comptes <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Changement des Souris, Claviers, etc... <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="" target="_blank" class="inline-flex items-center hover:text-[#2b62aa] transition-colors duration-300 group">
+                    Gestion des Accès et Autorisation au Core Banking <svg class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L11.586 9 7.293 4.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+        </div> #}
+    </section>
+
+    <!-- Toutes les Procedures -->
+    <section class="pb-8">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">Toutes les Procedures</h2>
+
+        <div class="space-y-4">
+            {% if documents|length != 0 %}
+            <div class="bg-blue-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                {% for i, procedure in documents|slice(0, 12) %}
+                <div class="bg-white rounded shadow p-2 text-center">
+                    <button class="cursor-pointer" type="button" id="dropdownRightButton_blue_{{i}}" data-dropdown-toggle="dropdownRight_blue_{{i}}" data-dropdown-placement="right">
+                        <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
+                        <p class="text-sm mt-2">{{procedure.libelle}}</p>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdownRight_blue_{{i}}" class="text-start z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                            <div class="font-medium truncate">{{procedure.libelle}}</div>
+                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
+                        </div>
+                        <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_blue_{{i}}">
+                            {% for sousProcedure in procedure.children|filter(s => s.deletedAt == null) %}
+                                {% if sousProcedure.source %}
+                                <li>
+                                    <a href="{{sousProcedure.source.filename}}" target="_blank" onclick="return oneMoreViewed(event, {{ sousProcedure.id }}, this)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcedure.libelle}}</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <button id="doubleDropdownButton_blue_{{i}}" data-dropdown-toggle="doubleDropdown_blue_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        {{sousProcedure.libelle}}
+                                        <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                                    </button>
+                                    <div id="doubleDropdown_blue_{{i}}" class="z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                            <div class="font-medium truncate">{{sousProcedure.libelle}}</div>
+                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
+                                        </div>
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_blue_{{i}}">
+                                            {% for item in sousProcedure.children|filter(i => i.deletedAt == null) %}
+                                            <li>
+                                                <a href="{{item.source.filename}}" target="_blank" onclick="return oneMoreViewed(event, {{ item.id }}, this)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if documents|length > 12 %}
+            <div class="bg-gray-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                {% for i, procedure in documents|slice(13, 25) %}
+                <div class="bg-white rounded shadow p-2 text-center">
+                    <button class="cursor-pointer" type="button" id="dropdownRightButton_grey_{{i}}" data-dropdown-toggle="dropdownRight_grey_{{i}}" data-dropdown-placement="right">
+                        <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
+                        <p class="text-sm mt-2">{{procedure.libelle}}</p>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdownRight_grey_{{i}}" class="text-start z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                            <div class="font-medium truncate">{{procedure.libelle}}</div>
+                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
+                        </div>
+                        <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_grey_{{i}}">
+                            {% for sousProcedure in procedure.children|filter(s => s.deletedAt == null) %}
+                                {% if sousProcedure.source %}
+                                <li>
+                                    <a href="{{sousProcedure.source.filename}}" target="_blank" onclick="return oneMoreViewed(event, {{ sousProcedure.id }}, this)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcedure.libelle}}</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <button id="doubleDropdownButton_grey_{{i}}" data-dropdown-toggle="doubleDropdown_grey_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        {{sousProcedure.libelle}}
+                                        <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                                    </button>
+                                    <div id="doubleDropdown_grey_{{i}}" class="z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                            <div class="font-medium truncate">{{sousProcedure.libelle}}</div>
+                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
+                                        </div>
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_grey_{{i}}">
+                                            {% for item in sousProcedure.children|filter(i => i.deletedAt == null) %}
+                                            <li>
+                                                <a href="{{item.source.filename}}" target="_blank" onclick="return oneMoreViewed(event, {{ item.id }}, this)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if documents|length > 25 %}
+            <div class="bg-green-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                {% for i, procedure in documents|slice(26, 38) %}
+                <div class="bg-white rounded shadow p-2 text-center">
+                    <button class="cursor-pointer" type="button" id="dropdownRightButton_green_{{i}}" data-dropdown-toggle="dropdownRight_green_{{i}}" data-dropdown-placement="right">
+                        <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
+                        <p class="text-sm mt-2">{{procedure.libelle}}</p>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdownRight_green_{{i}}" class="text-start z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                            <div class="font-medium truncate">{{procedure.libelle}}</div>
+                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
+                        </div>
+                        <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_green_{{i}}">
+                            {% for sousProcedure in procedure.children|filter(s => s.deletedAt == null) %}
+                                {% if sousProcedure.source %}
+                                <li>
+                                    <a href="{{sousProcedure.source.filename}}" target="_blank" onclick="return oneMoreViewed(event, {{ sousProcedure.id }}, this)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcedure.libelle}}</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <button id="doubleDropdownButton_green_{{i}}" data-dropdown-toggle="doubleDropdown_green_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        {{sousProcedure.libelle}}
+                                        <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                                    </button>
+                                    <div id="doubleDropdown_green_{{i}}" class="z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                            <div class="font-medium truncate">{{sousProcedure.libelle}}</div>
+                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
+                                        </div>
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_green_{{i}}">
+                                            {% for item in sousProcedure.children|filter(i => i.deletedAt == null) %}
+                                            <li>
+                                                <a href="{{item.source.filename}}" target="_blank" onclick="return oneMoreViewed(event, {{ item.id }}, this)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    function oneMoreViewed(event, docId, el) {
+        event.preventDefault(); // empêche le lien de s'ouvrir directement
+
+        const url = el.getAttribute('href'); // destination finale
+
+        fetch(`/documents-de-reference/procedures/${docId}/increment-view`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: docId })
+        })
+        .then(response => response.json()) // on parse la réponse JSON
+        .then(data => {
+            console.log('Réponse AJAX:', data); // 👈 ici tu as ton console.log
+            // tu peux aussi afficher data.views si tu veux
+        })
+        .catch(err => console.error('Erreur AJAX:', err))
+        .finally(() => {
+            // Une fois la requête partie (réussie ou non), on redirige vers le doc
+            window.open(url, '_blank');
+        });
+
+        return false; // bloque la navigation par défaut
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+    });
+</script>
+{% endblock %}

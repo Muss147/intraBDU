@@ -1,0 +1,702 @@
+{% extends "layout.html.twig" %}
+
+{% block title "Contrats de "~ projet.nom %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack "></div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+
+				<!--begin::Navbar-->
+				{% include "projets/_details_navbar.html.twig" %}
+				<!--end::Navbar-->
+
+				<!--begin::Toolbar-->
+				<div
+					class="d-flex flex-wrap flex-stack pt-10 pb-8"> 
+					<!--begin::Heading-->
+					<h3 class="fw-bold my-2">
+						Contrats du projet
+						<span class="fs-6 text-gray-500 fw-semibold ms-1">Par ordre des mise à jour ↓</span>
+					</h3>
+					<!--end::Heading-->
+
+					<!--begin::Controls-->
+					<div
+						class="d-flex flex-wrap my-1">
+						<!--begin::Wrapper-->
+						<div
+							class="my-0">
+							<!--begin::Button-->
+                            <button type="button" class="btn btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_contrat">
+                                <i class="ki-duotone ki-plus fs-2"></i>
+                                Ajouter un contrat
+                            </button>
+							<!--end::Button-->
+						</div>
+						<!--end::Wrapper-->
+					</div>
+					<!--end::Controls-->
+				</div>
+				<!--end::Toolbar-->
+
+				<!--begin::Tab Content-->
+				<div
+					class="tab-content">
+					<!--begin::Card-->
+                    <div class="card  card-flush ">
+                        <div
+                            class="card-body pt-3">
+                            <!--begin::Table-->
+                            <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
+                                <thead class="fs-7 text-gray-500 text-uppercase">
+                                    <tr>
+                                        <th class="min-w-200px">Contrat</th>
+                                        <th class="min-w-90px">Type</th>
+                                        <th class="min-w-90px">Montant</th>
+                                        <th class="min-w-90px">Taux</th>
+                                        <th class="min-w-90px">Client</th>
+                                        <th class="min-w-90px">Status</th>
+                                        <th class="min-w-125px">Date début</th>
+                                        <th class="min-w-125px">Date fin</th>
+                                        <th class="min-w-90px">Chef</th>
+                                        <th class="min-w-75px bg-white">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fs-6">
+                                    {% for contrat in projet.contrats %}
+                                    <tr>
+                                        <td class="fw-bold">
+                                            <a href="{{path('contrat_details', {contrat: contrat.id})}}" class="text-gray-900 text-hover-primary">{{contrat.nom}}</a>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-light fw-semibold me-auto">{{contrat.typeTravaux.libelle}}</span>
+                                        </td>
+                                        <td>{{contrat.montant}}</td>
+                                        <td>{{contrat.tauxGarantie}}</td>
+                                        <td>
+                                            <div class="symbol-group symbol-hover fs-8">
+                                                <div class="symbol symbol-25px symbol-circle" data-bs-toggle="tooltip" title="{{contrat.client.nom}}">
+                                                    <img alt="Pic" src="{{asset('assets/media/svg/avatars/blank.svg')}}"/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-light-primary fw-bold me-auto">{{contrat.statut}}</span>
+                                        </td>
+                                        <td>{{contrat.dateDebut|date('d M Y')}}</td>
+                                        <td>{{contrat.dateFin|date('d M Y')}}</td>
+                                        <td>{{contrat.chefChantier.nomComplet}}</td>
+                                        <td class="text-end bg-white d-flex justify-content-between">
+											<!--begin::Menu-->
+											<a href="{{path('contrat_details', {contrat: contrat.id})}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les détails">
+												<i class="ki-duotone ki-eye fs-3">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+												</i>
+											</a>
+											<a href="javascript:;" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_edit_contrat" data-bs-ident="{{contrat.id}}">
+												<i class="ki-duotone ki-setting-3 fs-3">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+												</i>
+											</a>
+											<form class="d-inline" method="post" action="{{ path('contrat_delete', {'contrat': contrat.id}) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
+												<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contrat.id) }}">
+												<button type="button" class="btn btn-icon btn-active-light-danger w-30px h-30px" data-kt-project-contrat-filter="delete_row">
+													<i class="ki-duotone ki-trash fs-3">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+														<span class="path5"></span>
+													</i>
+												</button>
+											</form>
+											<!--end::Menu-->
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <!--end::Table-->
+                        </div>
+                    </div>
+					<!--end::Card-->
+				</div>
+				<!--end::Tab Content-->
+
+				<!--begin::Modals-->
+				<!--begin::Modal - Add parametres-->
+				<div
+					class="modal fade" id="kt_modal_add_contrat" tabindex="-1" aria-hidden="true"> <!--begin::Modal dialog-->
+					<div
+						class="modal-dialog modal-lg modal-dialog-centered">
+						<!--begin::Modal content-->
+						<div
+							class="modal-content">
+							<!--begin::Modal header-->
+							<div
+								class="modal-header">
+								<!--begin::Modal title-->
+								<h2 class="fw-bold">Ajout de contrat</h2>
+								<!--end::Modal title-->
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-contrat-modal-action="close">
+									<i class="ki-duotone ki-cross fs-1">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</div>
+								<!--end::Close-->
+							</div>
+							<!--end::Modal header-->
+
+							<!--begin::Modal body-->
+							<div
+								class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+								<!--begin::Form-->
+                                {{form_start(new_form, {'attr': {'id': 'kt_modal_add_contrat_form', 'class': 'form'}})}}
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Nom du contrat</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.nom, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer un nom au contrat'}})}}
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Type de contrat</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.typeTravaux, {'attr': {'class': 'form-select form-select-solid', 'data-control': 'select2', 'data-hide-search': 'true', 'data-placeholder': 'Sélectionner un type'}})}}
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Client</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.client, {'attr': {'class': 'form-select form-select-solid', 'data-placeholder': 'Sélectionner un client'}})}}
+									    <!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<div
+										class="row g-9 mb-7">
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="required fw-semibold fs-6 mb-2">Date de début</label>
+											<!--end::Label-->
+
+											<div class="position-relative d-flex align-items-center">
+												<i class="ki-duotone ki-calendar-8 position-absolute ms-4 mb-1 fs-2">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+													<span class="path6"></span>
+												</i>
+												<!--begin::Input-->
+												{{form_widget(new_form.dateDebut, {'attr': {'class': 'form-control form-control-solid kt_datepicker ps-12', 'placeholder': 'Choisir une date'}})}}
+												<!--end::Input-->
+											</div>
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="required fw-semibold fs-6 mb-2">Date de fin</label>
+											<!--end::Label-->
+
+
+											<div class="position-relative d-flex align-items-center">
+												<i class="ki-duotone ki-calendar-8 position-absolute ms-4 mb-1 fs-2">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+													<span class="path6"></span>
+												</i>
+												<!--begin::Input-->
+												{{form_widget(new_form.dateFin, {'attr': {'class': 'form-control form-control-solid kt_datepicker ps-12', 'placeholder': 'Choisir une date'}})}}
+												<!--end::Input-->
+											</div>
+										</div>
+										<!--end::Input group-->
+									</div>
+
+									<div
+										class="row g-9 mb-7">
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="required fw-semibold fs-6 mb-2">Montant</label>
+											<!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            {{form_widget(new_form.montant, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer un montant'}})}}
+                                            <!--end::Input-->
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="fw-semibold fs-6 mb-2">Taux de garantie</label>
+											<!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            {{form_widget(new_form.tauxGarantie, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer un pourcentage'}})}}
+                                            <!--end::Input-->
+										</div>
+										<!--end::Input group-->
+									</div>
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Chef de chantier</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.chefChantier, {'attr': {'class': 'form-select form-select-solid', 'data-placeholder': 'Sélectionner un chef'}})}}
+									    <!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">Description</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.description, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer une description'}})}}
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Actions-->
+									<div class="text-center pt-15">
+										<button type="reset" class="btn btn-light me-3" data-kt-contrat-modal-action="cancel">
+											Annuler
+										</button>
+
+										<button type="submit" class="btn btn-primary" data-kt-contrat-modal-action="submit">
+											<span class="indicator-label">
+												Soumettre
+											</span>
+											<span class="indicator-progress">
+												Veuillez patienter...
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+											</span>
+										</button>
+									</div>
+									<!--end::Actions-->
+								{{form_end(new_form)}}
+								<!--end::Form-->
+							</div>
+							<!--end::Modal body-->
+						</div>
+						<!--end::Modal content-->
+					</div>
+					<!--end::Modal dialog-->
+				</div>
+				<!--end::Modal - Add parametres-->
+
+				<!--begin::Modal - Edit parametres-->
+				<div
+					class="modal fade" id="kt_modal_edit_contrat" tabindex="-1" aria-hidden="true"> <!--begin::Modal dialog-->
+					<div
+						class="modal-dialog modal-lg modal-dialog-centered">
+						<!--begin::Modal content-->
+						<div
+							class="modal-content">
+							<!--begin::Modal header-->
+							<div
+								class="modal-header">
+								<!--begin::Modal title-->
+								<h2 class="fw-bold">Modification de contrat</h2>
+								<!--end::Modal title-->
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-contrat-modal-action="close">
+									<i class="ki-duotone ki-cross fs-1">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</div>
+								<!--end::Close-->
+							</div>
+							<!--end::Modal header-->
+
+							<!--begin::Modal body-->
+							<div
+								class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+								<!--begin::Form-->
+                                <form id="kt_modal_edit_contrat_form" class="form" method="POST" action="{{path('contrat_edit_wProjet', {projet: projet.id})}}">
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Nom du contrat</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        <input name="contrat_id" type="hidden">
+                                        <input name="contrat_nom" class="form-control form-control-solid" placeholder="Entrer un nom au contrat">
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Type de contrat</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        <select name="contrat_typeContrat" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Sélectionner un type">
+										</select>
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Client</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        <select name="contrat_client" class="form-select form-select-solid" data-placeholder="Sélectionner un client" data-control="select2">
+										</select>
+									    <!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<div
+										class="row g-9 mb-7">
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="required fw-semibold fs-6 mb-2">Date de début</label>
+											<!--end::Label-->
+
+											<div class="position-relative d-flex align-items-center">
+												<i class="ki-duotone ki-calendar-8 position-absolute ms-4 mb-1 fs-2">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+													<span class="path6"></span>
+												</i>
+												<!--begin::Input-->
+												<input name="contrat_dateDebut" class="form-control form-control-solid kt_datepicker ps-12" placeholder="Choisir une date">
+												<!--end::Input-->
+											</div>
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="required fw-semibold fs-6 mb-2">Date de fin</label>
+											<!--end::Label-->
+
+
+											<div class="position-relative d-flex align-items-center">
+												<i class="ki-duotone ki-calendar-8 position-absolute ms-4 mb-1 fs-2">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+													<span class="path6"></span>
+												</i>
+												<!--begin::Input-->
+												<input name="contrat_dateFin" class="form-control form-control-solid kt_datepicker ps-12" placeholder="Choisir une date">
+												<!--end::Input-->
+											</div>
+										</div>
+										<!--end::Input group-->
+									</div>
+
+									<div
+										class="row g-9 mb-7">
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="required fw-semibold fs-6 mb-2">Montant</label>
+											<!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input name="contrat_montant" class="form-control form-control-solid" placeholder="Entrer un montant">
+                                            <!--end::Input-->
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="fw-semibold fs-6 mb-2">Taux de garantie</label>
+											<!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input name="contrat_tauxGarantie" class="form-control form-control-solid" placeholder="Entrer un pourcentage">
+                                            <!--end::Input-->
+										</div>
+										<!--end::Input group-->
+									</div>
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Chef de chantier</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        <select name="contrat_chefChantier" class="form-select form-select-solid" data-placeholder="Sélectionner un chef" data-control="select2">
+										</select>
+									    <!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">Description</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        <textarea name="contrat_description" class="form-control form-control-solid" placeholder="Entrer une description"></textarea>
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Actions-->
+									<div class="text-center pt-15">
+										<button type="reset" class="btn btn-light me-3" data-kt-contrat-modal-action="cancel">
+											Annuler
+										</button>
+
+										<button type="submit" class="btn btn-primary" data-kt-contrat-modal-action="submit">
+											<span class="indicator-label">
+												Soumettre
+											</span>
+											<span class="indicator-progress">
+												Veuillez patienter...
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+											</span>
+										</button>
+									</div>
+									<!--end::Actions-->
+								</form>
+								<!--end::Form-->
+							</div>
+							<!--end::Modal body-->
+						</div>
+						<!--end::Modal content-->
+					</div>
+					<!--end::Modal dialog-->
+				</div>
+				<!--end::Modal - Edit parametres-->
+				<!--end::Modals-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/projects/details/contrats.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/projects/details/add-contrat.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/projects/details/update-contrat.js')}}"></script>
+
+    <script type="text/javascript">
+        
+        $(".kt_datepicker").flatpickr();
+        
+        // Format options
+        var optionFormat = function(item) {
+            if ( !item.id ) {
+                return item.text;
+            }
+
+            var span = document.createElement('span');
+            var imgUrl = item.element.getAttribute('data-kt-select2-user');
+            var template = '';
+
+            template += '<img src="' + imgUrl + '" class="border border-gray-200 rounded-circle h-20px me-2" alt="image"/>';
+            template += item.text;
+            span.innerHTML = template;
+            return $(span);
+        }
+
+        // Init Select2 --- more info: https://select2.org/
+        $('#contrats_client').select2({
+            templateSelection: optionFormat,
+            templateResult: optionFormat
+        });
+
+        // Init Select2 --- more info: https://select2.org/
+        $('#contrats_chefChantier').select2({
+            templateSelection: optionFormat,
+            templateResult: optionFormat
+        });
+
+		const contrats = {{ projet.contrats|map(p => {
+			id: p.id,
+			nom: p.nom,
+			type: p.typeTravaux,
+			client: p.client,
+			dateDebut: p.dateDebut ? p.dateDebut|date('Y-m-d') : null,
+			dateFin: p.dateFin ? p.dateFin|date('Y-m-d') : null,
+			montant: p.montant,
+			taux: p.tauxGarantie,
+			chef: p.chefChantier,
+			description: p.description,
+		})|json_encode|raw }};
+
+		const editModal = document.getElementById('kt_modal_edit_contrat');
+		const clients = {{ clients|map(c => { id: c.id, text: c.nom })|json_encode|raw }};
+		const typesTravaux = {{ typesTravaux|map(t => { id: t.id, text: t.libelle })|json_encode|raw }};
+		const chefsChantier = {{ chefsChantier|map(c => { id: c.id, text: c.nomComplet })|json_encode|raw }};
+
+		editModal.addEventListener('show.bs.modal', event => {
+			const contratId = event.relatedTarget.attributes['data-bs-ident'].value;
+			const contrat = contrats.find(c => c.id == contratId);
+			if (!contrat) return;
+
+			$(editModal).find('input[name="contrat_id"]').val(contrat.id);
+			$(editModal).find('input[name="contrat_nom"]').val(contrat.nom);
+			$(editModal).find('input[name="contrat_montant"]').val(contrat.montant);
+			$(editModal).find('input[name="contrat_tauxGarantie"]').val(contrat.taux);
+			$(editModal).find('textarea[name="contrat_description"]').text(contrat.description);
+			
+			// Date de début
+			const dpDebut = $(editModal).find('input[name="contrat_dateDebut"]').get(0);
+			if (dpDebut && dpDebut._flatpickr) {
+				dpDebut._flatpickr.setDate(contrat.dateDebut);
+			} else if (dpDebut) {
+				dpDebut.value = contrat.dateDebut;
+			}
+
+			// Date de fin
+			const dpFin = $(editModal).find('input[name="contrat_dateFin"]').get(0);
+			if (dpFin && dpFin._flatpickr) {
+				dpFin._flatpickr.setDate(contrat.dateFin);
+			} else if (dpFin) {
+				dpFin.value = contrat.dateFin;
+			}
+			// Sélections dynamiques
+			const $selectClient = $(editModal).find('select[name="contrat_client"]');
+			const $selectType = $(editModal).find('select[name="contrat_typeContrat"]');
+			const $selectChef = $(editModal).find('select[name="contrat_chefChantier"]');
+
+			remplirSelect2($selectClient, clients, contrat.client?.id);
+			remplirSelect2($selectType, typesTravaux, contrat.type?.id);
+			remplirSelect2($selectChef, chefsChantier, contrat.chef?.id);
+		});
+
+		function remplirSelect2($select, dataList, selectedId) {
+			$select.empty(); // Vide les options existantes
+			dataList.forEach(item => {
+				const isSelected = item.id === selectedId;
+				const option = new Option(item.text, item.id, isSelected, isSelected);
+				$select.append(option);
+			});
+			$select.trigger('change'); // Met à jour Select2
+		}
+
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+            Swal.fire({
+                html: `{{message|raw}}`,
+                icon: "{{type}}",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, compris !",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
+            {% endfor %}
+        {% endfor %}
+    </script>
+{% endblock %}

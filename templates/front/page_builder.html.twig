@@ -1,0 +1,44 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title page.titre %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style type="text/css">
+    {{page.style|clean_quill|raw}}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">{{page.titre}}</h2>
+        
+        {% if 'ql-code-block' in page.contenu %}
+            {{ page.contenu|clean_quill|raw }}
+        {% else %}
+            <p>{{ page.contenu|raw }}</p>
+        {% endif %}        
+
+    </section>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+    {# jQuery obligatoire #}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    {# PDF.js depuis unpkg #}
+    <script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js"></script>
+
+    {# Turn.js depuis unpkg #}
+    <script src="{{ asset('assets/libs/turnjs/turn.min.js') }}"></script>
+
+<script type="text/javascript">
+    {{page.script|clean_quill|raw}}
+</script>
+{% endblock %}

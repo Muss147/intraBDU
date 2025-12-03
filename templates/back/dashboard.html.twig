@@ -1,0 +1,840 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title %}Tableau de bord
+{% endblock %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<!--begin::Content wrapper-->
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Tableau de bord
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="" class="text-muted text-hover-primary">
+								Accueil
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Tableau de bord
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div
+					class="d-flex align-items-center gap-2 gap-lg-3">
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Row-->
+				<div
+					class="row gx-5 gx-xl-10 mb-xl-10">
+					<!--begin::Col-->
+					<div
+						class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-10">
+
+						<!--begin::Card widget 4-->
+						<div
+							class="card card-flush h-md-50 mb-5 mb-xl-10">
+							<!--begin::Header-->
+							<div
+								class="card-header pt-5">
+								<!--begin::Title-->
+								<div
+									class="card-title d-flex flex-column">
+									<!--begin::Info-->
+									<div
+										class="d-flex align-items-center">
+										<!--begin::Amount-->
+										<span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">{{offres|length < 10 ? "0"}}{{offres|length}}</span>
+										<!--end::Amount-->
+									</div>
+									<!--end::Info-->
+
+									<!--begin::Subtitle-->
+									<span class="text-gray-500 pt-1 fw-semibold fs-6">Offres d'emploi</span>
+									<!--end::Subtitle-->
+								</div>
+								<!--end::Title-->
+							</div>
+							<!--end::Header-->
+
+							<!--begin::Card body-->
+							<div
+								class="card-body pt-2 pb-4 d-flex align-items-center">
+								<!--begin::Chart-->
+								<div class="d-flex flex-center me-5 pt-2">
+									<div id="kt_card_widget_4_chart" style="min-width: 70px; min-height: 70px" data-kt-size="70" data-kt-line="11"></div>
+								</div>
+								<!--end::Chart-->
+
+								<!--begin::Labels-->
+								<div
+									class="d-flex flex-column content-justify-center w-100">
+									<!--begin::Label-->
+									<div
+										class="d-flex fs-6 fw-semibold align-items-center">
+										<!--begin::Bullet-->
+										<div class="bullet w-8px h-6px rounded-2 bg-danger me-3"></div>
+										<!--end::Bullet-->
+
+										<!--begin::Label-->
+										<div class="text-gray-500 flex-grow-1 me-4">Expirées</div>
+										<!--end::Label-->
+
+										<!--begin::Stats-->
+										{% set offresExpirees = offres|filter(o => o.dateExpiration <= "now"|date('U')) %}
+										<div class="fw-bolder text-gray-700 text-xxl-end">{{offresExpirees|length}}</div>
+										<!--end::Stats-->
+									</div>
+									<!--end::Label-->
+
+									<!--begin::Label-->
+									<div
+										class="d-flex fs-6 fw-semibold align-items-center my-3">
+										<!--begin::Bullet-->
+										<div class="bullet w-8px h-6px rounded-2 bg-[#2b62aa] me-3"></div>
+										<!--end::Bullet-->
+
+										<!--begin::Label-->
+										<div class="text-gray-500 flex-grow-1 me-4">Disponibles</div>
+										<!--end::Label-->
+
+										<!--begin::Stats-->
+										{% set offresDispo = offres|filter(o => o.dateExpiration > "now"|date('U')) %}
+										<div class="fw-bolder text-gray-700 text-xxl-end">{{offresDispo|length}}</div>
+										<!--end::Stats-->
+									</div>
+									<!--end::Label-->
+
+									<!--begin::Label-->
+									<div
+										class="d-flex fs-6 fw-semibold align-items-center">
+										<!--begin::Bullet-->
+										<div class="bullet w-8px h-6px rounded-2 me-3" style="background-color: #E4E6EF"></div>
+										<!--end::Bullet-->
+
+										<!--begin::Label-->
+										<div class="text-gray-500 flex-grow-1 me-4">Autre</div>
+										<!--end::Label-->
+
+										<!--begin::Stats-->
+										<div class=" fw-bolder text-gray-700 text-xxl-end">00</div>
+										<!--end::Stats-->
+									</div>
+									<!--end::Label-->
+								</div>
+								<!--end::Labels-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Card widget 4-->
+
+						<!--begin::Card widget 5-->
+						<div
+							class="card card-flush h-md-50 mb-xl-10">
+							<!--begin::Header-->
+							<div
+								class="card-header pt-5">
+								<!--begin::Title-->
+								<div
+									class="card-title d-flex flex-column">
+									<!--begin::Info-->
+									<div
+										class="d-flex align-items-center">
+										<!--begin::Amount-->
+										<span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">{{pagesViewed|length < 10 ? "0"}}{{pagesViewed}}</span>
+										<!--end::Amount-->
+
+										<!--begin::Badge-->
+										<span class="badge badge-light-danger fs-base">
+											<i class="ki-duotone ki-arrow-down fs-5 text-danger ms-n1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+											2.2%
+										</span>
+										<!--end::Badge-->
+									</div>
+									<!--end::Info-->
+
+									<!--begin::Subtitle-->
+									<span class="text-gray-500 pt-1 fw-semibold fs-6">Total de pages vues ce mois-ci</span>
+									<!--end::Subtitle-->
+								</div>
+								<!--end::Title-->
+							</div>
+							<!--end::Header-->
+
+							<!--begin::Card body-->
+							<div
+								class="card-body d-flex align-items-end pt-0">
+								<!--begin::Progress-->
+								<div class="d-flex align-items-center flex-column mt-3 w-100">
+									<div class="d-flex justify-content-between w-100 mt-auto mb-2">
+										<span class="fw-bolder fs-6 text-gray-900">Cela répresente</span>
+										<span class="fw-bold fs-6 text-gray-500">{{percentViewed}}%</span>
+									</div>
+
+									<div class="h-8px mx-3 w-100 bg-light-success rounded">
+										<div class="bg-success rounded h-8px" role="progressbar" style="width: {{percentViewed}}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+								<!--end::Progress-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Card widget 5-->
+					</div>
+					<!--end::Col-->
+
+					<!--begin::Col-->
+					<div
+						class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-10">
+						<!--begin::Card widget 6-->
+						<div
+							class="card card-flush  h-md-50 mb-5 mb-xl-10">
+							<!--begin::Header-->
+							<div
+								class="card-header pt-5">
+								<!--begin::Title-->
+								<div
+									class="card-title d-flex flex-column">
+									<!--begin::Info-->
+									<div
+										class="d-flex align-items-center">
+										<!--begin::Amount-->
+										<span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">{{bounceRate|length < 10 ? "0"}}{{bounceRate}}</span>
+										<!--end::Amount-->
+
+										<!--begin::Badge-->
+										<span class="badge badge-light-success fs-base">
+											<i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+											2.6%
+										</span>
+										<!--end::Badge-->
+									</div>
+									<!--end::Info-->
+
+									<!--begin::Subtitle-->
+									<span class="text-gray-500 pt-1 fw-semibold fs-6">Taux de rebond par jour</span>
+									<!--end::Subtitle-->
+								</div>
+								<!--end::Title-->
+							</div>
+							<!--end::Header-->
+
+							<!--begin::Card body-->
+							<div
+								class="card-body d-flex align-items-end px-0 pb-0">
+								<!--begin::Chart-->
+								<div id="kt_card_widget_6_chart" class="w-100" style="height: 80px"></div>
+								<!--end::Chart-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Card widget 6-->
+
+
+						<!--begin::Card widget 7-->
+						<div
+							class="card card-flush h-md-50 mb-xl-10">
+							<!--begin::Header-->
+							<div
+								class="card-header pt-5">
+								<!--begin::Title-->
+								<div
+									class="card-title d-flex flex-column">
+									<!--begin::Amount-->
+									<span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">{{newUsers|length < 10 ? "0"}}{{newUsers|length}}</span>
+									<!--end::Amount-->
+
+									<!--begin::Subtitle-->
+									<span class="text-gray-500 pt-1 fw-semibold fs-6">Nouvels agents ce mois</span>
+									<!--end::Subtitle-->
+								</div>
+								<!--end::Title-->
+							</div>
+							<!--end::Header-->
+
+							<!--begin::Card body-->
+							<div
+								class="card-body d-flex flex-column justify-content-end pe-0">
+								<!--begin::Title-->
+								<span class="fs-6 fw-bolder text-gray-800 d-block mb-2">Ce sont :</span>
+								<!--end::Title-->
+
+								<!--begin::Users group-->
+								<div class="symbol-group symbol-hover flex-nowrap">
+									{% for agent in newUsers %}
+									<div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="{{ agent.nom ?? null ~" "~ agent.prenoms ?? null }}">
+										{% if agent.photo %}<img alt="Pic" src="{{asset(agent.photo.filename)}}"/>
+										{% else %}<span class="symbol-label bg-warning text-inverse-warning fw-bold">{{agent.nom|slice(0,1)|upper}}</span>{% endif %}
+									</div>
+									{% endfor %}
+									{% if newUsers|length > 6 %}
+									<a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
+										<span class="symbol-label bg-light text-gray-400 fs-8 fw-bold">+{{newUsers|length - 6}}</span>
+									</a>
+									{% endif %}
+								</div>
+								<!--end::Users group-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Card widget 7-->
+					</div>
+					<!--end::Col-->
+
+					<!--begin::Col-->
+					<div
+						class="col-lg-12 col-xl-12 col-xxl-6 mb-5 mb-xl-0">
+						<!--begin::Chart widget 3-->
+						<div
+							class="card card-flush overflow-hidden h-md-100">
+							<!--begin::Header-->
+							<div
+								class="card-header py-5">
+								<!--begin::Title-->
+								<h3 class="card-title align-items-start flex-column">
+									<span class="card-label fw-bold text-gray-900">Sessions</span>
+									<span class="text-gray-500 mt-1 fw-semibold fs-6">Nombre total de sessions</span>
+								</h3>
+								<!--end::Title-->
+
+								<!--begin::Toolbar-->
+								<div
+									class="card-toolbar">
+								</div>
+								<!--end::Toolbar-->
+							</div>
+							<!--end::Header-->
+
+							<!--begin::Card body-->
+							<div
+								class="card-body d-flex justify-content-between flex-column pb-1 px-0">
+								<!--begin::Statistics-->
+								<div
+									class="px-9 mb-5">
+									<!--begin::Statistics-->
+									<div class="d-flex mb-2">
+										<span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">{{sessions|length < 10 ? "0"}}{{sessions}}</span>
+									</div>
+									<!--end::Statistics-->
+
+									<!--begin::Description-->
+									<span class="fs-6 fw-semibold text-gray-500">Durée moyenne de session {{avgSessionDuration}}</span>
+									<!--end::Description-->
+								</div>
+								<!--end::Statistics-->
+
+								<!--begin::Chart-->
+								<div id="kt_charts_widget_3" class="min-h-auto ps-4 pe-6" style="height: 300px"></div>
+								<!--end::Chart-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Chart widget 3-->
+					</div>
+					<!--end::Col-->
+				</div>
+				<!--end::Row-->
+
+				<!--begin::Row-->
+				{# <div
+					class="row gy-5 g-xl-10">
+					<!--begin::Col-->
+					<div
+						class="col-xl-4 mb-xl-10">
+
+						<!--begin::Engage widget 1-->
+						<div
+							class="card h-md-100" dir="ltr">
+							<!--begin::Body-->
+							<div
+								class="card-body d-flex flex-column flex-center">
+								<!--begin::Heading-->
+								<div
+									class="mb-2">
+									<!--begin::Title-->
+									<h1 class="fw-semibold text-gray-800 text-center lh-lg">
+										Have you tried
+										<br/>
+										new
+										<span class="fw-bolder">
+											eCommerce App ?</span>
+									</h1>
+									<!--end::Title-->
+
+									<!--begin::Illustration-->
+									<div class="py-10 text-center">
+										<img src="/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg" class="theme-light-show w-200px" alt=""/>
+										<img src="/metronic8/demo1/assets/media/svg/illustrations/easy/2-dark.svg" class="theme-dark-show w-200px" alt=""/>
+									</div>
+									<!--end::Illustration-->
+								</div>
+								<!--end::Heading-->
+
+								<!--begin::Links-->
+								<div
+									class="text-center mb-1">
+									<!--begin::Link-->
+									<a class="btn btn-sm btn-primary me-2" href="/metronic8/demo1/apps/ecommerce/sales/listing.html">
+										View App
+									</a>
+									<!--end::Link-->
+
+									<!--begin::Link-->
+									<a class="btn btn-sm btn-light" href="/metronic8/demo1/apps/ecommerce/catalog/add-product.html">
+										New Product
+									</a>
+									<!--end::Link-->
+								</div>
+								<!--end::Links-->
+							</div>
+							<!--end::Body-->
+						</div>
+						<!--end::Engage widget 1-->
+
+					</div>
+					<!--end::Col-->
+
+					<!--begin::Col-->
+					<div
+						class="col-xl-8 mb-5 mb-xl-10">
+
+						<!--begin::Table Widget 4-->
+						<div
+							class="card card-flush h-xl-100">
+							<!--begin::Card header-->
+							<div
+								class="card-header pt-7">
+								<!--begin::Title-->
+								<h3 class="card-title align-items-start flex-column">
+									<span class="card-label fw-bold text-gray-800">Product Orders</span>
+									<span class="text-gray-500 mt-1 fw-semibold fs-6">Avg. 57 orders per day</span>
+								</h3>
+								<!--end::Title-->
+
+								<!--begin::Actions-->
+								<div
+									class="card-toolbar">
+									<!--begin::Filters-->
+									<div
+										class="d-flex flex-stack flex-wrap gap-4">
+										<!--begin::Destination-->
+										<div
+											class="d-flex align-items-center fw-bold">
+											<!--begin::Label-->
+											<div class="text-gray-500 fs-7 me-2">Cateogry</div>
+											<!--end::Label-->
+
+											<!--begin::Select-->
+											<select class="form-select form-select-transparent text-graY-800 fs-base lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option">
+												<option></option>
+												<option value="Show All" selected>Show All</option>
+												<option value="a">Category A</option>
+												<option value="b">Category A</option>
+											</select>
+											<!--end::Select-->
+										</div>
+										<!--end::Destination-->
+
+										<!--begin::Status-->
+										<div
+											class="d-flex align-items-center fw-bold">
+											<!--begin::Label-->
+											<div class="text-gray-500 fs-7 me-2">Status</div>
+											<!--end::Label-->
+
+											<!--begin::Select-->
+											<select class="form-select form-select-transparent text-gray-900 fs-7 lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option" data-kt-table-widget-4="filter_status">
+												<option></option>
+												<option value="Show All" selected>Show All</option>
+												<option value="Shipped">Shipped</option>
+												<option value="Confirmed">Confirmed</option>
+												<option value="Rejected">Rejected</option>
+												<option value="Pending">Pending</option>
+											</select>
+											<!--end::Select-->
+										</div>
+										<!--end::Status-->
+
+										<!--begin::Search-->
+										<div class="position-relative my-1">
+											<i class="ki-duotone ki-magnifier fs-2 position-absolute top-50 translate-middle-y ms-4">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+											<input type="text" data-kt-table-widget-4="search" class="form-control w-150px fs-7 ps-12" placeholder="Search"/>
+										</div>
+										<!--end::Search-->
+									</div>
+									<!--begin::Filters-->
+								</div>
+								<!--end::Actions-->
+							</div>
+							<!--end::Card header-->
+
+							<!--begin::Card body-->
+							<div
+								class="card-body pt-2">
+								<!--begin::Table-->
+								<table
+									class="table align-middle table-row-dashed fs-6 gy-3" id="kt_table_widget_4_table">
+									<!--begin::Table head-->
+									<thead>
+										<!--begin::Table row-->
+										<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+											<th class="min-w-100px">Order ID</th>
+											<th class="text-end min-w-100px">Created</th>
+											<th class="text-end min-w-125px">Customer</th>
+											<th class="text-end min-w-100px">Total</th>
+											<th class="text-end min-w-100px">Profit</th>
+											<th class="text-end min-w-50px">Status</th>
+											<th class="text-end"></th>
+										</tr>
+										<!--end::Table row-->
+									</thead>
+									<!--end::Table head-->
+
+									<!--begin::Table body-->
+									<tbody class="fw-bold text-gray-600">
+										<tr data-kt-table-widget-4="subtable_template" class="d-none">
+											<td colspan="2">
+												<div class="d-flex align-items-center gap-3">
+													<a href="#" class="symbol symbol-50px bg-[#6ca942] bg-opacity-25 rounded">
+														<img src="" data-kt-src-path="/metronic8/demo1/assets/media/stock/ecommerce/" alt="" data-kt-table-widget-4="template_image"/>
+													</a>
+													<div class="d-flex flex-column text-muted">
+														<a href="#" class="text-gray-800 text-hover-primary fw-bold" data-kt-table-widget-4="template_name">Product name</a>
+														<div class="fs-7" data-kt-table-widget-4="template_description">Product description</div>
+													</div>
+												</div>
+											</td>
+											<td class="text-end">
+												<div class="text-gray-800 fs-7">Cost</div>
+												<div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_cost">1</div>
+											</td>
+											<td class="text-end">
+												<div class="text-gray-800 fs-7">Qty</div>
+												<div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_qty">1</div>
+											</td>
+											<td class="text-end">
+												<div class="text-gray-800 fs-7">Total</div>
+												<div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_total">name</div>
+											</td>
+											<td class="text-end">
+												<div class="text-gray-800 fs-7 me-3">On hand</div>
+												<div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_stock">32</div>
+											</td>
+											<td></td>
+										</tr>
+
+										<tr>
+											<td>
+												<a href="/metronic8/demo1/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#XGY-346</a>
+											</td>
+
+											<td class="text-end">
+												7 min ago
+											</td>
+
+											<td class="text-end">
+												<a href="#" class="text-gray-600 text-hover-primary">Albert Flores</a>
+											</td>
+
+											<td class="text-end">
+												$630.00
+											</td>
+
+											<td class="text-end">
+												<span class="text-gray-800 fw-bolder">$86.70</span>
+											</td>
+
+											<td class="text-end">
+												<span class="badge py-3 px-4 fs-7 badge-light-warning">Pending</span>
+											</td>
+
+											<td class="text-end">
+												<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
+													<i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+													<i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="/metronic8/demo1/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#YHD-047</a>
+											</td>
+
+											<td class="text-end">
+												52 min ago
+											</td>
+
+											<td class="text-end">
+												<a href="#" class="text-gray-600 text-hover-primary">Jenny Wilson</a>
+											</td>
+
+											<td class="text-end">
+												$25.00
+											</td>
+
+											<td class="text-end">
+												<span class="text-gray-800 fw-bolder">$4.20</span>
+											</td>
+
+											<td class="text-end">
+												<span class="badge py-3 px-4 fs-7 badge-light-primary">Confirmed</span>
+											</td>
+
+											<td class="text-end">
+												<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
+													<i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+													<i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="/metronic8/demo1/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SRR-678</a>
+											</td>
+
+											<td class="text-end">
+												1 hour ago
+											</td>
+
+											<td class="text-end">
+												<a href="#" class="text-gray-600 text-hover-primary">Robert Fox</a>
+											</td>
+
+											<td class="text-end">
+												$1,630.00
+											</td>
+
+											<td class="text-end">
+												<span class="text-gray-800 fw-bolder">$203.90</span>
+											</td>
+
+											<td class="text-end">
+												<span class="badge py-3 px-4 fs-7 badge-light-warning">Pending</span>
+											</td>
+
+											<td class="text-end">
+												<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
+													<i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+													<i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="/metronic8/demo1/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#PXF-534</a>
+											</td>
+
+											<td class="text-end">
+												3 hour ago
+											</td>
+
+											<td class="text-end">
+												<a href="#" class="text-gray-600 text-hover-primary">Cody Fisher</a>
+											</td>
+
+											<td class="text-end">
+												$119.00
+											</td>
+
+											<td class="text-end">
+												<span class="text-gray-800 fw-bolder">$12.00</span>
+											</td>
+
+											<td class="text-end">
+												<span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
+											</td>
+
+											<td class="text-end">
+												<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
+													<i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+													<i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="/metronic8/demo1/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#XGD-249</a>
+											</td>
+
+											<td class="text-end">
+												2 day ago
+											</td>
+
+											<td class="text-end">
+												<a href="#" class="text-gray-600 text-hover-primary">Arlene McCoy</a>
+											</td>
+
+											<td class="text-end">
+												$660.00
+											</td>
+
+											<td class="text-end">
+												<span class="text-gray-800 fw-bolder">$52.26</span>
+											</td>
+
+											<td class="text-end">
+												<span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
+											</td>
+
+											<td class="text-end">
+												<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
+													<i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+													<i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="/metronic8/demo1/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SKP-035</a>
+											</td>
+
+											<td class="text-end">
+												2 day ago
+											</td>
+
+											<td class="text-end">
+												<a href="#" class="text-gray-600 text-hover-primary">Eleanor Pena</a>
+											</td>
+
+											<td class="text-end">
+												$290.00
+											</td>
+
+											<td class="text-end">
+												<span class="text-gray-800 fw-bolder">$29.00</span>
+											</td>
+
+											<td class="text-end">
+												<span class="badge py-3 px-4 fs-7 badge-light-danger">Rejected</span>
+											</td>
+
+											<td class="text-end">
+												<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
+													<i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+													<i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="/metronic8/demo1/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SKP-567</a>
+											</td>
+
+											<td class="text-end">
+												7 min ago
+											</td>
+
+											<td class="text-end">
+												<a href="#" class="text-gray-600 text-hover-primary">Dan Wilson</a>
+											</td>
+
+											<td class="text-end">
+												$590.00
+											</td>
+
+											<td class="text-end">
+												<span class="text-gray-800 fw-bolder">$50.00</span>
+											</td>
+
+											<td class="text-end">
+												<span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
+											</td>
+
+											<td class="text-end">
+												<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
+													<i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
+													<i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+									<!--end::Table body-->
+								</table>
+								<!--end::Table-->
+							</div>
+							<!--end::Card body-->
+						</div>
+						<!--end::Table Widget 4-->
+					</div>
+					<!--end::Col-->
+				</div> #}
+				<!--end::Row-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+
+	</div>
+	<!--end::Content wrapper-->
+{% endblock %}
+
+{% block javascripts %}
+	<!-- Resources -->
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/plugins/custom/vis-timeline/vis-timeline.bundle.js')}}"></script>
+
+    <script src="{{asset('assets/js/widgets.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/custom/widgets.js')}}"></script>
+	<script type="text/javascript">
+	</script>
+{% endblock %}

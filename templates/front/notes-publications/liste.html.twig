@@ -1,0 +1,173 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Notes & publications" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <h2 class="text-[#2b62aa] text-xl font-semibold mb-4">Notes & publications</h2>
+
+        <div class="grid md:grid-cols-3 gap-4 md:gap-x-5 md:gap-y-8">
+            {% for note in notes %}
+            <div id="note_{{note.id}}" class="flex flex-col p-6 bg-blue-100 border border-gray-300 rounded-sm shadow-sm">
+                <a href="javascript:;" onclick="showModal({{ note.id }})" data-modal-toggle="show-modal">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{note.titre}}</h5>
+                </a>
+                <p class="mb-4 text-xs font-normal text-gray-700">{{note.createdAt|date('d M Y')}}</p>
+                <p class="mb-3 font-normal text-gray-700">{{note.resume|slice(0, 90)}}{{note.resume|length > 90 ? "..." : ""}}</p>
+                <div class="mt-auto">
+                    <button data-modal-target="show-modal" onclick="showModal({{ note.id }})" data-modal-toggle="show-modal" type="button" class="open-note-btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#6ca942] rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        Lire le communiqué
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {# --- PAGINATION --- #}
+        {% if notes.pageCount > 1 %}
+        <nav aria-label="Page navigation example" class="flex justify-center mt-8">
+            <ul class="inline-flex -space-x-px text-base h-10">
+                {% if notes.currentPageNumber > 1 %}
+                <li>
+                    <a href="{{ path('notes_publications', { page: notes.currentPageNumber - 1 }) }}"
+                        class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
+                        Précédent
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <span class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-300 bg-white border border-e-0 border-gray-200 rounded-s-lg cursor-not-allowed">
+                        Précédent
+                    </span>
+                </li>
+                {% endif %}
+
+                {% for page in 1..notes.pageCount %}
+                    <li class="{{ page > 2 and page < notes.pageCount - 1 ? 'hidden sm:block' : '' }}">
+                        <a href="{{ path('notes_publications', { page: page }) }}"
+                        class="flex items-center justify-center px-4 h-10 leading-tight {{ page == notes.currentPageNumber ? 'text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700' }}">
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                {% if notes.currentPageNumber < notes.pageCount %}
+                <li>
+                    <a href="{{ path('notes_publications', { page: notes.currentPageNumber + 1 }) }}"
+                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
+                        Suivant
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <span class="flex items-center justify-center px-4 h-10 leading-tight text-gray-300 bg-white border border-gray-200 rounded-e-lg cursor-not-allowed">
+                        Suivant
+                    </span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </section>
+
+    <!-- Main modal -->
+    <div id="show-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 rounded-t">
+                    <h3 id="note_title" class="text-xl font-semibold text-gray-900"></h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="show-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 max-h-[400px] overflow-y-auto space-y-8">
+                    <p id="note_desc" class="text-base leading-relaxed text-gray-500 text-justify"></p>
+                    <span id="note_date" class="text-end font-normal italic text-gray-400"></span>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 rounded-b">
+                    <button data-modal-hide="show-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+    const notes = {{ notes|map(p => {
+        id: p.id,
+        titre: p.titre,
+        slug: p.slug,
+        description: p.description|raw,
+        date: p.createdAt|date('d M Y'),
+    })|json_encode|raw }};
+
+    const showModal = (paramId) => {
+        const note = notes.find(c => c.id == paramId);
+        if (!note) return;
+
+        document.querySelector('#note_title').textContent = note.titre;
+        document.querySelector('#note_desc').textContent = note.description;
+        document.querySelector('#note_date').textContent = note.date;
+    };
+
+    // À placer après avoir inclus flowbite.min.js (ou sinon on écoute 'load')
+    (function () {
+        function openModalFromHash() {
+            const hash = window.location.hash;
+            if (!hash || !hash.startsWith('#')) return;
+
+            const slug = decodeURIComponent(hash.slice(1));
+            console.log(slug);
+
+            // -> Si tu as la variable JS 'notes' côté client :
+            const note = (notes || []).find(n => n.slug === slug);
+            if (!note) return;
+            console.log(note);
+
+            // On cible le bon bouton (tu as déjà la classe 'open-note-btn')
+            const btn = document.querySelector(`#note_${note.id} .open-note-btn`);
+            if (!btn) return;
+
+            // Important : initialiser Flowbite si dispo (utile si contenu dynamique)
+            if (typeof window.initFlowbite === 'function') {
+            window.initFlowbite();
+            }
+
+            // Simuler un "vrai" clic utilisateur
+            const evt = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+            btn.dispatchEvent(evt);
+        }
+
+        // Si Flowbite et le DOM sont déjà prêts, petit micro-délai puis clic
+        if (document.readyState === 'complete') {
+            setTimeout(openModalFromHash, 0);
+        } else {
+            // Attendre que TOUT soit chargé (DOM + scripts Flowbite)
+            window.addEventListener('load', () => setTimeout(openModalFromHash, 0), { once: true });
+        }
+    })();
+
+    document.addEventListener('DOMContentLoaded', function () {
+    })
+</script>
+{% endblock %}

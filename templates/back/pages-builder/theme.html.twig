@@ -1,0 +1,269 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title "Couverture du thème" %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Couverture du thème
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Page builder
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Thème
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div class="d-flex align-items-center gap-2 gap-lg-3"></div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Form-->
+				<form id="kt_ecommerce_add_category_form" action="" method="post" class="form" enctype="multipart/form-data">
+					<!--begin::Couverture settings-->
+					<div class="card card-flush py-4">
+						<!--begin::Card header-->
+						<div class="card-header">
+							<!--begin::Card title-->
+							<div class="card-title">
+								<h2>Couverture du thème</h2>
+							</div>
+							<!--end::Card title-->
+						</div>
+						<!--end::Card header-->
+
+						<!--begin::Card body-->
+						<div class="card-body pt-0">
+							<!--begin::Image input-->
+							<!--begin::Image input placeholder-->
+							<style>
+								.image-input-placeholder {
+									background-image: url("{{asset('assets/media/svg/files/blank-image.svg')}}");
+									background-size: contain;
+									background-position: center;
+								}
+
+								[data-bs-theme="dark"] .image-input-placeholder {
+									background-image: url("{{asset('assets/media/svg/files/blank-image-dark.svg')}}");
+									background-size: contain;
+									background-position: center;
+								}                
+							</style>
+							<!--end::Image input placeholder-->
+							<div class="row">	
+								<div class="col-md-8">
+									<label class="form-label">Desktop</label>
+									<div class="image-input {{ not themeDesktop.id ? 'image-input-empty image-input-placeholder' : null }} image-input-outline w-100 mb-3" data-kt-image-input="true" style="background-size: contain; background-position: center;">
+										<!--begin::Preview existing cover-->
+										<div class="image-input-wrapper w-100 h-200px" 
+											style="background-image: url({{ themeDesktop.id 
+												? asset(themeDesktop.filename)
+												: null
+											}})"></div>
+										<!--end::Preview existing cover-->
+
+										<!--begin::Label-->
+										<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Changer la couverture">
+											<i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+											<!--begin::Inputs-->
+											<input type="file" name="cover[desktop]" accept=".png, .jpg, .jpeg">
+											<input type="hidden" name="cover_remove[{{themeDesktop.id}}]" value="" disabled />
+											<!--end::Inputs-->
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Cancel-->
+										<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Annuler">
+											<i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>            </span>
+										<!--end::Cancel-->
+
+										<!--begin::Remove-->
+										<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Supprimer la couverture">
+											<i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>            </span>
+										<!--end::Remove-->
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<label class="form-label">Mobile</label>
+									<div id="kt_image_input_mobile" class="image-input {{ not themeMobile.id ? 'image-input-empty image-input-placeholder' : null }} image-input-outline w-100 mb-3" data-kt-image-input="true" style="background-size: contain; background-position: center;">
+										<!--begin::Preview existing cover-->
+										<div class="image-input-wrapper w-100 h-200px" 
+											style="background-image: url({{ themeMobile.id 
+												? asset(themeMobile.filename)
+												: null
+											}})"></div>
+										<!--end::Preview existing cover-->
+
+										<!--begin::Label-->
+										<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Changer la couverture">
+											<i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+											<!--begin::Inputs-->
+											<input type="file" name="cover[mobile]" accept=".png, .jpg, .jpeg">
+											<input type="hidden" name="cover_remove[{{themeMobile.id}}]" value="" disabled />
+											<!--end::Inputs-->
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Cancel-->
+										<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Annuler">
+											<i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>            </span>
+										<!--end::Cancel-->
+
+										<!--begin::Remove-->
+										<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Supprimer la couverture">
+											<i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>            </span>
+										<!--end::Remove-->
+									</div>
+								</div>
+							</div>
+							<!--end::Image input-->
+
+							<!--begin::Description-->
+							<div class="text-muted fs-7">Définir l'image de couverture. Seuls les fichiers *.png, *.jpg et *.jpeg sont acceptés.</div>
+							<!--end::Description-->
+						</div>
+						<!--end::Card body-->
+					
+						<!--begin::Actions-->
+						<div class="text-center">
+							<button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">
+								Annuler
+							</button>
+
+							<button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+								<span class="indicator-label">
+									Soumettre
+								</span>
+								<span class="indicator-progress">
+									Veuillez patienter...
+									<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+								</span>
+							</button>
+						</div>
+						<!--end::Actions-->
+					</div>
+					<!--end::Couverture settings-->
+				</form>
+				<!--end::Form-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript">
+		document.querySelectorAll('.image-input').forEach(imageInputElement => {
+			let imageInput = KTImageInput.getInstance(imageInputElement) || new KTImageInput(imageInputElement);;
+
+			if (!imageInput) return;
+
+			// Quand on supprime l'image
+			imageInput.on("kt.imageinput.remove", function () {
+				let hiddenInput = imageInputElement.querySelector('input[type="hidden"]');
+				if (hiddenInput) {
+					hiddenInput.removeAttribute("disabled");
+					hiddenInput.value = hiddenInput.value || "1"; // si pas d'ID, au moins un flag
+					
+					// On réinitialise l'image de fond sur l'élément DOM approprié
+					imageInputElement.style.backgroundImage = "url('{{ asset('assets/media/svg/files/blank-image.svg') }}')";
+				}
+			});
+
+			// Quand on annule (on revient à l'ancienne image)
+			imageInput.on("kt.imageinput.cancel", function () {
+				let hiddenInput = imageInputElement.querySelector('input[type="hidden"]');
+				if (hiddenInput) {
+					hiddenInput.setAttribute("disabled", "disabled");
+					hiddenInput.value = ""; // reset
+				}
+			});
+
+			// Quand on change l’image (upload)
+			imageInput.on("kt.imageinput.change", function () {
+				let hiddenInput = imageInputElement.querySelector('input[type="hidden"]');
+				if (hiddenInput) {
+					hiddenInput.setAttribute("disabled", "disabled");
+					hiddenInput.value = ""; // reset car nouvelle image choisie
+				}
+			});
+		});
+
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                Swal.fire({
+                    html: `{{message|raw}}`,
+                    icon: "{{ type }}",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, compris !",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            {% endfor %}
+        {% endfor %}
+	</script>
+{% endblock %}

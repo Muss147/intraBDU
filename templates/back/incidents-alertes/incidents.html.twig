@@ -1,0 +1,551 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title "Incidents déclarés" %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+	<style></style>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Liste des incidents
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							App
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Incidents déclarés
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div
+					class="d-flex align-items-center gap-2 gap-lg-3">
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Products-->
+				<div
+					class="card card-flush">
+					<!--begin::Card header-->
+					<div
+						class="card-header align-items-center py-5 gap-2 gap-md-5">
+						<!--begin::Card title-->
+						<div
+							class="card-title">
+							<!--begin::Search-->
+							<div class="d-flex align-items-center position-relative my-1">
+								<i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<input type="text" data-kt-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Rechercher un incident"/>
+							</div>
+							<!--end::Search-->
+							<!--begin::Export buttons-->
+							<div id="kt_datatable_example_1_export" class="d-none"></div>
+							<!--end::Export buttons-->
+						</div>
+						<!--end::Card title-->
+
+						<!--begin::Card toolbar-->
+						<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+							<!--begin::Export dropdown-->
+							<button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+								<i class="ki-duotone ki-exit-down fs-2"><span class="path1"></span><span class="path2"></span></i>
+								Exporter la liste
+							</button>
+							<!--begin::Menu-->
+							<div id="kt_datatable_example_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+								<!--begin::Menu item-->
+								<div class="menu-item px-3">
+									<a href="#" class="menu-link px-3" data-kt-export="copy">
+									Copier dans le presse-papiers
+									</a>
+								</div>
+								<!--end::Menu item-->
+								<!--begin::Menu item-->
+								<div class="menu-item px-3">
+									<a href="#" class="menu-link px-3" data-kt-export="excel">
+									Exporter en Excel
+									</a>
+								</div>
+								<!--end::Menu item-->
+								<!--begin::Menu item-->
+								<div class="menu-item px-3">
+									<a href="#" class="menu-link px-3" data-kt-export="csv">
+									Exporter en CSV
+									</a>
+								</div>
+								<!--end::Menu item-->
+								<!--begin::Menu item-->
+								<div class="menu-item px-3">
+									<a href="#" class="menu-link px-3" data-kt-export="pdf">
+									Exporter en PDF
+									</a>
+								</div>
+								<!--end::Menu item-->
+							</div>
+							<!--end::Menu-->
+							<!--end::Export dropdown-->
+
+							<!--begin::Hide default export buttons-->
+							<div id="kt_datatable_example_buttons" class="d-none"></div>
+							<!--end::Hide default export buttons-->
+						</div>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body pt-0">
+
+						<!--begin::Table-->
+						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+							<thead>
+								<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-100px">Incident</th>
+									<th class="min-w-200px">Rapporteur</th>
+									<th class="text-end min-w-100px">Direction</th>
+									<th class="text-end min-w-70px pe-0">Statut</th>
+									<th class="text-end min-w-100px pe-0">Date</th>
+									<th class="text-end min-w-70px">Actions</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+                                {% for incident in incidents %}
+								<tr>
+									<td class="">
+										<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-bs-toggle="modal" data-bs-target="#kt_modal_open_fiche" data-bs-ident="{{incident.id}}">{{incident.code}}</a>
+									</td>
+									<td>
+										<div
+											class="d-flex align-items-center">
+											<!--begin::Thumbnail-->
+											<a href="#" class="symbol symbol-50px">
+												<span class="symbol-label" style="background-image:url({{asset('assets/media/svg/avatars/blank.svg')}});"></span>
+											</a>
+											<!--end::Thumbnail-->
+											<div
+												class="ms-5">
+												<!--begin::Title-->
+												<a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-customer-filter="agent_name">{{incident.rapporteur}}</a>
+												<!--end::Title-->
+                                                <div class="text-muted fs-7 fw-bold">{{incident.email ~' | '~ incident.telephone}}</div>
+											</div>
+										</div>
+									</td>
+									<td class="text-end pe-0">
+										<span class="fw-bold">{{incident.direction.libelle}}</span>
+									</td>
+									<td class="text-end pe-0">
+										{% if incident.corrigee %}<div class="badge badge-light-success">Corrigée</div>
+										{% else %}<div class="badge badge-light-warning">En attente</div>{% endif %}
+									</td>
+									<td class="text-end pe-0" data-order="rating-4">
+                                        {{incident.createdAt|date('d/m/Y')}}
+									</td>
+									<td class="text-end">
+										{% if not incident.corrigee %}
+										<a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-success" data-bs-toggle="modal" data-bs-target="#kt_modal_correct_fiche" data-bs-correct-ident="{{incident.id}}">
+											Corriger
+											<i class="ki-duotone ki-double-check fs-5 ms-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+										</a>
+										{% endif %}
+									</td>
+								</tr>
+                                {% endfor %}
+							</tbody>
+						</table>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Products-->
+
+				<div class="modal fade" tabindex="-1" id="kt_modal_open_fiche">
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h3 class="modal-title">Ouverture de fiche</h3>
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+									<i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+								</div>
+								<!--end::Close-->
+							</div>
+
+							<div class="modal-body row">
+								<div id="code" class="mb-4 col-md-6">
+									<label class="font-semibold">Code fiche</label>
+									<h4>TEST</h4>
+								</div>
+								<div id="etape" class="mb-4 col-md-6">
+									<label class="font-semibold">Étape de suivi de l'incident</label>
+									<h4>TEST</h4>
+								</div>
+								<div id="debut" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de début de l'incident</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="remontee" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de remontée</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="agence" class="mb-4 col-md-6">
+									<label class="font-semibold">Agence</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="region" class="mb-4 col-md-6">
+									<label class="font-semibold">Région</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="direction" class="mb-4 col-md-6">
+									<label class="font-semibold">Direction / Service</label>
+									<h4>Oui</h4>
+								</div>
+								<div id="rapporteur" class="mb-4 col-md-6">
+									<label class="font-semibold">Incident rémonté par</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="fonction" class="mb-4 col-md-6">
+									<label class="font-semibold">Fonction</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="telephone" class="mb-4 col-md-6">
+									<label class="font-semibold">Poste téléphonique</label>
+									<h4>Anonyme</h4>
+								</div>
+								<div id="email" class="mb-4 col-md-6">
+									<label class="font-semibold">Email</label>
+									<h4>Oui</h4>
+								</div>
+								<div id="description" class="mb-4 col-12">
+									<label class="font-semibold">Description succincte de l'incident</label>
+									<p class="fw-bold fs-4"></p>
+								</div>
+
+								<div id="categorie" class="mb-4 col-md-6">
+									<label class="font-semibold">Catégorisation baloise de risques</label>
+									<h4>Non</h4>
+								</div>
+								<div id="sous_categorie" class="mb-4 col-md-6">
+									<label class="font-semibold">Sous-catégorie d'incidents</label>
+									<h4>Non</h4>
+								</div>
+								<div id="processus" class="mb-4 col-md-6">
+									<label class="font-semibold">Processus</label>
+									<h4>Non</h4>
+								</div>
+								<div id="sous_processus" class="mb-4 col-md-6">
+									<label class="font-semibold">Sous processus</label>
+									<h4>Non</h4>
+								</div>
+								<div id="montant_estime" class="mb-4 col-md-6">
+									<label class="font-semibold">Montant estimé de la perte (TTC/HT)</label>
+									<h4>Non</h4>
+								</div>
+								<div id="date_perte" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de comptabilisation de la perte</label>
+									<h4>Non</h4>
+								</div>
+								<div id="direction_impactee" class="mb-4 col-md-6">
+									<label class="font-semibold">Direction / Département / Service impacté</label>
+									<h4>Non</h4>
+								</div>
+								<div id="montant_recup" class="mb-4 col-md-6">
+									<label class="font-semibold">Montant des récupérations obtenues (TTC/HT)</label>
+									<h4>Non</h4>
+								</div>
+								<div id="date_recup" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de la récupération</label>
+									<h4>Non</h4>
+								</div>
+								<div id="date_compta_recup" class="mb-4 col-md-6">
+									<label class="font-semibold">Date de comptabilisation du montant récupéré</label>
+									<h4>Non</h4>
+								</div>
+								<div id="nature_recup" class="mb-4 col-md-6">
+									<label class="font-semibold">Nature de la récupération</label>
+									<h4>Non</h4>
+								</div>
+								<div id="montant_perte" class="mb-4 col-md-6">
+									<label class="font-semibold">Montant net de la perte</label>
+									<h4>Non</h4>
+								</div>
+
+								<div id="consequences" class="mb-4 col-12">
+									<label class="font-semibold">Conséquences</label>
+									<p class="fw-bold fs-4"></p>
+								</div>
+								<div id="fichiers" class="mb-4 col-12">
+									<label class="font-semibold">Fichiers joints</label>
+									<div class="d-flex flex-wrap gap-3 mt-2"></div>
+								</div>
+								<div id="solutions" class="mb-4 col-12">
+									<label class="font-semibold">Proposition de solutions</label>
+									<table class="table align-middle table-row-dashed gy-5">
+										<thead>
+											<tr class="text-start text-dark fw-bold fs-7 text-uppercase gs-0">
+												<th>Solution</th>
+												<th>Responsable</th>
+												<th>Délai</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_correct_fiche" data-bs-correct-ident="">Corriger</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" tabindex="-1" id="kt_modal_correct_fiche">
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<form class="modal-content" action="{{path('correct_incident')}}" method="POST">
+							<div class="modal-header">
+								<h3 class="modal-title">Correction</h3>
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+									<i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+								</div>
+								<!--end::Close-->
+							</div>
+
+							<div class="modal-body row">
+								<!--begin::Input group-->
+								<div
+									class="fv-row mb-7">
+									<!--begin::Label-->
+									<label class="fs-6 fw-semibold form-label mb-2">Description</label>
+									<!--end::Label-->
+
+									<!--begin::Input-->
+									<input type="hidden" name="fiche_id">
+									<textarea rows="5" name="fiche_correction" class="form-control form-control-solid" placeholder="Décrivez les actions ménées pour la correction"></textarea>
+									<!--end::Input-->
+								</div>
+								<!--end::Input group-->
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
+								<button type="submit" class="btn btn-primary">Valider</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/alerts-incidents/export.js')}}"></script>
+	
+	<script type="text/javascript">
+		const incidents = {{ incidents|map(m => {
+			id: m.id,
+			code: m.code,
+			corrigee: m.corrigee,
+			etape: m.etape ?? null,
+			dateDebut: m.dateDebut ? m.dateDebut|date('d/m/Y') : null,
+			dateRemonte: m.dateRemonte ? m.dateRemonte|date('d/m/Y') : null,
+			agence: m.agence ? m.agence.libelle : null,
+			region: m.region ?? null,
+			direction: m.direction ? m.direction.libelle : null,
+			rapporteur: m.rapporteur ?? null,
+			fonction: m.fonction ?? null,
+			email: m.email ?? null,
+			telephone: m.telephone ?? null,
+			description: m.description ?? null,
+			solutions: m.solutions ?? [],
+			montantEstime: m.montantEstime ?? null,
+			datePerte: m.datePerte ? m.datePerte|date('d/m/Y') : null,
+			directionImpacte: m.directionImpacte ? m.directionImpacte.libelle : null,
+			montantObtenu: m.montantObtenu ?? null,
+			dateRecup: m.dateRecup ? m.dateRecup|date('d/m/Y') : null,
+			dateCompta: m.dateCompta ? m.dateCompta|date('d/m/Y') : null,
+			natureRecup: m.natureRecup ?? null,
+			montantNet: m.montantNet ?? null,
+			categorie: m.categorie ? m.categorie.libelle : null,
+			sousCategorie: m.sousCategorie ? m.sousCategorie.libelle : null,
+			processus: m.processus ? m.processus.libelle : null,
+			sousProcessus: m.sousProcessus ? m.sousProcessus.libelle : null,
+			createdAt: m.createdAt ?? null,
+			consequences: m.consequences ?? null,
+			pieceJointe: m.pieceJointe|map(f => ({
+				filename: f.filename,
+				alt: f.alt
+			}))
+		})|json_encode|raw }};
+
+		const openModal = document.getElementById('kt_modal_open_fiche');
+
+		openModal.addEventListener('show.bs.modal', e => {
+			const id = e.relatedTarget.getAttribute('data-bs-ident');
+			const alert = incidents.find(c => c.id == id);
+			if (!alert) return;
+
+			// Mapping clé → ID HTML
+			const fields = {
+				etape: '#etape',
+				code: '#code',
+				dateDebut: '#debut',
+				dateRemonte: '#remontee',
+				agence: '#agence',
+				region: '#region',
+				direction: '#direction',
+				rapporteur: '#rapporteur',
+				fonction: '#fonction',
+				telephone: '#telephone',
+				email: '#email',
+				description: '#description',
+				categorie: '#categorie',
+				sousCategorie: '#sous_categorie',
+				processus: '#processus',
+				sousProcessus: '#sous_processus',
+				montantEstime: '#montant_estime',
+				datePerte: '#date_perte',
+				directionImpacte: '#direction_impactee',
+				montantObtenu: '#montant_recup',
+				dateRecup: '#date_recup',
+				dateCompta: '#date_compta_recup',
+				natureRecup: '#nature_recup',
+				montantNet: '#montant_perte',
+				consequences: '#consequences'
+			};
+
+			// Remplissage dynamique
+			for (const [key, selector] of Object.entries(fields)) {
+				const el = openModal.querySelector(`${selector} label`)?.nextElementSibling;
+				if (el) el.textContent = alert[key] ?? '';
+			}
+
+			if (!alert.corrigee) {
+				openModal.querySelector('button[data-bs-toggle="modal"]').setAttribute('data-bs-correct-ident', alert.id);
+				openModal.querySelector('button[data-bs-toggle="modal"]').style.display = "block";
+			}
+			else openModal.querySelector('button[data-bs-toggle="modal"]').style.display = "none";
+
+			const solutionsTable = openModal.querySelector('#solutions tbody');
+			solutionsTable.innerHTML = '';
+			(alert.solutions || []).forEach(solution => {
+				solutionsTable.insertAdjacentHTML('beforeend', `
+					<tr>
+						<td>${solution['action']}</td>
+						<td>${solution['responsable']}</td>
+						<td>${solution['delai']}</td>
+					</tr>
+				`);
+			});
+
+			// Gestion des fichiers
+			const fichiersContainer = openModal.querySelector('#fichiers .d-flex');
+			fichiersContainer.innerHTML = '';
+			(alert.pieceJointe || []).forEach(file => {
+				fichiersContainer.insertAdjacentHTML('beforeend', `
+					<a href="${file.filename}" target="_blank">
+						<img src="${file.filename}" class="h-150px" style="min-width: 125px">
+					</a>
+				`);
+			});
+		});
+
+		const correctModal = document.getElementById('kt_modal_correct_fiche');
+		correctModal.addEventListener('show.bs.modal', e => {
+			const id = e.relatedTarget.getAttribute('data-bs-correct-ident');
+			const alert = incidents.find(c => c.id == id);
+			if (!alert) return;
+			correctModal.querySelector('input[name="fiche_id"]').value = alert.id;
+		});
+
+		{% for type, messages in app.flashes %}
+			{% for message in messages %}
+				Swal.fire({
+					html: `{{message|raw}}`,
+					icon: "{{ type }}",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, compris !",
+					customClass: {
+						confirmButton: "btn btn-primary"
+					}
+				});
+			{% endfor %}
+		{% endfor %}
+	</script>
+{% endblock %}

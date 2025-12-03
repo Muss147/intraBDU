@@ -1,0 +1,137 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Offres d'emploi" %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style type="text/css">
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-8 md:space-y-10">
+        <div class="rounded shadow p-4 md:p-8">
+            <div class="w-full">
+                <h2 class="text-[#2b62aa] text-xl font-semibold mb-1">Offres d'emploi</h2>
+                <p class="mb-6"><span class="font-semibold text-[#2b62aa]">{{offres|length}}</span> offres d'emploi trouvées</p>
+
+                <form accept="" method="" class="grid grid-cols-8 items-center w-full gap-x-4 gap-y-4">   
+                    {# <label for="voice-search" class="sr-only">Rechercher</label> #}
+                    <div class="col-span-8 sm:col-span-4 lg:col-span-3 relative w-full">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path fill="currentColor" d="M8 1V0v1Zm4 0V0v1Zm2 4v1h1V5h-1ZM6 5H5v1h1V5Zm2-3h4V0H8v2Zm4 0a1 1 0 0 1 .707.293L14.121.879A3 3 0 0 0 12 0v2Zm.707.293A1 1 0 0 1 13 3h2a3 3 0 0 0-.879-2.121l-1.414 1.414ZM13 3v2h2V3h-2Zm1 1H6v2h8V4ZM7 5V3H5v2h2Zm0-2a1 1 0 0 1 .293-.707L5.879.879A3 3 0 0 0 5 3h2Zm.293-.707A1 1 0 0 1 8 2V0a3 3 0 0 0-2.121.879l1.414 1.414ZM2 6h16V4H2v2Zm16 0h2a2 2 0 0 0-2-2v2Zm0 0v12h2V6h-2Zm0 12v2a2 2 0 0 0 2-2h-2Zm0 0H2v2h16v-2ZM2 18H0a2 2 0 0 0 2 2v-2Zm0 0V6H0v12h2ZM2 6V4a2 2 0 0 0-2 2h2Zm16.293 3.293C16.557 11.029 13.366 12 10 12c-3.366 0-6.557-.97-8.293-2.707L.293 10.707C2.557 12.971 6.366 14 10 14c3.634 0 7.444-1.03 9.707-3.293l-1.414-1.414ZM10 9v2a2 2 0 0 0 2-2h-2Zm0 0H8a2 2 0 0 0 2 2V9Zm0 0V7a2 2 0 0 0-2 2h2Zm0 0h2a2 2 0 0 0-2-2v2Z"></path>
+                            </svg>
+                        </div>
+                        <input type="text" name="keywords" value="{{ search.keywords }}" id="voice-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Mots clés, compétences, métiers..." />
+                    </div>
+                    <div class="col-span-8 sm:col-span-4 lg:col-span-3 relative w-full">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"/>
+                            </svg>
+                        </div>
+                        <input type="text" name="lieu" value="{{ search.lieu }}" id="voice-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Régions, directions, agences..." />
+                    </div>
+                    <button type="submit" class="col-span-8 lg:col-span-2 w-full inline-flex items-center justify-center py-2.5 px-3 text-sm font-medium text-white bg-[#2b62aa] rounded-lg border border-[#2b62aa] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>Rechercher
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Colonne latérale -->
+            <aside class="relative md:col-span-1">
+                <div class="rounded shadow sticky inset-x-0 top-0 space-y-4 py-4">
+                    <div class="px-8"><h3 class="font-semibold text-lg">Filtrer par</h3></div>
+                    <hr>
+                    <form id="filters_form" action="" method="post" class="flex flex-row sm:flex-col justify-between items-center gap-4 overflow-auto px-8 pb-4 sm:pb-0">
+                        <div class="flex-shrink-0 w-auto sm:w-full">
+                            <label for="metier" class="hidden sm:block mb-2 text-sm font-medium text-gray-900 ">Métier / Fonction</label>
+                            <select id="metier" name="metier" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value="" selected>Toutes les offres d'emploi</option>
+                                {% for metier in metiers %}
+                                <option value="{{metier.id}}" {% if filters.metier == metier.id %}selected{% endif %}>{{metier.libelle}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="flex-shrink-0 w-auto sm:w-full">
+                            <label for="experience" class="hidden sm:block mb-2 text-sm font-medium text-gray-900 ">Expérience démandée</label>
+                            <select id="experience" name="experience" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value="" selected>Toutes les offres d'emploi</option>
+                                <option {% if filters.experience == "Sans expérience" %}selected{% endif %}>Sans expérience</option>
+                                <option {% if filters.experience == "Moins d’un an" %}selected{% endif %}>Moins d’un an</option>
+                                <option {% if filters.experience == "1 à 2 ans" %}selected{% endif %}>1 à 2 ans</option>
+                                <option {% if filters.experience == "3 à 5 ans" %}selected{% endif %}>3 à 5 ans</option>
+                                <option {% if filters.experience == "6 à 10 ans" %}selected{% endif %}>6 à 10 ans</option>
+                                <option {% if filters.experience == "Plus de 10 ans" %}selected{% endif %}>Plus de 10 ans</option>
+                            </select>
+                        </div>
+                        <div class="flex-shrink-0 w-auto sm:w-full">
+                            <label for="niveau_poste" class="hidden sm:block mb-2 text-sm font-medium text-gray-900 ">Niveau de poste</label>
+                            <select id="niveau_poste" name="niveau_poste" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value="" selected>Toutes les offres d'emploi</option>
+                                <option {% if filters.niveau_poste == "Stagiaire / Etudiant" %}selected{% endif %}>Stagiaire / Etudiant</option>
+                                <option {% if filters.niveau_poste == "Jeune diplômé" %}selected{% endif %}>Jeune diplômé</option>
+                                <option {% if filters.niveau_poste == "Débutant / Junior" %}selected{% endif %}>Débutant / Junior</option>
+                                <option {% if filters.niveau_poste == "Confirmé / Expérimenté" %}selected{% endif %}>Confirmé / Expérimenté</option>
+                                <option {% if filters.niveau_poste == "Responsable d'équipe" %}selected{% endif %}>Responsable d'équipe</option>
+                                <option {% if filters.niveau_poste == "Manager / Responsable département" %}selected{% endif %}>Manager / Responsable département</option>
+                                <option {% if filters.niveau_poste == "Cadre dirigeant" %}selected{% endif %}>Cadre dirigeant</option>
+                            </select>
+                        </div>
+                        <div class="flex-shrink-0 w-auto sm:w-full">
+                            <label for="niveau_formation" class="hidden sm:block mb-2 text-sm font-medium text-gray-900 ">Niveau de formation</label>
+                            <select id="niveau_formation" name="niveau_formation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value="" selected>Toutes les offres d'emploi</option>
+                                <option {% if filters.niveau_formation == "Niveau secondair" %}selected{% endif %}>Niveau secondaire</option>
+                                <option {% if filters.niveau_formation == "Niveau terminal" %}selected{% endif %}>Niveau terminal</option>
+                                <option {% if filters.niveau_formation == "Formation Professionnelle" %}selected{% endif %}>Formation Professionnelle</option>
+                                <option {% if filters.niveau_formation == "Baccalauréat" %}selected{% endif %}>Baccalauréat</option>
+                                <option {% if filters.niveau_formation == "Universitaire sans diplôme" %}selected{% endif %}>Universitaire sans diplôme</option>
+                                <option {% if filters.niveau_formation == "TS Bac +2" %}selected{% endif %}>TS Bac +2</option>
+                                <option {% if filters.niveau_formation == "Licence (LMD), Bac + 3" %}selected{% endif %}>Licence (LMD), Bac + 3</option>
+                                <option {% if filters.niveau_formation == "Master 1, Licence  Bac + 4" %}selected{% endif %}>Master 1, Licence  Bac + 4</option>
+                                <option {% if filters.niveau_formation == "Master 2, Ingéniorat, Bac + 5" %}selected{% endif %}>Master 2, Ingéniorat, Bac + 5</option>
+                                <option {% if filters.niveau_formation == "Magistère Bac + 7" %}selected{% endif %}>Magistère Bac + 7</option>
+                                <option {% if filters.niveau_formation == "Doctorat" %}selected{% endif %}>Doctorat</option>
+                                <option {% if filters.niveau_formation == "Certification" %}selected{% endif %}>Certification</option>
+                                <option {% if filters.niveau_formation == "Non diplômante" %}selected{% endif %}>Non diplômante</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </aside>
+
+            <!-- Colonne principale -->
+            <section class="rounded shadow md:col-span-2 divide-y divide-gray-200 mb-12">
+                <turbo-frame id="offres_results">
+                    {% include 'front/offres-emploi/_offres.html.twig' %}
+                </turbo-frame>
+            </section>
+        </div>
+
+    </section>
+    
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        filtersForm = document.querySelector('#filters_form');
+        selectFields = filtersForm.querySelectorAll('select').forEach(element => {
+            element.addEventListener('change', (e) => {
+                filtersForm.submit()
+            })
+        });;
+
+    });
+</script>
+{% endblock %}

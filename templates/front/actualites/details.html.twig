@@ -1,0 +1,30 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title actu.titre %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style type="text/css">
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 mb-12">
+    <!-- Sujets les plus consultés -->
+    <section class="pb-8 min-h-screen space-y-16 md:space-y-10">
+        <img src="{{asset(actu.cover.filename|default(''))}}" alt="{{actu.titre}}" class="w-full h-64 object-cover">
+        <h2 class="text-[#2b62aa] text-xl font-semibold w-full max-w-4xl mb-4">{{actu.titre}}</h2>
+
+        <div class="">
+            {{actu.description|raw}}
+        </div>
+        
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+</script>
+{% endblock %}

@@ -1,0 +1,15 @@
+body {
+    --bs-layout-bg-color: #012545FF;
+    --bs-default-menu-link-color: #f5f5f5;
+    /* --bs-hover-menu-link-color: #f5f5f5; */
+}
+
+.bg-[#2b62aa]-o {
+    color: #f5f5f5;
+    background-color: var(--bs-layout-bg-color) !important;
+}
+
+.bg-[#2b62aa]-o {
+    color: #f5f5f5;
+    background-color: var(--bs-layout-bg-color) !important;
+}

@@ -1,0 +1,647 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title "Agents employés" %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+	<style></style>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Liste des agents
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							App
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Agents employés
+						</li>
+						<!--end::Item-->
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div class="d-flex align-items-center gap-2 gap-lg-3"></div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Products-->
+				<div
+					class="card card-flush">
+					<!--begin::Card header-->
+					<div
+						class="card-header align-items-center py-5 gap-2 gap-md-5">
+						<!--begin::Card title-->
+						<div
+							class="card-title">
+							<!--begin::Search-->
+							<div class="d-flex align-items-center position-relative my-1">
+								<i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Rechercher un agent"/>
+							</div>
+							<!--end::Search-->
+						</div>
+						<!--end::Card title-->
+
+						<!--begin::Card toolbar-->
+						<div class="card-toolbar">
+                            <div class="d-flex flex-row-fluid justify-content-end gap-5" data-kt-customer-table-toolbar="base">
+                                <div
+                                    class="w-150px mw-200px">
+                                    <!--begin::Select2-->
+                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-order-filter="status">
+                                        <option></option>
+                                        <option value="all">All</option>
+                                        <option value="published">Published</option>
+                                        <option value="scheduled">Scheduled</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                    <!--end::Select2-->
+                                </div>
+
+                                <!--begin::Add product-->
+                                <a href="" class="btn btn-primary flex-shrink-0" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
+                                    Ajouter un agent
+                                </a>
+                                <!--end::Add product-->
+                            </div>
+
+							<!--begin::Group actions-->
+							<div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
+								<div class="fw-bold me-5">
+									<span class="me-2" data-kt-customer-table-select="selected_count"></span>
+									Sélectionné(s)
+								</div>
+
+								<button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected" data-deleted-root="{{path('agents_selected_delete')}}">
+									Supprimer la sélection
+								</button>
+							</div>
+							<!--end::Group actions-->
+						</div>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body pt-0">
+
+						<!--begin::Table-->
+						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+							<thead>
+								<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+									<th class="w-10px pe-2">
+										<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+											<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="0"/>
+										</div>
+									</th>
+									<th class="min-w-200px">Agents</th>
+									<th class="text-end min-w-100px">Email</th>
+									<th class="text-end min-w-70px pe-0">Téléphone</th>
+									<th class="text-end min-w-100px pe-0">Service</th>
+									<th class="text-end min-w-100px pe-0">Direction</th>
+									<th class="text-end min-w-100px pe-0">Voting</th>
+									<th class="text-end min-w-70px">Actions</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+                                {% for agent in agents %}
+								<tr>
+									<td>
+										<div class="form-check form-check-sm form-check-custom form-check-solid">
+											<input class="form-check-input" type="checkbox" value="{{agent.id}}"/>
+										</div>
+									</td>
+									<td>
+										<div
+											class="d-flex align-items-center">
+											<!--begin::Thumbnail-->
+											<a href="{{path('details_agents', {agent: agent.id})}}" class="symbol symbol-50px">
+												<span class="symbol-label" style="background-image:url({{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}});"></span>
+											</a>
+											<!--end::Thumbnail-->
+
+											<div
+												class="ms-5">
+												<!--begin::Title-->
+												<a href="{{path('details_agents', {agent: agent.id})}}" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-customer-filter="product_name">{{agent.nom ~' '~ agent.prenoms}}</a>
+												<!--end::Title-->
+                                                <div class="text-muted fs-7 fw-bold">{{agent.fonction}}</div>
+											</div>
+										</div>
+									</td>
+									<td class="text-end pe-0">
+										<span class="fw-bold">{{agent.email}}</span>
+									</td>
+									<td class="text-end pe-0">
+										<span class="fw-bold">{{agent.telephone}}</span>
+									</td>
+									<td class="text-end pe-0">{{agent.service ? agent.service.libelle}}</td>
+									<td class="text-end pe-0">{{agent.service ? agent.service.parent.libelle}}</td>
+									<td class="text-end pe-0" data-order="rating-4">
+										<div class="rating justify-content-end">
+											<div class="rating-label checked">
+												<i class="ki-duotone ki-star fs-6"></i>
+											</div>
+											<div class="rating-label checked">
+												<i class="ki-duotone ki-star fs-6"></i>
+											</div>
+											<div class="rating-label checked">
+												<i class="ki-duotone ki-star fs-6"></i>
+											</div>
+											<div class="rating-label checked">
+												<i class="ki-duotone ki-star fs-6"></i>
+											</div>
+											<div class="rating-label ">
+												<i class="ki-duotone ki-star fs-6"></i>
+											</div>
+										</div>
+									</td>
+									<td class="text-end">
+										<a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+											Actions
+											<i class="ki-duotone ki-down fs-5 ms-1"></i>
+										</a>
+										<!--begin::Menu-->
+										<div
+											class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+											<!--begin::Menu item-->
+											<div class="menu-item px-3">
+												<a href="{{path('details_agents', {agent: agent.id})}}#modification" class="menu-link px-3">
+													Modifier
+												</a>
+											</div>
+											<!--end::Menu item-->
+
+											<!--begin::Menu item-->
+											<form class="menu-item px-3" method="post" action="{{ path('agent_delete', {'agent': agent.id}) }}">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ agent.id) }}">
+												<a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">
+													Supprimer
+												</a>
+											</form>
+											<!--end::Menu item-->
+										</div>
+										<!--end::Menu-->
+									</td>
+								</tr>
+                                {% endfor %}
+							</tbody>
+						</table>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Products-->
+
+                <!--begin::Modals-->
+                <!--begin::Modal - Customers - Add-->
+                <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <!--begin::Modal content-->
+                        <div class="modal-content">
+                            <!--begin::Form-->
+                            {{form_start(form, {'attr': {'id': 'kt_modal_add_customer_form', 'class': 'form'}})}}
+                                <!--begin::Modal header-->
+                                <div class="modal-header" id="kt_modal_add_customer_header">
+                                    <!--begin::Modal title-->
+                                    <h2 class="fw-bold">Nouvel agent</h2>
+                                    <!--end::Modal title-->
+
+                                    <!--begin::Close-->
+                                    <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                                        <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                    </div>
+                                    <!--end::Close-->
+                                </div>
+                                <!--end::Modal header-->
+
+                                <!--begin::Modal body-->
+                                <div class="modal-body px-5 my-7">
+                                    <!--begin::Scroll-->
+                                    <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+                                        <!--begin::Input group-->
+                                        <div
+                                            class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="d-block fw-semibold fs-6 mb-5">Photo</label>
+                                            <!--end::Label-->
+
+
+                                            <!--begin::Image placeholder-->
+                                            <style>
+                                                .image-input-placeholder {
+                                                    background-image: url("{{asset('assets/media/svg/avatars/blank.svg')}}");
+                                                }
+
+                                                [data-bs-theme="dark"] .image-input-placeholder {
+                                                    background-image: url("{{asset('assets/media/svg/avatars/blank-dark.svg')}}");
+                                                }
+                                            </style>
+                                            <!--end::Image placeholder-->
+                                            <!--begin::Image input-->
+                                            <div
+                                                class="image-input image-input-outline image-input-placeholder image-input-empty" data-kt-image-input="true">
+                                                <!--begin::Preview existing avatar-->
+                                                <div class="image-input-wrapper w-125px h-125px"></div>
+                                                <!--end::Preview existing avatar-->
+
+                                                <!--begin::Label-->
+                                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                    <i class="ki-duotone ki-pencil fs-7">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                    <!--begin::Inputs-->
+                                                    {{ form_row(form.photo) }}
+                                                    <input type="hidden" name="avatar_remove"/>
+                                                    <!--end::Inputs-->
+                                                </label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Cancel-->
+                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                                    <i class="ki-duotone ki-cross fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </span>
+                                                <!--end::Cancel-->
+
+                                                <!--begin::Remove-->
+                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                                    <i class="ki-duotone ki-cross fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </span>
+                                                <!--end::Remove-->
+                                            </div>
+                                            <!--end::Image input-->
+
+                                            <!--begin::Hint-->
+                                            <div class="form-text">Types de fichiers autorisés : png, jpg, jpeg.</div>
+                                            <!--end::Hint-->
+                                        </div>
+                                        <!--end::Input group-->
+
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-semibold mb-2">Matricule</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            {{form_widget(form.matricule, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Numéro matricule'}})}}
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Input group-->
+
+                                        <!--begin::Input group-->
+                                        <div class="row fv-row mb-7">
+                                            <div class="col-md-6 mb-5">
+                                                <!--begin::Label-->
+                                                <label class="required fs-6 fw-semibold mb-2">Nom</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.nom, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Nom de l\'agent'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                            <div class="col-md-6 mb-5">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 fw-semibold mb-2">Prénoms</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.prenoms, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Prénoms de l\'agent'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                        </div>
+                                        <!--end::Input group-->
+
+                                        <!--begin::Input group-->
+                                        <div class="row fv-row mb-7">
+                                            <div class="col-md-6 mb-5">
+                                                <!--begin::Label-->
+                                                <label class="required fs-6 fw-semibold mb-2">Civilité</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.civilite, {'attr': {'class': 'form-select form-select-solid fw-bold', 'data-control': 'select2', 'aria-label': 'Sélectionner une civilité', 'data-placeholder': 'Sélectionner une civilité...', 'data-dropdown-parent': '#kt_modal_add_customer', 'data-hide-search': 'true'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                            <div class="col-md-6 mb-5">
+                                                <!--begin::Label-->
+                                                <label class="required fs-6 fw-semibold mb-2">Date d'anniversaire</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.anniversaire, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Sélectionner une date'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                        </div>
+                                        <!--end::Input group-->
+
+                                        <div class="row fv-row mb-7">
+                                            <div class="col-md-6 mb-5">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 fw-semibold mb-2">
+                                                    <span class="required">Email</span>
+
+                                                    
+                                                    <span class="ms-1"  data-bs-toggle="tooltip" title="L'adresse Email doit être active" >
+                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                                    </span>
+                                                </label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.email, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Adresse email de service'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                            <div class="col-md-6 mb-5">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 fw-semibold mb-2">Téléphone</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.telephone, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Téléphone de service'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                        </div>
+                                        <div class="row fv-row mb-7">
+                                            <div class="col-md-6 mb-5">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 fw-semibold mb-2 required">Numéro IP</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.fixe, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer votre Numéro IP'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                            <div class="col-md-6 mb-5">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 required fw-semibold mb-2">Fonction</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.fonction, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Fonction occupée'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                        </div>
+                                        <!--end::Input group-->
+
+                                        <!--begin::Billing toggle-->
+                                        <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_add_customer_billing_info" role="button" aria-expanded="false" aria-controls="kt_customer_view_details">
+                                            Informations de fonction
+                                            <span class="ms-2 rotate-180">
+                                                <i class="ki-duotone ki-down fs-3"></i>
+                                            </span>
+                                        </div>
+                                        <!--end::Billing toggle-->
+
+                                        <!--begin::Billing form-->
+                                        <div id="kt_modal_add_customer_billing_info" class="collapse show">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column mb-7 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="fs-6 fw-semibold mb-2">
+                                                    <span class="required">Bureau / Lieu de travail</span>
+
+                                                    
+                                                    <span class="ms-1"  data-bs-toggle="tooltip" title="Agence de fonction" >
+                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i></span>
+                                                </label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                {{form_widget(form.bureau, {'attr': {'class': 'form-select form-select-solid fw-bold', 'data-control': 'select2', 'data-dropdown-parent': '#kt_modal_add_customer', 'data-hide-search': 'true', 'aria-label': 'Selectionner votre lieu de travail', 'data-placeholder': 'Selectionner votre lieu de travail'}})}}
+                                                <!--end::Input-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="row g-9 mb-7">
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <!--begin::Label-->
+                                                    <label class="required fs-6 fw-semibold mb-2">Direction</label>
+                                                    <!--end::Label-->
+
+                                                    <!--begin::Input-->
+                                                    <select name="direction" aria-label="Sélectionner une direction" data-control="select2" data-placeholder="Sélectionner une direction..." data-dropdown-parent="#kt_modal_add_customer" data-hide-search="true" class="form-select form-select-solid fw-bold">
+                                                        <option value="">Sélectionner une direction...</option>
+                                                        {% for direction in directions %}
+                                                        <option value="{{direction.id}}" >{{direction.libelle}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <!--end::Input-->
+                                                </div>
+                                                <!--end::Col-->
+
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <!--begin::Label-->
+                                                    <label class="required fs-6 fw-semibold mb-2">Service</label>
+                                                    <!--end::Label-->
+
+                                                    <!--begin::Input-->
+                                                    {{form_widget(form.service, {'attr': {'class': 'form-select form-select-solid fw-bold', 'disabled': 'true', 'data-control': 'select2', 'data-dropdown-parent': '#kt_modal_add_customer', 'data-hide-search': 'true', 'aria-label': 'Selectionner un service', 'data-placeholder': 'Selectionner un service'}})}}
+                                                    <!--end::Input-->
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-7">
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex flex-stack">
+                                                    <!--begin::Label-->
+                                                    <div class="me-5">
+                                                        <!--begin::Label-->
+                                                        <label class="fs-6 fw-semibold">Mail de bienvenue ?</label>
+                                                        <!--end::Label-->
+
+                                                        <!--begin::Input-->
+                                                        <div class="fs-7 fw-semibold text-muted">Souhaitez-vous envoyer un mail de bienvenue à l'adresse de l'agent.</div>
+                                                        <!--end::Input-->
+                                                    </div>
+                                                    <!--end::Label-->
+
+                                                    <!--begin::Switch-->
+                                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                                        <!--begin::Input-->
+                                                        <input class="form-check-input" name="welcomeMail" type="checkbox" value="1" id="kt_modal_add_customer_billing" checked="checked" />
+                                                        <!--end::Input-->
+
+                                                        <!--begin::Label-->
+                                                        <span class="form-check-label fw-semibold text-muted" for="kt_modal_add_customer_billing">
+                                                            Oui
+                                                        </span>
+                                                        <!--end::Label-->
+                                                    </label>
+                                                    <!--end::Switch-->
+                                                </div>
+                                                <!--begin::Wrapper-->
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--end::Billing form-->
+                                    </div>
+                                    <!--end::Scroll-->
+                                </div>
+                                <!--end::Modal body-->
+
+                                <!--begin::Modal footer-->
+                                <div class="modal-footer flex-center">
+                                    <!--begin::Button-->
+                                    <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3">
+                                        Annuler
+                                    </button>
+                                    <!--end::Button-->
+
+                                    <!--begin::Button-->
+                                    <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+                                        <span class="indicator-label">
+                                            Soumettre
+                                        </span>
+                                        <span class="indicator-progress">
+                                            Veuillez patienter... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        </span>
+                                    </button>
+                                    <!--end::Button-->
+                                </div>
+                                <!--end::Modal footer-->
+                            {{form_end(form)}}
+                            <!--end::Form-->
+                        </div>
+                    </div>
+                </div>
+                <!--end::Modal - Customers - Add-->
+                <!--end::Modals-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/ecommerce/customers/listing/listing.js')}}"></script>
+    <script src="{{asset('assets/js/custom/apps/ecommerce/customers/listing/add.js')}}"></script>
+	<script type="text/javascript">
+    
+    const today = new Date();
+    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    const minDate = new Date(today.getFullYear() - 80, today.getMonth(), today.getDate());
+    $("#agents_form_anniversaire").flatpickr({
+        maxDate: maxDate,
+        minDate: minDate,
+    });
+
+	const directions = {{ directions|map(d => {
+        id: d.id,
+        libelle: d.libelle,
+        parent: d.parent.id,
+    })|json_encode|raw }};
+
+    const services = {{ services|map(s => {
+        id: s.id,
+        libelle: s.libelle,
+        parent: s.parent.id,
+    })|json_encode|raw }};
+
+    $('select[name="direction"]').change((e) => {
+        const selectedValue = $(e.target).val();
+        const servicesFinded = services.filter(s => s.parent == selectedValue);
+
+        const $serviceSelect = $('#agents_form_service');
+
+        // Réinitialise et active le select service
+        $serviceSelect.empty().append('<option value="">Sélectionner un service</option>').prop('disabled', false);
+
+        // Ajoute les services trouvés
+        servicesFinded.forEach(serv => {
+            $serviceSelect.append(`<option value="${serv.id}">${serv.libelle}</option>`);
+        });
+        $serviceSelect.trigger('change.select2');
+    });
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            Swal.fire({
+                html: `{{message|raw}}`,
+                icon: "{{ type }}",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, compris !",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
+        {% endfor %}
+    {% endfor %}
+	</script>
+{% endblock %}

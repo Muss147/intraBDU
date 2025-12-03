@@ -1,0 +1,510 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div id="kt_app_toolbar_container" class="app-container container-xxl">
+
+				<div
+					class="bg-[#2b62aa]-o h-150px rounded d-flex flex-stack p-5 p-md-10">
+					<!--begin::Page title-->
+					<div
+						class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+						<!--begin::Title-->
+						<h1 class="page-heading d-flex text-gray-100 fw-bold fs-3 flex-column justify-content-center my-0">
+							Projets
+						</h1>
+						<!--end::Title-->
+
+
+						<!--begin::Breadcrumb-->
+						<ul
+							class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+							<!--begin::Item-->
+							<li class="breadcrumb-item text-muted">
+								<a href="{{path('acceuil')}}" class="text-muted text-hover-primary">
+									Accueil
+								</a>
+							</li>
+							<!--end::Item-->
+							<!--begin::Item-->
+							<li class="breadcrumb-item">
+								<span class="bullet bg-gray-500 w-5px h-2px"></span>
+							</li>
+							<!--end::Item-->
+
+							<!--begin::Item-->
+							<li class="breadcrumb-item text-muted">
+								App
+							</li>
+							<!--end::Item-->
+
+							<!--begin::Item-->
+							<li class="breadcrumb-item">
+								<span class="bullet bg-gray-200 w-5px h-2px"></span>
+							</li>
+							<!--end::Item-->
+
+							<!--begin::Item-->
+							<li class="breadcrumb-item">
+								Projets
+							</li>
+							<!--end::Item-->
+						</ul>
+						<!--end::Breadcrumb-->
+					</div>
+					<!--end::Page title-->
+				</div>
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Products-->
+				<div
+					class="card card-flush">
+					<!--begin::Card header-->
+					<div
+						class="card-header align-items-center py-5 gap-2 gap-md-5">
+						<!--begin::Card title-->
+						<div
+							class="card-title">
+							<!--begin::Search-->
+							<div class="d-flex align-items-center position-relative my-1">
+								<i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Rechercher un projet"/>
+							</div>
+							<!--end::Search-->
+						</div>
+						<!--end::Card title-->
+
+						<!--begin::Card toolbar-->
+						<div
+							class="card-toolbar flex-row-fluid justify-content-end gap-5">
+							<!--begin::Flatpickr-->
+							<div class="input-group w-250px">
+								<input class="form-control form-control-solid rounded rounded-end-0" placeholder="Choisir une plage de dates" id="kt_ecommerce_sales_flatpickr"/>
+								<button class="btn btn-icon btn-light" id="kt_ecommerce_sales_flatpickr_clear">
+									<i class="ki-duotone ki-cross fs-2">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</button>
+							</div>
+							<!--end::Flatpickr-->
+
+							<div
+								class="w-100 mw-150px">
+								<!--begin::Select2-->
+								<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Statut" data-kt-ecommerce-order-filter="status">
+									<option></option>
+									<option value="all">Tout</option>
+									<option value="Annulé">Annulé</option>
+									<option value="Terminé">Terminé</option>
+									<option value="Abandonné">Abandonné</option>
+									<option value="Expiré">Expiré</option>
+									<option value="Échoué">Échoué</option>
+									<option value="En attente">En attente</option>
+									<option value="En cours">En cours</option>
+									<option value="Refusé">Refusé</option>
+									<option value="Accordé">Accordé</option>
+									<option value="Livré">Livré</option>
+								</select>
+								<!--end::Select2-->
+							</div>
+
+							<!--begin::Add product-->
+							<a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_project">
+								Ajouter un projet
+							</a>
+							<!--end::Add product-->
+						</div>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body pt-0">
+
+						<!--begin::Table-->
+						<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_sales_table">
+							<thead>
+								<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+									<th class="text-start w-10px">
+										<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+											<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_sales_table .form-check-input" value="1"/>
+										</div>
+									</th>
+									<th class="min-w-250px">Nom</th>
+									<th class="text-end pe-0 min-w-100px">Secteur</th>
+									<th class="text-end pe-0 min-w-150px">Client</th>
+									<th class="text-end pe-0 min-w-100px">Statut</th>
+									<th class="text-end pe-0 min-w-50px">TVA</th>
+									<th class="text-end pe-0 min-w-150px">Conducteur</th>
+									<th class="text-end min-w-100px">Date début</th>
+									<th class="text-end min-w-100px">Date fin</th>
+									<th class="text-end min-w-100px bg-white">Actions</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+                                {% for projet in projets %}
+								<tr>
+									<td class="text-start">
+										<div class="form-check form-check-sm form-check-custom form-check-solid">
+											<input class="form-check-input" type="checkbox" value="{{projet.id}}"/>
+										</div>
+									</td>
+									<td class="text-start" data-kt-ecommerce-order-filter="order_id">
+										<a href="{{path('projet_resume', {projet: projet.id})}}" class="text-gray-800 text-hover-primary fw-bold">
+											{{projet.nom}}
+										</a>
+									</td>
+									<td class="text-end pe-0">
+										<span class="fw-bold">{{projet.secteurActivite.libelle|default(null)}}</span>
+									</td>
+									<td class="pe-0">
+										<div
+											class="d-flex align-items-center justify-content-end">
+											<!--begin:: Avatar -->
+											<div class="symbol symbol-circle symbol-25px overflow-hidden">
+												<a href="">
+													<div class="symbol-label">
+														<img src="{{asset('assets/media/svg/avatars/blank.svg')}}" alt="Emma Smith" class="w-100">
+													</div>
+												</a>
+											</div>
+											<!--end::Avatar-->
+
+											<div
+												class="ms-2">
+												<!--begin::Title-->
+												<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold">{{projet.client.nom}}</a>
+												<!--end::Title-->
+											</div>
+										</div>
+									</td>
+									<td
+										class="text-end pe-0" data-order="Completed">
+										<!--begin::Badges-->
+										{% if projet.statut == "Livré" %}<div class="badge badge-light-primary">{{projet.statut}}</div>
+										{% elseif projet.statut in ["Terminé", "Accordé"] %}<div class="badge badge-light-success">{{projet.statut}}</div>
+										{% elseif projet.statut in ["En attente", "En cours"] %}<div class="badge badge-light-warning">{{projet.statut}}</div>
+										{% elseif projet.statut in ["Refusé", "Expiré"] %}<div class="badge badge-light-info">{{projet.statut}}</div>
+										{% elseif projet.statut in ["Annulé", "Abandonné", "Échoué"] %}<div class="badge badge-light-danger">{{projet.statut}}</div>{% endif %}
+										<!--end::Badges-->
+									</td>
+									<td class="text-end pe-0">
+										<span class="fw-bold">{{projet.tva ? "Oui" : "Nom" }}</span>
+									</td>
+									<td class="text-end pe-0">
+										<span class="fw-bold">{{projet.ConducteurTravaux}}</span>
+									</td>
+									<td class="text-end pe-0" data-order="{{projet.dateDebut|date('Y-m-d')}}2025-05-14">
+										<span class="fw-bold">{{projet.dateDebut|date('d/m/Y')}}</span>
+									</td>
+									<td class="text-end" data-order="{{projet.dateFin|date('Y-m-d')}}2025-05-21">
+										<span class="fw-bold">{{projet.dateFin|date('d/m/Y')}}</span>
+									</td>
+									<td class="text-end bg-white">
+										<a href="{{path('projet_resume', {projet: projet.id})}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir les détails">
+											<i class="ki-duotone ki-setting-3 fs-3">
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+												<span class="path4"></span>
+												<span class="path5"></span>
+											</i>
+										</a>
+										<form class="d-inline" method="post" action="{{ path('projet_delete', {'projet': projet.id}) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
+											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ projet.id) }}">
+											<button class="btn btn-icon btn-active-light-danger w-30px h-30px" data-kt-ecommerce-order-filter="delete_row">
+												<i class="ki-duotone ki-trash fs-3">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+												</i>
+											</button>
+										</form>
+									</td>
+								</tr>
+                                {% endfor %}
+                            </tbody>
+						</table>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Products-->
+
+				<!--begin::Modals-->
+				<!--begin::Modal - Add parametres-->
+				<div
+					class="modal fade" id="kt_modal_add_project" tabindex="-1" aria-hidden="true"> <!--begin::Modal dialog-->
+					<div
+						class="modal-dialog modal-dialog-centered mw-650px">
+						<!--begin::Modal content-->
+						<div
+							class="modal-content">
+							<!--begin::Modal header-->
+							<div
+								class="modal-header">
+								<!--begin::Modal title-->
+								<h2 class="fw-bold">Ajout de projet</h2>
+								<!--end::Modal title-->
+
+								<!--begin::Close-->
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-project-modal-action="close">
+									<i class="ki-duotone ki-cross fs-1">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</div>
+								<!--end::Close-->
+							</div>
+							<!--end::Modal header-->
+
+							<!--begin::Modal body-->
+							<div
+								class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+								<!--begin::Form-->
+                                {{form_start(new_form, {'attr': {'id': 'kt_modal_add_project_form', 'class': 'form'}})}}
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Nom du projet</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.nom, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer un nom au projet'}})}}
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<div
+										class="row g-9 mb-7">
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="required fw-semibold fs-6 mb-2">Date de début</label>
+											<!--end::Label-->
+
+											<div class="position-relative d-flex align-items-center">
+												<i class="ki-duotone ki-calendar-8 position-absolute ms-4 mb-1 fs-2">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+													<span class="path6"></span>
+												</i>
+												<!--begin::Input-->
+												{{form_widget(new_form.dateDebut, {'attr': {'class': 'form-control form-control-solid kt_datepicker ps-12', 'placeholder': 'Choisir une date'}})}}
+												<!--end::Input-->
+											</div>
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div
+											class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="required fw-semibold fs-6 mb-2">Date de fin</label>
+											<!--end::Label-->
+
+
+											<div class="position-relative d-flex align-items-center">
+												<i class="ki-duotone ki-calendar-8 position-absolute ms-4 mb-1 fs-2">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+													<span class="path6"></span>
+												</i>
+												<!--begin::Input-->
+												{{form_widget(new_form.dateFin, {'attr': {'class': 'form-control form-control-solid kt_datepicker ps-12', 'placeholder': 'Choisir une date'}})}}
+												<!--end::Input-->
+											</div>
+										</div>
+										<!--end::Input group-->
+									</div>
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Client</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.client, {'attr': {'class': 'form-select form-select-solid', 'data-placeholder': 'Sélectionner un client'}})}}
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="required">Secteur d'activité</span>
+										</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.secteurActivite, {'attr': {'class': 'form-select form-select-solid', 'data-control': 'select2', 'data-hide-search': 'true', 'data-placeholder': 'Sélectionner un secteur'}})}}
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">Conducteur de travaux</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.conducteurTravaux, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer le nom et prénom'}})}}
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">Description</label>
+										<!--end::Label-->
+
+										<!--begin::Input-->
+                                        {{form_widget(new_form.description, {'attr': {'class': 'form-control form-control-solid', 'placeholder': 'Entrer une description'}})}}
+									<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<div class="form-check form-switch form-check-custom form-check-solid">
+                                        	{{form_widget(new_form.tva, {'attr': {'class': 'form-check-input', 'checked': 'checked', 'placeholder': 'Entrer une description'}})}}
+											<label class="form-check-label  fw-semibold text-gray-500 ms-3" for="projets_tva">
+												TVA applicable ?
+											</label>
+										</div>
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Actions-->
+									<div class="text-center pt-15">
+										<button type="reset" class="btn btn-light me-3" data-kt-project-modal-action="cancel">
+											Annuler
+										</button>
+
+										<button type="submit" class="btn btn-primary" data-kt-project-modal-action="submit">
+											<span class="indicator-label">
+												Soumettre
+											</span>
+											<span class="indicator-progress">
+												Veuillez patienter...
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+											</span>
+										</button>
+									</div>
+									<!--end::Actions-->
+								{{form_end(new_form)}}
+								<!--end::Form-->
+							</div>
+							<!--end::Modal body-->
+						</div>
+						<!--end::Modal content-->
+					</div>
+					<!--end::Modal dialog-->
+				</div>
+				<!--end::Modal - Add parametres-->
+				<!--end::Modals-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+<script src="{{asset('assets/js/custom/apps/projects/list/listing.js')}}"></script>
+<script src="{{asset('assets/js/custom/apps/projects/list/add.js')}}"></script>
+
+<script type="text/javascript">
+	
+	$(".kt_datepicker").flatpickr();
+	
+	// Format options
+	var optionFormat = function(item) {
+		if ( !item.id ) {
+			return item.text;
+		}
+
+		var span = document.createElement('span');
+		var imgUrl = item.element.getAttribute('data-kt-select2-user');
+		var template = '';
+
+		template += '<img src="' + imgUrl + '" class="border border-gray-200 rounded-circle h-20px me-2" alt="image"/>';
+		template += item.text;
+		span.innerHTML = template;
+		return $(span);
+	}
+
+	// Init Select2 --- more info: https://select2.org/
+	$('#projets_client').select2({
+		templateSelection: optionFormat,
+		templateResult: optionFormat
+	});
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+        Swal.fire({
+            html: `{{message|raw}}`,
+            icon: "{{type}}",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, compris !",
+            customClass: {
+                confirmButton: "btn btn-primary"
+            }
+        });
+        {% endfor %}
+    {% endfor %}
+</script>
+{% endblock %}

@@ -1,0 +1,716 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title type %}
+
+{% block stylesheets %}
+	<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Liste des {{type}}
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Documents de référence
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							{{type}}
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div class="d-flex align-items-center gap-2 gap-lg-3"></div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+				<!--begin::Card-->
+				<div
+					class="card card-flush pb-0 bgi-position-y-center bgi-no-repeat mb-10" style="background-size: auto calc(100% + 10rem); background-position-x: 100%; background-image: url({{asset('assets/media/illustrations/sketchy-1/4.png')}})">
+
+					<!--begin::Card header-->
+					<div class="card-header pt-10">
+						<div
+							class="d-flex align-items-center">
+							<!--begin::Icon-->
+							<div class="symbol symbol-circle me-5">
+								<div class="symbol-label bg-transparent text-[#2b62aa] border border-[#6ca942] border-dashed">
+									<i class="ki-duotone ki-abstract-47 fs-2x text-[#2b62aa]">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</div>
+							</div>
+							<!--end::Icon-->
+
+							<!--begin::Title-->
+							<div class="d-flex flex-column">
+								<h2 class="mb-1">Gestionnaire de fichiers</h2>
+								<div class="text-muted fw-bold">
+									<a href="">Dashboard</a>
+									<span class="mx-3">|</span>
+									<a href="#">Documents de référence</a>
+									<span class="mx-3">|</span>
+									<a href="#">{{type}}</a>
+									<span class="mx-3">|</span>
+									{{documents|length}} éléments
+								</div>
+							</div>
+							<!--end::Title-->
+						</div>
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body pb-0">
+						<!--begin::Navs-->
+						<div class="d-flex overflow-auto h-55px">
+							<ul
+								class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-semibold flex-nowrap">
+								<!--begin::Nav item-->
+								{# <li class="nav-item">
+									<a class="nav-link text-active-primary me-6 active" href="/metronic8/demo1/apps/file-manager/folders.html">
+										Files
+									</a>
+								</li>
+								<!--end::Nav item-->
+
+								<!--begin::Nav item-->
+								<li class="nav-item">
+									<a class="nav-link text-active-primary me-6" href="/metronic8/demo1/apps/file-manager/settings.html">
+										Settings
+									</a>
+								</li> #}
+								<!--end::Nav item-->
+							</ul>
+						</div>
+						<!--begin::Navs-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Card-->
+
+				<!--begin::Card-->
+				<div
+					class="card card-flush">
+					<!--begin::Card header-->
+					<div class="card-header pt-8">
+						<div
+							class="card-title">
+							<!--begin::Search-->
+							<div class="d-flex align-items-center position-relative my-1">
+								<i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<input type="text" data-kt-filemanager-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Rechercher un(e) {{type}}"/>
+							</div>
+							<!--end::Search-->
+						</div>
+
+						<!--begin::Card toolbar-->
+						<div
+							class="card-toolbar">
+							<!--begin::Toolbar-->
+							<div class="d-flex justify-content-end" data-kt-filemanager-table-toolbar="base">
+								{% if parent %}
+								<!--begin::Back to folders-->
+								<a href="{{path('app_documents', {type: type, parent: (parent.parent ? parent.parent.id : null)})}}" class="btn btn-icon btn-light-primary me-3">
+									<i class="ki-duotone ki-exit-up fs-2"><span class="path1"></span><span class="path2"></span></i>
+								</a>
+								<!--end::Back to folders-->
+								{% endif %}
+								
+								<!--begin::Export-->
+								<button type="button" class="btn btn-flex btn-light-primary me-3" id="kt_file_manager_new_folder">
+									<i class="ki-duotone ki-add-folder fs-2"><span class="path1"></span><span class="path2"></span></i>
+									Nouveau dossier
+								</button>
+								<!--end::Export-->
+								{# {% if parent %} #}
+								<!--begin::Add customer-->
+								<button type="button" class="btn btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
+									<i class="ki-duotone ki-folder-up fs-2"><span class="path1"></span><span class="path2"></span></i>
+									Ajouter un(e) {{type}}
+								</button>
+								<!--end::Add customer--> 
+								{# {% endif %} #}
+							</div>
+							<!--end::Toolbar-->
+
+							<!--begin::Group actions-->
+							<div class="d-flex justify-content-end align-items-center d-none" data-kt-filemanager-table-toolbar="selected">
+								<div class="fw-bold me-5">
+									<span class="me-2" data-kt-filemanager-table-select="selected_count"></span>
+									Sélectionné(s)
+								</div>
+
+								<button type="button" class="btn btn-danger" data-kt-filemanager-table-select="delete_selected" data-deleted-root="{{path('document_selected_delete')}}">
+									Supprimer la sélection
+								</button>
+							</div>
+							<!--end::Group actions-->
+						</div>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body">
+						<!--begin::Table header-->
+						<div
+							class="d-flex flex-stack">
+							<!--begin::Folder path-->
+							<div class="badge badge-lg badge-light-primary">
+								<div class="d-flex align-items-center flex-wrap">
+									<i class="ki-duotone ki-abstract-32 fs-2 text-[#2b62aa] me-3">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+									{% set pathParts = [
+										parent.parent.parent ?? null,
+										parent.parent ?? null,
+										parent ?? null
+									] %}
+
+									{% for part in pathParts %}
+										{% if part and part.libelle %}
+											<a href="{{path('app_documents', {type: part.type, parent: (part.parent ? part.parent.id : null)})}}">{{ part.libelle }}</a>
+											<i class="ki-duotone ki-right fs-2 text-[#2b62aa] mx-1"></i>
+										{% endif %}
+									{% endfor %}
+
+									{{ type|capitalize }}
+								</div>
+							</div>
+							<!--end::Folder path-->
+
+							<!--begin::Folder Stats-->
+							<div class="badge badge-lg badge-primary">
+								<span id="kt_file_manager_items_counter">{{documents|length}} éléments</span>
+							</div>
+							<!--end::Folder Stats-->
+						</div>
+						<!--end::Table header-->
+						<!--begin::Table-->
+						<table id="kt_file_manager_list" data-kt-filemanager-table="folders" class="table align-middle table-row-dashed fs-6 gy-5">
+							<thead>
+								<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+									<th class="w-10px pe-2">
+										<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+											<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_file_manager_list .form-check-input" value="0"/>
+										</div>
+									</th>
+									<th class="min-w-250px">{{type|capitalize}}</th>
+									<th class="min-w-10px">Fichiers</th>
+									<th class="min-w-100px text-end">Taille</th>
+									<th class="min-w-100px text-end">Dernière modification</th>
+									<th class="w-125px"></th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+								{% set dossiersData = documents|filter(doc => doc.source is not null) %}
+								{% set fichiers = documents|filter(doc => doc.source is null) %}
+								{% set sortedDocuments = fichiers|merge(dossiersData) %}
+								
+								{% for param in sortedDocuments %}
+								<tr>
+									<td>
+										<div class="form-check form-check-sm form-check-custom form-check-solid">
+											<input class="form-check-input" type="checkbox" value="{{param.id}}"/>
+										</div>
+									</td>
+									<td data-order="account">
+										<div class="d-flex align-items-center">
+											{% if not param.source %}
+											<span class="icon-wrapper">
+												<i class="ki-duotone ki-folder fs-2x text-[#2b62aa] me-4">
+													<span class="path1"></span>
+													<span class="path2"></span>
+												</i>
+											</span>
+											{% endif %}
+											<a href="{{param.source ? param.source.filename : path('app_documents', {type: type, parent: param.id})}}" class="text-gray-800 text-hover-primary">{{param.libelle}}</a>
+										</div>
+									</td>
+									<td class="text-end pe-0">
+										{{ param.source ? '-' : (param.children|filter(p => p.deletedAt is null)|length) }}
+									</td>
+									<td class="text-end pe-0">
+										{{param.source ? param.source.size : '-'}}
+									</td>
+									<td class="text-end">
+										{{param.updatedAt|date('d M Y, H:m')}}
+									</td>
+									<td class="text-end" data-kt-filemanager-table="action_dropdown">
+										<div
+											class="d-flex justify-content-end">
+											{% if not param.source %}
+											<!--begin::Edit link-->
+											<div class="ms-2" data-kt-filemanger-table="copy_link">
+												<button href="#" type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary" data-kt-filemanager-table="rename">
+													<i class="ki-duotone ki-notepad-edit fs-5 m-0">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>
+												</button>
+												<!--end::Edit link-->
+											</div>
+											{% endif %}
+
+											<!--begin::More-->
+											<div class="ms-2">
+												<button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+													<i class="ki-duotone ki-dots-square fs-5 m-0">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+													</i>
+												</button>
+												<!--begin::Menu-->
+												<div
+													class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-150px py-4" data-kt-menu="true">
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="{{param.source ? param.source.filename : path('app_documents', {type: type, parent: param.id})}}" class="menu-link px-3">
+															Voir
+														</a>
+													</div>
+													<!--end::Menu item-->
+
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-bs-ident="{{param.id}}" data-kt-filemanager-table-filter="move_row" data-bs-toggle="modal" data-bs-target="#kt_modal_move_to_folder">
+															Déplacer vers
+														</a>
+													</div>
+													<!--end::Menu item-->
+
+													<!--begin::Menu item-->
+													<form class="menu-item px-3" method="post" action="{{ path('document_delete', {'document': param.id}) }}">
+														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ param.id) }}">
+														<a href="#" class="menu-link text-danger px-3" data-kt-filemanager-table-filter="delete_row">
+															Supprimer
+														</a>
+													</form>
+													<!--end::Menu item-->
+												</div>
+												<!--end::Menu-->
+												<!--end::More-->
+											</div>
+										</div>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Card-->
+				<!--begin::Upload template-->
+				<table class="d-none">
+					<tr id="kt_file_manager_new_folder_row" data-kt-filemanager-template="upload">
+						<td></td>
+						<td id="kt_file_manager_add_folder_form" class="fv-row">
+							{{form_start(new_folder, {'attr': {'id': '', 'class': 'd-flex align-items-center'}})}}
+								<!--begin::Folder icon-->
+								<span id="kt_file_manager_folder_icon">
+									<i class="ki-duotone ki-folder fs-2x text-[#2b62aa] me-4">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</span>
+								<!--end::Folder icon-->
+
+								<!--begin:Input-->
+								{{form_widget(new_folder.libelle, {'attr': {'placeholder': 'Entrer un libellé', 'class': 'form-control mw-250px me-3'}})}}
+								<!--end:Input-->
+
+								<!--begin:Submit button-->
+								<button class="btn btn-icon btn-light-primary me-3" id="kt_file_manager_add_folder"> <span class="indicator-label">
+										<i class="ki-duotone ki-check fs-1"></i>
+									</span>
+									<span class="indicator-progress">
+										<span class="spinner-border spinner-border-sm align-middle"></span>
+									</span>
+								</button>
+								<!--end:Submit button-->
+
+								<!--begin:Cancel button-->
+								<button class="btn btn-icon btn-light-danger" id="kt_file_manager_cancel_folder">
+									<span class="indicator-label">
+										<i class="ki-duotone ki-cross fs-1">
+											<span class="path1"></span>
+											<span class="path2"></span>
+										</i>
+									</span>
+									<span class="indicator-progress">
+										<span class="spinner-border spinner-border-sm align-middle"></span>
+									</span>
+								</button>
+								<!--end:Cancel button-->
+							{{form_end(new_folder)}}
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				<!--end::Upload template-->
+
+				<!--begin::Rename template-->
+				<div class="d-none" data-kt-filemanager-template="rename">
+					<form id="form-edit-param" action="{{path('document_edit')}}" method="POST">
+						<div class="fv-row">
+							<div class="d-flex align-items-center">
+								<span id="kt_file_manager_rename_folder_icon"></span>
+								<input type="hidden" name="param_id">
+								<input type="text" id="kt_file_manager_rename_input" name="param_libelle" placeholder="Entrer le nouveau libellé" class="form-control mw-250px me-3" value=""/>
+								<button class="btn btn-icon btn-light-primary me-3" id="kt_file_manager_rename_folder">
+									<i class="ki-duotone ki-check fs-1"></i>
+								</button>
+								<button class="btn btn-icon btn-light-danger" id="kt_file_manager_rename_folder_cancel">
+									<span class="indicator-label">
+										<i class="ki-duotone ki-cross fs-1">
+											<span class="path1"></span>
+											<span class="path2"></span>
+										</i>
+									</span>
+									<span class="indicator-progress">
+										<span class="spinner-border spinner-border-sm align-middle"></span>
+									</span>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!--end::Rename template-->
+
+				<!--begin::Checkbox template-->
+				<div class="d-none" data-kt-filemanager-template="checkbox">
+					<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input" type="checkbox" value="1"/></div>
+				</div>
+				<!--end::Checkbox template-->
+				
+				<!--begin::Modals-->
+				<!--begin::Modal - Upload File-->
+				<div class="modal fade" id="kt_modal_upload" tabindex="-1" aria-hidden="true">
+					<!--begin::Modal dialog-->
+					<div class="modal-dialog modal-dialog-centered mw-650px">
+						<!--begin::Modal content-->
+						<div class="modal-content">
+							<!--begin::Form-->
+							{{form_start(new_file, {'attr': {'id': 'kt_modal_upload_form', 'class': 'form', 'enctype': 'multipart/form-data'}})}}
+								<!--begin::Modal header-->
+								<div class="modal-header">
+									<!--begin::Modal title-->
+									<h2 class="fw-bold">Upload files</h2> 
+									<!--end::Modal title-->
+
+									<!--begin::Close-->
+									<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+										<i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                    </div>
+									<!--end::Close-->
+								</div>
+								<!--end::Modal header-->
+
+								<!--begin::Modal body-->
+								<div class="modal-body pt-10 pb-15 px-lg-17">
+									<!--begin::Input group-->
+									<div
+										class="fv-row mb-7">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mb-2">
+											<span class="">Libelle</span>
+										</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										{{form_widget(new_file.libelle, {'attr': {'placeholder': 'Entrer un libellé', 'class': 'form-control mw-250px me-3'}})}}
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+									
+									<!--begin::Input group-->
+									<div class="fv-row">
+										<!-- Dropzone container -->
+										<div class="dropzone" id="kt_modal_upload_dropzone">
+											<div class="dz-message needsclick">
+												<i class="ki-duotone ki-file-up fs-3x text-[#2b62aa]"><span class="path1"></span><span class="path2"></span></i>
+												<div class="ms-4">
+													<h3 class="fs-5 fw-bold text-gray-900 mb-1">Déposez vos fichiers ici ou cliquez pour téléverser</h3>
+													<span class="fs-7 fw-semibold text-gray-500">1 fichier à la fois / 10 Mo</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									{{ form_widget(new_file.source, {'attr': {'class': 'd-none'}}) }}
+									{{ form_rest(new_file) }}
+									<!--end::Input group-->
+
+                                    <!--begin::Actions-->
+                                    <div class="d-flex flex-center mt-15">
+                                        <button type="reset" id="kt_modal_users_search_reset" data-bs-dismiss="modal" class="btn btn-active-light me-3">
+                                            Annuler
+                                        </button>
+
+                                        <button type="submit" id="kt_modal_users_search_submit" class="btn btn-primary">
+                                            Enregistrer
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+								</div>
+								<!--end::Modal body-->
+							{{form_end(new_file)}}
+							<!--end::Form-->
+						</div>
+					</div>
+				</div>
+				<!--end::Modal - Upload File-->
+
+				<!--begin::Modal - Move file-->
+				<div class="modal fade" id="kt_modal_move_to_folder" tabindex="-1" aria-hidden="true">
+					<!--begin::Modal dialog-->
+					<div class="modal-dialog modal-dialog-centered mw-650px">
+						<!--begin::Modal content-->
+						<div class="modal-content">
+							<!--begin::Form-->
+							<form class="form" action="{{path('document_edit')}}" method="post" id="kt_modal_move_to_folder_form">
+								<!--begin::Modal header-->
+								<div class="modal-header">
+									<!--begin::Modal title-->
+									<h2 class="fw-bold">Déplacer vers un dossier</h2>
+									<!--end::Modal title-->
+
+									<!--begin::Close-->
+									<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+										<i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                    </div>
+									<!--end::Close-->
+								</div>
+								<!--end::Modal header-->
+
+								<!--begin::Modal body-->
+								<div class="modal-body pt-10 pb-15 px-lg-17">
+									<!--begin::Input group-->
+									<input type="hidden" name="param_id">
+									<div class="form-group fv-row">
+										{% for i, dossier in dossiers %}
+										{% if dossier != parent %}
+										<!--begin::Item-->
+										<div class="d-flex">
+											<!--begin::Checkbox-->
+											<div class="form-check form-check-custom form-check-solid">
+												<!--begin::Input-->
+												<input class="form-check-input me-3" name="param_parent" type="radio" value="{{dossier.id}}" id="kt_modal_move_to_folder_{{dossier.id}}" />
+												<!--end::Input-->
+
+												<!--begin::Label-->
+												<label class="form-check-label" for="kt_modal_move_to_folder_{{dossier.id}}">
+													<div class="fw-bold"><i class="ki-duotone ki-folder fs-2 text-[#2b62aa] me-2"><span class="path1"></span><span class="path2"></span></i> {{dossier.libelle}}</div>
+												</label>
+												<!--end::Label-->
+											</div>
+											<!--end::Checkbox-->
+										</div>
+										<!--end::Item-->
+										<div class='separator separator-dashed my-5'></div>
+										{% endif %}
+										{% endfor %}
+										<!--begin::Item-->
+										<div class="d-flex">
+											<!--begin::Checkbox-->
+											<div class="form-check form-check-custom form-check-solid">
+												<!--begin::Input-->
+												<input class="form-check-input me-3" name="param_parent" type="radio" value="0" id="kt_modal_move_to_folder_0" />
+												<!--end::Input-->
+
+												<!--begin::Label-->
+												<label class="form-check-label" for="kt_modal_move_to_folder_0">
+													<div class="fw-bold"><i class="ki-duotone ki-folder fs-2 text-[#2b62aa] me-2"><span class="path1"></span><span class="path2"></span></i> Dossier racine</div>
+												</label>
+												<!--end::Label-->
+											</div>
+											<!--end::Checkbox-->
+										</div>
+										<!--end::Item-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Action buttons-->
+									<div class="d-flex flex-center mt-12">
+										<!--begin::Button-->
+										<button type="button" class="btn btn-primary" id="kt_modal_move_to_folder_submit">
+											<span class="indicator-label">
+												Sauvegarder
+											</span>
+											<span class="indicator-progress">
+												Veuillez patienter... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+											</span>
+										</button>
+										<!--end::Button-->
+									</div>
+									<!--begin::Action buttons-->
+								</div>
+								<!--end::Modal body-->
+							</form>
+							<!--end::Form-->
+						</div>
+					</div>
+				</div>
+				<!--end::Modal - Move file-->
+				<!--end::Modals-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+	<script src="{{asset('assets/js/custom/apps/file-manager/list.js')}}"></script>
+
+	<script type="text/javascript">
+		var hostUrl = "{{asset('assets/')}}";
+
+		// Initialiser Dropzone
+		const dropzoneSourceInput = document.getElementById("documents_form_source");
+		const form = document.getElementById("kt_modal_upload_form");
+
+		const myDropzone = new Dropzone("#kt_modal_upload_dropzone", {
+			url: "{{ path('app_documents', {type: type, parent: 1}) }}", // juste pour Dropzone, mais on ne l'utilise pas ici
+			autoProcessQueue: false,
+			paramName: "new_file[source]",
+			maxFiles: 1,
+			maxFilesize: 10, // Mo
+			addRemoveLinks: true,
+			// acceptedFiles: "image/jpeg,image/png",
+			parallelUploads: 1,
+			init: function () {
+				const dz = this;
+
+				// Interception du submit
+				form.addEventListener("submit", function (e) {
+					e.preventDefault();
+
+					if (dz.getAcceptedFiles().length > 0) {
+						const file = dz.getAcceptedFiles()[0];
+
+						// Simuler le champ <input type="file">
+						const dataTransfer = new DataTransfer();
+						dataTransfer.items.add(file);
+						dropzoneSourceInput.files = dataTransfer.files;
+
+						form.submit(); // Maintenant le fichier est dans le champ input[type=file]
+					} else {
+						form.submit(); // Aucun fichier ? soumission directe
+					}
+				});
+			}
+		});
+
+		const documents = {{ documents|map(m => {
+			id: m.id,
+			libelle: m.libelle,
+			source: m.source,
+		})|json_encode|raw }};
+
+		const moveToModal = document.getElementById('kt_modal_move_to_folder');
+		moveToModal.addEventListener('show.bs.modal', event => {
+			const paramId = event.relatedTarget.attributes['data-bs-ident'].value;
+			const dossier = documents.find(c => c.id == paramId);
+			if (!dossier) return;
+
+			moveToModal.querySelector('[name="param_id"]').value = dossier.id;
+
+			// Réactiver tous les inputs d'abord (au cas où un ancien reste désactivé)
+			moveToModal.querySelectorAll('input[name="param_parent"]').forEach(input => {
+				input.disabled = false;
+			});
+
+			if (!dossier.source) {
+				const inputToDisable = moveToModal.querySelector(`#kt_modal_move_to_folder_${dossier.id}`);
+				if (inputToDisable) {
+					inputToDisable.disabled = true;
+					inputToDisable.checked = false;
+				}
+			}
+		});
+
+		{% for typeMsg, messages in app.flashes %}
+			{% for message in messages %}
+			Swal.fire({
+				html: `{{message|raw}}`,
+				icon: "{{typeMsg}}",
+				buttonsStyling: false,
+				confirmButtonText: "Ok, compris !",
+				customClass: {
+					confirmButton: "btn btn-primary"
+				}
+			});
+			{% endfor %}
+		{% endfor %}
+	</script>
+{% endblock %}

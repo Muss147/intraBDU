@@ -1,0 +1,60 @@
+
+                {% for offre in pagination %}
+                <div class="first:rounded-t-lg last:rounded-b-lg p-4 md:p-8 hover:bg-slate-200 flex flex-wrap sm:flex-nowrap gap-4">
+                    <div class="rounded-md text-center hidden sm:flex w-20 bg-white items-center justify-center">
+                        <a href="{{path('details_offre', {offre: offre.slug})}}" data-turbo="false"><img src="{{asset('assets/media/logos/Logo-BDUCI-dark.png')}}" alt="photo" class="max-w-16"></a>
+                    </div>
+                    <div class="">
+                        <a href="{{path('details_offre', {offre: offre.slug})}}" data-turbo="false"><h4 class="font-semibold text-xl">{{offre.titre}}</h4></a>
+                        <span class="text-[#2b62aa]">{{offre.metier.libelle}} | {{offre.direction.libelle}}</span>
+                        <div class="flex flex-wrap gap-0 sm:gap-4 items-center text-sm">
+                            <span class="flex gap-2">
+                                <svg class="w-4 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z" clip-rule="evenodd"/></svg>
+                                {{offre.direction.parent.libelle}}
+                            </span>
+                            <span class="flex gap-2">
+                                <svg class="w-4 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/></svg>
+                                {{offre.dateExpiration|date('d-m-Y')}}
+                            </span>
+                            <span class="flex gap-2">
+                                <svg class="w-4 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M7.833 2c-.507 0-.98.216-1.318.576A1.92 1.92 0 0 0 6 3.89V21a1 1 0 0 0 1.625.78L12 18.28l4.375 3.5A1 1 0 0 0 18 21V3.889c0-.481-.178-.954-.515-1.313A1.808 1.808 0 0 0 16.167 2H7.833Z"/></svg>
+                                {{offre.niveauPoste}} (<span>{{offre.experience}}</span>)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {# --- PAGINATION --- #}
+                {% if pagination.pageCount > 1 %}
+                <nav aria-label="Page navigation example" class="flex justify-center mt-8">
+                    <ul class="inline-flex -space-x-px text-base h-10">
+                        {% if pagination.currentPage > 1 %}
+                        <li>
+                            <a href="{{ path('annuaire', { page: pagination.currentPage - 1, research: term }) }}"
+                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
+                                Précédent
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for page in 1..pagination.pageCount %}
+                            <li class="{{ page > 2 and page < pagination.pageCount - 1 ? 'hidden sm:block' : '' }}">
+                                <a href="{{ path('annuaire', { page: page, research: term }) }}"
+                                class="flex items-center justify-center px-4 h-10 leading-tight {{ page == pagination.currentPage ? 'text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700' }}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                        {% if pagination.currentPage < pagination.pageCount %}
+                        <li>
+                            <a href="{{ path('annuaire', { page: pagination.currentPage + 1, research: term }) }}"
+                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
+                                Suivant
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}

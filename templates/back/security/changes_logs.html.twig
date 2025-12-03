@@ -1,0 +1,234 @@
+{% extends "back/layout.html.twig" %}
+
+{% block title "Changes logs" %}
+
+{% block stylesheets %}
+<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="d-flex flex-column flex-column-fluid">
+
+		<!--begin::Toolbar-->
+		<div
+			id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+						Changes logs
+					</h1>
+					<!--end::Title-->
+
+
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="{{path('dashboard')}}" class="text-muted text-hover-primary">
+								Tableau de bord
+							</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Gestion d'utilisateurs
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							Changes logs
+						</li>
+						<!--end::Item-->
+
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div
+					class="d-flex align-items-center gap-2 gap-lg-3">
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+
+		<!--begin::Content-->
+		<div
+			id="kt_app_content" class="app-content  flex-column-fluid ">
+
+
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container" class="app-container  container-xxl ">
+
+				<!--begin::Card-->
+				<div
+					class="card card-flush ">
+					<!--begin::Card header-->
+					<div
+						class="card-header mt-6">
+						<!--begin::Card title-->
+						<div
+							class="card-title">
+							<!--begin::Search-->
+							<div class="d-flex align-items-center position-relative my-1 me-5">
+								<i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<input type="text" data-kt-logs-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Rechercher un log"/>
+							</div>
+							<!--end::Search-->
+						</div>
+						<!--end::Card title-->
+
+						<!--begin::Card toolbar-->
+						<div
+							class="card-toolbar">
+							<!--begin::Button-->
+							<form id="form_empty_all_logs" method="post" action="{{ path('empty_logs') }}">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ logs|length) }}">
+								<button type="submit" class="btn btn-light-danger">
+									<i class="ki-duotone ki-trash fs-3">
+										<span class="path1"></span>
+										<span class="path2"></span>
+										<span class="path3"></span>
+										<span class="path4"></span>
+										<span class="path5"></span>
+									</i>
+									Vider les Logs
+								</button>
+							</form>
+							<!--end::Button-->
+						</div>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+
+					<!--begin::Card body-->
+					<div
+						class="card-body pt-0">
+						<!--begin::Table-->
+						<table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_logs_table">
+							<thead>
+								<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-125px">Statut</th>
+									<th class="min-w-250px">Chemin</th>
+									<th class="min-w-125px">Adresse IP</th>
+									<th class="min-w-125px">Responsable</th>
+									<th class="min-w-125px">Date</th>
+									<th class="text-end min-w-100px">Actions</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+                                {% for log in logs %}
+								<tr>
+									<td>
+										{% if log.status == "OK" %}<div class="badge badge-light-success">{{log.responseCode}} {{log.status}}</div>
+										{% elseif log.status == "WRN" %}<div class="badge badge-light-warning">{{log.responseCode}} {{log.status}}</div>
+										{% else %}<div class="badge badge-light-danger">{{log.responseCode}} {{log.status}}</div>{% endif %}
+									</td>
+									<td>
+										{{log.path ? log.path : ''}}
+									</td>
+									<td>{{log.ipAddress}}</td>
+									<td>
+										<a href="{{path('user_resume', {'user': log.user.id})}}" class="text-gray-800 text-hover-primary mb-1">{{log.user.nomComplet}}</a>
+									</td>
+									<td>{{log.createdAt|time_ago}}</td>
+									<td class="text-end">
+										<form class="d-inline" method="post" action="{{ path('delete_log', {'id': log.user.id}) }}">
+											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ log.user.id) }}">
+											<button class="btn btn-icon btn-active-light-danger w-30px h-30px" data-kt-logs-table-filter="delete_row">
+												<i class="ki-duotone ki-trash fs-3">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+													<span class="path4"></span>
+													<span class="path5"></span>
+												</i>
+											</button>
+										</form>
+									</td>
+								</tr>
+                                {% endfor %}
+							</tbody>
+						</table>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Card-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+<script src="{{asset('assets/js/custom/apps/user-management/changes-logs/list.js')}}"></script>
+
+<script type="text/javascript">
+	$('#form_empty_all_logs').submit(function(e) {
+		e.preventDefault();
+		var form = $(this);
+		swal
+			.fire({
+				html: "Êtes-vous sûr de vouloir <b>supprimer tous les logs</b> ?",
+				icon: "warning",
+				showCancelButton: !0,
+				buttonsStyling: !1,
+				confirmButtonText: "Oui, tout supprimer!",
+				cancelButtonText: "Non, annuler",
+				customClass: {
+					confirmButton: "btn fw-bold btn-danger",
+					cancelButton: "btn fw-bold btn-active-light-primary",
+				},
+			})
+			.then(function(result) {
+				if (result.isConfirmed) {
+					form.off('submit').submit(); // Soumet le formulaire
+				}
+			})
+	})
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+        Swal.fire({
+            html: `{{message|raw}}`,
+            icon: "{{type}}",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, compris !",
+            customClass: {
+                confirmButton: "btn btn-primary"
+            }
+        });
+        {% endfor %}
+    {% endfor %}
+</script>
+{% endblock %}

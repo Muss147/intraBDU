@@ -1,0 +1,114 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title "Documents de référence" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-screen-xl mx-auto px-4 mt-6 space-y-16 md:space-y-10 mb-12">
+    <!-- Section principale -->
+    <section class="">
+        <h2 class="text-[#2b62aa] font-semibold text-xl mb-6">Documents de réferences</h2>
+      
+        <!-- Cartes de documents -->
+        <div class="bg-blue-100 p-10 md:py-24 rounded-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="{{path('notes_publications')}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+                <img src="{{asset('assets/media/icons/note.png')}}" alt="Notes de services" class="w-12 h-12" />
+                <span class="font-semibold">Notes de Services</span>
+            </a>
+
+            <a href="{{path('procedures')}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+                <img src="{{asset('assets/media/icons/procedure.png')}}" alt="Procédures" class="w-12 h-12" />
+                <span class="font-semibold">Procedures</span>
+            </a>
+
+            <a href="{{path('politique_ethique')}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+                <img src="{{asset('assets/media/icons/politique.png')}}" alt="Politiques" class="w-12 h-12" />
+                <span class="font-semibold">Politiques</span>
+            </a>
+
+            <a href="{{path('type_docs', {type: 'Directives'})}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+                <img src="{{asset('assets/media/icons/directive.png')}}" alt="Directives" class="w-12 h-12" />
+                <span class="font-semibold">Directives</span>
+            </a>
+
+            <a href="{{path('type_docs', {type: 'Chartes'})}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+                <img src="{{asset('assets/media/icons/charte.png')}}" alt="Chartes" class="w-12 h-12" />
+                <span class="font-semibold">Chartes</span>
+            </a>
+
+            <a href="{{path('type_docs', {type: 'Autres documents'})}}" class="bg-white border hover:border-gray-400 shadow p-4 flex items-center gap-4 rounded">
+                <img src="{{asset('assets/media/icons/archives.png')}}" alt="Autres Documents" class="w-12 h-12" />
+                <span class="font-semibold">Autres Documents</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Statistiques -->
+    <section class="bg-green-200 rounded-sm py-6 px-4 md:px-12 flex flex-wrap md:flex-nowrap justify-center md:justify-between items-center gap-8 text-center">
+        <div class="max-w-48">
+            <img src="{{asset('assets/media/icons/team.png')}}" class="mx-auto w-8 mb-2" alt="Collaborateurs" />
+            <p class="font-semibold text-3xl">
+                <span class="counter" data-count="264">0</span>
+            </p>
+            <p class="text-sm">collaborateurs</p>
+        </div>
+        <div class="max-w-48">
+            <img src="{{asset('assets/media/icons/femmes.png')}}" class="mx-auto w-8 mb-2" alt="Femmes managers" />
+            <p class="font-semibold text-3xl">
+                <span class="counter" data-count="35">0</span>
+                <span>%</span>
+            </p>
+            <p class="text-sm">de femmes dans les réseaux de management</p>
+        </div>
+        <div class="max-w-48">
+            <img src="{{asset('assets/media/icons/formation.png')}}" class="mx-auto w-8 mb-2" alt="Formation" />
+            <p class="font-semibold text-3xl">
+                <span class="counter" data-count="97">0</span>
+                <span>%</span>
+            </p>
+            <p class="text-sm">ont suivi une formation en 2023</p>
+        </div>
+        <div class="max-w-48">
+            <img src="{{asset('assets/media/icons/recrutement.png')}}" class="mx-auto w-8 mb-2" alt="Recrutements" />
+            <p class="font-semibold text-3xl">
+                <span class="counter" data-count="25">0</span>
+            </p>
+            <p class="text-sm">recrutements en 2025</p>
+        </div>
+        <div class="max-w-48">
+            <img src="{{asset('assets/media/icons/like.png')}}" class="mx-auto w-8 mb-2" alt="Recommandation" />
+            <p class="font-semibold text-3xl">
+                <span class="counter" data-count="85">0</span>
+                <span>%</span>
+            </p>
+            <p class="text-sm">des salariés recommandent BDU</p>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.counter').forEach((el) => {
+        const end = parseInt(el.dataset.count);
+        let current = 0;
+        const step = Math.ceil(end / 50);
+
+        const interval = setInterval(() => {
+            current += step;
+            if (current >= end) {
+            el.textContent = end;
+            clearInterval(interval);
+            } else {
+            el.textContent = current;
+            }
+        }, 50);
+    });
+});
+</script>
+{% endblock %}
