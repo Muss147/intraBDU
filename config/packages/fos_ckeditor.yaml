@@ -1,0 +1,18 @@
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+fos_ck_editor:
+    base_path: '/ckeditor'
+    js_path: '/ckeditor/ckeditor.js'
+    default_config: default
+    configs:
+        default:
+            toolbar:
+                - [Bold, Italic, Underline, Link]
+                - [BulletedList, NumberedList]
+                - [Blockquote, Table]
+                - [Undo, Redo]
+            height: 200
+            uiColor: '#f9fafb'
+            removePlugins: 'exportpdf,copyformatting'

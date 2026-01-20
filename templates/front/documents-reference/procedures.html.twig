@@ -89,23 +89,23 @@
                             <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
                         </div>
                         <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRightButton_blue_{{i}}">
-                            {% for sousProcedure in procedure.children|filter(s => s.deletedAt == null) %}
+                            {% for j, sousProcedure in procedure.children|filter(s => s.deletedAt == null) %}
                                 {% if sousProcedure.source %}
                                 <li>
                                     <a href="{{sousProcedure.source.filename}}" target="_blank" onclick="return oneMoreViewed(event, {{ sousProcedure.id }}, this)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousProcedure.libelle}}</a>
                                 </li>
                                 {% else %}
                                 <li>
-                                    <button id="doubleDropdownButton_blue_{{i}}" data-dropdown-toggle="doubleDropdown_blue_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <button id="doubleDropdownButton_blue_{{i}}_{{j}}" data-dropdown-toggle="doubleDropdown_blue_{{i}}_{{j}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between text-left w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         {{sousProcedure.libelle}}
                                         <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
                                     </button>
-                                    <div id="doubleDropdown_blue_{{i}}" class="z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                    <div id="doubleDropdown_blue_{{i}}_{{j}}" class="z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
                                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                             <div class="font-medium truncate">{{sousProcedure.libelle}}</div>
-                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
+                                            <p id="helper-checkbox-text-{{i}}-{{j}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner une sous procedure :</p>
                                         </div>
-                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_blue_{{i}}">
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_blue_{{i}}_{{j}}">
                                             {% for item in sousProcedure.children|filter(i => i.deletedAt == null) %}
                                             <li>
                                                 <a href="{{item.source.filename}}" target="_blank" onclick="return oneMoreViewed(event, {{ item.id }}, this)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
@@ -124,7 +124,7 @@
             {% endif %}
             {% if documents|length > 12 %}
             <div class="bg-gray-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                {% for i, procedure in documents|slice(13, 25) %}
+                {% for i, procedure in documents|slice(12, 12) %}
                 <div class="bg-white rounded shadow p-2 text-center">
                     <button class="cursor-pointer" type="button" id="dropdownRightButton_grey_{{i}}" data-dropdown-toggle="dropdownRight_grey_{{i}}" data-dropdown-placement="right">
                         <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
@@ -144,7 +144,7 @@
                                 </li>
                                 {% else %}
                                 <li>
-                                    <button id="doubleDropdownButton_grey_{{i}}" data-dropdown-toggle="doubleDropdown_grey_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <button id="doubleDropdownButton_grey_{{i}}" data-dropdown-toggle="doubleDropdown_grey_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between text-left w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         {{sousProcedure.libelle}}
                                         <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
                                     </button>
@@ -170,9 +170,9 @@
                 {% endfor %}
             </div>
             {% endif %}
-            {% if documents|length > 25 %}
+            {% if documents|length > 24 %}
             <div class="bg-green-100 p-4 rounded grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                {% for i, procedure in documents|slice(26, 38) %}
+                {% for i, procedure in documents|slice(23, 12) %}
                 <div class="bg-white rounded shadow p-2 text-center">
                     <button class="cursor-pointer" type="button" id="dropdownRightButton_green_{{i}}" data-dropdown-toggle="dropdownRight_green_{{i}}" data-dropdown-placement="right">
                         <img src="{{asset('assets/media/icons/folder.png')}}" class="mx-auto w-12 h-12" alt="Dossier" />
@@ -192,7 +192,7 @@
                                 </li>
                                 {% else %}
                                 <li>
-                                    <button id="doubleDropdownButton_green_{{i}}" data-dropdown-toggle="doubleDropdown_green_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <button id="doubleDropdownButton_green_{{i}}" data-dropdown-toggle="doubleDropdown_green_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between text-left w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         {{sousProcedure.libelle}}
                                         <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
                                     </button>

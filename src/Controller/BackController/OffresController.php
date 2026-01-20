@@ -52,23 +52,24 @@ final class OffresController extends AbstractController
         $form = $this->createForm(OffresForm::class, $offre);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if (!$form->isValid()) {
-                foreach ($form->getErrors(true) as $error) {
-                    $this->addFlash('error', $error->getMessage());
-                }
+        if ($form->isSubmitted() && !$form->isValid()) {
+            foreach ($form->getErrors(true) as $error) {
+                $this->addFlash('error', $error->getMessage());
             }
-            else {
+        }
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$offre->getSlug()) {
                 $offre->generateSlug();
-                $offre->updatedTimestamps();
-                $offre->updatedUserstamps($this->getUser());
-
-                $this->em->persist($offre);
-                $this->em->flush();
-        
-                $this->addFlash('success', 'Offre d\'emploi ajouté(e) avec succès.');
-                return $this->redirectToRoute('list_offres');
             }
+
+            $offre->updatedTimestamps();
+            $offre->updatedUserstamps($this->getUser());
+
+            $this->em->persist($offre);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Offre d\'emploi ajouté(e) avec succès.');
+            return $this->redirectToRoute('list_offres');
         }
         return $this->render('back/offres/add.html.twig', [
             'offre' => $offre,

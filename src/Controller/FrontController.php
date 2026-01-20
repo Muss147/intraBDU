@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Files;
+use App\Repository\ProjectVoteRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Entity\ProjectVote;
+use App\Repository\ProjectImpactRepository;
 use App\Entity\Votes;
 use App\Entity\Agents;
 use App\Entity\Alertes;
@@ -10,6 +14,7 @@ use App\Form\VotesForm;
 use App\Entity\VoteNote;
 use App\Form\AlertesForm;
 use App\Entity\Actualites;
+use App\Entity\ProjectImpact;
 use App\Service\FileUploader;
 use Symfony\Component\Mime\Email;
 use App\Repository\FilesRepository;
@@ -48,47 +53,69 @@ final class FrontController extends AbstractController
         ClassementMensuelRepository $classementMensuelRepository,
         NotesPublicationsRepository $notesPublicationsRepository,
         ActualitesRepository $actualitesRepository,
-        PagesRepository $pagesRepository
+        PagesRepository $pagesRepository,
+        ProjectImpactRepository $projectRepo,
         ): Response
     {
-        $criteres = $criteresRepository->findByType('criteres'); // Tous les critères
-        $vote = new Votes();
-        $vote->setVotedAt(new \DateTime());
+        // $criteres = $criteresRepository->findByType('criteres'); // Tous les critères
+        // $vote = new Votes();
+        // $vote->setVotedAt(new \DateTime());
+        // foreach ($criteres as $critere) {
+        //     $voteNote = new VoteNote();
+        //     $voteNote->setCritere($critere);
+        //     $vote->addNote($voteNote);
+        // }
+        // $form = $this->createForm(VotesForm::class, $vote);
+        // $form->handleRequest($request);
+        
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $votantInput = $form->get('votant')->getData();
+        //     $votant = $agentsRepository->findVotantByTerms($votantInput);
 
-        foreach ($criteres as $critere) {
-            $voteNote = new VoteNote();
-            $voteNote->setCritere($critere);
-            $vote->addNote($voteNote);
+        //     if (!$votant) {
+        //         $this->addFlash('error', 'Ce matricule ne correspond à aucun agent dans notre base de données. Veuillez réessayer.');
+        //     } else {
+        //         // Vérifie s’il a déjà voté ce mois-ci
+        //         $now = new \DateTime();
+        //         $hasVotedThisMonth = $votant->getVotesEffectues()->exists(function ($key, $vote) use ($now) {
+        //             return $vote->getVotedAt()->format('Y-m') === $now->format('Y-m');
+        //         });
+
+        //         if ($hasVotedThisMonth) {
+        //             $this->addFlash('error', 'Vous avez déjà effectué un vote ce mois-ci. Veuillez attendre le mois prochain.');
+        //         } else {
+        //             $vote->setVotant($votant);
+        //             $em->persist($vote);
+        //             $em->flush();
+
+        //             $this->addFlash('success', 'Merci pour votre vote !');
+        //         }
+        //     }
+        // }
+        
+        $currentMonth = (new \DateTime())->format('Y-m');
+        $projects = $projectRepo->findPublishedForCurrentMonth($currentMonth);
+
+        if ($request->isMethod('POST')) {
+            $marticule = $request->get('marticule');
+            $projetId = $request->get('projet_id');
+            $project = $projectRepo->find($projetId);
+            $votant = $agentsRepository->findVotantByTerms($marticule);
+
+            $voterHash = hash(
+                'sha256',
+                $votant->getId() . $_ENV['APP_SECRET'] . $currentMonth
+            );
+            $vote = new ProjectVote();
+            $vote->setProject($project);
+            $vote->setVoterHash($voterHash);
+            $vote->setVotedAt(new \DateTimeImmutable());
+            
+            $em->persist($vote);
+            $em->flush();
+            $this->addFlash('success', 'Merci pour votre vote ! Les résultats seront proclamés à la fin du mois en cours.');
         }
 
-        $form = $this->createForm(VotesForm::class, $vote);
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            $votantInput = $form->get('votant')->getData();
-            $votant = $agentsRepository->findVotantByTerms($votantInput);
-
-            if (!$votant) {
-                $this->addFlash('error', 'Ce matricule ne correspond à aucun agent dans notre base de données. Veuillez réessayer.');
-            } else {
-                // Vérifie s’il a déjà voté ce mois-ci
-                $now = new \DateTime();
-                $hasVotedThisMonth = $votant->getVotesEffectues()->exists(function ($key, $vote) use ($now) {
-                    return $vote->getVotedAt()->format('Y-m') === $now->format('Y-m');
-                });
-
-                if ($hasVotedThisMonth) {
-                    $this->addFlash('error', 'Vous avez déjà effectué un vote ce mois-ci. Veuillez attendre le mois prochain.');
-                } else {
-                    $vote->setVotant($votant);
-                    $em->persist($vote);
-                    $em->flush();
-
-                    $this->addFlash('success', 'Merci pour votre vote !');
-                }
-            }
-        }
-        
         return $this->render('front/home.html.twig', [
             'slides' => $slidersRepository->findAllOnline(),
             'notes' => $notesPublicationsRepository->findAllOnline(3),
@@ -96,9 +123,71 @@ final class FrontController extends AbstractController
             'agents' => $agentsRepository->findAll(),
             'anniversaires' => $agentsRepository->findAnniversairesDuMois(),
             'akwaba' => $agentsRepository->findAkwabaDuMois(),
-            'form' => $form->createView(),
+            // 'form' => $form->createView(),
+            'projects' => $projects,
             'pages' => $pagesRepository->findAllSimply(),
             'top' => $classementMensuelRepository->findOneByMois(new \DateTime('first day of this month'))
+        ]);
+    }
+
+    #[Route('/vote/check', name: 'project_vote_check', methods: ['POST'])]
+    public function checkVote(
+        Request $request,
+        EntityManagerInterface $em,
+        AgentsRepository $agentsRepository,
+        ProjectImpactRepository $projectRepo,
+        ProjectVoteRepository $voteRepo,
+    ): JsonResponse {
+        if (!$this->isCsrfTokenValid('vote', $request->get('_token'))) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Token invalide.'
+            ], 400);
+        }
+
+        $marticule = trim($request->get('marticule'));
+        $projectId = $request->get('projet_id');
+        $currentMonth = (new \DateTime())->format('Y-m');
+
+        if (strlen($marticule) < 3) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Veuillez saisir un matricule valide.'
+            ]);
+        }
+
+        $agent = $agentsRepository->findVotantByTerms($marticule);
+        if (!$agent) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Ce matricule ne correspond à aucun agent.'
+            ]);
+        }
+
+        $project = $projectRepo->find($projectId);
+        if (!$project) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Projet invalide.'
+            ]);
+        }
+
+        $voterHash = hash(
+            'sha256',
+            $agent->getId() . $_ENV['APP_SECRET'] . $currentMonth
+        );
+
+        $hasVoted = $voteRepo->hasUserVoted($voterHash, $projectId);
+
+        if ($hasVoted) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Vous avez déjà voté ce mois-ci.'
+            ]);
+        }
+
+        return $this->json([
+            'success' => true
         ]);
     }
     
@@ -340,8 +429,8 @@ final class FrontController extends AbstractController
         ]);
     }
     
-    #[Route('/vote', name: 'vote_agent')]
-    public function vote(Request $request, ParametresRepository $criteresRepository, EntityManagerInterface $em): Response
+    #[Route('/vote-agent', name: 'vote_agent')]
+    public function voteAgent(Request $request, ParametresRepository $criteresRepository, EntityManagerInterface $em): Response
     {
         $criteres = $criteresRepository->findByType('criteres'); // Tous les critères
         $vote = new Votes();
@@ -369,6 +458,39 @@ final class FrontController extends AbstractController
 
         return $this->render('front/vote/index.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/vote', name: 'project_vote')]
+    public function vote(
+        Request $request,
+        ProjectImpactRepository $repo,
+        EntityManagerInterface $em
+    ) {
+        $currentMonth = (new \DateTime())->format('Y-m');
+        $projects = $repo->findPublishedForCurrentMonth($currentMonth);
+
+        if ($request->isMethod('POST')) {
+            $voterId = $request->get('voter_id');
+            $projetId = $request->get('projet_id');
+            $voter = $em->getRepository(Agents::class)->find($voterId);
+            $project = $em->getRepository(ProjectImpact::class)->find($projetId);
+            
+            $voterHash = hash(
+                'sha256',
+                $voter->getId() . $_ENV['APP_SECRET'] . $currentMonth
+            );
+            $vote = new ProjectVote();
+            $vote->setProject($project);
+            $vote->setVoterHash($voterHash);
+            $vote->setVotedAt(new \DateTimeImmutable());
+
+            $em->persist($vote);
+            $em->flush();
+        }
+
+        return $this->render('front/vote/index.html.twig', [
+            'projects' => $projects
         ]);
     }
 

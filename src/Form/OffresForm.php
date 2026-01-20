@@ -29,7 +29,7 @@ class OffresForm extends AbstractType
                     '6 à 10 ans' => '6 à 10 ans',
                     'Plus de 10 ans' => 'Plus de 10 ans',
                 ],
-                'placeholder' => 'Sélectionner une civilité',
+                'placeholder' => 'Sélectionner une expérience',
                 'required' => true,
                 'attr' => [
                     'class' => 'form-select form-select-solid',
@@ -45,7 +45,7 @@ class OffresForm extends AbstractType
                     'Manager / Responsable département' => 'Manager / Responsable département',
                     'Cadre dirigeant' => 'Cadre dirigeant',
                 ],
-                'placeholder' => 'Sélectionner une civilité',
+                'placeholder' => 'Sélectionner un niveau',
                 'required' => true,
                 'attr' => [
                     'class' => 'form-select form-select-solid',
@@ -67,7 +67,7 @@ class OffresForm extends AbstractType
                     'Certification' => 'Certification',
                     'Non diplômante' => 'Non diplômante',
                 ],
-                'placeholder' => 'Sélectionner une civilité',
+                'placeholder' => 'Sélectionner un niveau',
                 'required' => true,
                 'attr' => [
                     'class' => 'form-select form-select-solid',

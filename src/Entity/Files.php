@@ -78,6 +78,11 @@ class Files extends EntityBase
         return $this;
     }
 
+    public function getExtension(): string
+    {
+        return strtolower(pathinfo($this->filename, PATHINFO_EXTENSION));
+    }
+
     public function getSize(): ?string
     {
         return $this->size;

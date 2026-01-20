@@ -35,6 +35,7 @@ class AgentsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->leftJoin('a.service', 's')
             ->leftJoin('s.parent', 'p')
+            ->andWhere('a.deletedAt IS NULL')
             ->andWhere('a.nom LIKE :term OR 
                 a.prenoms LIKE :term OR 
                 a.email LIKE :term OR 

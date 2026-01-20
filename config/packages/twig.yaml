@@ -9,7 +9,9 @@ twig:
         decimal_point: ','
         thousands_separator: ' '
     paths: ['%kernel.project_dir%/templates']
-    form_themes: ['bootstrap_5_layout.html.twig']
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig' 
+        # ['bootstrap_5_layout.html.twig']
     
 when@test:
     twig:

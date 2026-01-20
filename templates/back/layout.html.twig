@@ -8,7 +8,7 @@ Contact: +225 07 471 612 21
 -->
 <html>
 	<head>
-		<title>{% block title %}{% endblock %} | ERP SIA</title>
+		<title>{% block title %}{% endblock %} | Admin Intra BDU</title>
 		<meta charset="utf-8"/>
 		<meta name="author" content="Digit Communication : Moussa Fofana"/>
 		<meta name="description" content="{% block description %}{% endblock %}"/>
@@ -231,7 +231,8 @@ Contact: +225 07 471 612 21
                                             <!--end:Menu content-->
                                         </div>
                                         <!--end:Menu item-->
-                                        {% if 'Page builder' in app.user.role.autorisations|map(a => a.permission.libelle) %}
+                                        {% if 'Page builder' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'pages_builder' %} here show{% endif %}">
                                             <!--begin:Menu link-->
@@ -343,7 +344,8 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         {% endif %}
-                                        {% if 'Agents / employés' in app.user.role.autorisations|map(a => a.permission.libelle) %}
+                                        {% if 'Agents / employés' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <!--begin:Menu link-->
@@ -361,7 +363,8 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         {% endif %}
-                                        {% if 'Chartes graphiques' in app.user.role.autorisations|map(a => a.permission.libelle) %}
+                                        {% if 'Chartes graphiques' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <!--begin:Menu link-->
@@ -378,7 +381,8 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         {% endif %}
-                                        {% if 'Documents de référence' in app.user.role.autorisations|map(a => a.permission.libelle) %}
+                                        {% if 'Documents de référence' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'documents' %} here show{% endif %}">
                                             <!--begin:Menu link-->
@@ -461,7 +465,26 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         {% endif %}
-                                        {% if 'Offres d\'emploi' in app.user.role.autorisations|map(a => a.permission.libelle) %}
+                                        {% if 'Étoile du Mois' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
+                                        <!--begin:Menu item-->
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="{{path('project_index')}}" class="menu-link{% if app.session.get('menu') == 'etoile' %} active{% endif %}">
+                                                <span class="menu-icon">
+                                                    <i class="ki-duotone ki-design-2 fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </span>
+                                                <span class="menu-title">Étoile du Mois</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                        {% endif %}
+                                        {% if 'Offres d\'emploi' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('menu') == 'offres' %} here show{% endif %}">
                                             <!--begin:Menu link-->
@@ -507,7 +530,8 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         {% endif %}
-                                        {% if 'Médiathèque' in app.user.role.autorisations|map(a => a.permission.libelle) %}
+                                        {% if 'Médiathèque' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion disabled">
                                             <!--begin:Menu link-->
@@ -524,7 +548,8 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         {% endif %}
-                                        {% if 'Incidents & Alertes' in app.user.role.autorisations|map(a => a.permission.libelle) %}
+                                        {% if 'Incidents & Alertes' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if (app.session.get('subMenu') in ['incidents', 'alertes', 'categories', 'processus']) %} here show{% endif %}">
                                             <!--begin:Menu link-->
@@ -597,7 +622,8 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         {% endif %}
-                                        {% if 'Paramètres' in app.user.role.autorisations|map(a => a.permission.libelle) %}
+                                        {% if 'Paramètres' in app.user.role.autorisations|map(a => a.permission.libelle)
+                                            or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion{% if app.session.get('subMenu') in ['bureaux', 'directions', 'services', 'criteres'] %} here show{% endif %}">
                                             <!--begin:Menu link-->

@@ -37,7 +37,7 @@ class PostulerForm extends AbstractType
             ->add('motivations')
             ->add('cv', FileType::class, [
                 'label' => false,
-                'required' => false,
+                'required' => true,
                 'mapped' => false,
                 'constraints' => [
                     new File([

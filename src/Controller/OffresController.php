@@ -81,7 +81,7 @@ final class OffresController extends AbstractController
         $breadcrumbs = [
             ['label' => 'Accueil', 'route' => 'app_homepage'],
             ['label' => 'offres-emploi', 'route' => 'app_offres'],
-            ['label' => $offre, 'route' => 'details_offre'],
+            ['label' => $offre->getTitre(), 'route' => 'details_offre'],
         ];
 
         $url = $request->getUri();

@@ -189,15 +189,15 @@
                     {{form_start(form, {'attr': {'class': ''}})}}
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div>
-                                <label for="postuler_form[nomAgent]" class="block mb-2 text-sm font-medium text-gray-900">Nom & prénoms</label>
+                                <label for="postuler_form[nomAgent]" class="block mb-2 text-sm font-medium text-gray-900">Nom & prénoms <sup>*</sup></label>
                                 {{form_widget(form.nomAgent, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5', 'placeholder': 'Votre nom et prénoms'}})}}
                             </div>
                             <div>
-                                <label for="postuler_form[posteOccupe]" class="block mb-2 text-sm font-medium text-gray-900">Poste occupé</label>
+                                <label for="postuler_form[posteOccupe]" class="block mb-2 text-sm font-medium text-gray-900">Poste occupé <sup>*</sup></label>
                                 {{form_widget(form.posteOccupe, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5', 'placeholder': 'Le poste que vous occupé'}})}}
                             </div>
                             <div>
-                                <label for="postuler_form[email]" class="block mb-2 text-sm font-medium text-gray-900">Adresse Email</label>
+                                <label for="postuler_form[email]" class="block mb-2 text-sm font-medium text-gray-900">Adresse Email <sup>*</sup></label>
                                 {{form_widget(form.email, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5', 'placeholder': 'Votre adresse email'}})}}
                             </div>
                             <div>
@@ -205,12 +205,12 @@
                                 {{form_widget(form.telephone, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5', 'placeholder': 'Votre numéro de téléphone'}})}}
                             </div>
                             <div class="md:col-span-2">
-                                <label for="postuler_form[cv]" class="block mb-2 text-sm font-medium text-gray-900">Curriculum vitae</label>
+                                <label for="postuler_form[cv]" class="block mb-2 text-sm font-medium text-gray-900">Curriculum vitae <sup>*</sup></label>
                                 {{form_widget(form.cv, {'attr': {'class': 'block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none', 'multiple': 'multiple'}})}}
                                 <p class="mt-1 text-sm text-gray-500" id="file_input_help">PDF, WORD, JPG or PNG (MAX. 800x400px).</p>
                             </div>
                             <div class="md:col-span-2">
-                                <label for="postuler_form[motivations]" class="block mb-2 text-sm font-medium text-gray-900">Motivations</label>
+                                <label for="postuler_form[motivations]" class="block mb-2 text-sm font-medium text-gray-900">Motivations <sup>*</sup></label>
                                 {{form_widget(form.motivations, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5', 'rows': '8', 'placeholder': 'Nous vous écoutons'}})}}
                             </div>
                         </div>

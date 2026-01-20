@@ -65,7 +65,6 @@ class OffresEmploi extends EntityBase
     private array $profils = [];
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank]
     private ?string $slug = null;
 
     /**

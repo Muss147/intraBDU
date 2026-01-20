@@ -85,7 +85,7 @@
 				<div
 					class="d-flex flex-column flex-xl-row">
 					<!--begin::Sidebar-->
-                    {% if offre.titre %}
+                    {% if offre.id %}
 					<div
 						class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
 
@@ -175,7 +175,13 @@
 					<div
 						class="flex-lg-row-fluid ms-lg-15">
                         <!--begin::Form-->
-                        {{form_start(form_offre, {'attr': {'id': 'kt_ecommerce_customer_profile', 'class': 'form'}})}}
+                        {{ form_start(form_offre, {
+                            attr: {
+                                id: 'kt_ecommerce_customer_profile',
+                                class: 'form',
+                                novalidate: 'novalidate'
+                            }
+                        }) }}
                             <!--begin::Card-->
                             <div
                                 class="card pt-4 mb-6 mb-xl-9">
@@ -367,9 +373,10 @@
                                             <div
                                                 id="kt_ecommerce_customer_addresses_1" class="collapse fs-6 ps-9" data-bs-parent="#kt_ecommerce_customer_addresses_accordion">
                                                 <!--begin::Details-->
-                                                <div class="d-flex flex-column pb-5">
+                                                <div id="missions_div" class="d-flex flex-column pb-5">
                                                     {% for mission in offre.missions %}
-                                                    <div class="fw-bold text-gray-600">
+                                                    <div class="d-flex gap-3 fw-bold text-gray-600">
+                                                        <span class="">•</span>
                                                         {{mission}}
                                                     </div>
                                                     {% endfor %}
@@ -428,9 +435,10 @@
                                             <div
                                                 id="kt_ecommerce_customer_addresses_2" class="collapse fs-6 ps-9" data-bs-parent="#kt_ecommerce_customer_addresses_accordion">
                                                 <!--begin::Details-->
-                                                <div class="d-flex flex-column pb-5">
+                                                <div id="profils_div" class="d-flex flex-column pb-5">
                                                     {% for profil in offre.profils %}
-                                                    <div class="fw-bold text-gray-600">
+                                                    <div class="d-flex gap-3 fw-bold text-gray-600">
+                                                        <span class="">•</span>
                                                         {{profil}}
                                                     </div>
                                                     {% endfor %}
@@ -475,7 +483,7 @@
                             </div>
                             <!--end::Card-->
                             
-                            <!--begin::Modal - New Address-->
+                            <!--begin::Modal - New Mission-->
                             <div
                                 class="modal fade" id="kt_modal_update_missions" tabindex="-1" aria-hidden="true"> <!--begin::Modal dialog-->
                                 <div
@@ -543,6 +551,11 @@
                                                             Ajouter une mission
                                                         </a>
                                                     </div>
+                                                    <div class="form-group d-flex justify-content-end mt-4">
+                                                        <a href="javascript:;" data-bs-dismiss="modal" class="btn btn-primary" onclick="update_missions_profils_div()">
+                                                            Soumettre la/les mission(s)
+                                                        </a>
+                                                    </div>
                                                     <!--end::Form group-->
                                                 </div>
                                                 <!--end::Repeater-->
@@ -554,9 +567,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--end::Modal - New Address-->
+                            <!--end::Modal - New Mission-->
 
-                            <!--begin::Modal - New Address-->
+                            <!--begin::Modal - New Profile-->
                             <div
                                 class="modal fade" id="kt_modal_update_profils" tabindex="-1" aria-hidden="true"> <!--begin::Modal dialog-->
                                 <div
@@ -620,6 +633,11 @@
                                                             Ajouter un profil
                                                         </a>
                                                     </div>
+                                                    <div class="form-group d-flex justify-content-end mt-4">
+                                                        <a href="javascript:;" data-bs-dismiss="modal" class="btn btn-primary" onclick="update_missions_profils_div()">
+                                                            Soumettre le(s) profil(s)
+                                                        </a>
+                                                    </div>
                                                 </div>
                                                 <!--end::Repeater-->
                                             </div>
@@ -629,7 +647,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--end::Modal - New Address-->
+                            <!--end::Modal - New Profile-->
                         {{form_end(form_offre)}}
                         <!--end::Form-->
 					</div>
@@ -649,6 +667,20 @@
     <script src="{{asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js')}}"></script>
 
 	<script type="text/javascript">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                Swal.fire({
+                    html: `{{message|raw}}`,
+                    icon: "{{ type }}",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, compris !",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            {% endfor %}
+        {% endfor %}
+
         document.addEventListener('DOMContentLoaded', function () {
             $('#kt_docs_repeater_missions').repeater({
                 initEmpty: {{ form_offre.missions|length == 0 ? 'true' : 'false' }},
@@ -667,19 +699,113 @@
             const form = document.getElementById('kt_ecommerce_customer_profile');            
             if (!form) return;
 
-            form.addEventListener('submit', function () {
-                // Missions
+            form.addEventListener('submit', function (e) {
+                // 🔁 Normalisation des champs repeater
                 document.querySelectorAll('[name^="offres_form[missions]"]').forEach((input, index) => {
-                    // Remplace offres_form[missions][0][0] → offres_form[missions][0]
                     input.name = `offres_form[missions][${index}]`;
                 });
 
-                // Profils
                 document.querySelectorAll('[name^="offres_form[profils]"]').forEach((input, index) => {
                     input.name = `offres_form[profils][${index}]`;
                 });
+
+                let errors = [];
+
+                // 🔎 Champs simples obligatoires
+                const requiredFields = [
+                    { id: 'offres_form_titre', label: "Titre de l'offre" },
+                    { id: 'offres_form_metier', label: "Métier" },
+                    { id: 'offres_form_niveauFormation', label: "Niveau de formation" },
+                    { id: 'offres_form_experience', label: "Expérience demandée" },
+                    { id: 'offres_form_niveauPoste', label: "Niveau de poste" },
+                    { id: 'offres_form_dateExpiration', label: "Date d'expiration" },
+                    { id: 'offres_form_description', label: "Description de l'offre" }
+                ];
+
+                requiredFields.forEach(field => {
+                    const el = document.getElementById(field.id);
+                    if (!el || el.value.trim() === '') {
+                        errors.push(field.label);
+                        if (el) {
+                            el.classList.add('is-invalid');
+                        }
+                    } else {
+                        el.classList.remove('is-invalid');
+                    }
+                });
+
+                // 🔎 Missions / Profils
+                const missionsFilled = hasFilledField('offres_form[missions]');
+                const profilsFilled  = hasFilledField('offres_form[profils]');
+
+                if (!missionsFilled) {
+                    errors.push('Ajouter au moins une mission');
+                }
+
+                if (!profilsFilled) {
+                    errors.push('Ajouter au moins un profil');
+                }
+
+                // ❌ Erreurs → on bloque la soumission
+                if (errors.length > 0) {
+                    e.preventDefault();
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Formulaire incomplet',
+                        html: `
+                            <div class="text-start">
+                                <p class="fw-semibold mb-2">Veuillez corriger les points suivants :</p>
+                                <ul class="mb-0">
+                                    ${errors.map(err => `<li>${err}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `,
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, je corrige",
+                        customClass: {
+                            confirmButton: "btn btn-danger"
+                        }
+                    });
+
+                    return false;
+                }
             });
+
+            function hasFilledField(namePart) {
+                const fields = document.querySelectorAll(
+                    `input[name*="${namePart}"], textarea[name*="${namePart}"]`
+                );
+
+                return Array.from(fields).some(field => field.value.trim() !== '');
+            }
         });
+
+        const update_missions_profils_div = () => {
+            const missionsDiv = document.getElementById('missions_div');
+            const profilsDiv  = document.getElementById('profils_div');
+
+            missionsDiv.innerHTML = '';
+            profilsDiv.innerHTML  = '';
+
+            document.querySelectorAll('[name*="offres_form[missions]"]').forEach(input => {
+                if (input.value.trim() !== '') {
+                    missionsDiv.innerHTML += `
+                        <div class="d-flex gap-3 fw-bold text-gray-600">
+                            <span>•</span>${input.value}
+                        </div>`;
+                }
+            });
+
+            document.querySelectorAll('[name*="offres_form[profils]"]').forEach(input => {
+                if (input.value.trim() !== '') {
+                    profilsDiv.innerHTML += `
+                        <div class="d-flex gap-3 fw-bold text-gray-600">
+                            <span>•</span>${input.value}
+                        </div>`;
+                }
+            });
+        };
 
         const today = new Date();
         const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());

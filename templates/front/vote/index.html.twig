@@ -1,0 +1,52 @@
+{% extends "front/layout.html.twig" %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold text-center mb-4">
+        ⭐ Projet à fort impact du mois
+    </h1>
+
+    <p class="text-center text-gray-600 mb-10">
+        Votez pour le projet qui a le plus contribué à l’amélioration et à la performance de l’entreprise.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for project in projects %}
+            <div class="bg-white rounded-2xl shadow hover:shadow-lg transition flex flex-col">
+
+                <div class="p-6 flex-1">
+                    <h2 class="text-xl font-semibold mb-3 text-gray-800">
+                        {{ project.title }}
+                    </h2>
+
+                    <div class="text-gray-600 text-sm leading-relaxed line-clamp-4">
+                        {{ project.description|raw }}
+                    </div>
+                </div>
+
+                <form method="post"
+                    action="{{ path('project_vote', {id: project.id}) }}"
+                    class="p-6 pt-0">
+                    
+                    <input type="hidden" name="_token"
+                        value="{{ csrf_token('vote_' ~ project.id) }}">
+
+                    <button
+                        class="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition">
+                        👍 Voter pour ce projet
+                    </button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+{% endblock %}

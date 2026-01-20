@@ -34,26 +34,26 @@
                             <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500">Veuillez sélectionner un sous élément :</p>
                         </div>
                         <ul class="h-60 py-2 overflow-y-auto text-sm text-gray-700" aria-labelledby="dropdownRightButton_{{i}}">
-                            {% for sousDoc in doc.children %}
+                            {% for j, sousDoc in doc.children %}
                                 {% if sousDoc.source %}
                                 <li>
                                     <a href="{{sousDoc.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{sousDoc.libelle}}</a>
                                 </li>
                                 {% else %}
                                 <li>
-                                    <button id="doubleDropdownButton_{{i}}" data-dropdown-toggle="doubleDropdown_{{i}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <button id="doubleDropdownButton_{{i}}_{{j}}" data-dropdown-toggle="doubleDropdown_{{i}}_{{j}}" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between text-left w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         {{sousDoc.libelle}}
                                         <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
                                     </button>
-                                    <div id="doubleDropdown_{{i}}" class="z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                    <div id="doubleDropdown_{{i}}_{{j}}" class="z-10 hidden bg-white border border-[#6ca942] min-w-64 divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
                                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                             <div class="font-medium truncate">{{sousDoc.libelle}}</div>
-                                            <p id="helper-checkbox-text-{{i}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner un sous élément :</p>
+                                            <p id="helper-checkbox-text-{{i}}-{{j}}" class="text-xs font-normal text-gray-500 dark:text-gray-300">Veuillez sélectionner un sous élément :</p>
                                         </div>
-                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_{{i}}">
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton_{{i}}_{{j}}">
                                             {% for item in sousDoc.children %}
                                             <li>
-                                                <a href="{{item.source.filename}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
+                                                <a href="{{item.source.filename}}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item.libelle}}</a>
                                             </li>
                                             {% endfor %}
                                         </ul>

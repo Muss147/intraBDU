@@ -136,6 +136,7 @@ select#votes_form_agent {
             </ul>
         </div>
 
+        {% if projects|length != 0 %}
         <div class="">
             <div class="flex justify-between items-start mb-4">
                 <h2 class="text-[#2b62aa] font-bold text-xl">Votez pour l’Étoile du Mois !</h2>
@@ -150,9 +151,17 @@ select#votes_form_agent {
                 <!-- Carrousel -->
                 <div class="swiper voteSwiper grow max-w-[300px] sm:max-w-[400px]">
                     <div id="carousel-track" class="swiper-wrapper">
-                        {% for agent in agents %}
+                        {% for project in projects %}
                         <div class="swiper-slide bg-center bg-cover w-[20vw] h-[20vw] md:w-[25vw] md:h-[25vw] max-w-[150px] max-h-[150px]">
-                            <img src="{{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}}" class="w-full h-full block object-cover border rounded" />
+                            <div class="w-full h-36 flex justify-center items-center border rounded p-3" style="
+                                background-image: linear-gradient(rgba(255,255,255,0.9), 
+                                    rgba(255,255,255,0.4)), 
+                                    url('{{ asset('assets/media/logos/Logo-BDUCI-dark.png') }}');
+                                background-position: center;
+                                background-size: cover;">
+                                <span class="font-bold text-center">{{ project.title|slice(0,47) }}{{ project.title|length > 47 ? "..." }}</span>
+                            </div>
+                            {# <img src="{{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}}" class="w-full h-full block object-cover border rounded" /> #}
                         </div>
                         {% endfor %}
                     </div>
@@ -161,8 +170,7 @@ select#votes_form_agent {
                 <!-- Texte + Bouton -->
                 <div class="text-center flex-none max-w-[250px]">
                     <p class="text-black font-bold mb-4">
-                        💡 Reconnaissons l’Excellence !<br />
-                        Participez à l’élection du Salarié du Mois.
+                        Votez pour le projet qui a le plus contribué à l’amélioration et à la performance de la BDU. 
                     </p>
                     <button type="button" class="bg-[#6ca942] text-white font-bold py-2 px-6 rounded-full inline-block hover:bg-green-600 transition"
                         data-modal-target="agent-modal"
@@ -172,7 +180,8 @@ select#votes_form_agent {
                 </div>
             </div>
         </div>
-
+        {% endif %}
+        
         <div class="">
             <div class="flex justify-between items-start mb-4">
                 <h2 class="text-[#2b62aa] font-bold text-xl">Ma prise en main</h2>
@@ -300,7 +309,7 @@ select#votes_form_agent {
         <div class="flex flex-col border border-[#2b62aa] rounded">
             <img class="h-125px" src="{{asset('assets/media/bg/image14.png')}}" alt="">
         </div>
-        <div class="flex flex-col border border-[#2b62aa] rounded">
+        {# <div class="flex flex-col border border-[#2b62aa] rounded">
             <turbo-frame id="classement_mensuel">
                 {% if top %}
                     <div class="bg-white p-4 rounded shadow">
@@ -318,10 +327,24 @@ select#votes_form_agent {
                     <div class="text-gray-500 text-center">Aucun vote pour ce mois.</div>
                 {% endif %}
             </turbo-frame>
-        </div>
-        {# <div class="flex flex-col border border-[#2b62aa] rounded">
-            <img class="h-[165px]" src="{{asset('assets/media/bg/image9.png')}}" alt="">
-        </div>     #}
+        </div> #}
+        {# <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl p-8 shadow">
+            <h2 class="text-2xl font-bold mb-2">
+                🏆 Projet à fort impact – {{ result.month }}
+            </h2>
+
+            <p class="text-xl">
+                <strong>{{ result.projectTitle }}</strong>
+            </p>
+
+            <p class="mt-2">
+                Porté par : <strong>{{ result.ownerName }}</strong>
+            </p>
+
+            <p class="mt-2 text-lg">
+                📊 {{ result.votesCount }} votes
+            </p>
+        </div> #}
     </aside>
 
     <!-- Modals Vote -->
@@ -331,26 +354,23 @@ select#votes_form_agent {
             <!-- Modal body -->
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                 <div id="indicators-carousel" class="relative w-full bg-[#2b62aa] rounded-lg py-8" data-carousel="static">
-                    <div class="relative overflow-hidden rounded-lg h-48">
-                        {% for agent in agents %}
+                    <div class="relative overflow-hidden rounded-lg h-[350px] max-h-[450px]">
+                        {% for project in projects %}
                         <div class="hidden bg-[#2b62aa] rounded-lg duration-700 ease-in-out" 
                             data-carousel-item{% if loop.first %}="active"{% endif %} 
-                            data-agent="{{ {
-                                id: agent.id,
-                                matricule: agent.matricule
-                            }|json_encode|e('html_attr') }}">
-                            <div class="flex flex-col items-center pb-10">
-                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{asset(agent.photo.filename|default('assets/media/svg/avatars/blank.svg'))}}" alt="{{agent.nom ~' '~ agent.prenoms}}"/>
-                                <h5 class="mb-1 text-xl font-medium text-white">{{agent.nom ~' '~ agent.prenoms}}</h5>
-                                <span class="text-sm text-gray-300">{{agent.fonction}}</span>                    
-                                <span class="text-sm text-gray-300">{{agent.service ? agent.service.parent.libelle}}</span>                    
+                            data-project-id="{{ project.id }}">
+                            <div class="flex flex-col items-center px-8 pb-10 h-full overflow-y-auto">
+                                <div class="absolute inset-x-0 top-0 bg-[#2b62aa]">
+                                    <h5 class="mb-4 mx-auto text-xl text-center font-medium text-white">{{project.title}}</h5>
+                                </div>
+                                <div class="text-gray-300 mt-12">{{project.description|raw}}</div>                    
                             </div>
                         </div>
                         {% endfor %}
                     </div>
                     <!-- Slider indicators -->
                     <div class="absolute w-full z-30 flex justify-center space-x-3 rtl:space-x-reverse inset-x-0 bottom-5">
-                        {% for i, agent in agents %}
+                        {% for i, project in projects %}
                         <button type="button" class="w-3 h-3 rounded-full" aria-current="{{ loop.first ? true : false }}" aria-label="Slide {{i+1}}" data-carousel-slide-to="{{i}}"></button>
                         {% endfor %}
                     </div>
@@ -374,9 +394,23 @@ select#votes_form_agent {
                 </div>
                 <!-- Vote form -->
                 <div class="p-4 md:px-8">
-                    <h2 class="text-lg font-bold text-[#2b62aa] mt-3 mb-5">Noter l'agent pour voter</h2>
+                    <h2 class="text-lg font-bold text-[#2b62aa] mt-3 mb-5">Identifiez-vous pour voter</h2>
 
-                    {% include 'front/vote/_form.html.twig' with { form: form } %}
+                    <form id="vote-form" method="post" action="" class="space-y-4">
+                        
+                        <input type="hidden" name="_token" value="{{ csrf_token('vote') }}">
+                        <input type="hidden" name="projet_id" id="vote_project_id" value="">
+                        
+                        <div>
+                            <input type="text" name="marticule" id="vote_matricule" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:border-blue-500 block w-full p-2.5" placeholder='Saisissez votre matricule...'>
+                            <!-- message erreur -->
+                            <p id="matricule-error" class="mt-2 text-sm text-red-600 hidden"></p>
+                        </div>
+
+                        <button type="submit" id="vote-submit" class="inline-flex items-center px-4 py-2 font-medium text-white bg-[#2b62aa] rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                            Voter pour ce projet
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -448,6 +482,7 @@ select#votes_form_agent {
     </div>
     {% endfor %}
 </div>
+<div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-3"></div>
 {% endblock %}
 
 {% block javascripts %}
@@ -456,61 +491,135 @@ select#votes_form_agent {
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script type="module" src="{{ asset('assets/js/carousel-agent.js') }}"></script>
 <script>
-    const flashMessages = {
+    window.flashMessages = {
         {% for type, messages in app.flashes %}
             {{ type }}: {{ messages|json_encode|raw }},
         {% endfor %}
     };
-    document.addEventListener("DOMContentLoaded", () => {
-        const modalEl = document.getElementById('agent-modal');
-        if (modalEl) {
-            // Crée et ajoute le backdrop
-            const backdrop = document.createElement('div');
-            backdrop.className = "bg-gray-900/50 fixed inset-0 z-40 hidden";
-            document.body.appendChild(backdrop);
 
-            // Initialise le modal
-            const modal = new Modal(modalEl, {
-                placement: 'center',
-                backdrop: 'dynamic',
-                onHide: () => backdrop.classList.add('hidden')
-            });
+    document.addEventListener('DOMContentLoaded', () => {
+        const showToast = (message, type = 'success', duration = 9000) => {
+            const container = document.getElementById('toast-container');
 
-            // Ouvre le modal avec le backdrop visible
-            const showModal = () => {
-                backdrop.classList.remove('hidden');
-                modal.show();
+            const colors = {
+                success: 'bg-green-600 text-white',
+                error: 'bg-red-600 text-white',
+                info: 'bg-blue-600 text-white',
+                warning: 'bg-yellow-500 text-black'
             };
 
-            // Si message flash d’erreur → affiche l’alerte + ouvre le modal
-            if (flashMessages?.error?.length) {
-                const box = document.getElementById('alert-container');
-                box.innerHTML = `
-                <div class="flex items-center p-4 mt-3 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
-                    <svg class="w-4 h-4 me-3 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                    </svg>
-                    <div><strong>Erreur :</strong> ${flashMessages.error[0]}</div>
-                </div>`;
-                box.classList.remove('hidden');
-                showModal();
-            }
+            const toast = document.createElement('div');
+            toast.className = `
+                flex items-center p-4 rounded-lg shadow-lg
+                ${colors[type] || colors.success}
+                transition-opacity duration-500
+            `;
+
+            toast.innerHTML = `
+                <div class="text-sm font-medium">${message}</div>
+                <button class="ml-4 text-white hover:text-gray-200 focus:outline-none">
+                    ✕
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            // fermeture manuelle
+            toast.querySelector('button').addEventListener('click', () => {
+                toast.remove();
+            });
+
+            // auto-destroy
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, duration);
+        };
+
+        /* ==========================
+        * 2. FLASH SUCCESS → TOAST
+        * ========================== */
+        if (window.flashMessages?.success?.length) {
+            showToast(flashMessages.success[0], 'success');
         }
 
-        const modalEl2 = document.getElementById('success-modal');
-        if (!modalEl2) return;
+        const form = document.getElementById('vote-form');
+        const errorBox = document.getElementById('matricule-error');
+        const submitBtn = document.getElementById('vote-submit');
 
-        const modal2 = new Modal(modalEl2, {
-            backdrop: 'dynamic',
-            placement: 'center'
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            errorBox.classList.add('hidden');
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("{{ path('project_vote_check') }}", {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    errorBox.textContent = data.message;
+                    errorBox.classList.remove('hidden');
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                // ✅ OK → soumission réelle
+                form.submit();
+
+            } catch (error) {
+                errorBox.textContent = "Une erreur est survenue. Veuillez réessayer.";
+                errorBox.classList.remove('hidden');
+                submitBtn.disabled = false;
+            }
         });
 
-        // Si on a un flash message "success" → on ouvre le modal
-        if (flashMessages?.success?.length) {
-            const message = flashMessages.success[0];
-            document.getElementById('success-message').textContent = message;
-            modal2.show();
-        }
+        const projectInput = document.getElementById('vote_project_id');
+        const carousel = document.getElementById('indicators-carousel');
+
+        const updateProjectIdFromActiveSlide = () => {
+            const activeSlide = carousel.querySelector('[data-carousel-item].translate-x-0');
+
+            if (!activeSlide) {
+                console.warn('Aucun slide visible');
+                return;
+            }
+
+            const projectId = activeSlide.dataset.projectId;
+
+            if (!projectId) {
+                console.warn('data-project-id manquant');
+                return;
+            }
+
+            projectInput.value = projectId;
+            console.log('Projet actif →', projectId);
+        };
+
+        // Initialisation (important)
+        updateProjectIdFromActiveSlide();
+
+        /* ==========================
+        * FLOWBITE → OBSERVE LES CLASSES
+        * ========================== */
+        const observer = new MutationObserver(() => {
+            updateProjectIdFromActiveSlide();
+        });
+
+        observer.observe(carousel, {
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['class']
+        });
         
         var carouselSwiper = new Swiper('.carouselSwiper', {
             loop: true,
