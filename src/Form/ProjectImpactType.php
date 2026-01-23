@@ -18,7 +18,9 @@ class ProjectImpactType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre du projet'
+                'label' => 'Titre du projet',
+                'required' => true,
+                'empty_data' => '',
             ])
             ->add('owner', EntityType::class, [
                 'class' => Agents::class,

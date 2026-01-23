@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 03 déc. 2025 à 12:27
+-- Généré le : mar. 20 jan. 2026 à 11:45
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -18,6 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
+-- Base de données : `intrabdu_db`
 --
 
 -- --------------------------------------------------------
@@ -195,7 +196,41 @@ INSERT INTO `actions_autorisation` (`id`, `autorisation_id`, `action_id`, `check
 (178, 62, 23, 1),
 (179, 63, 30, 1),
 (180, 63, 31, 1),
-(181, 63, 32, 1);
+(181, 63, 32, 1),
+(182, 64, 4, 1),
+(183, 64, 5, 0),
+(184, 65, 6, 1),
+(185, 65, 7, 1),
+(186, 65, 8, 1),
+(187, 66, 9, 1),
+(188, 66, 10, 1),
+(189, 66, 11, 1),
+(190, 67, 12, 1),
+(191, 67, 13, 1),
+(192, 67, 14, 1),
+(193, 68, 15, 0),
+(194, 68, 16, 0),
+(195, 68, 17, 0),
+(196, 69, 18, 1),
+(197, 69, 19, 1),
+(198, 69, 20, 1),
+(199, 70, 21, 0),
+(200, 70, 22, 0),
+(201, 70, 23, 0),
+(202, 71, 24, 0),
+(203, 71, 25, 0),
+(204, 71, 26, 0),
+(205, 72, 27, 0),
+(206, 72, 28, 0),
+(207, 72, 29, 0),
+(208, 73, 30, 0),
+(209, 73, 31, 0),
+(210, 73, 32, 0),
+(211, 74, 33, 0),
+(212, 74, 34, 0),
+(213, 74, 35, 0),
+(214, 75, 36, 0),
+(215, 75, 37, 0);
 
 -- --------------------------------------------------------
 
@@ -1236,7 +1271,140 @@ INSERT INTO `activity_log` (`id`, `user_id`, `type`, `method`, `path`, `ip_addre
 (1006, 10, 'modification', 'POST', '/espace-admin/notes-publications/modification', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0', ' -  - ', 'OK', 303, 286.71, '2025-12-02 11:01:43'),
 (1007, 10, 'modification', 'POST', '/espace-admin/notes-publications/modification', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0', ' -  - ', 'OK', 303, 301.42, '2025-12-02 11:01:57'),
 (1008, 10, 'modification', 'POST', '/espace-admin/notes-publications/', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0', ' -  - ', 'OK', 302, 489.42, '2025-12-02 11:08:24'),
-(1009, 10, 'modification', 'POST', '/espace-admin/actualites/', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0', ' -  - ', 'OK', 302, 525.85, '2025-12-02 11:22:38');
+(1009, 10, 'modification', 'POST', '/espace-admin/actualites/', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0', ' -  - ', 'OK', 302, 525.85, '2025-12-02 11:22:38'),
+(1010, 5, 'modification', 'POST', '/espace-admin/actualites/modification', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 303, 533.43, '2025-12-03 14:38:24'),
+(1011, 5, 'modification', 'POST', '/espace-admin/actualites/modification', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 303, 479.12, '2025-12-03 14:53:24'),
+(1012, 5, 'modification', 'POST', '/espace-admin/actualites/modification', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 303, 6970.21, '2025-12-03 15:15:50'),
+(1013, 7, 'Login', 'Login', NULL, '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', 'Inconnue', 'OK', NULL, NULL, '2025-12-03 15:22:20'),
+(1014, 7, 'modification', 'POST', '/espace-admin/login', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', 'Inconnue', 'OK', 302, 1764771751723.9, '2025-12-03 15:22:31'),
+(1015, 7, 'Login', 'Login', NULL, '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', 'Inconnue', 'OK', NULL, NULL, '2025-12-03 15:22:31'),
+(1016, 7, 'modification', 'POST', '/espace-admin/login', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', 'Inconnue', 'OK', 302, 1764771751746.4, '2025-12-03 15:22:31'),
+(1017, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Autres%20documents/10', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', 'Inconnue', 'OK', 302, 15583.96, '2025-12-03 15:25:39'),
+(1018, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/delete/230', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 405.75, '2025-12-03 15:26:02'),
+(1019, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/modification', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 384.32, '2025-12-03 15:27:09'),
+(1020, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/modification', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 298.12, '2025-12-03 15:27:45'),
+(1021, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/delete/199', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 446.78, '2025-12-03 15:28:14'),
+(1022, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Autres%20documents/9', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 375.9, '2025-12-03 15:28:24'),
+(1023, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Autres%20documents/9', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 481.66, '2025-12-03 15:29:17'),
+(1024, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Autres%20documents/9', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 337.62, '2025-12-03 15:29:52'),
+(1025, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Autres%20documents/9', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 481.56, '2025-12-03 15:30:26'),
+(1026, 12, 'Login', 'Login', NULL, '10.80.5.215', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-09 08:22:34'),
+(1027, 12, 'modification', 'POST', '/espace-admin/login', '10.80.5.215', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1765264955330.8, '2025-12-09 08:22:35'),
+(1028, 7, 'Login', 'Login', NULL, '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', NULL, NULL, '2025-12-16 16:08:48'),
+(1029, 7, 'modification', 'POST', '/espace-admin/login', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 1765897728947.4, '2025-12-16 16:08:48'),
+(1030, 7, 'Login', 'Login', NULL, '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', NULL, NULL, '2025-12-16 16:08:49'),
+(1031, 7, 'modification', 'POST', '/espace-admin/login', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 1765897729975.7, '2025-12-16 16:08:49'),
+(1032, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Procedures/52', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 2990.47, '2025-12-16 16:10:17'),
+(1033, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-17 09:36:42'),
+(1034, 5, 'modification', 'POST', '/espace-admin/login', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1765960602697.9, '2025-12-17 09:36:42'),
+(1035, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-17 09:36:47'),
+(1036, 5, 'modification', 'POST', '/espace-admin/login', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1765960607865.3, '2025-12-17 09:36:47'),
+(1037, 5, 'modification', 'POST', '/espace-admin/notes-publications/', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 2137.3, '2025-12-17 09:45:56'),
+(1038, 11, 'Login', 'Login', NULL, '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-17 13:16:15'),
+(1039, 11, 'modification', 'POST', '/espace-admin/login', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1765973776016.5, '2025-12-17 13:16:16'),
+(1040, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-19 18:01:29'),
+(1041, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-19 18:01:29'),
+(1042, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-19 18:01:35'),
+(1043, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-19 18:02:56'),
+(1044, 5, 'modification', 'POST', '/espace-admin/roles/', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 2600.91, '2025-12-19 18:05:59'),
+(1045, 11, 'Login', 'Login', NULL, '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-19 18:06:45'),
+(1046, 5, 'modification', 'POST', '/espace-admin/users/11/modification', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 303, 4219.41, '2025-12-19 18:06:49'),
+(1047, 5, 'modification', 'POST', '/espace-admin/users/13/modification', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 303, 804.43, '2025-12-19 18:15:01'),
+(1048, 11, 'modification', 'POST', '/espace-admin/offres/delete-offres-selected', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 200, 608.68, '2025-12-19 18:21:30'),
+(1049, 13, 'Login', 'Login', NULL, '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-19 18:45:22'),
+(1050, 13, 'modification', 'POST', '/espace-admin/login', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1766166323165.5, '2025-12-19 18:45:23'),
+(1051, 13, 'Login', 'Login', NULL, '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-19 18:45:24'),
+(1052, 13, 'modification', 'POST', '/espace-admin/login', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1766166325317.4, '2025-12-19 18:45:25'),
+(1053, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 2645.87, '2025-12-19 18:53:05'),
+(1054, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 502.44, '2025-12-19 18:53:05'),
+(1055, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 4129.36, '2025-12-19 18:59:40'),
+(1056, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 587.14, '2025-12-19 19:04:22'),
+(1057, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 484.64, '2025-12-19 19:04:50'),
+(1058, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 426.23, '2025-12-19 19:04:54'),
+(1059, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-22 09:41:35'),
+(1060, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-22 09:41:38'),
+(1061, 5, 'Login', 'Login', NULL, '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-22 09:41:40'),
+(1062, 11, 'Login', 'Login', NULL, '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-23 11:51:41'),
+(1063, 11, 'modification', 'POST', '/espace-admin/agents/', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 4555.94, '2025-12-23 12:00:26'),
+(1064, 11, 'modification', 'POST', '/espace-admin/agents/', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 610.01, '2025-12-23 12:04:50'),
+(1065, 11, 'modification', 'POST', '/espace-admin/agents/', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 557.68, '2025-12-23 12:09:11'),
+(1066, 11, 'modification', 'POST', '/espace-admin/agents/', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 594.05, '2025-12-23 12:12:08'),
+(1067, 11, 'modification', 'POST', '/espace-admin/agents/', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1618.18, '2025-12-23 12:21:27'),
+(1068, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 3094.95, '2025-12-23 15:23:51'),
+(1069, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages/20', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 516.57, '2025-12-23 15:25:29'),
+(1070, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages/20', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 477.07, '2025-12-23 15:26:49'),
+(1071, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages/20', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 498.15, '2025-12-23 15:30:54'),
+(1072, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages/20', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 360.72, '2025-12-23 15:30:55'),
+(1073, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages/20', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 471.95, '2025-12-23 15:32:17'),
+(1074, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages/20', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 485.05, '2025-12-23 15:38:53'),
+(1075, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages/20', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 397.96, '2025-12-23 15:39:52'),
+(1076, 13, 'Login', 'Login', NULL, '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-23 17:38:12'),
+(1077, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 2683.71, '2025-12-23 17:45:58'),
+(1078, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 458.4, '2025-12-23 17:45:58'),
+(1079, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 632.42, '2025-12-23 17:46:12'),
+(1080, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 471.32, '2025-12-23 17:46:52'),
+(1081, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 525.22, '2025-12-23 17:47:52'),
+(1082, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'WRN', 422, 430.6, '2025-12-23 17:47:57'),
+(1083, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 5143.54, '2025-12-26 11:48:37'),
+(1084, 5, 'modification', 'POST', '/espace-admin/pages-builder/pages/13', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 548.53, '2025-12-26 12:11:38'),
+(1085, 10, 'Login', 'Login', NULL, '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', NULL, NULL, '2025-12-26 14:45:19'),
+(1086, 10, 'modification', 'POST', '/espace-admin/login', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 302, 1766756720537.6, '2025-12-26 14:45:20'),
+(1087, 10, 'modification', 'POST', '/espace-admin/sliders/modification', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 423.27, '2025-12-26 14:46:17'),
+(1088, 10, 'modification', 'POST', '/espace-admin/sliders/', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 302, 1327.39, '2025-12-26 14:49:25'),
+(1089, 10, 'modification', 'POST', '/espace-admin/actualites/', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 302, 995.22, '2025-12-26 14:54:16'),
+(1090, 10, 'modification', 'POST', '/espace-admin/actualites/modification', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 510.74, '2025-12-26 14:54:37'),
+(1091, 10, 'modification', 'POST', '/espace-admin/actualites/modification', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 305.8, '2025-12-26 14:54:50'),
+(1092, 10, 'modification', 'POST', '/espace-admin/actualites/', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 302, 469.77, '2025-12-26 14:56:24'),
+(1093, 10, 'modification', 'POST', '/espace-admin/sliders/', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 302, 503.31, '2025-12-26 16:27:55'),
+(1094, 5, 'Login', 'Login', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-29 13:27:23'),
+(1095, 5, 'modification', 'POST', '/espace-admin/login', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1767011244523, '2025-12-29 13:27:24'),
+(1096, 7, 'Login', 'Login', NULL, '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', NULL, NULL, '2025-12-30 11:09:19'),
+(1097, 7, 'modification', 'POST', '/espace-admin/login', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 1767089360220.5, '2025-12-30 11:09:20'),
+(1098, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/delete/47', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 2202.6, '2025-12-30 15:45:34'),
+(1099, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/modification', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 733.56, '2025-12-30 15:46:03'),
+(1100, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-procedures/46', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 9644.12, '2025-12-30 15:49:50'),
+(1101, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-procedures/46', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 455.78, '2025-12-30 15:49:51'),
+(1102, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/delete/237', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 342.95, '2025-12-30 15:50:04'),
+(1103, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-procedures/46', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 387.03, '2025-12-30 15:50:44'),
+(1104, 5, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Procedures', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 563, '2025-12-30 15:58:26'),
+(1105, 5, 'modification', 'POST', '/espace-admin/documents-de-reference/delete/239', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 296.25, '2025-12-30 15:59:18'),
+(1106, 5, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Procedures', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 458.09, '2025-12-30 16:00:17'),
+(1107, 13, 'Login', 'Login', NULL, '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-30 20:21:11'),
+(1108, 13, 'modification', 'POST', '/espace-admin/login', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1767122472441.5, '2025-12-30 20:21:12'),
+(1109, 13, 'Login', 'Login', NULL, '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2025-12-30 20:21:13'),
+(1110, 13, 'modification', 'POST', '/espace-admin/login', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1767122473299.9, '2025-12-30 20:21:13'),
+(1111, 13, 'modification', 'POST', '/espace-admin/offres/details', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 2150.35, '2025-12-30 20:38:08'),
+(1112, 7, 'Login', 'Login', NULL, '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', NULL, NULL, '2026-01-05 09:42:41'),
+(1113, 7, 'modification', 'POST', '/espace-admin/login', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 1767602562050.7, '2026-01-05 09:42:42'),
+(1114, 5, 'modification', 'POST', '/espace-admin/documents-de-reference/delete/240', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 2757.74, '2026-01-05 18:51:36'),
+(1115, 7, 'Login', 'Login', NULL, '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', NULL, NULL, '2026-01-06 16:14:15'),
+(1116, 7, 'modification', 'POST', '/espace-admin/login', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 1767712455732.9, '2026-01-06 16:14:15'),
+(1117, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Procedures/41', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 3215.33, '2026-01-06 16:15:22'),
+(1118, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Procedures/41', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 396.6, '2026-01-06 16:15:55'),
+(1119, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Procedures/41', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 534.68, '2026-01-06 16:16:36'),
+(1120, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Procedures/41', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 407.31, '2026-01-06 16:17:19'),
+(1121, 7, 'modification', 'POST', '/espace-admin/documents-de-reference/lsite-Procedures/195', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0', ' -  - ', 'OK', 302, 528, '2026-01-06 16:22:06'),
+(1122, 10, 'Login', 'Login', NULL, '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', NULL, NULL, '2026-01-12 12:17:22'),
+(1123, 10, 'modification', 'POST', '/espace-admin/login', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 302, 1768216643341.2, '2026-01-12 12:17:23'),
+(1124, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/42', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 534.51, '2026-01-12 12:22:37'),
+(1125, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/41', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 327.05, '2026-01-12 12:22:43'),
+(1126, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/40', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 626.98, '2026-01-12 12:22:48'),
+(1127, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/39', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 308.61, '2026-01-12 12:22:53'),
+(1128, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/38', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 309.71, '2026-01-12 12:22:59'),
+(1129, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/18', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 619.48, '2026-01-12 12:23:47'),
+(1130, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/17', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 333.48, '2026-01-12 12:24:43'),
+(1131, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/16', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 391.61, '2026-01-12 12:24:49'),
+(1132, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/15', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 326.69, '2026-01-12 12:24:55'),
+(1133, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/14', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 474.6, '2026-01-12 12:24:59'),
+(1134, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/13', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 287.69, '2026-01-12 12:25:04'),
+(1135, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/12', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 292.94, '2026-01-12 12:25:09'),
+(1136, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/11', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 342.08, '2026-01-12 12:25:14'),
+(1137, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/10', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 314.81, '2026-01-12 12:25:19'),
+(1138, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/9', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 292.8, '2026-01-12 12:25:23'),
+(1139, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/8', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 305.97, '2026-01-12 12:25:26'),
+(1140, 10, 'modification', 'POST', '/espace-admin/mediatheque/delete/7', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0', ' -  - ', 'OK', 303, 297.42, '2026-01-12 12:25:31'),
+(1141, 13, 'Login', 'Login', NULL, '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', ' -  - ', 'OK', NULL, NULL, '2026-01-16 19:52:47'),
+(1142, 13, 'modification', 'POST', '/espace-admin/login', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', ' -  - ', 'OK', 302, 1768589568480.1, '2026-01-16 19:52:48');
 
 -- --------------------------------------------------------
 
@@ -1256,20 +1424,23 @@ CREATE TABLE `actualites` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   `online` tinyint(1) DEFAULT NULL,
-  `slug` varchar(255) NOT NULL
+  `slug` varchar(255) NOT NULL,
+  `thumbnail_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `actualites`
 --
 
-INSERT INTO `actualites` (`id`, `cover_id`, `titre`, `description`, `created_user_id`, `updated_user_id`, `deleted_user_id`, `created_at`, `updated_at`, `deleted_at`, `online`, `slug`) VALUES
-(1, 24, 'La BDU-CI réaffirme son engagement envers les jeunes talents en lançant la Saison 2 du Programme Pépinière d’Excellence BDU-CI', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.', 4, 4, NULL, '2025-07-20 02:38:18', '2025-07-31 14:37:30', NULL, 1, 'la-BDU-CI-reaffirme-son-engagement-envers-les-jeunes-talents-en-lancant-la-saison-2-du-programme-pepiniere-d-excellence-BDU-CI'),
-(2, 25, 'Les voeux de la nouvelle annee du DG', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.\r\nLorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.', 4, 4, NULL, '2025-07-20 02:42:52', '2025-07-31 14:37:21', NULL, 1, 'les-voeux-de-la-nouvelle-annee-du-DG'),
-(4, 302, 'Campagne Bancassurance : J’assure mes biens DU 05 NOVEMBRE AU 30 DÉCEMBRE 2025', 'NOS OBJECTIFS :\r\n✅ Sécuriser les financements octroyés à notre clientèle entreprise.\r\n✅ Assurer la continuité de l’activité de nos clients en cas de sinistre subit par leurs locaux, leurs stocks de marchandises, leurs matériels, leur chantier, etc.\r\nDurant cette période de campagne, l\'équipe commerciale doit jouer un rôle clé dans le succès de ces offres. Elle doit être force de proposition auprès de nos clients, en mettant en valeur les avantages de nos produits, et contribuer activement à l\'atteinte de nos objectifs.\r\nComment intensifier notre communication auprès des clients ?\r\n✔ Informez chaque client entreprise de cette solution essentielle.\r\n✔ Intégrez au moins un produit dans chaque dossier de financement (se faire assister par la bancassurance au besoin)\r\n\r\n\" Protégez vos biens, vivez l’esprit tranquille avec BDU-CI. Intro : Parce que l’imprévu peut coûter cher, BDU-CI vous aide à sécuriser vos biens et vos projets. Avec notre offre d’assurance, garantissez la pérennité de votre entreprise, même face aux imprévus.\"\r\nPériode de la campagne : 05 novembre au 30 Décembre 2025\r\nDurée :  2 Mois\r\nProduits : MULTIRISQUE HABITATION (MRH), MULTIRISQUE PROFESSIONNEL (MRP), TOUT RISQUE CHANTIER (TRC) et l\'Assurance AUTO.', 5, 5, 5, '2025-11-06 12:39:19', '2025-11-06 12:39:19', '2025-11-06 12:42:10', 1, 'campagne-bancassurance-j-assure-mes-biens-du-05-novembre-au-30-decembre-2025'),
-(9, 307, 'Test Campagne Bancassurance : J’assure mes biens DU 05 NOVEMBRE AU 30 DÉCEMBRE 2025', 'Mesdames, Messieurs \r\nJusqu\'au 30 Décembre 2025, nous lançons la Campagne Bancassurance « J’ASSURE MES BIENS ».\r\nCette campagne met en avant nos solution d’assurance non-vie, notamment :MULTIRISQUE HABITATION (MRH),MULTIRISQUE PROFESSIONNEL (MRP),TOUT RISQUE CHANTIER (TRC),et l\'Assurance AUTO\r\n A quel besoin répondent ces offres ?\r\n\r\nParce qu’un sinistre, peut survenir à tout moment.Et lorsqu’il frappe, une entreprise ou un particulier peut être lourdement impacté.Se protéger, c’est donc garantir la pérennité de son activité et la capacité de se relever, quels que soient les imprévus.Nos solutions d’assurance vous offrent cette tranquillité d’esprit, et garantissent :Assurance MULTIRISQUE HABITATION (MRH) : la remise en l’état du bien immobilier en cas d’incendie, dégâts des eaux, vol ou toute autre garantie choisie par le clientAssurance MULTIRISQUE PROFESSIONNEL (MRP) :la remise en l’état des locaux, le renouvellement du stock de marchandises, des matériels et mobiliers de l’entreprise assurée en cas d’incendie, dégâts des eaux, vol ou toute autre garantie choisie par le client Assurance TOUT RISQUE CHANTIER (TRC) garantit : la continuité des travaux en cas de survenu de risque au cours de l’exécution des travaux Assurance AUTO garantit votre sécurité sur la route :la couverture contre les dommages matériels et la responsabilité civile pour les dommages causés à autrui, garantissant ainsi votre sécurité sur la routeNOS \r\nOBJECTIFS\r\n :✅ Sécuriser les financements octroyés à notre clientèle entreprise.\r\n✅ Assurer la continuité de l’activité de nos clients en cas de sinistre subit par leurs locaux, leurs stocks de marchandises, leurs matériels, leur chantier, etc.Durant cette période de campagne, l\'équipe commerciale doit jouer un rôle clé dans le succès de ces offres. Elle doit être force de proposition auprès de nos clients, en mettant en valeur les avantages de nos produits, et contribuer activement à l\'atteinte de nos objectifs.Comment intensifier notre communication auprès des clients ?\r\n✔ Informez chaque client entreprise de cette solution essentielle.\r\n✔ Intégrez au moins un produit dans chaque dossier de financement (se faire assister par la bancassurance au besoin)\" Protégez vos biens, vivez l’esprit tranquille avec BDU-CI. Intro : Parce que l’imprévu peut coûter cher, BDU-CI vous aide à sécuriser vos biens et vos projets. Avec notre offre d’assurance, garantissez la pérennité de votre entreprise, même face aux imprévus.\"Période de la campagne : 05 novembre au 30 Décembre 2025Durée :  2 MoisProduits : MULTIRISQUE HABITATION (MRH), MULTIRISQUE PROFESSIONNEL (MRP), TOUT RISQUE CHANTIER (TRC) et l\'Assurance AUTO. Les caractéristiques de la campagne : ACTEURSChargés de clientèle PME, chargés d’affaires et chefs d’agencesOBJECTIFS*92 contrats (MRP-MRH-TRC) -  18 400 000 FCFA de chiffres d’affaires, soit 3 680 000 FCFA de commissions sur les produits IARD.*111 contrats d’assurance AUTO -  25 900 000 FCFA de chiffres d’affaires et 5 180 000 FCFA de commissions.La répartition de l’objectif global sera faite par agence.CIBLE*Clients titulaires de comptes entreprises, et commerçants, demandeurs de financements ou non (MRI-MRP-TRC-AUTO).* Clients particuliers titulaires de comptes courant ou épargne, locataire ou propriétaire de biens immobiliers et de véhicule.                DETAILS* Période de la campagne : du 20/10/2025 au 20/12/2025*Durée :  2 mois*Produits : MULTIRISQUE HABITATION (MRH), MULTIRISQUE PROFESSIONNEL (MRP), TOUT RISQUE CHANTIER (TRC), AUTOMOYENS DE MOTIVATION2% de commission sur le chiffre d’affaires seront accordées aux vendeurs et un prix à la meilleure agence avec un minimum de 5 000 FCFA.*Prix de la meilleure agence : réaliser 100% de l’objectif global de l’agence.  BONNE VENTE A TOUS ET A TOUTES !', 5, 5, NULL, '2025-11-06 12:53:08', '2025-11-06 13:00:19', NULL, 1, 'test-campagne-bancassurance-j-assure-mes-biens-du-05-novembre-au-30-decembre-2025'),
-(10, 334, 'Save the Date-2nde Édition de l\'Arbre de Noël BDU 2025', 'La féérie de Noël s’invite à nouveau à la BDU-CI… et cette année encore, nous voyons les choses en GRAND.\r\n\r\nNous vous rappelons que la 2ᵉ édition de l’Arbre de Noël BDU-CI aura lieu très bientôt. \r\n\r\nUn moment exceptionnel vous attend, pensé pour émerveiller vos enfants et réunir toute la grande famille BDU autour de la magie, du rire et du partage.\r\n\r\n Samedi 06 décembre 2025\r\n  Espace Événementiel Sweet Life Garden\r\n\r\nNe manquez pas ce rendez-vous festif unique.\r\nNous vous y attendons avec impatience !\r\n\r\n#ArbreDeNoëlBDU2025 #NoëlMagique #EspritDeFamilleBDU', 10, 10, NULL, '2025-12-02 10:53:18', '2025-12-02 10:53:18', NULL, 1, 'save-the-date-2nde-edition-de-l-arbre-de-noel-bdu-2025'),
-(11, 336, 'OPÉRATION DE DON DE SANG BDU-CI', 'Donner son sang, c’est offrir quelques minutes pour sauver des vies.\r\nUn geste simple, solidaire et profondément humain, qui permet de soigner des malades, d’intervenir en urgence et de redonner espoir. Chaque don compte.\r\nParticiper à cette collecte, c’est aussi prendre soin de soi : votre sang sera analysé, vous offrant un premier niveau d’information sur votre santé.\r\nConditions pour donner :\r\n• Être à jeun ou non ;\r\n• Peser au moins 50 kg ;\r\n• Être en bonne santé le jour du don ;\r\n• Ne pas être enceinte.\r\nDéroulement du don :\r\nPrise des constantes → Remise du kit → Prélèvement → Pause d’observation → Collation.\r\nNous comptons sur la mobilisation de tous pour sauver des vies !', 10, 10, NULL, '2025-12-02 11:22:37', '2025-12-02 11:22:37', NULL, 1, 'operation-de-don-de-sang-bdu-ci');
+INSERT INTO `actualites` (`id`, `cover_id`, `titre`, `description`, `created_user_id`, `updated_user_id`, `deleted_user_id`, `created_at`, `updated_at`, `deleted_at`, `online`, `slug`, `thumbnail_id`) VALUES
+(1, 24, 'La BDU-CI réaffirme son engagement envers les jeunes talents en lançant la Saison 2 du Programme Pépinière d’Excellence BDU-CI', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.', 4, 4, NULL, '2025-07-20 02:38:18', '2025-07-31 14:37:30', NULL, 1, 'la-BDU-CI-reaffirme-son-engagement-envers-les-jeunes-talents-en-lancant-la-saison-2-du-programme-pepiniere-d-excellence-BDU-CI', NULL),
+(2, 25, 'Les voeux de la nouvelle annee du DG', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.\r\nLorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.', 4, 4, NULL, '2025-07-20 02:42:52', '2025-07-31 14:37:21', NULL, 1, 'les-voeux-de-la-nouvelle-annee-du-DG', NULL),
+(4, 302, 'Campagne Bancassurance : J’assure mes biens DU 05 NOVEMBRE AU 30 DÉCEMBRE 2025', 'NOS OBJECTIFS :\r\n✅ Sécuriser les financements octroyés à notre clientèle entreprise.\r\n✅ Assurer la continuité de l’activité de nos clients en cas de sinistre subit par leurs locaux, leurs stocks de marchandises, leurs matériels, leur chantier, etc.\r\nDurant cette période de campagne, l\'équipe commerciale doit jouer un rôle clé dans le succès de ces offres. Elle doit être force de proposition auprès de nos clients, en mettant en valeur les avantages de nos produits, et contribuer activement à l\'atteinte de nos objectifs.\r\nComment intensifier notre communication auprès des clients ?\r\n✔ Informez chaque client entreprise de cette solution essentielle.\r\n✔ Intégrez au moins un produit dans chaque dossier de financement (se faire assister par la bancassurance au besoin)\r\n\r\n\" Protégez vos biens, vivez l’esprit tranquille avec BDU-CI. Intro : Parce que l’imprévu peut coûter cher, BDU-CI vous aide à sécuriser vos biens et vos projets. Avec notre offre d’assurance, garantissez la pérennité de votre entreprise, même face aux imprévus.\"\r\nPériode de la campagne : 05 novembre au 30 Décembre 2025\r\nDurée :  2 Mois\r\nProduits : MULTIRISQUE HABITATION (MRH), MULTIRISQUE PROFESSIONNEL (MRP), TOUT RISQUE CHANTIER (TRC) et l\'Assurance AUTO.', 5, 5, 5, '2025-11-06 12:39:19', '2025-11-06 12:39:19', '2025-11-06 12:42:10', 1, 'campagne-bancassurance-j-assure-mes-biens-du-05-novembre-au-30-decembre-2025', NULL),
+(9, 307, 'Test Campagne Bancassurance : J’assure mes biens DU 05 NOVEMBRE AU 30 DÉCEMBRE 2025', 'Mesdames, Messieurs \r\nJusqu\'au 30 Décembre 2025, nous lançons la Campagne Bancassurance « J’ASSURE MES BIENS ».\r\nCette campagne met en avant nos solution d’assurance non-vie, notamment :MULTIRISQUE HABITATION (MRH),MULTIRISQUE PROFESSIONNEL (MRP),TOUT RISQUE CHANTIER (TRC),et l\'Assurance AUTO\r\n A quel besoin répondent ces offres ?\r\n\r\nParce qu’un sinistre, peut survenir à tout moment.Et lorsqu’il frappe, une entreprise ou un particulier peut être lourdement impacté.Se protéger, c’est donc garantir la pérennité de son activité et la capacité de se relever, quels que soient les imprévus.Nos solutions d’assurance vous offrent cette tranquillité d’esprit, et garantissent :Assurance MULTIRISQUE HABITATION (MRH) : la remise en l’état du bien immobilier en cas d’incendie, dégâts des eaux, vol ou toute autre garantie choisie par le clientAssurance MULTIRISQUE PROFESSIONNEL (MRP) :la remise en l’état des locaux, le renouvellement du stock de marchandises, des matériels et mobiliers de l’entreprise assurée en cas d’incendie, dégâts des eaux, vol ou toute autre garantie choisie par le client Assurance TOUT RISQUE CHANTIER (TRC) garantit : la continuité des travaux en cas de survenu de risque au cours de l’exécution des travaux Assurance AUTO garantit votre sécurité sur la route :la couverture contre les dommages matériels et la responsabilité civile pour les dommages causés à autrui, garantissant ainsi votre sécurité sur la routeNOS \r\nOBJECTIFS\r\n :✅ Sécuriser les financements octroyés à notre clientèle entreprise.\r\n✅ Assurer la continuité de l’activité de nos clients en cas de sinistre subit par leurs locaux, leurs stocks de marchandises, leurs matériels, leur chantier, etc.Durant cette période de campagne, l\'équipe commerciale doit jouer un rôle clé dans le succès de ces offres. Elle doit être force de proposition auprès de nos clients, en mettant en valeur les avantages de nos produits, et contribuer activement à l\'atteinte de nos objectifs.Comment intensifier notre communication auprès des clients ?\r\n✔ Informez chaque client entreprise de cette solution essentielle.\r\n✔ Intégrez au moins un produit dans chaque dossier de financement (se faire assister par la bancassurance au besoin)\" Protégez vos biens, vivez l’esprit tranquille avec BDU-CI. Intro : Parce que l’imprévu peut coûter cher, BDU-CI vous aide à sécuriser vos biens et vos projets. Avec notre offre d’assurance, garantissez la pérennité de votre entreprise, même face aux imprévus.\"Période de la campagne : 05 novembre au 30 Décembre 2025Durée :  2 MoisProduits : MULTIRISQUE HABITATION (MRH), MULTIRISQUE PROFESSIONNEL (MRP), TOUT RISQUE CHANTIER (TRC) et l\'Assurance AUTO. Les caractéristiques de la campagne : ACTEURSChargés de clientèle PME, chargés d’affaires et chefs d’agencesOBJECTIFS*92 contrats (MRP-MRH-TRC) -  18 400 000 FCFA de chiffres d’affaires, soit 3 680 000 FCFA de commissions sur les produits IARD.*111 contrats d’assurance AUTO -  25 900 000 FCFA de chiffres d’affaires et 5 180 000 FCFA de commissions.La répartition de l’objectif global sera faite par agence.CIBLE*Clients titulaires de comptes entreprises, et commerçants, demandeurs de financements ou non (MRI-MRP-TRC-AUTO).* Clients particuliers titulaires de comptes courant ou épargne, locataire ou propriétaire de biens immobiliers et de véhicule.                DETAILS* Période de la campagne : du 20/10/2025 au 20/12/2025*Durée :  2 mois*Produits : MULTIRISQUE HABITATION (MRH), MULTIRISQUE PROFESSIONNEL (MRP), TOUT RISQUE CHANTIER (TRC), AUTOMOYENS DE MOTIVATION2% de commission sur le chiffre d’affaires seront accordées aux vendeurs et un prix à la meilleure agence avec un minimum de 5 000 FCFA.*Prix de la meilleure agence : réaliser 100% de l’objectif global de l’agence.  BONNE VENTE A TOUS ET A TOUTES !', 5, 5, NULL, '2025-11-06 12:53:08', '2025-11-06 13:00:19', NULL, 1, 'test-campagne-bancassurance-j-assure-mes-biens-du-05-novembre-au-30-decembre-2025', NULL),
+(10, 334, 'Save the Date-2nde Édition de l\'Arbre de Noël BDU 2025', '<p>La féérie de Noël s’invite à nouveau à la BDU-CI… et cette année encore, nous voyons les choses en GRAND. Nous vous rappelons que la 2ᵉ édition de l’Arbre de Noël BDU-CI aura lieu très bientôt. Un moment exceptionnel vous attend, pensé pour émerveiller vos enfants et réunir toute la grande famille BDU autour de la magie, du rire et du partage. Samedi 06 décembre 2025 Espace Événementiel Sweet Life Garden Ne manquez pas ce rendez-vous festif unique. Nous vous y attendons avec impatience !</p><p>#ArbreDeNoëlBDU2025 #NoëlMagique #EspritDeFamilleBDU</p>', 10, 10, NULL, '2025-12-02 10:53:18', '2025-12-26 14:54:50', NULL, NULL, 'save-the-date-2nde-edition-de-l-arbre-de-noel-bdu-2025', 337),
+(11, 336, 'OPÉRATION DE DON DE SANG BDU-CI', '<p>Donner son sang, c’est offrir quelques minutes pour sauver des vies. Un geste simple, solidaire et profondément humain, qui permet de soigner des malades, d’intervenir en urgence et de redonner espoir. Chaque don compte. Participer à cette collecte, c’est aussi prendre soin de soi : votre sang sera analysé, vous offrant un premier niveau d’information sur votre santé. Conditions pour donner : • Être à jeun ou non ; • Peser au moins 50 kg ; • Être en bonne santé le jour du don ; • Ne pas être enceinte. Déroulement du don : Prise des constantes → Remise du kit → Prélèvement → Pause d’observation → Collation. Nous comptons sur la mobilisation de tous pour sauver des vies !</p>', 10, 10, NULL, '2025-12-02 11:22:37', '2025-12-26 14:54:37', NULL, NULL, 'operation-de-don-de-sang-bdu-ci', 338),
+(12, 349, 'CELEBREZ LA CAN 2025 AVEC VOTRE BANQUE LA BDU-CI', NULL, 10, 10, NULL, '2025-12-26 14:54:15', '2025-12-26 14:54:15', NULL, 1, 'celebrez-la-can-2025-avec-votre-banque-la-bdu-ci', 348),
+(13, 351, 'LA BDU-CI VOUS SOUHAITE UN JOYEUX NOEL', NULL, 10, 10, NULL, '2025-12-26 14:56:24', '2025-12-26 14:56:24', NULL, 1, 'la-bdu-ci-vous-souhaite-un-joyeux-noel', 350);
 
 -- --------------------------------------------------------
 
@@ -1395,7 +1566,12 @@ INSERT INTO `agents` (`id`, `service_id`, `created_user_id`, `updated_user_id`, 
 (88, 155, 5, 5, NULL, 'Toure', 'moussokoro', 'Mme.', '0748570486', 'mtoure@bduci.com', '3068', NULL, 'Chef de Service Contrôle et Suivi des Engagements', '2025-11-11 14:43:29', '2025-11-11 14:43:29', NULL, 329, '2007-08-01', '047', 197),
 (89, 158, 5, 5, NULL, 'ABA', 'Jessica Epse KONE', 'Mme.', '0769039984', 'jkone@bduci.com', '3058', NULL, 'Chef de Service Juridique', '2025-11-11 14:47:17', '2025-11-11 14:47:17', NULL, 330, '2007-08-07', '146', 197),
 (90, 161, 5, 5, NULL, 'COULIBALY', 'SENOUCI LYA ABDEL -KADER', 'M.', '0777888872', 'akcoulibaly@bduci.com', '3069', NULL, 'Chargé d’Affaires PME-PMI', '2025-11-13 09:09:27', '2025-11-13 09:09:27', NULL, 332, '2007-07-31', '000123333', 197),
-(91, 160, 5, 5, NULL, 'Akéssé', 'épse EWUSSI Marie-Laure', 'Mme.', '0747150296', 'mlewussi@bduci.com', '3196', NULL, 'Chef d\'agence', '2025-11-13 09:12:58', '2025-11-13 09:12:58', NULL, 333, '2007-05-24', '065', 181);
+(91, 160, 5, 5, NULL, 'Akéssé', 'épse EWUSSI Marie-Laure', 'Mme.', '0747150296', 'mlewussi@bduci.com', '3196', NULL, 'Chef d\'agence', '2025-11-13 09:12:58', '2025-11-13 09:12:58', NULL, 333, '2007-05-24', '065', 181),
+(92, 193, 11, 11, NULL, 'KOUASSI', 'ALVERSE NATHANAEL', 'M.', '0779788322', 'ankouassi@bduci.com', '00', NULL, 'Technicien Support Applicatif', '2025-12-23 12:00:25', '2025-12-23 12:00:25', NULL, 340, '2003-04-13', '271', 133),
+(93, 159, 11, 11, NULL, 'ATTIEMBONON', 'JEAN MARIE VIANNEY', 'M.', '0707202811', 'jattiembonon@bduci.com', '3230', NULL, 'Chargé de Recouvrement', '2025-12-23 12:04:50', '2025-12-23 12:04:50', NULL, 341, '1993-08-04', '275', 134),
+(94, 152, 11, 11, NULL, 'TOURE', 'GNELBIEN FABRICE', 'M.', '0759994514', 'gtoure@bduci.com', '3233', NULL, 'Contrôleur de Gestion', '2025-12-23 12:09:10', '2025-12-23 12:09:10', NULL, 342, '1989-06-19', '272', 133),
+(95, 160, 11, 11, NULL, 'KOUASSI Epse DJE', 'AFFOUET MARLENE STEPHANIE', 'Mme.', '0708299720', 'sdje@bduci.com', '3023', NULL, 'Chargée de Clientèle PME/PMI', '2025-12-23 12:12:08', '2025-12-23 12:12:08', NULL, 343, '1990-09-01', '274', 172),
+(96, 160, 11, 11, NULL, 'AFFY', 'HADDEY ERIC EVANS', 'M.', '0142314102', 'haffy@bduci.com', '3132', NULL, 'Chargée de Clientèle PME/PMI', '2025-12-23 12:21:26', '2025-12-23 12:21:26', NULL, 344, '1996-05-18', '281', 179);
 
 -- --------------------------------------------------------
 
@@ -1479,7 +1655,19 @@ INSERT INTO `autorisations` (`id`, `permission_id`, `role_id`) VALUES
 (60, 13, 1),
 (61, 3, 6),
 (62, 8, 6),
-(63, 11, 6);
+(63, 11, 6),
+(64, 2, 7),
+(65, 3, 7),
+(66, 4, 7),
+(67, 5, 7),
+(68, 6, 7),
+(69, 7, 7),
+(70, 8, 7),
+(71, 9, 7),
+(72, 10, 7),
+(73, 11, 7),
+(74, 12, 7),
+(75, 13, 7);
 
 -- --------------------------------------------------------
 
@@ -1541,7 +1729,7 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20251013114428', '2025-10-20 14:45:27', 20);
+('DoctrineMigrations\\Version20251203113042', '2025-12-03 11:30:47', 248);
 
 -- --------------------------------------------------------
 
@@ -1577,7 +1765,7 @@ INSERT INTO `documents` (`id`, `parent_id`, `source_id`, `created_user_id`, `upd
 (6, NULL, NULL, 4, 4, 7, 'Another One', 'another-one', 'procedures', '2025-07-08 12:58:47', '2025-07-08 12:58:47', '2025-09-26 10:59:00', 0),
 (7, 5, 21, 4, 4, 4, 'Fichier test', 'fichier-test', 'procedures', '2025-07-08 13:13:10', '2025-07-08 13:13:10', '2025-09-30 19:08:44', 0),
 (8, 6, 22, 4, 4, 4, 'Fichier test', 'fichier-test', 'procedures', '2025-07-08 13:14:06', '2025-07-08 13:48:54', '2025-09-30 19:08:58', 0),
-(9, NULL, NULL, 4, 5, NULL, 'Conformité ', 'conformite', 'Autres documents', '2025-07-23 15:59:04', '2025-10-29 11:07:20', NULL, 0),
+(9, NULL, NULL, 4, 7, NULL, 'CULTURE RISQUE ', 'culture-risque', 'Autres documents', '2025-07-23 15:59:04', '2025-12-03 15:27:45', NULL, 0),
 (10, NULL, NULL, 4, 4, NULL, 'Exemple de document N2', 'exemple-de-document-n2', 'Autres documents', '2025-07-23 15:59:55', '2025-07-23 16:00:05', NULL, 0),
 (11, NULL, NULL, 4, 4, NULL, 'Exemple de document N3', 'exemple-de-document-n3', 'Autres documents', '2025-07-23 16:00:20', '2025-07-23 16:00:20', NULL, 0),
 (12, NULL, NULL, 4, 4, NULL, 'Exemple de document N4', 'exemple-de-document-n4', 'Autres documents', '2025-07-23 16:00:29', '2025-07-23 16:00:29', NULL, 0),
@@ -1614,8 +1802,8 @@ INSERT INTO `documents` (`id`, `parent_id`, `source_id`, `created_user_id`, `upd
 (43, NULL, NULL, 7, 7, NULL, 'Processus Crédit', 'processus-credit', 'procedures', '2025-09-26 11:09:40', '2025-09-26 11:09:40', NULL, 0),
 (44, NULL, NULL, 7, 7, NULL, 'Processus Finance et Comptabilité', 'processus-finance-et-comptabilite', 'procedures', '2025-09-26 11:10:06', '2025-09-26 11:10:06', NULL, 0),
 (45, NULL, NULL, 7, 7, NULL, 'Processus Gouvernance et Strategie', 'processus-gouvernance-et-strategie', 'procedures', '2025-09-26 11:10:54', '2025-09-26 11:10:54', NULL, 0),
-(46, NULL, NULL, 7, 7, NULL, 'Processus Marketing', 'processus-marketing', 'procedures', '2025-09-26 11:11:15', '2025-09-26 11:11:15', NULL, 0),
-(47, NULL, NULL, 7, 7, NULL, 'Processus Communication', 'processus-communication', 'procedures', '2025-09-26 11:11:31', '2025-09-26 11:11:31', NULL, 0),
+(46, NULL, NULL, 7, 7, NULL, 'Processus Communication et  Marketing', 'processus-communication-et-marketing', 'procedures', '2025-09-26 11:11:15', '2025-12-30 15:46:03', NULL, 0),
+(47, NULL, NULL, 7, 7, 7, 'Processus Communication', 'processus-communication', 'procedures', '2025-09-26 11:11:31', '2025-09-26 11:11:31', '2025-12-30 15:45:31', 0),
 (48, NULL, NULL, 7, 7, NULL, 'Processus Qualité', 'processus-qualite', 'procedures', '2025-09-26 11:11:54', '2025-09-26 11:11:54', NULL, 0),
 (49, NULL, NULL, 7, 7, NULL, 'Processus Organisation', 'processus-organisation', 'procedures', '2025-09-26 11:12:18', '2025-09-26 11:12:18', NULL, 0),
 (50, NULL, NULL, 7, 7, NULL, 'Processus Gestion des Risques', 'processus-gestion-des-risques', 'procedures', '2025-09-26 11:12:53', '2025-09-26 11:12:53', NULL, 0),
@@ -1689,69 +1877,69 @@ INSERT INTO `documents` (`id`, `parent_id`, `source_id`, `created_user_id`, `upd
 (118, 54, 122, 7, 7, 7, 'Gérer les litiges et les demandes d\'assistance ou conseils juridiques', 'gerer-les-litiges-et-les-demandes-d-assistance-ou-conseils-juridiques', 'procedures', '2025-09-26 18:06:00', '2025-09-26 18:06:00', '2025-09-26 18:06:09', 0),
 (119, 54, 123, 7, 7, 7, 'Gérer les saisies et les ATD', 'gerer-les-saisies-et-les-atd', 'procedures', '2025-09-30 18:52:59', '2025-09-30 18:52:59', '2025-09-30 18:53:13', 0),
 (120, 54, 124, 7, 7, NULL, 'Gérer les saisies et les ATD', 'gerer-les-saisies-et-les-atd', 'procedures', '2025-09-30 18:53:00', '2025-09-30 18:53:00', NULL, 2),
-(121, 54, 125, 7, 7, NULL, 'Rédaction des contrats notariés', 'redaction-des-contrats-notaries', 'procedures', '2025-09-30 18:53:48', '2025-09-30 18:53:48', NULL, 3),
+(121, 54, 125, 7, 7, NULL, 'Rédaction des contrats notariés', 'redaction-des-contrats-notaries', 'procedures', '2025-09-30 18:53:48', '2025-09-30 18:53:48', NULL, 4),
 (122, 54, 126, 7, 7, NULL, 'Suretés réelles & suretés personnelles', 'suretes-reelles-suretes-personnelles', 'procedures', '2025-09-30 18:54:39', '2025-09-30 18:54:39', NULL, 1),
 (123, 54, 127, 7, 7, NULL, 'Traiter les successions', 'traiter-les-successions', 'procedures', '2025-09-30 18:55:38', '2025-09-30 18:55:38', NULL, 0),
-(124, 55, 128, 7, 7, NULL, 'Recouvrement Amiable', 'recouvrement-amiable', 'procedures', '2025-09-30 18:57:32', '2025-09-30 18:57:32', NULL, 5),
-(125, 55, 129, 7, 7, NULL, 'Recouvrement commercial et transfert en contentieux', 'recouvrement-commercial-et-transfert-en-contentieux', 'procedures', '2025-09-30 18:58:28', '2025-09-30 18:58:28', NULL, 2),
-(126, 55, 130, 7, 7, NULL, 'Recouvrement Contentieux', 'recouvrement-contentieux', 'procedures', '2025-09-30 18:59:44', '2025-09-30 18:59:44', NULL, 1),
+(124, 55, 128, 7, 7, NULL, 'Recouvrement Amiable', 'recouvrement-amiable', 'procedures', '2025-09-30 18:57:32', '2025-09-30 18:57:32', NULL, 7),
+(125, 55, 129, 7, 7, NULL, 'Recouvrement commercial et transfert en contentieux', 'recouvrement-commercial-et-transfert-en-contentieux', 'procedures', '2025-09-30 18:58:28', '2025-09-30 18:58:28', NULL, 4),
+(126, 55, 130, 7, 7, NULL, 'Recouvrement Contentieux', 'recouvrement-contentieux', 'procedures', '2025-09-30 18:59:44', '2025-09-30 18:59:44', NULL, 4),
 (127, 56, 138, 7, 7, NULL, 'Assurer la sécurité du SI', 'assurer-la-securite-du-si', 'procedures', '2025-10-03 16:58:25', '2025-10-03 16:58:25', NULL, 5),
 (128, 56, 139, 7, 7, 7, 'Assurer la sécurité du SI', 'assurer-la-securite-du-si', 'procedures', '2025-10-03 16:58:27', '2025-10-03 16:58:27', '2025-10-03 16:58:38', 0),
 (129, 56, 140, 7, 7, NULL, 'Gérer et assurer la maintenance et la sécurisation des données', 'gerer-et-assurer-la-maintenance-et-la-securisation-des-donnees', 'procedures', '2025-10-03 16:59:37', '2025-10-03 16:59:37', NULL, 3),
-(130, 56, 141, 7, 7, NULL, 'Gérer les accès et les autorisations au réseau et au SI', 'gerer-les-acces-et-les-autorisations-au-reseau-et-au-si', 'procedures', '2025-10-03 17:00:28', '2025-10-03 17:00:28', NULL, 1),
-(131, 56, 142, 7, 7, NULL, 'Planifier la stratégie et l\'organisation du SI', 'planifier-la-strategie-et-l-organisation-du-si', 'procedures', '2025-10-03 17:01:02', '2025-10-03 17:01:02', NULL, 0),
+(130, 56, 141, 7, 7, NULL, 'Gérer les accès et les autorisations au réseau et au SI', 'gerer-les-acces-et-les-autorisations-au-reseau-et-au-si', 'procedures', '2025-10-03 17:00:28', '2025-10-03 17:00:28', NULL, 2),
+(131, 56, 142, 7, 7, NULL, 'Planifier la stratégie et l\'organisation du SI', 'planifier-la-strategie-et-l-organisation-du-si', 'procedures', '2025-10-03 17:01:02', '2025-10-03 17:01:02', NULL, 2),
 (132, 56, 143, 7, 7, NULL, 'Réaliser les études et développements informatiques', 'realiser-les-etudes-et-developpements-informatiques', 'procedures', '2025-10-03 17:01:52', '2025-10-03 17:01:52', NULL, 0),
 (133, 54, 147, 7, 7, NULL, 'Assurer le secrétariat  Juridique', 'assurer-le-secretariat-juridique', 'procedures', '2025-10-08 13:16:55', '2025-10-08 13:16:55', NULL, 0),
-(134, 1, 148, 7, 7, NULL, 'Effectuer les ouvertures de comptes , Opérations de DAT et Clotures de comptes', 'effectuer-les-ouvertures-de-comptes-operations-de-dat-et-clotures-de-comptes', 'Procedures', '2025-10-08 13:33:55', '2025-10-08 13:33:55', NULL, 2),
-(135, 1, 149, 7, 7, NULL, 'Traiter les opérations de caisse', 'traiter-les-operations-de-caisse', 'procedures', '2025-10-08 13:35:24', '2025-10-08 13:35:24', NULL, 1),
-(136, 1, 150, 7, 7, NULL, 'Piiloter et coordonner l\'activité des agences', 'piiloter-et-coordonner-l-activite-des-agences', 'procedures', '2025-10-08 13:36:27', '2025-10-08 13:36:27', NULL, 0),
-(137, 1, 151, 7, 7, NULL, 'Gérer la relation client', 'gerer-la-relation-client', 'procedures', '2025-10-08 13:37:54', '2025-10-08 13:37:54', NULL, 3),
+(134, 1, 148, 7, 7, NULL, 'Effectuer les ouvertures de comptes , Opérations de DAT et Clotures de comptes', 'effectuer-les-ouvertures-de-comptes-operations-de-dat-et-clotures-de-comptes', 'Procedures', '2025-10-08 13:33:55', '2025-10-08 13:33:55', NULL, 4),
+(135, 1, 149, 7, 7, NULL, 'Traiter les opérations de caisse', 'traiter-les-operations-de-caisse', 'procedures', '2025-10-08 13:35:24', '2025-10-08 13:35:24', NULL, 3),
+(136, 1, 150, 7, 7, NULL, 'Piiloter et coordonner l\'activité des agences', 'piiloter-et-coordonner-l-activite-des-agences', 'procedures', '2025-10-08 13:36:27', '2025-10-08 13:36:27', NULL, 2),
+(137, 1, 151, 7, 7, NULL, 'Gérer la relation client', 'gerer-la-relation-client', 'procedures', '2025-10-08 13:37:54', '2025-10-08 13:37:54', NULL, 4),
 (138, 1, 152, 7, 7, NULL, 'Gestion des chéquiers', 'gestion-des-chequiers', 'procedures', '2025-10-08 13:40:05', '2025-10-08 13:40:05', NULL, 3),
 (139, 38, 153, 7, 7, NULL, 'Tenue des dossiers du personnel', 'tenue-des-dossiers-du-personnel', 'procedures', '2025-10-08 14:07:07', '2025-10-08 14:07:07', NULL, 1),
-(140, 1, 154, 7, 7, NULL, 'Gestion des comptes dormants', 'gestion-des-comptes-dormants', 'procedures', '2025-10-08 14:07:47', '2025-10-08 14:07:47', NULL, 0),
-(141, 31, 155, 7, 7, NULL, 'Assurer la gestion des cartes bancaires, DAB et produits digitaux', 'assurer-la-gestion-des-cartes-bancaires-dab-et-produits-digitaux', 'procedures', '2025-10-08 14:09:45', '2025-10-08 14:09:45', NULL, 5),
-(142, 32, 156, 7, 7, NULL, 'Gérer les opérations de transfert d\'argent', 'gerer-les-operations-de-transfert-d-argent', 'procedures', '2025-10-08 14:10:51', '2025-10-08 14:10:51', NULL, 3),
-(143, 36, 157, 7, 7, NULL, 'Souscrire à un produit et les modifications des contrats d\'assurance', 'souscrire-a-un-produit-et-les-modifications-des-contrats-d-assurance', 'procedures', '2025-10-08 14:11:40', '2025-10-08 14:11:40', NULL, 3),
-(144, 38, 158, 7, 7, NULL, 'Gérer la paie', 'gerer-la-paie', 'procedures', '2025-10-08 14:13:28', '2025-10-08 14:13:28', NULL, 1),
-(145, 38, 159, 7, 7, NULL, 'Gérer les avances , les acomptes et prets', 'gerer-les-avances-les-acomptes-et-prets', 'procedures', '2025-10-08 14:14:10', '2025-10-08 14:14:10', NULL, 0),
-(146, 38, 162, 7, 7, NULL, 'Gérer les carrières', 'gerer-les-carrieres', 'procedures', '2025-10-08 16:27:26', '2025-10-08 16:27:26', NULL, 0),
+(140, 1, 154, 7, 7, NULL, 'Gestion des comptes dormants', 'gestion-des-comptes-dormants', 'procedures', '2025-10-08 14:07:47', '2025-10-08 14:07:47', NULL, 4),
+(141, 31, 155, 7, 7, NULL, 'Assurer la gestion des cartes bancaires, DAB et produits digitaux', 'assurer-la-gestion-des-cartes-bancaires-dab-et-produits-digitaux', 'procedures', '2025-10-08 14:09:45', '2025-10-08 14:09:45', NULL, 7),
+(142, 32, 156, 7, 7, NULL, 'Gérer les opérations de transfert d\'argent', 'gerer-les-operations-de-transfert-d-argent', 'procedures', '2025-10-08 14:10:51', '2025-10-08 14:10:51', NULL, 4),
+(143, 36, 157, 7, 7, NULL, 'Souscrire à un produit et les modifications des contrats d\'assurance', 'souscrire-a-un-produit-et-les-modifications-des-contrats-d-assurance', 'procedures', '2025-10-08 14:11:40', '2025-10-08 14:11:40', NULL, 4),
+(144, 38, 158, 7, 7, NULL, 'Gérer la paie', 'gerer-la-paie', 'procedures', '2025-10-08 14:13:28', '2025-10-08 14:13:28', NULL, 3),
+(145, 38, 159, 7, 7, NULL, 'Gérer les avances , les acomptes et prets', 'gerer-les-avances-les-acomptes-et-prets', 'procedures', '2025-10-08 14:14:10', '2025-10-08 14:14:10', NULL, 1),
+(146, 38, 162, 7, 7, NULL, 'Gérer les carrières', 'gerer-les-carrieres', 'procedures', '2025-10-08 16:27:26', '2025-10-08 16:27:26', NULL, 1),
 (147, 38, 163, 7, 7, NULL, 'Gérer les départs', 'gerer-les-departs', 'procedures', '2025-10-08 16:29:06', '2025-10-08 16:29:06', NULL, 0),
-(148, 38, 164, 7, 7, NULL, 'Gérer les missions', 'gerer-les-missions', 'procedures', '2025-10-08 16:30:41', '2025-10-08 16:30:41', NULL, 2),
+(148, 38, 164, 7, 7, NULL, 'Gérer les missions', 'gerer-les-missions', 'procedures', '2025-10-08 16:30:41', '2025-10-08 16:30:41', NULL, 3),
 (149, 38, 165, 7, 7, NULL, 'Gérer les recrutements et l\'intégration', 'gerer-les-recrutements-et-l-integration', 'procedures', '2025-10-08 16:32:39', '2025-10-08 16:32:39', NULL, 0),
-(150, 38, 166, 7, 7, NULL, 'Gestion de la performance', 'gestion-de-la-performance', 'procedures', '2025-10-08 16:33:35', '2025-10-08 16:33:35', NULL, 0),
-(151, 38, 167, 7, 7, NULL, 'Gestion des Congés', 'gestion-des-conges', 'procedures', '2025-10-08 16:35:22', '2025-10-08 16:35:22', NULL, 0),
+(150, 38, 166, 7, 7, NULL, 'Gestion de la performance', 'gestion-de-la-performance', 'procedures', '2025-10-08 16:33:35', '2025-10-08 16:33:35', NULL, 1),
+(151, 38, 167, 7, 7, NULL, 'Gestion des Congés', 'gestion-des-conges', 'procedures', '2025-10-08 16:35:22', '2025-10-08 16:35:22', NULL, 2),
 (152, 39, 169, 7, 7, NULL, 'Gérer la sécurité physique', 'gerer-la-securite-physique', 'procedures', '2025-10-08 16:38:28', '2025-10-08 16:38:28', NULL, 0),
-(153, 39, 170, 7, 7, NULL, 'Gérer le courrier', 'gerer-le-courrier', 'procedures', '2025-10-08 16:39:36', '2025-10-08 16:39:36', NULL, 0),
-(154, 39, 171, 7, 7, NULL, 'Gérer le parc automobile', 'gerer-le-parc-automobile', 'procedures', '2025-10-08 16:40:49', '2025-10-08 16:40:49', NULL, 0),
+(153, 39, 170, 7, 7, NULL, 'Gérer le courrier', 'gerer-le-courrier', 'procedures', '2025-10-08 16:39:36', '2025-10-08 16:39:36', NULL, 1),
+(154, 39, 171, 7, 7, NULL, 'Gérer le parc automobile', 'gerer-le-parc-automobile', 'procedures', '2025-10-08 16:40:49', '2025-10-08 16:40:49', NULL, 2),
 (155, 39, 172, 7, 7, NULL, 'Gérer le stock de fournitures de bureau et consommables', 'gerer-le-stock-de-fournitures-de-bureau-et-consommables', 'procedures', '2025-10-08 17:04:57', '2025-10-08 17:04:57', NULL, 0),
-(156, 39, 173, 7, 7, NULL, 'Gérer les archives', 'gerer-les-archives', 'procedures', '2025-10-08 17:05:41', '2025-10-08 17:05:41', NULL, 0),
-(157, 39, 174, 7, 7, NULL, 'Gérer les immobilisations', 'gerer-les-immobilisations', 'procedures', '2025-10-08 17:06:51', '2025-10-08 17:06:51', NULL, 0),
+(156, 39, 173, 7, 7, NULL, 'Gérer les archives', 'gerer-les-archives', 'procedures', '2025-10-08 17:05:41', '2025-10-08 17:05:41', NULL, 1),
+(157, 39, 174, 7, 7, NULL, 'Gérer les immobilisations', 'gerer-les-immobilisations', 'procedures', '2025-10-08 17:06:51', '2025-10-08 17:06:51', NULL, 1),
 (158, 39, 175, 7, 7, NULL, 'Realiser les achats de biens de services', 'realiser-les-achats-de-biens-de-services', 'procedures', '2025-10-08 17:07:42', '2025-10-08 17:07:42', NULL, 0),
 (159, 40, 176, 7, 7, NULL, 'Réaliser les activités d\'audit interne', 'realiser-les-activites-d-audit-interne', 'Procedures', '2025-10-08 17:09:51', '2025-10-08 17:09:51', NULL, 2),
 (160, 40, 177, 7, 7, NULL, 'Recevoir les instructions et gérer le reporting avec le CA', 'recevoir-les-instructions-et-gerer-le-reporting-avec-le-ca', 'Procedures', '2025-10-08 17:10:29', '2025-10-08 17:10:29', NULL, 0),
-(161, 41, 178, 7, 7, NULL, 'Piloter le controle de la performance', 'piloter-le-controle-de-la-performance', 'Procedures', '2025-10-08 17:11:38', '2025-10-08 17:11:38', NULL, 0),
-(162, 42, 179, 7, 7, NULL, 'Gérer les opérations de Trésorerie Bancaire', 'gerer-les-operations-de-tresorerie-bancaire', 'procedures', '2025-10-08 17:12:57', '2025-10-08 17:12:57', NULL, 0),
-(163, 43, 180, 7, 7, NULL, 'Octroyer les crédits', 'octroyer-les-credits', 'procedures', '2025-10-08 17:32:20', '2025-10-08 17:32:20', NULL, 6),
-(164, 43, 181, 7, 7, NULL, 'Gérer le portefeuille des engagements', 'gerer-le-portefeuille-des-engagements', 'procedures', '2025-10-08 17:33:41', '2025-10-08 17:33:41', NULL, 4),
-(165, 44, 182, 7, 7, NULL, 'Gérer les activités comptables, financières et fiscales', 'gerer-les-activites-comptables-financieres-et-fiscales', 'procedures', '2025-10-08 17:39:31', '2025-10-08 17:39:31', NULL, 0),
-(166, 44, 183, 7, 7, NULL, 'Cloture de DAT', 'cloture-de-dat', 'procedures', '2025-10-08 17:39:56', '2025-10-08 17:39:56', NULL, 0),
-(167, 44, 184, 7, 7, NULL, 'Ouverture de DAT', 'ouverture-de-dat', 'procedures', '2025-10-08 17:40:17', '2025-10-08 17:40:17', NULL, 2),
-(168, 44, 185, 7, 7, NULL, 'Modification du DAT', 'modification-du-dat', 'procedures', '2025-10-08 17:42:20', '2025-10-08 17:42:20', NULL, 0),
-(169, 44, 186, 7, 7, NULL, 'Renouvellement du DAT', 'renouvellement-du-dat', 'procedures', '2025-10-08 17:42:45', '2025-10-08 17:42:45', NULL, 0),
-(170, 45, 187, 7, 7, NULL, 'Définir et Superviser la mise en oeuvre de la stratégie', 'definir-et-superviser-la-mise-en-oeuvre-de-la-strategie', 'procedures', '2025-10-08 17:44:02', '2025-10-08 17:44:02', NULL, 0),
-(171, 46, 188, 7, 7, NULL, 'Elaborer la stratégie Marketing et Commerciale', 'elaborer-la-strategie-marketing-et-commerciale', 'procedures', '2025-10-08 17:46:23', '2025-10-08 17:46:23', NULL, 2),
-(172, 48, 189, 7, 7, NULL, 'Assurer le management de la qualité', 'assurer-le-management-de-la-qualite', 'procedures', '2025-10-08 18:27:45', '2025-10-08 18:27:45', NULL, 1),
+(161, 41, 178, 7, 7, NULL, 'Piloter le controle de la performance', 'piloter-le-controle-de-la-performance', 'Procedures', '2025-10-08 17:11:38', '2025-10-08 17:11:38', NULL, 2),
+(162, 42, 179, 7, 7, NULL, 'Gérer les opérations de Trésorerie Bancaire', 'gerer-les-operations-de-tresorerie-bancaire', 'procedures', '2025-10-08 17:12:57', '2025-10-08 17:12:57', NULL, 4),
+(163, 43, 180, 7, 7, NULL, 'Octroyer les crédits', 'octroyer-les-credits', 'procedures', '2025-10-08 17:32:20', '2025-10-08 17:32:20', NULL, 15),
+(164, 43, 181, 7, 7, NULL, 'Gérer le portefeuille des engagements', 'gerer-le-portefeuille-des-engagements', 'procedures', '2025-10-08 17:33:41', '2025-10-08 17:33:41', NULL, 9),
+(165, 44, 182, 7, 7, NULL, 'Gérer les activités comptables, financières et fiscales', 'gerer-les-activites-comptables-financieres-et-fiscales', 'procedures', '2025-10-08 17:39:31', '2025-10-08 17:39:31', NULL, 1),
+(166, 44, 183, 7, 7, NULL, 'Cloture de DAT', 'cloture-de-dat', 'procedures', '2025-10-08 17:39:56', '2025-10-08 17:39:56', NULL, 1),
+(167, 44, 184, 7, 7, NULL, 'Ouverture de DAT', 'ouverture-de-dat', 'procedures', '2025-10-08 17:40:17', '2025-10-08 17:40:17', NULL, 5),
+(168, 44, 185, 7, 7, NULL, 'Modification du DAT', 'modification-du-dat', 'procedures', '2025-10-08 17:42:20', '2025-10-08 17:42:20', NULL, 1),
+(169, 44, 186, 7, 7, NULL, 'Renouvellement du DAT', 'renouvellement-du-dat', 'procedures', '2025-10-08 17:42:45', '2025-10-08 17:42:45', NULL, 1),
+(170, 45, 187, 7, 7, NULL, 'Définir et Superviser la mise en oeuvre de la stratégie', 'definir-et-superviser-la-mise-en-oeuvre-de-la-strategie', 'procedures', '2025-10-08 17:44:02', '2025-10-08 17:44:02', NULL, 3),
+(171, 46, 188, 7, 7, NULL, 'Elaborer la stratégie Marketing et Commerciale', 'elaborer-la-strategie-marketing-et-commerciale', 'procedures', '2025-10-08 17:46:23', '2025-10-08 17:46:23', NULL, 5),
+(172, 48, 189, 7, 7, NULL, 'Assurer le management de la qualité', 'assurer-le-management-de-la-qualite', 'procedures', '2025-10-08 18:27:45', '2025-10-08 18:27:45', NULL, 3),
 (173, 49, 190, 7, 7, NULL, 'Gestion des Habilitations', 'gestion-des-habilitations', 'procedures', '2025-10-08 18:29:16', '2025-10-08 18:29:16', NULL, 0),
 (174, 49, 191, 7, 7, NULL, 'Manager les Projets', 'manager-les-projets', 'procedures', '2025-10-08 18:29:37', '2025-10-08 18:29:37', NULL, 0),
-(175, 49, 192, 7, 7, NULL, 'Rédiger les politiques et les procédures', 'rediger-les-politiques-et-les-procedures', 'procedures', '2025-10-08 18:30:14', '2025-10-08 18:30:14', NULL, 0),
+(175, 49, 192, 7, 7, NULL, 'Rédiger les politiques et les procédures', 'rediger-les-politiques-et-les-procedures', 'procedures', '2025-10-08 18:30:14', '2025-10-08 18:30:14', NULL, 1),
 (176, 50, 193, 7, 7, NULL, 'Externalisation des Services', 'externalisation-des-services', 'procedures', '2025-10-08 18:42:52', '2025-10-08 18:42:52', NULL, 0),
-(177, 50, 194, 7, 7, NULL, 'Gérer le Risque de Crédit', 'gerer-le-risque-de-credit', 'procedures', '2025-10-08 18:43:16', '2025-10-08 18:43:16', NULL, 0),
+(177, 50, 194, 7, 7, NULL, 'Gérer le Risque de Crédit', 'gerer-le-risque-de-credit', 'procedures', '2025-10-08 18:43:16', '2025-10-08 18:43:16', NULL, 2),
 (178, 50, 195, 7, 7, NULL, 'Gérer les Risques de liquidité et de Marché', 'gerer-les-risques-de-liquidite-et-de-marche', 'procedures', '2025-10-08 18:44:39', '2025-10-08 18:44:39', NULL, 1),
-(179, 50, 196, 7, 7, NULL, 'Gérer les Risques Opérationnels', 'gerer-les-risques-operationnels', 'procedures', '2025-10-08 18:45:04', '2025-10-08 18:45:04', NULL, 1),
+(179, 50, 196, 7, 7, NULL, 'Gérer les Risques Opérationnels', 'gerer-les-risques-operationnels', 'procedures', '2025-10-08 18:45:04', '2025-10-08 18:45:04', NULL, 2),
 (180, 50, 197, 7, 7, NULL, 'Identification et Gestion des Groupes de Clients liées', 'identification-et-gestion-des-groupes-de-clients-liees', 'procedures', '2025-10-08 18:45:38', '2025-10-08 18:45:38', NULL, 0),
-(181, 50, 198, 7, 7, NULL, 'Lancement des nouveaux produits', 'lancement-des-nouveaux-produits', 'procedures', '2025-10-08 18:52:46', '2025-10-08 18:52:46', NULL, 0),
+(181, 50, 198, 7, 7, NULL, 'Lancement des nouveaux produits', 'lancement-des-nouveaux-produits', 'procedures', '2025-10-08 18:52:46', '2025-10-08 18:52:46', NULL, 2),
 (182, 50, 199, 7, 7, NULL, 'Suivi Expositions sur Parties liées', 'suivi-expositions-sur-parties-liees', 'procedures', '2025-10-08 18:53:36', '2025-10-08 18:53:36', NULL, 0),
-(183, 51, 200, 7, 7, NULL, 'Crédit Documentaire Export', 'credit-documentaire-export', 'procedures', '2025-10-08 18:58:05', '2025-10-08 18:58:05', NULL, 1),
+(183, 51, 200, 7, 7, NULL, 'Crédit Documentaire Export', 'credit-documentaire-export', 'procedures', '2025-10-08 18:58:05', '2025-10-08 18:58:05', NULL, 3),
 (184, 51, 201, 7, 7, NULL, 'Crédit Documentaire Import', 'credit-documentaire-import', 'procedures', '2025-10-08 18:59:24', '2025-10-08 18:59:24', NULL, 0),
 (185, 51, 202, 7, 7, NULL, 'Gérer les incidents de paiements', 'gerer-les-incidents-de-paiements', 'procedures', '2025-10-08 18:59:50', '2025-10-08 18:59:50', NULL, 0),
 (186, 51, 203, 7, 7, NULL, 'Remise Documentaire Export', 'remise-documentaire-export', 'procedures', '2025-10-08 19:01:33', '2025-10-08 19:01:33', NULL, 0),
@@ -1760,44 +1948,60 @@ INSERT INTO `documents` (`id`, `parent_id`, `source_id`, `created_user_id`, `upd
 (189, 51, 206, 7, 7, NULL, 'Transferts Internationaux reçus', 'transferts-internationaux-recus', 'procedures', '2025-10-08 19:03:35', '2025-10-08 19:03:35', NULL, 3),
 (190, 51, 207, 7, 7, NULL, 'Gestion des Effets', 'gestion-des-effets', 'procedures', '2025-10-08 19:08:42', '2025-10-08 19:08:42', NULL, 0),
 (191, 51, 208, 7, 7, NULL, 'Gestion des Opérations Locales', 'gestion-des-operations-locales', 'procedures', '2025-10-08 19:09:15', '2025-10-08 19:09:15', NULL, 0),
-(192, 52, 209, 7, 7, NULL, 'Veiller à la Conformité liée au blanchiment des capitaux', 'veiller-a-la-conformite-liee-au-blanchiment-des-capitaux', 'procedures', '2025-10-08 19:11:28', '2025-10-08 19:11:28', NULL, 2),
-(193, 53, 210, 7, 7, NULL, 'Assurer le Contrôle Permanent', 'assurer-le-controle-permanent', 'procedures', '2025-10-08 19:16:13', '2025-10-08 19:16:13', NULL, 3),
+(192, 52, 209, 7, 7, NULL, 'Veiller à la Conformité liée au blanchiment des capitaux', 'veiller-a-la-conformite-liee-au-blanchiment-des-capitaux', 'procedures', '2025-10-08 19:11:28', '2025-10-08 19:11:28', NULL, 5),
+(193, 53, 210, 7, 7, NULL, 'Assurer le Contrôle Permanent', 'assurer-le-controle-permanent', 'procedures', '2025-10-08 19:16:13', '2025-10-08 19:16:13', NULL, 7),
 (194, 54, 211, 7, 7, NULL, 'Gérer les litiges et les demandes d\'assistance', 'gerer-les-litiges-et-les-demandes-d-assistance', 'procedures', '2025-10-08 19:19:22', '2025-10-08 19:19:22', NULL, 0),
 (195, NULL, NULL, 7, 7, NULL, 'Processus Sécurité du SI', 'processus-securite-du-si', 'procedures', '2025-10-08 19:23:00', '2025-10-08 19:23:00', NULL, 0),
 (196, NULL, 212, 7, 7, NULL, 'Politique d\'Archivage', 'politique-d-archivage', 'Politiques', '2025-10-08 19:25:59', '2025-10-08 19:25:59', NULL, 0),
 (197, NULL, 213, 7, 7, NULL, 'Politique de Stage', 'politique-de-stage', 'Politiques', '2025-10-08 19:26:20', '2025-10-08 19:26:20', NULL, 0),
 (198, NULL, 214, 7, 7, NULL, 'Charte d\'Audit Interne', 'charte-d-audit-interne', 'Chartes', '2025-10-08 19:27:06', '2025-10-08 19:27:06', NULL, 0),
-(199, 9, 236, 5, 5, NULL, 'Note de sensibilisation - Bénéficiaire Effectif', 'note-de-sensibilisation-beneficiaire-effectif', 'Autres documents', '2025-10-29 11:07:58', '2025-10-29 11:07:58', NULL, 0),
-(200, 52, 251, 7, 7, NULL, 'Filtrage des clients', 'filtrage-des-clients', 'procedures', '2025-10-30 16:01:58', '2025-10-30 16:01:58', NULL, 1),
-(201, 52, 252, 7, 7, NULL, 'Filtrage des Virements Swifts et RTGS', 'filtrage-des-virements-swifts-et-rtgs', 'procedures', '2025-10-30 16:03:02', '2025-10-30 16:03:02', NULL, 0),
-(202, 52, 253, 7, 7, NULL, 'Suivi des opérations avec les Etats non Coopératifs', 'suivi-des-operations-avec-les-etats-non-cooperatifs', 'procedures', '2025-10-30 16:03:56', '2025-10-30 16:03:56', NULL, 0),
-(203, 52, 254, 7, 7, NULL, 'Traitement des alertes', 'traitement-des-alertes', 'procedures', '2025-10-30 16:04:31', '2025-10-30 16:04:31', NULL, 0),
-(204, 52, 255, 7, 7, NULL, 'Entrée en relation avec les PPE', 'entree-en-relation-avec-les-ppe', 'procedures', '2025-10-30 16:05:08', '2025-10-30 16:05:08', NULL, 0),
-(205, 52, 256, 7, 7, NULL, 'Controle des Opérations Atypiques', 'controle-des-operations-atypiques', 'procedures', '2025-10-30 16:05:38', '2025-10-30 16:05:38', NULL, 0),
-(206, 52, 257, 7, 7, NULL, 'Déclarations des Opérations Suspectes', 'declarations-des-operations-suspectes', 'procedures', '2025-10-30 16:06:07', '2025-10-30 16:06:07', NULL, 0),
-(207, 52, 258, 7, 7, NULL, 'Instruction KYC Personne Morale', 'instruction-kyc-personne-morale', 'procedures', '2025-10-30 16:06:52', '2025-10-30 16:06:52', NULL, 0),
-(208, 52, 259, 7, 7, NULL, 'Instruction KYC Personne Physique', 'instruction-kyc-personne-physique', 'procedures', '2025-10-30 16:07:30', '2025-10-30 16:07:30', NULL, 0),
-(209, 52, 260, 7, 7, NULL, 'Entrée en relation avec les correspondants bancaires transfontaliers', 'entree-en-relation-avec-les-correspondants-bancaires-transfontaliers', 'procedures', '2025-10-30 16:09:05', '2025-10-30 16:09:05', NULL, 0),
-(210, 52, 261, 7, 7, NULL, 'Suivi des Embargos et Gel des avoirs', 'suivi-des-embargos-et-gel-des-avoirs', 'procedures', '2025-10-30 16:10:40', '2025-10-30 16:10:40', NULL, 0),
-(211, 52, 262, 7, 7, NULL, 'Traitement et Dégel des avoirs', 'traitement-et-degel-des-avoirs', 'procedures', '2025-10-30 16:11:46', '2025-10-30 16:11:46', NULL, 0),
-(212, 52, 263, 7, 7, NULL, 'Suivi des Opérations exécutées par Internet et Autres Supports Economiques', 'suivi-des-operations-executees-par-internet-et-autres-supports-economiques', 'procedures', '2025-10-30 16:14:56', '2025-10-30 16:14:56', NULL, 3),
-(213, 52, 264, 7, 7, NULL, 'Création ou Modification d\'un Scénario', 'creation-ou-modification-d-un-scenario', 'procedures', '2025-10-30 16:16:24', '2025-10-30 16:16:24', NULL, 0),
+(199, 9, 236, 5, 5, 7, 'Note de sensibilisation - Bénéficiaire Effectif', 'note-de-sensibilisation-beneficiaire-effectif', 'Autres documents', '2025-10-29 11:07:58', '2025-10-29 11:07:58', '2025-12-03 15:28:14', 0),
+(200, 52, 251, 7, 7, NULL, 'Filtrage des clients', 'filtrage-des-clients', 'procedures', '2025-10-30 16:01:58', '2025-10-30 16:01:58', NULL, 5),
+(201, 52, 252, 7, 7, NULL, 'Filtrage des Virements Swifts et RTGS', 'filtrage-des-virements-swifts-et-rtgs', 'procedures', '2025-10-30 16:03:02', '2025-10-30 16:03:02', NULL, 1),
+(202, 52, 253, 7, 7, NULL, 'Suivi des opérations avec les Etats non Coopératifs', 'suivi-des-operations-avec-les-etats-non-cooperatifs', 'procedures', '2025-10-30 16:03:56', '2025-10-30 16:03:56', NULL, 2),
+(203, 52, 254, 7, 7, NULL, 'Traitement des alertes', 'traitement-des-alertes', 'procedures', '2025-10-30 16:04:31', '2025-10-30 16:04:31', NULL, 3),
+(204, 52, 255, 7, 7, NULL, 'Entrée en relation avec les PPE', 'entree-en-relation-avec-les-ppe', 'procedures', '2025-10-30 16:05:08', '2025-10-30 16:05:08', NULL, 3),
+(205, 52, 256, 7, 7, NULL, 'Controle des Opérations Atypiques', 'controle-des-operations-atypiques', 'procedures', '2025-10-30 16:05:38', '2025-10-30 16:05:38', NULL, 2),
+(206, 52, 257, 7, 7, NULL, 'Déclarations des Opérations Suspectes', 'declarations-des-operations-suspectes', 'procedures', '2025-10-30 16:06:07', '2025-10-30 16:06:07', NULL, 2),
+(207, 52, 258, 7, 7, NULL, 'Instruction KYC Personne Morale', 'instruction-kyc-personne-morale', 'procedures', '2025-10-30 16:06:52', '2025-10-30 16:06:52', NULL, 3),
+(208, 52, 259, 7, 7, NULL, 'Instruction KYC Personne Physique', 'instruction-kyc-personne-physique', 'procedures', '2025-10-30 16:07:30', '2025-10-30 16:07:30', NULL, 3),
+(209, 52, 260, 7, 7, NULL, 'Entrée en relation avec les correspondants bancaires transfontaliers', 'entree-en-relation-avec-les-correspondants-bancaires-transfontaliers', 'procedures', '2025-10-30 16:09:05', '2025-10-30 16:09:05', NULL, 1),
+(210, 52, 261, 7, 7, NULL, 'Suivi des Embargos et Gel des avoirs', 'suivi-des-embargos-et-gel-des-avoirs', 'procedures', '2025-10-30 16:10:40', '2025-10-30 16:10:40', NULL, 2),
+(211, 52, 262, 7, 7, NULL, 'Traitement et Dégel des avoirs', 'traitement-et-degel-des-avoirs', 'procedures', '2025-10-30 16:11:46', '2025-10-30 16:11:46', NULL, 2),
+(212, 52, 263, 7, 7, NULL, 'Suivi des Opérations exécutées par Internet et Autres Supports Economiques', 'suivi-des-operations-executees-par-internet-et-autres-supports-economiques', 'procedures', '2025-10-30 16:14:56', '2025-10-30 16:14:56', NULL, 5),
+(213, 52, 264, 7, 7, NULL, 'Création ou Modification d\'un Scénario', 'creation-ou-modification-d-un-scenario', 'procedures', '2025-10-30 16:16:24', '2025-10-30 16:16:24', NULL, 2),
 (214, NULL, 265, 7, 7, NULL, 'Charte de Conformité BDU CI', 'charte-de-conformite-bdu-ci', 'Chartes', '2025-10-30 16:18:03', '2025-10-30 16:18:03', NULL, 0),
 (215, NULL, 266, 7, 7, NULL, 'Politique LBCTFP', 'politique-lbctfp', 'Politiques', '2025-10-30 16:18:45', '2025-10-30 16:18:45', NULL, 0),
 (216, NULL, 267, 7, 7, NULL, 'Politique Conformité', 'politique-conformite', 'Politiques', '2025-10-30 16:20:07', '2025-10-30 16:20:07', NULL, 0),
 (217, 45, 315, 7, 7, NULL, 'Procédure Expansion du Réseau d\'agences', 'procedure-expansion-du-reseau-d-agences', 'procedures', '2025-11-10 10:58:41', '2025-11-10 10:58:41', NULL, 0),
 (218, 50, 316, 7, 7, NULL, 'Mise à jour de la Cartographie des Risques', 'mise-a-jour-de-la-cartographie-des-risques', 'procedures', '2025-11-10 11:00:06', '2025-11-10 11:00:06', NULL, 0),
-(219, 195, 317, 7, 7, NULL, 'Gestion de la classification des applications critiques', 'gestion-de-la-classification-des-applications-critiques', 'procedures', '2025-11-10 11:04:46', '2025-11-10 11:04:46', NULL, 1),
-(220, 195, 318, 7, 7, NULL, 'Gestion de la classification des données numériques', 'gestion-de-la-classification-des-donnees-numeriques', 'procedures', '2025-11-10 11:05:18', '2025-11-10 11:05:18', NULL, 0),
-(221, 195, 319, 7, 7, NULL, 'Gestion de la sécurité dans les projets', 'gestion-de-la-securite-dans-les-projets', 'procedures', '2025-11-10 11:06:03', '2025-11-10 11:06:03', NULL, 0),
-(222, 195, 320, 7, 7, NULL, 'Gestion des accès logiques', 'gestion-des-acces-logiques', 'procedures', '2025-11-10 11:06:28', '2025-11-10 11:06:28', NULL, 1),
-(223, 195, 321, 7, 7, NULL, 'Gestion des accès physiques', 'gestion-des-acces-physiques', 'procedures', '2025-11-10 11:06:49', '2025-11-10 11:06:49', NULL, 0),
-(224, 195, 322, 7, 7, NULL, 'Gestion des changements informatiques', 'gestion-des-changements-informatiques', 'procedures', '2025-11-10 11:07:15', '2025-11-10 11:07:15', NULL, 0),
-(225, 195, 323, 7, 7, NULL, 'Gestion des sauvegardes et des restaurations', 'gestion-des-sauvegardes-et-des-restaurations', 'procedures', '2025-11-10 11:08:04', '2025-11-10 11:08:04', NULL, 0),
-(226, 195, 324, 7, 7, NULL, 'Gestion des clés cryptographiques', 'gestion-des-cles-cryptographiques', 'procedures', '2025-11-10 11:08:37', '2025-11-10 11:08:37', NULL, 0),
+(219, 195, 317, 7, 7, NULL, 'Gestion de la classification des applications critiques', 'gestion-de-la-classification-des-applications-critiques', 'procedures', '2025-11-10 11:04:46', '2025-11-10 11:04:46', NULL, 8),
+(220, 195, 318, 7, 7, NULL, 'Gestion de la classification des données numériques', 'gestion-de-la-classification-des-donnees-numeriques', 'procedures', '2025-11-10 11:05:18', '2025-11-10 11:05:18', NULL, 1),
+(221, 195, 319, 7, 7, NULL, 'Gestion de la sécurité dans les projets', 'gestion-de-la-securite-dans-les-projets', 'procedures', '2025-11-10 11:06:03', '2025-11-10 11:06:03', NULL, 2),
+(222, 195, 320, 7, 7, NULL, 'Gestion des accès logiques', 'gestion-des-acces-logiques', 'procedures', '2025-11-10 11:06:28', '2025-11-10 11:06:28', NULL, 3),
+(223, 195, 321, 7, 7, NULL, 'Gestion des accès physiques', 'gestion-des-acces-physiques', 'procedures', '2025-11-10 11:06:49', '2025-11-10 11:06:49', NULL, 3),
+(224, 195, 322, 7, 7, NULL, 'Gestion des changements informatiques', 'gestion-des-changements-informatiques', 'procedures', '2025-11-10 11:07:15', '2025-11-10 11:07:15', NULL, 2),
+(225, 195, 323, 7, 7, NULL, 'Gestion des sauvegardes et des restaurations', 'gestion-des-sauvegardes-et-des-restaurations', 'procedures', '2025-11-10 11:08:04', '2025-11-10 11:08:04', NULL, 3),
+(226, 195, 324, 7, 7, NULL, 'Gestion des clés cryptographiques', 'gestion-des-cles-cryptographiques', 'procedures', '2025-11-10 11:08:37', '2025-11-10 11:08:37', NULL, 1),
 (227, 195, 325, 7, 7, 7, 'Gestion des Habiloitations V2', 'gestion-des-habiloitations-v2', 'procedures', '2025-11-10 11:08:59', '2025-11-10 11:08:59', '2025-11-10 11:09:45', 0),
-(228, 195, 326, 7, 7, NULL, 'Gestion des HabilitationsV2', 'gestion-des-habilitationsv2', 'procedures', '2025-11-10 11:10:19', '2025-11-10 11:10:19', NULL, 0),
-(229, 195, 327, 7, 7, NULL, 'Gestion des incidents de securité SI V2', 'gestion-des-incidents-de-securite-si-v2', 'procedures', '2025-11-10 11:11:01', '2025-11-10 11:11:01', NULL, 0);
+(228, 195, 326, 7, 7, NULL, 'Gestion des HabilitationsV2', 'gestion-des-habilitationsv2', 'procedures', '2025-11-10 11:10:19', '2025-11-10 11:10:19', NULL, 3),
+(229, 195, 327, 7, 7, NULL, 'Gestion des incidents de securité SI V2', 'gestion-des-incidents-de-securite-si-v2', 'procedures', '2025-11-10 11:11:01', '2025-11-10 11:11:01', NULL, 2),
+(230, 10, NULL, 7, 7, 7, 'Note de l\'Audit Interne', 'note-de-l-audit-interne', 'Autres documents', '2025-12-03 15:25:28', '2025-12-03 15:25:28', '2025-12-03 15:26:02', 0),
+(231, 9, NULL, 7, 7, NULL, 'Note de l\'Audit Interne', 'note-de-l-audit-interne', 'Autres documents', '2025-12-03 15:28:24', '2025-12-03 15:28:24', NULL, 0),
+(232, 9, NULL, 7, 7, NULL, 'Note de la Conformité', 'note-de-la-conformite', 'Autres documents', '2025-12-03 15:29:16', '2025-12-03 15:29:16', NULL, 0),
+(233, 9, NULL, 7, 7, NULL, 'Note de la Gestion Globale des risques', 'note-de-la-gestion-globale-des-risques', 'Autres documents', '2025-12-03 15:29:52', '2025-12-03 15:29:52', NULL, 0),
+(234, 9, NULL, 7, 7, NULL, 'Note du RSSI', 'note-du-rssi', 'Autres documents', '2025-12-03 15:30:26', '2025-12-03 15:30:26', NULL, 0),
+(235, 52, 339, 7, 7, NULL, 'Procédure de Validation des Nouveaux produits', 'procedure-de-validation-des-nouveaux-produits', 'Procedures', '2025-12-16 16:10:17', '2025-12-16 16:10:17', NULL, 2),
+(236, 46, 353, 7, 7, NULL, 'Assurer la Communication Institutionnelle', 'assurer-la-communication-institutionnelle', 'procedures', '2025-12-30 15:49:50', '2025-12-30 15:49:50', NULL, 1),
+(237, 46, 354, 7, 7, 7, 'Assurer la Communication Institutionnelle', 'assurer-la-communication-institutionnelle', 'procedures', '2025-12-30 15:49:50', '2025-12-30 15:49:50', '2025-12-30 15:50:04', 0),
+(238, 46, 355, 7, 7, NULL, 'Assurer la communication Commerciale', 'assurer-la-communication-commerciale', 'procedures', '2025-12-30 15:50:44', '2025-12-30 15:50:44', NULL, 1),
+(239, NULL, NULL, 5, 5, 5, 'Processus Communication et Marketing', 'processus-communication-et-marketing', 'Procedures', '2025-12-30 15:58:25', '2025-12-30 15:58:25', '2025-12-30 15:59:18', 0),
+(240, NULL, NULL, 5, 5, 5, 'Autres', 'autres', 'Procedures', '2025-12-30 16:00:16', '2025-12-30 16:00:16', '2026-01-05 18:51:34', 0),
+(241, 41, 356, 7, 7, NULL, 'Procédure Elaboration du Budget', 'procedure-elaboration-du-budget', 'Procedures', '2026-01-06 16:15:21', '2026-01-06 16:15:21', NULL, 4),
+(242, 41, 357, 7, 7, NULL, 'Procédure de Suivi Budgetaire des Performances Financières', 'procedure-de-suivi-budgetaire-des-performances-financieres', 'Procedures', '2026-01-06 16:15:55', '2026-01-06 16:15:55', NULL, 3),
+(243, 41, 358, 7, 7, NULL, 'Procédure de Suivi Budgetaire des Performances Commerciales', 'procedure-de-suivi-budgetaire-des-performances-commerciales', 'Procedures', '2026-01-06 16:16:36', '2026-01-06 16:16:36', NULL, 4),
+(244, 41, 359, 7, 7, NULL, 'Procédure Elaboration du Suivi de la rentabilité par agence', 'procedure-elaboration-du-suivi-de-la-rentabilite-par-agence', 'Procedures', '2026-01-06 16:17:19', '2026-01-06 16:17:19', NULL, 4),
+(245, 195, 360, 7, 7, NULL, 'Standard de Nommage des Comptes Active Directory', 'standard-de-nommage-des-comptes-active-directory', 'Procedures', '2026-01-06 16:22:06', '2026-01-06 16:22:06', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1832,18 +2036,18 @@ INSERT INTO `files` (`id`, `created_user_id`, `updated_user_id`, `deleted_user_i
 (4, NULL, NULL, NULL, '/uploads/images/686462b5a3a2f.png', 'Cover de ', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
 (5, NULL, NULL, NULL, '/uploads/documents/6866b23447193.pdf', 'Gestion des Promotions', 'documents', NULL, NULL, NULL, '147.58 Ko', NULL, NULL),
 (6, NULL, NULL, NULL, '/uploads/documents/6866bc8c5a5d3.xlsx', 'Piloter et coordonner l\'activité des agences', 'documents', NULL, NULL, NULL, '20.06 Ko', NULL, NULL),
-(7, 4, 4, NULL, '/uploads/images/6867079d8cab8.jpg', 'jeune-fille-WU.jpg', 'medias', '2025-07-03 22:43:41', '2025-07-03 22:43:41', NULL, '97.42 Ko', NULL, NULL),
-(8, 4, 4, NULL, '/uploads/images/68670a4567ae8.jpg', 'Escompte.jpg', 'medias', '2025-07-03 22:55:01', '2025-07-03 22:55:01', NULL, '318.14 Ko', NULL, NULL),
-(9, 4, 4, NULL, '/uploads/images/68670a88d7940.jpg', 'Credit-Spot.jpg', 'medias', '2025-07-03 22:56:08', '2025-07-03 22:56:08', NULL, '119.84 Ko', NULL, NULL),
-(10, 4, 4, NULL, '/uploads/images/68670bd385e84.jpg', 'jeune-fille-Wave.jpg', 'medias', '2025-07-03 23:01:39', '2025-07-03 23:01:39', NULL, '111.27 Ko', NULL, NULL),
-(11, 4, 4, NULL, '/uploads/images/68670bd385fab.jpg', 'Retraite-BG.jpg', 'medias', '2025-07-03 23:01:39', '2025-07-03 23:01:39', NULL, '50.86 Ko', NULL, NULL),
-(12, 4, 4, NULL, '/uploads/images/68670bd38639a.jpg', 'Avance.jpg', 'medias', '2025-07-03 23:01:39', '2025-07-03 23:01:39', NULL, '186.39 Ko', NULL, NULL),
-(13, 4, 4, NULL, '/uploads/images/68670f195f084.png', 'Pret-Scolaire2023-1024x968.png', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', NULL, '993.68 Ko', NULL, NULL),
-(14, 4, 4, NULL, '/uploads/images/68670f195f52c.jpg', 'Carte-BDU.jpg', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', NULL, '151.14 Ko', NULL, NULL),
-(15, 4, 4, NULL, '/uploads/images/68670f195f608.jpg', 'E-Banking.jpg', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', NULL, '288.22 Ko', NULL, NULL),
-(16, 4, 4, NULL, '/uploads/images/68670f195f6b5.jpg', 'BDU-Mobile-1.jpg', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', NULL, '198.73 Ko', NULL, NULL),
-(17, 4, 4, NULL, '/uploads/images/68670f195f73e.jpg', 'Meeting.jpg', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', NULL, '50.55 Ko', NULL, NULL),
-(18, 4, 4, NULL, '/uploads/images/68670f195f7d9.png', 'visuel-Bank-to-Wallet.png', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', NULL, '133.72 Ko', NULL, NULL),
+(7, 4, 4, 10, '/uploads/images/6867079d8cab8.jpg', 'jeune-fille-WU.jpg', 'medias', '2025-07-03 22:43:41', '2025-07-03 22:43:41', '2026-01-12 12:25:31', '97.42 Ko', NULL, NULL),
+(8, 4, 4, 10, '/uploads/images/68670a4567ae8.jpg', 'Escompte.jpg', 'medias', '2025-07-03 22:55:01', '2025-07-03 22:55:01', '2026-01-12 12:25:26', '318.14 Ko', NULL, NULL),
+(9, 4, 4, 10, '/uploads/images/68670a88d7940.jpg', 'Credit-Spot.jpg', 'medias', '2025-07-03 22:56:08', '2025-07-03 22:56:08', '2026-01-12 12:25:22', '119.84 Ko', NULL, NULL),
+(10, 4, 4, 10, '/uploads/images/68670bd385e84.jpg', 'jeune-fille-Wave.jpg', 'medias', '2025-07-03 23:01:39', '2025-07-03 23:01:39', '2026-01-12 12:25:18', '111.27 Ko', NULL, NULL),
+(11, 4, 4, 10, '/uploads/images/68670bd385fab.jpg', 'Retraite-BG.jpg', 'medias', '2025-07-03 23:01:39', '2025-07-03 23:01:39', '2026-01-12 12:25:14', '50.86 Ko', NULL, NULL),
+(12, 4, 4, 10, '/uploads/images/68670bd38639a.jpg', 'Avance.jpg', 'medias', '2025-07-03 23:01:39', '2025-07-03 23:01:39', '2026-01-12 12:25:09', '186.39 Ko', NULL, NULL),
+(13, 4, 4, 10, '/uploads/images/68670f195f084.png', 'Pret-Scolaire2023-1024x968.png', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', '2026-01-12 12:25:04', '993.68 Ko', NULL, NULL),
+(14, 4, 4, 10, '/uploads/images/68670f195f52c.jpg', 'Carte-BDU.jpg', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', '2026-01-12 12:24:59', '151.14 Ko', NULL, NULL),
+(15, 4, 4, 10, '/uploads/images/68670f195f608.jpg', 'E-Banking.jpg', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', '2026-01-12 12:24:54', '288.22 Ko', NULL, NULL),
+(16, 4, 4, 10, '/uploads/images/68670f195f6b5.jpg', 'BDU-Mobile-1.jpg', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', '2026-01-12 12:24:49', '198.73 Ko', NULL, NULL),
+(17, 4, 4, 10, '/uploads/images/68670f195f73e.jpg', 'Meeting.jpg', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', '2026-01-12 12:24:43', '50.55 Ko', NULL, NULL),
+(18, 4, 4, 10, '/uploads/images/68670f195f7d9.png', 'visuel-Bank-to-Wallet.png', 'medias', '2025-07-03 23:15:37', '2025-07-03 23:15:37', '2026-01-12 12:23:46', '133.72 Ko', NULL, NULL),
 (19, NULL, NULL, NULL, '/uploads/images/686c2ad2d30fe.png', 'Yao', 'images', NULL, NULL, NULL, '10.7 Ko', NULL, NULL),
 (20, NULL, NULL, NULL, '/uploads/images/686c5380dc379.png', 'Diallo', 'images', NULL, NULL, NULL, '42.39 Ko', NULL, NULL),
 (21, NULL, NULL, NULL, '/uploads/documents/686d19660a95d.pdf', 'Fichier test', 'documents', NULL, NULL, NULL, '169 Ko', NULL, NULL),
@@ -1863,11 +2067,11 @@ INSERT INTO `files` (`id`, `created_user_id`, `updated_user_id`, `deleted_user_i
 (35, NULL, NULL, NULL, '/uploads/documents/688792dd29cac.docx', 'Mariam fatim(ss).docx', 'documents', NULL, NULL, NULL, '166 Ko', 2, NULL),
 (36, NULL, NULL, NULL, '/uploads/images/688b7d52357f2.png', 'Dagobert', 'images', NULL, NULL, NULL, '364 Ko', NULL, NULL),
 (37, NULL, NULL, NULL, '/uploads/documents/688b814790bf4.pdf', 'Charte de bonne conduite', 'documents', NULL, NULL, NULL, '148 Ko', NULL, NULL),
-(38, NULL, NULL, NULL, '/uploads/images/6895aae014877.jpg', 'IMG_4137.jpg', 'medias', NULL, NULL, NULL, '1078 Ko', 4, NULL),
-(39, NULL, NULL, NULL, '/uploads/images/6895aae015282.jpg', 'IMG_4136.jpg', 'medias', NULL, NULL, NULL, '1192 Ko', 4, NULL),
-(40, NULL, NULL, NULL, '/uploads/images/6895aae01546c.jpg', 'IMG_4135.jpg', 'medias', NULL, NULL, NULL, '1181 Ko', 4, NULL),
-(41, NULL, NULL, NULL, '/uploads/images/6895aae015729.jpg', 'IMG_4149.jpg', 'medias', NULL, NULL, NULL, '1205 Ko', 4, NULL),
-(42, NULL, NULL, NULL, '/uploads/images/6895aae016491.jpg', 'IMG_4150.jpg', 'medias', NULL, NULL, NULL, '1249 Ko', 4, NULL),
+(38, NULL, NULL, 10, '/uploads/images/6895aae014877.jpg', 'IMG_4137.jpg', 'medias', NULL, NULL, '2026-01-12 12:22:59', '1078 Ko', 4, NULL),
+(39, NULL, NULL, 10, '/uploads/images/6895aae015282.jpg', 'IMG_4136.jpg', 'medias', NULL, NULL, '2026-01-12 12:22:53', '1192 Ko', 4, NULL),
+(40, NULL, NULL, 10, '/uploads/images/6895aae01546c.jpg', 'IMG_4135.jpg', 'medias', NULL, NULL, '2026-01-12 12:22:47', '1181 Ko', 4, NULL),
+(41, NULL, NULL, 10, '/uploads/images/6895aae015729.jpg', 'IMG_4149.jpg', 'medias', NULL, NULL, '2026-01-12 12:22:42', '1205 Ko', 4, NULL),
+(42, NULL, NULL, 10, '/uploads/images/6895aae016491.jpg', 'IMG_4150.jpg', 'medias', NULL, NULL, '2026-01-12 12:22:37', '1249 Ko', 4, NULL),
 (43, NULL, NULL, NULL, '/uploads/documents/68ac33848fe07.pdf', 'Nouvelle politique qualité OCI', 'documents', NULL, NULL, NULL, '148 Ko', NULL, NULL),
 (44, NULL, NULL, NULL, '/uploads/documents/68ac33b81fcaa.pdf', 'Politique N°2', 'documents', NULL, NULL, NULL, '169 Ko', NULL, NULL),
 (45, NULL, NULL, NULL, '/uploads/documents/68ac341477dbb.pdf', 'Politique N°4', 'documents', NULL, NULL, NULL, '148 Ko', NULL, NULL),
@@ -2155,7 +2359,32 @@ INSERT INTO `files` (`id`, `created_user_id`, `updated_user_id`, `deleted_user_i
 (333, NULL, NULL, NULL, '/uploads/images/6915930a1b1e4.jpg', 'Akéssé', 'images', NULL, NULL, NULL, '123 Ko', NULL, NULL),
 (334, NULL, NULL, NULL, '/uploads/images/692eb70e8704d.png', 'Cover de Save the Date-2nde Édition de l\'Arbre de Noël BDU 2025', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
 (335, NULL, NULL, NULL, '/uploads/images/692eb7cb107fd.png', 'Cover de Save the Date-2nde Édition de l\'Arbre de Noël BDU 2025', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
-(336, NULL, NULL, NULL, '/uploads/images/692ebdedd2903.jpg', 'Cover de OPÉRATION DE DON DE SANG BDU-CI', 'images', NULL, NULL, NULL, NULL, NULL, NULL);
+(336, NULL, NULL, NULL, '/uploads/images/692ebdedd2903.jpg', 'Cover de OPÉRATION DE DON DE SANG BDU-CI', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
+(337, NULL, NULL, NULL, '/uploads/images/693040d407be9.png', 'Vignette de Save the Date-2nde Édition de l\'Arbre de Noël BDU 2025', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
+(338, NULL, NULL, NULL, '/uploads/images/6930460f906f5.png', 'Vignette de OPÉRATION DE DON DE SANG BDU-CI', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
+(339, NULL, NULL, NULL, '/uploads/documents/6941765900e9b.pdf', 'Procédure de Validation des Nouveaux produits', 'documents', NULL, NULL, NULL, '970 Ko', NULL, NULL),
+(340, NULL, NULL, NULL, '/uploads/images/694a764972f9e.jpg', 'KOUASSI', 'images', NULL, NULL, NULL, '68 Ko', NULL, NULL),
+(341, NULL, NULL, NULL, '/uploads/images/694a775201e4d.jpg', 'ATTIEMBONON', 'images', NULL, NULL, NULL, '113 Ko', NULL, NULL),
+(342, NULL, NULL, NULL, '/uploads/images/694a7856efd7c.png', 'TOURE', 'images', NULL, NULL, NULL, '85 Ko', NULL, NULL),
+(343, NULL, NULL, NULL, '/uploads/images/694a79084bc31.png', 'KOUASSI Epse DJE', 'images', NULL, NULL, NULL, '87 Ko', NULL, NULL),
+(344, NULL, NULL, NULL, '/uploads/images/694a7b36ab44c.jpg', 'AFFY', 'images', NULL, NULL, NULL, '214 Ko', NULL, NULL),
+(345, NULL, NULL, NULL, '/uploads/images/694e68029c860.png', 'Jeu Pronostic', 'images', NULL, NULL, NULL, '1151 Ko', NULL, NULL),
+(346, NULL, NULL, NULL, '/uploads/images/694e6d69d0d69.png', 'Quiz Can 2025', 'images', NULL, NULL, NULL, '644 Ko', NULL, NULL),
+(347, NULL, NULL, NULL, '/uploads/images/694e9264aee8f.jpg', 'Cover de ', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
+(348, NULL, NULL, NULL, '/uploads/images/694e93877a14e.png', 'Vignette de CELEBREZ LA CAN 2025 AVEC VOTRE BANQUE LA BDU-CI', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
+(349, NULL, NULL, NULL, '/uploads/images/694e93877b1ed.png', 'Cover de CELEBREZ LA CAN 2025 AVEC VOTRE BANQUE LA BDU-CI', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
+(350, NULL, NULL, NULL, '/uploads/images/694e940881434.jpg', 'Vignette de LA BDU-CI VOUS SOUHAITE UN JOYEUX NOEL', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
+(351, NULL, NULL, NULL, '/uploads/images/694e940881ede.jpg', 'Cover de LA BDU-CI VOUS SOUHAITE UN JOYEUX NOEL', 'images', NULL, NULL, NULL, NULL, NULL, NULL),
+(352, NULL, NULL, NULL, '/uploads/images/694ea97ad7092.png', 'Cover de ', 'images', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `files` (`id`, `created_user_id`, `updated_user_id`, `deleted_user_id`, `filename`, `alt`, `type`, `created_at`, `updated_at`, `deleted_at`, `size`, `alertes_id`, `incidents_id`) VALUES
+(353, NULL, NULL, NULL, '/uploads/documents/6953e68e3053b.pdf', 'Assurer la Communication Institutionnelle', 'documents', NULL, NULL, NULL, '2227 Ko', NULL, NULL),
+(354, NULL, NULL, NULL, '/uploads/documents/6953e68ee6a5b.pdf', 'Assurer la Communication Institutionnelle', 'documents', NULL, NULL, NULL, '2227 Ko', NULL, NULL),
+(355, NULL, NULL, NULL, '/uploads/documents/6953e6c48860d.pdf', 'Assurer la communication Commerciale', 'documents', NULL, NULL, NULL, '2214 Ko', NULL, NULL),
+(356, NULL, NULL, NULL, '/uploads/documents/695d270949e1a.pdf', 'Procédure Elaboration du Budget', 'documents', NULL, NULL, NULL, '1320 Ko', NULL, NULL),
+(357, NULL, NULL, NULL, '/uploads/documents/695d272b69934.pdf', 'Procédure de Suivi Budgetaire des Performances Financières', 'documents', NULL, NULL, NULL, '1295 Ko', NULL, NULL),
+(358, NULL, NULL, NULL, '/uploads/documents/695d27545088f.pdf', 'Procédure de Suivi Budgetaire des Performances Commerciales', 'documents', NULL, NULL, NULL, '1270 Ko', NULL, NULL),
+(359, NULL, NULL, NULL, '/uploads/documents/695d277f61b46.pdf', 'Procédure Elaboration du Suivi de la rentabilité par agence', 'documents', NULL, NULL, NULL, '1273 Ko', NULL, NULL),
+(360, NULL, NULL, NULL, '/uploads/documents/695d289e8269f.pdf', 'Standard de Nommage des Comptes Active Directory', 'documents', NULL, NULL, NULL, '2164 Ko', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2171,29 +2400,29 @@ CREATE TABLE `incidents` (
   `sous_categorie_id` int(11) NOT NULL,
   `processus_id` int(11) NOT NULL,
   `sous_processus_id` int(11) NOT NULL,
-  `etape` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `etape` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
   `date_debut` datetime DEFAULT NULL,
   `date_remonte` datetime DEFAULT NULL,
-  `region` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `rapporteur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fonction` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telephone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `region` varchar(255) DEFAULT NULL,
+  `rapporteur` varchar(255) NOT NULL,
+  `fonction` varchar(255) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `description` longtext NOT NULL,
   `montant_estime` int(11) DEFAULT NULL,
   `date_perte` datetime DEFAULT NULL,
   `montant_obtenu` int(11) DEFAULT NULL,
   `date_recup` datetime DEFAULT NULL,
   `date_compta` datetime DEFAULT NULL,
-  `nature_recup` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nature_recup` varchar(255) DEFAULT NULL,
   `montant_net` int(11) DEFAULT NULL,
-  `consequences` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `solutions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `consequences` longtext DEFAULT NULL,
+  `solutions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`solutions`)),
   `agence_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `corrigee` tinyint(1) DEFAULT NULL,
-  `corrections` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `corrections` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -2289,7 +2518,8 @@ INSERT INTO `notes_publications` (`id`, `titre`, `resume`, `description`, `creat
 (3, 'Excellente Journée Internationale des Droits de la Femme 2025', 'Excellente Journée Internationale des Droits de la Femme 2025', 'Excellente Journée Internationale des Droits de la Femme 2025Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.', 4, 10, NULL, '2025-07-07 23:12:48', '2025-12-02 11:01:57', NULL, NULL, 'excellente-journee-internationale-des-droits-de-la-femme-2025'),
 (4, 'INNOVATION\'S DAY 2025', 'INNOVATION\'S DAY 2025', 'INNOVATION\'S DAY 2025Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab quos ullam quidem qui nihil recusandae repudiandae accusantium omnis autem. Totam expedita unde, laboriosam esse dolores harum rerum dicta quidem quae.', 4, 10, NULL, '2025-07-07 23:13:05', '2025-12-02 11:01:43', NULL, NULL, 'innovation-s-day-2025'),
 (5, 'Save the Date-2nde Édition de l\'Arbre de Noël BDU 2025', 'La féérie de Noël s’invite à nouveau à la BDU-CI… et cette année encore, nous voyons les choses en GRAND.', 'La féérie de Noël s’invite à nouveau à la BDU-CI… et cette année encore, nous voyons les choses en GRAND.\r\nNous vous rappelons que la 2ᵉ édition de l’Arbre de Noël BDU-CI aura lieu très bientôt. \r\nUn moment exceptionnel vous attend, pensé pour émerveiller vos enfants et réunir toute la grande famille BDU autour de la magie, du rire et du partage.\r\n\r\n    Samedi 06 décembre 2025\r\n    Espace Événementiel Sweet Life Garden\r\n\r\nNe manquez pas ce rendez-vous festif unique.\r\nNous vous y attendons avec impatience !\r\n#ArbreDeNoëlBDU2025 #NoëlMagique #EspritDeFamilleBDU', 10, 10, NULL, '2025-12-02 11:01:14', '2025-12-02 11:01:14', NULL, 1, 'save-the-date-2nde-edition-de-l-arbre-de-noel-bdu-2025'),
-(6, 'OPÉRATION DE DON DE SANG BDU-CI', 'Donner son sang, c’est offrir quelques minutes pour sauver des vies !', 'Donner son sang, c’est offrir quelques minutes pour sauver des vies.\r\nUn geste simple, solidaire et profondément humain, qui permet de soigner des malades, d’intervenir en urgence et de redonner espoir. Chaque don compte.\r\nParticiper à cette collecte, c’est aussi prendre soin de soi : votre sang sera analysé, vous offrant un premier niveau d’information sur votre santé.\r\nConditions pour donner :\r\n• Être à jeun ou non ;\r\n• Peser au moins 50 kg ;\r\n• Être en bonne santé le jour du don ;\r\n• Ne pas être enceinte.\r\nDéroulement du don :\r\nPrise des constantes → Remise du kit → Prélèvement → Pause d’observation → Collation.\r\nNous comptons sur la mobilisation de tous pour sauver des vies !', 10, 10, NULL, '2025-12-02 11:08:23', '2025-12-02 11:08:23', NULL, 1, 'operation-de-don-de-sang-bdu-ci');
+(6, 'OPÉRATION DE DON DE SANG BDU-CI', 'Donner son sang, c’est offrir quelques minutes pour sauver des vies !', 'Donner son sang, c’est offrir quelques minutes pour sauver des vies.\r\nUn geste simple, solidaire et profondément humain, qui permet de soigner des malades, d’intervenir en urgence et de redonner espoir. Chaque don compte.\r\nParticiper à cette collecte, c’est aussi prendre soin de soi : votre sang sera analysé, vous offrant un premier niveau d’information sur votre santé.\r\nConditions pour donner :\r\n• Être à jeun ou non ;\r\n• Peser au moins 50 kg ;\r\n• Être en bonne santé le jour du don ;\r\n• Ne pas être enceinte.\r\nDéroulement du don :\r\nPrise des constantes → Remise du kit → Prélèvement → Pause d’observation → Collation.\r\nNous comptons sur la mobilisation de tous pour sauver des vies !', 10, 10, NULL, '2025-12-02 11:08:23', '2025-12-02 11:08:23', NULL, 1, 'operation-de-don-de-sang-bdu-ci'),
+(7, 'Campagne d’évaluation des performances 2025 et fixation des objectifs 2026', 'Les évaluations des performances 2025 et la fixation des objectifs 2026 se dérouleront conformément au planning communiqué, avec une phase de formation des évaluateurs et évalués, suivie des entretiens d’évaluation.', 'La Direction du Capital Humain et des Moyens Généraux informe l’ensemble du personnel que les évaluations des performances au titre de l’exercice 2025 ainsi que la fixation des objectifs pour l’année 2026 se dérouleront selon le planning suivant : une phase de formation des évaluateurs et des évalués (CODIR, chefs de service, chefs d’agences et l’ensemble des collaborateurs) est prévue du jeudi 18 décembre 2025 au mardi 23 décembre 2025, suivie des entretiens d’évaluation des performances 2025 et de fixation des contrats d’objectifs 2026, qui se tiendront du vendredi 26 décembre 2025 au jeudi 15 janvier 2026. La Direction du Capital Humain compte sur l’implication de tous pour le bon déroulement de cet exercice et précise que l’équipe du Service Capital Humain reste disponible pour toute assistance nécessaire lors des séances. Bonne évaluation 2025 et excellente performance 2026.', 5, 5, NULL, '2025-12-17 09:45:56', '2025-12-17 09:45:56', NULL, 1, 'campagne-d-evaluation-des-performances-2025-et-fixation-des-objectifs-2026');
 
 -- --------------------------------------------------------
 
@@ -2325,9 +2555,10 @@ CREATE TABLE `offres_emploi` (
 --
 
 INSERT INTO `offres_emploi` (`id`, `direction_id`, `metier_id`, `titre`, `lieu`, `experience`, `niveau_poste`, `niveau_formation`, `created_user_id`, `updated_user_id`, `deleted_user_id`, `created_at`, `updated_at`, `deleted_at`, `date_expiration`, `postes`, `description`, `missions`, `profils`, `slug`) VALUES
-(1, 2, 14, 'ASSISTANT QUALITE ET EXPERIENCE CLIENT', NULL, '6 à 10 ans', 'Jeune diplômé', 'Universitaire sans diplôme', 4, 4, NULL, '2025-07-14 01:01:44', '2025-07-14 01:01:44', NULL, '2025-07-18', 1, 'dfdscxw', 'BAC + 4 /5 en Management de la Qualité; Marketing; statistiques ou équivalent.,blah blah', 'BAC + 4 /5 en Management de la Qualité; Marketing; statistiques ou équivalent.,Test deux', 'assistant-qualite-et-experience-client'),
-(2, 2, 17, 'ORGANISATEUR BANCAIRE MAITRISE D’OUVRAGE', NULL, '3 à 5 ans', 'Jeune diplômé', 'Universitaire sans diplôme', 4, 4, NULL, '2025-07-14 01:29:00', '2025-07-14 01:29:00', NULL, '2025-08-09', 1, 'Dans le cadre du renforcement de ses effectifs, la Banque Nationale d’Investissement recherche un Organisateur Bancaire Maîtrise d’Ouvrage.\r\nBlah blah', 'Assurer l’accompagnement lors des changements induits par les évolutions liées aux traitements bancaires et par les projets.,Réaliser les analyses fonctionnelles et les tests de conformité des projets;,Assurer la prise en charge ou le suivi du traitement des dysfonctionnements détectés lors des audits ou des missions organisationnelles.;,Conduire les projets de la banque en collaboration avec les entités concernées.', 'BAC + 4 années en Management des Organisations, Management des projets, Sciences Economiques ou équivalent.,Justifier d’une expérience professionnelle de trois ans dans une fonction similaire.,Connaissance en gestion de projets,,Connaissance de l’organisation de la Banque.', 'organisateur-bancaire-maitrise-d-ouvrage'),
-(3, 4, 16, 'Assistant administratif', NULL, '1 à 2 ans', 'Confirmé / Expérimenté', 'Universitaire sans diplôme', 4, 4, NULL, '2025-07-14 01:30:57', '2025-07-14 01:30:57', NULL, '2025-08-22', 3, 'Nous recherchons un assistant administratif rigoureux et organisé pour renforcer notre équipe. Vous serez un soutien clé dans la gestion quotidienne des tâches administratives et le bon fonctionnement du service.', 'Accueil physique et téléphonique,Gestion des dossiers RH,suivi des paiements,Rédaction de courriers, comptes rendus, notes internes,Suivi des dossiers administratifs,Aide à la gestion des agendas et à l’organisation de réunions,Appuie logistique', 'Formation en secrétariat, gestion administrative ou équivalent,Bonne maîtrise du pack Office (Word, Excel, Outlook),Excellente expression orale et écrite,Discrétion, sens de l\'organisation et autonomie,Capacité à gérer plusieurs tâches en parallèle', 'assistant-administratif');
+(1, 2, 14, 'ASSISTANT QUALITE ET EXPERIENCE CLIENT', NULL, '6 à 10 ans', 'Jeune diplômé', 'Universitaire sans diplôme', 4, 4, 11, '2025-07-14 01:01:44', '2025-07-14 01:01:44', '2025-12-19 18:21:30', '2025-07-18', 1, 'dfdscxw', 'BAC + 4 /5 en Management de la Qualité; Marketing; statistiques ou équivalent.,blah blah', 'BAC + 4 /5 en Management de la Qualité; Marketing; statistiques ou équivalent.,Test deux', 'assistant-qualite-et-experience-client'),
+(2, 2, 17, 'ORGANISATEUR BANCAIRE MAITRISE D’OUVRAGE', NULL, '3 à 5 ans', 'Jeune diplômé', 'Universitaire sans diplôme', 4, 4, 11, '2025-07-14 01:29:00', '2025-07-14 01:29:00', '2025-12-19 18:21:30', '2025-08-09', 1, 'Dans le cadre du renforcement de ses effectifs, la Banque Nationale d’Investissement recherche un Organisateur Bancaire Maîtrise d’Ouvrage.\r\nBlah blah', 'Assurer l’accompagnement lors des changements induits par les évolutions liées aux traitements bancaires et par les projets.,Réaliser les analyses fonctionnelles et les tests de conformité des projets;,Assurer la prise en charge ou le suivi du traitement des dysfonctionnements détectés lors des audits ou des missions organisationnelles.;,Conduire les projets de la banque en collaboration avec les entités concernées.', 'BAC + 4 années en Management des Organisations, Management des projets, Sciences Economiques ou équivalent.,Justifier d’une expérience professionnelle de trois ans dans une fonction similaire.,Connaissance en gestion de projets,,Connaissance de l’organisation de la Banque.', 'organisateur-bancaire-maitrise-d-ouvrage'),
+(3, 4, 16, 'Assistant administratif', NULL, '1 à 2 ans', 'Confirmé / Expérimenté', 'Universitaire sans diplôme', 4, 4, 11, '2025-07-14 01:30:57', '2025-07-14 01:30:57', '2025-12-19 18:21:30', '2025-08-22', 3, 'Nous recherchons un assistant administratif rigoureux et organisé pour renforcer notre équipe. Vous serez un soutien clé dans la gestion quotidienne des tâches administratives et le bon fonctionnement du service.', 'Accueil physique et téléphonique,Gestion des dossiers RH,suivi des paiements,Rédaction de courriers, comptes rendus, notes internes,Suivi des dossiers administratifs,Aide à la gestion des agendas et à l’organisation de réunions,Appuie logistique', 'Formation en secrétariat, gestion administrative ou équivalent,Bonne maîtrise du pack Office (Word, Excel, Outlook),Excellente expression orale et écrite,Discrétion, sens de l\'organisation et autonomie,Capacité à gérer plusieurs tâches en parallèle', 'assistant-administratif'),
+(4, 137, 18, 'Auditeur/ Auditrice Interne', NULL, '3 à 5 ans', 'Confirmé / Expérimenté', 'Master 2, Ingéniorat, Bac + 5', 13, 13, NULL, '2025-12-30 20:38:07', '2025-12-30 20:38:07', NULL, '2026-01-09', 1, 'Pour faire acte de candidature, veuillez envoyer votre CV actualisé + lettre de motivation à l’adresse suivante : recrutements@bduci.com au plus tard le 2 février 2026\r\n\r\nNB : Seules les candidatures retenues seront contactées.', 'Sous la supervision du Chef de Mission Audit Interne, vous êtes chargé (e) de :,Participer à l’élaboration du plan d’audit annuel ou pluriannuel ;,Participer à la réalisation des missions d’audit interne ;,Faire des recommandations pertinentes à l’attention des entités audités ou de la Direction Générale ;,Suivre la mise en œuvre diligente des recommandations dans les délais impartis ;,S’assurer de la correction effective des faiblesses relevées ;,Renseigner correctement et régulièrement les états de suivi des recommandations ;,Respecter la charte d’audit interne et le code de déontologie ;,Respecter les procédures établies par la Direction de l’Audit Interne ;,Participer au renforcement du dispositif de contrôle interne de la Banque et à l’établissement des reportings ;,Contribuer à l’amélioration des prestations fournies par la Direction de l’Audit Interne ;,Tenir correctement les dossiers d’audit ;,Traiter avec diligence les investigations assignées;,Participer au traitement de toute autre activité relevant de la Direction de l’Audit Interne.', 'Bac +4/5 en Audit, Finance, Comptabilité ou Gestion.,Minimum 3 années d’expériences en Audit Interne de préférence dans le domaine bancaire.', 'auditeur-auditrice-interne');
 
 -- --------------------------------------------------------
 
@@ -2374,12 +2605,14 @@ INSERT INTO `pages` (`id`, `titre`, `slug`, `emplacement`, `rang`, `contenu`, `s
 INSERT INTO `pages` (`id`, `titre`, `slug`, `emplacement`, `rang`, `contenu`, `statut`, `style`, `script`, `created_user_id`, `updated_user_id`, `deleted_user_id`, `created_at`, `updated_at`, `deleted_at`, `cover_id`, `lien`) VALUES
 (11, 'Ma mutuelle', 'ma-mutuelle', 'Ma prise en main', 2, '<p>Lorem ipsum</p>', 1, NULL, NULL, 4, 5, NULL, '2025-08-22 19:01:38', '2025-10-08 16:24:41', NULL, 161, ''),
 (12, 'Mon livret d’accueil', 'mon-livret-d-accueil', 'Ma prise en main', 1, '<div class=\"ql-code-block-container\" spellcheck=\"false\"><div class=\"ql-code-block\">&lt;?php</div><div class=\"ql-code-block\">// src/Controller/FlipbookSingleController.php</div><div class=\"ql-code-block\">namespace App\\Controller;</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">use Symfony\\Component\\HttpFoundation\\Response;</div><div class=\"ql-code-block\">use Symfony\\Component\\Routing\\Annotation\\Route;</div><div class=\"ql-code-block\">use Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">class FlipbookSingleController extends AbstractController</div><div class=\"ql-code-block\">{</div><div class=\"ql-code-block\">    #[Route(\'/livret\', name: \'app_flipbook_single\')]</div><div class=\"ql-code-block\">    public function __invoke(): Response</div><div class=\"ql-code-block\">    {</div><div class=\"ql-code-block\">        // 🔗 Ton PDF (peut rester externe ; si CORS bloque, dépose une copie en local et remplace l’URL)</div><div class=\"ql-code-block\">        $pdfUrl = \'https://bduci.com/wp-content/uploads/2025/09/livret-dacceuil-BDU-CI-AOUT.pdf\';</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">        $html = &lt;&lt;&lt;HTML</div><div class=\"ql-code-block\">&lt;!doctype html&gt;</div><div class=\"ql-code-block\">&lt;html lang=\"fr\"&gt;</div><div class=\"ql-code-block\">&lt;head&gt;</div><div class=\"ql-code-block\">&lt;meta charset=\"utf-8\"&gt;</div><div class=\"ql-code-block\">&lt;meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"&gt;</div><div class=\"ql-code-block\">&lt;title&gt;Livret d’accueil du salarié – BDU-CI&lt;/title&gt;</div><div class=\"ql-code-block\">&lt;style&gt;</div><div class=\"ql-code-block\">  :root{--bdu-blue:#2b62aa;--bdu-green:#6ca942;--ink:#0c223f;--bg:#f7f9fc;--shadow:rgba(0,0,0,.16)}</div><div class=\"ql-code-block\">  body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}</div><div class=\"ql-code-block\">  .flipbook-wrap{background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 28px var(--shadow);max-width:1100px;margin:24px auto}</div><div class=\"ql-code-block\">  .flipbook-head{display:flex;align-items:center;gap:14px;justify-content:space-between;margin-bottom:14px}</div><div class=\"ql-code-block\">  .flipbook-title{display:flex;align-items:center;gap:10px}</div><div class=\"ql-code-block\">  .flipbook-title .dot{width:8px;height:28px;background:linear-gradient(180deg,var(--bdu-green),#9dd86d);border-radius:6px}</div><div class=\"ql-code-block\">  .flipbook-title h1{margin:0;font-weight:800;color:var(--ink);font-size:20px}</div><div class=\"ql-code-block\">  .flipbook-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}</div><div class=\"ql-code-block\">  .fb-btn{appearance:none;border:1px solid #e6eef6;background:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;</div><div class=\"ql-code-block\">    display:inline-flex;gap:8px;align-items:center;font-weight:600;color:var(--ink);box-shadow:0 2px 8px rgba(43,98,170,.08);transition:.15s}</div><div class=\"ql-code-block\">  .fb-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(43,98,170,.18)}</div><div class=\"ql-code-block\">  .fb-btn.primary{background:var(--bdu-blue);color:#fff;border-color:var(--bdu-blue)}</div><div class=\"ql-code-block\">  .fb-badge{font:600 12px/1.2 system-ui;color:#55709a;background:#eaf2ff;border:1px solid #d6e6ff;padding:6px 10px;border-radius:999px}</div><div class=\"ql-code-block\">  .flipbook{position:relative;user-select:none;background:#fff;border-radius:14px;overflow:hidden;</div><div class=\"ql-code-block\">    box-shadow:inset 0 0 0 1px #eaf0f6, 0 18px 40px rgba(17,59,107,.15)}</div><div class=\"ql-code-block\">  .book-viewport{position:relative;width:100%;aspect-ratio:16/10;background:#fff}</div><div class=\"ql-code-block\">  .sheet{position:absolute;top:0;bottom:0;width:50%;perspective:1600px;transform-style:preserve-3d}</div><div class=\"ql-code-block\">  .sheet.left{left:0;border-right:1px solid #eef2f7}</div><div class=\"ql-code-block\">  .sheet.right{right:0;border-left:1px solid #eef2f7}</div><div class=\"ql-code-block\">  .page{position:absolute;inset:0;background:#fff;overflow:hidden}</div><div class=\"ql-code-block\">  canvas{width:100%;height:100%;display:block;object-fit:contain;background:#fff}</div><div class=\"ql-code-block\">  .turn{transform-origin:left center;transform:rotateY(-180deg);transition:transform .65s cubic-bezier(.4,.2,.2,1);backface-visibility:hidden}</div><div class=\"ql-code-block\">  .shade::after{content:\"\";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 35%,rgba(0,0,0,.06));</div><div class=\"ql-code-block\">    pointer-events:none;opacity:0;transition:opacity .3s}</div><div class=\"ql-code-block\">  .turn.shade::after{opacity:.5}</div><div class=\"ql-code-block\">  .nav-zone{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}</div><div class=\"ql-code-block\">  .nav-zone &gt; div{cursor:pointer}</div><div class=\"ql-code-block\">  .flipbook-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}</div><div class=\"ql-code-block\">  .progress{height:8px;background:#e9f1fb;border-radius:999px;overflow:hidden;flex:1;margin:0 12px}</div><div class=\"ql-code-block\">  .progress &gt; i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bdu-blue),#6ea3ff)}</div><div class=\"ql-code-block\">  .pagecount{font-weight:700;color:#395a8a;min-width:120px;text-align:right}</div><div class=\"ql-code-block\">  @media (max-width:840px){.sheet{width:100%}.sheet.left{display:none}.sheet.right{left:0;right:auto;border-left:none}}</div><div class=\"ql-code-block\">&lt;/style&gt;</div><div class=\"ql-code-block\">&lt;/head&gt;</div><div class=\"ql-code-block\">&lt;body&gt;</div><div class=\"ql-code-block\">  &lt;div class=\"flipbook-wrap\"&gt;</div><div class=\"ql-code-block\">    &lt;div class=\"flipbook-head\"&gt;</div><div class=\"ql-code-block\">      &lt;div class=\"flipbook-title\"&gt;</div><div class=\"ql-code-block\">        &lt;span class=\"dot\" aria-hidden=\"true\"&gt;&lt;/span&gt;</div><div class=\"ql-code-block\">        &lt;h1&gt;Livret d’accueil du salarié – BDU-CI&lt;/h1&gt;</div><div class=\"ql-code-block\">      &lt;/div&gt;</div><div class=\"ql-code-block\">      &lt;div class=\"flipbook-toolbar\"&gt;</div><div class=\"ql-code-block\">        &lt;button class=\"fb-btn\" id=\"fb-prev\" aria-label=\"Page précédente\"&gt;◀ Préc.&lt;/button&gt;</div><div class=\"ql-code-block\">        &lt;button class=\"fb-btn primary\" id=\"fb-next\" aria-label=\"Page suivante\"&gt;Suiv. ▶&lt;/button&gt;</div><div class=\"ql-code-block\">        &lt;span class=\"fb-badge\" id=\"fb-indic\"&gt;Page 1–2&lt;/span&gt;</div><div class=\"ql-code-block\">        &lt;button class=\"fb-btn\" id=\"fb-full\"&gt;⤢ Plein écran&lt;/button&gt;</div><div class=\"ql-code-block\">        &lt;a class=\"fb-btn\" id=\"fb-download\" download&gt;⬇ Télécharger (PDF)&lt;/a&gt;</div><div class=\"ql-code-block\">      &lt;/div&gt;</div><div class=\"ql-code-block\">    &lt;/div&gt;</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    &lt;div class=\"flipbook\" id=\"book\"&gt;</div><div class=\"ql-code-block\">      &lt;div class=\"book-viewport\" id=\"viewport\"&gt;</div><div class=\"ql-code-block\">        &lt;div class=\"sheet left\"&gt;&lt;div class=\"page\" id=\"leftPage\"&gt;&lt;canvas id=\"leftCanvas\"&gt;&lt;/canvas&gt;&lt;/div&gt;&lt;/div&gt;</div><div class=\"ql-code-block\">        &lt;div class=\"sheet right\"&gt;&lt;div class=\"page\" id=\"rightPage\"&gt;&lt;canvas id=\"rightCanvas\"&gt;&lt;/canvas&gt;&lt;/div&gt;&lt;/div&gt;</div><div class=\"ql-code-block\">        &lt;div class=\"nav-zone\" aria-hidden=\"true\"&gt;&lt;div id=\"zone-prev\"&gt;&lt;/div&gt;&lt;div id=\"zone-next\"&gt;&lt;/div&gt;&lt;/div&gt;</div><div class=\"ql-code-block\">      &lt;/div&gt;</div><div class=\"ql-code-block\">    &lt;/div&gt;</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    &lt;div class=\"flipbook-foot\"&gt;</div><div class=\"ql-code-block\">      &lt;button class=\"fb-btn\" id=\"fb-first\"&gt;⏮ Début&lt;/button&gt;</div><div class=\"ql-code-block\">      &lt;div class=\"progress\"&gt;&lt;i id=\"fb-prog\"&gt;&lt;/i&gt;&lt;/div&gt;</div><div class=\"ql-code-block\">      &lt;div class=\"pagecount\" id=\"fb-count\"&gt;1 / …&lt;/div&gt;</div><div class=\"ql-code-block\">    &lt;/div&gt;</div><div class=\"ql-code-block\">  &lt;/div&gt;</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">  &lt;!-- PDF.js (CDN) --&gt;</div><div class=\"ql-code-block\">  &lt;script src=\"https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js\"&gt;&lt;/script&gt;</div><div class=\"ql-code-block\">  &lt;script&gt;</div><div class=\"ql-code-block\">    const LIVRET_PDF_URL = \"{$pdfUrl}\";</div><div class=\"ql-code-block\">    document.getElementById(\'fb-download\').href = LIVRET_PDF_URL;</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    // PDF.js worker</div><div class=\"ql-code-block\">    pdfjsLib.GlobalWorkerOptions.workerSrc =</div><div class=\"ql-code-block\">      \"https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js\";</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    // UI refs</div><div class=\"ql-code-block\">    const leftCv = document.getElementById(\'leftCanvas\');</div><div class=\"ql-code-block\">    const rightCv = document.getElementById(\'rightCanvas\');</div><div class=\"ql-code-block\">    const indic = document.getElementById(\'fb-indic\');</div><div class=\"ql-code-block\">    const count = document.getElementById(\'fb-count\');</div><div class=\"ql-code-block\">    const prog  = document.getElementById(\'fb-prog\');</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    let pdfDoc = null;</div><div class=\"ql-code-block\">    let totalPages = 0;</div><div class=\"ql-code-block\">    let index = 0; // index 0-based (gauche desktop / page courante mobile)</div><div class=\"ql-code-block\">    const cache = new Map(); // { \"page@width\": ImageBitmap }</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    function targetWidth(){</div><div class=\"ql-code-block\">      const isMobile = matchMedia(\"(max-width:840px)\").matches;</div><div class=\"ql-code-block\">      const w = document.getElementById(\'viewport\').clientWidth;</div><div class=\"ql-code-block\">      return Math.min(1400, isMobile ? w : w/2);</div><div class=\"ql-code-block\">    }</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    async function renderPageToCanvas(pageNum, canvas){</div><div class=\"ql-code-block\">      const key = pageNum + \"@\" + targetWidth();</div><div class=\"ql-code-block\">      if(cache.has(key)){</div><div class=\"ql-code-block\">        const bmp = cache.get(key);</div><div class=\"ql-code-block\">        const ctx = canvas.getContext(\'2d\');</div><div class=\"ql-code-block\">        canvas.width = bmp.width; canvas.height = bmp.height;</div><div class=\"ql-code-block\">        ctx.drawImage(bmp, 0, 0);</div><div class=\"ql-code-block\">        return;</div><div class=\"ql-code-block\">      }</div><div class=\"ql-code-block\">      const page = await pdfDoc.getPage(pageNum);</div><div class=\"ql-code-block\">      const viewport = page.getViewport({scale:1});</div><div class=\"ql-code-block\">      const scale = targetWidth() / viewport.width;</div><div class=\"ql-code-block\">      const vp = page.getViewport({scale});</div><div class=\"ql-code-block\">      const tmp = document.createElement(\'canvas\');</div><div class=\"ql-code-block\">      tmp.width = vp.width; tmp.height = vp.height;</div><div class=\"ql-code-block\">      await page.render({canvasContext: tmp.getContext(\'2d\'), viewport: vp}).promise;</div><div class=\"ql-code-block\">      const bmp = await createImageBitmap(tmp);</div><div class=\"ql-code-block\">      cache.set(key, bmp);</div><div class=\"ql-code-block\">      const ctx = canvas.getContext(\'2d\');</div><div class=\"ql-code-block\">      canvas.width = bmp.width; canvas.height = bmp.height;</div><div class=\"ql-code-block\">      ctx.drawImage(bmp, 0, 0);</div><div class=\"ql-code-block\">    }</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    async function render(){</div><div class=\"ql-code-block\">      const isMobile = matchMedia(\"(max-width:840px)\").matches;</div><div class=\"ql-code-block\">      let leftNum, rightNum;</div><div class=\"ql-code-block\">      if(isMobile){</div><div class=\"ql-code-block\">        leftNum = Math.min(index+1, totalPages);</div><div class=\"ql-code-block\">        rightNum = leftNum;</div><div class=\"ql-code-block\">      }else{</div><div class=\"ql-code-block\">        leftNum = Math.min((index % 2 === 0 ? index : index-1) + 1, totalPages);</div><div class=\"ql-code-block\">        rightNum = Math.min(leftNum + 1, totalPages);</div><div class=\"ql-code-block\">      }</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">      await renderPageToCanvas(leftNum, leftCv);</div><div class=\"ql-code-block\">      await renderPageToCanvas(rightNum, rightCv);</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">      const isDbl = !isMobile &amp;&amp; leftNum !== rightNum;</div><div class=\"ql-code-block\">      indic.textContent = isDbl ? `Page \\${leftNum}–\\${rightNum}` : `Page \\${leftNum}`;</div><div class=\"ql-code-block\">      count.textContent = `\\${rightNum} / \\${totalPages}`;</div><div class=\"ql-code-block\">      prog.style.width = ((rightNum/totalPages)*100) + \"%\";</div><div class=\"ql-code-block\">    }</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    function next(){</div><div class=\"ql-code-block\">      const mob = matchMedia(\"(max-width:840px)\").matches;</div><div class=\"ql-code-block\">      index = Math.min(index + (mob?1:2), totalPages-1);</div><div class=\"ql-code-block\">      animateTurn(); render();</div><div class=\"ql-code-block\">    }</div><div class=\"ql-code-block\">    function prev(){</div><div class=\"ql-code-block\">      const mob = matchMedia(\"(max-width:840px)\").matches;</div><div class=\"ql-code-block\">      index = Math.max(index - (mob?1:2), 0);</div><div class=\"ql-code-block\">      animateTurn(true); render();</div><div class=\"ql-code-block\">    }</div><div class=\"ql-code-block\">    function first(){ index = 0; render(); }</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    function animateTurn(){</div><div class=\"ql-code-block\">      const rp = document.getElementById(\'rightPage\');</div><div class=\"ql-code-block\">      rp.classList.remove(\'shade\',\'turn\'); void rp.offsetWidth;</div><div class=\"ql-code-block\">      rp.classList.add(\'shade\'); requestAnimationFrame(()=&gt; rp.classList.add(\'turn\'));</div><div class=\"ql-code-block\">      setTimeout(()=&gt; rp.classList.remove(\'shade\',\'turn\'), 650);</div><div class=\"ql-code-block\">    }</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    // Events</div><div class=\"ql-code-block\">    document.getElementById(\'fb-next\').addEventListener(\'click\', next);</div><div class=\"ql-code-block\">    document.getElementById(\'fb-prev\').addEventListener(\'click\', prev);</div><div class=\"ql-code-block\">    document.getElementById(\'fb-first\').addEventListener(\'click\', first);</div><div class=\"ql-code-block\">    document.getElementById(\'zone-next\').addEventListener(\'click\', next);</div><div class=\"ql-code-block\">    document.getElementById(\'zone-prev\').addEventListener(\'click\', prev);</div><div class=\"ql-code-block\">    window.addEventListener(\'keydown\', e=&gt;{</div><div class=\"ql-code-block\">      if(e.key===\'ArrowRight\') next();</div><div class=\"ql-code-block\">      if(e.key===\'ArrowLeft\')  prev();</div><div class=\"ql-code-block\">      if(e.key===\'Home\')       first();</div><div class=\"ql-code-block\">    });</div><div class=\"ql-code-block\">    document.getElementById(\'fb-full\').addEventListener(\'click\', ()=&gt;{</div><div class=\"ql-code-block\">      const el = document.getElementById(\'book\');</div><div class=\"ql-code-block\">      if(document.fullscreenElement) document.exitFullscreen();</div><div class=\"ql-code-block\">      else el.requestFullscreen &amp;&amp; el.requestFullscreen();</div><div class=\"ql-code-block\">    });</div><div class=\"ql-code-block\">    matchMedia(\"(max-width:840px)\").addEventListener(\'change\', ()=&gt;{ index=0; render(); });</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">    // Load PDF</div><div class=\"ql-code-block\">    (async () =&gt; {</div><div class=\"ql-code-block\">      try{</div><div class=\"ql-code-block\">        const loadingTask = pdfjsLib.getDocument({ url: LIVRET_PDF_URL, withCredentials:false });</div><div class=\"ql-code-block\">        pdfDoc = await loadingTask.promise;</div><div class=\"ql-code-block\">        totalPages = pdfDoc.numPages;</div><div class=\"ql-code-block\">        document.getElementById(\'fb-count\').textContent = `1 / \\${totalPages}`;</div><div class=\"ql-code-block\">        await render();</div><div class=\"ql-code-block\">      }catch(err){</div><div class=\"ql-code-block\">        console.error(err);</div><div class=\"ql-code-block\">        alert(\"Impossible de charger le PDF. Si besoin, déposez le PDF sur le même domaine que l\'intranet et remplacez l\'URL.\");</div><div class=\"ql-code-block\">      }</div><div class=\"ql-code-block\">    })();</div><div class=\"ql-code-block\">  &lt;/script&gt;</div><div class=\"ql-code-block\">&lt;/body&gt;</div><div class=\"ql-code-block\">&lt;/html&gt;</div><div class=\"ql-code-block\">HTML;</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\">        return new Response($html);</div><div class=\"ql-code-block\">    }</div><div class=\"ql-code-block\">}</div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div><div class=\"ql-code-block\"><br></div></div>', 1, NULL, NULL, 4, 5, 5, '2025-08-22 19:01:54', '2025-09-19 10:30:07', '2025-10-08 11:53:13', NULL, NULL),
-(13, 'My Bdu mobile', 'my-bdu-mobile', 'Ma prise en main', 2, '<div class=\"ql-code-block-container\" spellcheck=\"false\"><div class=\"ql-code-block\"><br></div></div>', 1, '<div class=\"ql-code-block-container\" spellcheck=\"false\"><div class=\"ql-code-block\"><br></div></div>', NULL, 4, 5, NULL, '2025-08-22 19:02:09', '2025-10-03 13:31:31', NULL, 137, ''),
+(13, 'Quiz Can 2025', 'quiz-can-2025', 'Ma prise en main', 2, '<div class=\"ql-code-block-container\" spellcheck=\"false\"><div class=\"ql-code-block\"><br></div></div>', 1, '<div class=\"ql-code-block-container\" spellcheck=\"false\"><div class=\"ql-code-block\"><br></div></div>', NULL, 4, 5, NULL, '2025-08-22 19:02:09', '2025-12-26 12:11:37', NULL, 346, ''),
 (15, 'SIRH', 'sirh', 'Tools', 1, '', 1, NULL, NULL, 5, 5, NULL, '2025-10-08 20:44:20', '2025-10-08 20:44:20', NULL, NULL, ''),
 (16, 'Me former(e-lerning)', 'me-former-e-lerning', 'Tools', 3, NULL, 1, NULL, NULL, 5, 5, NULL, '2025-10-15 19:13:56', '2025-10-15 19:15:52', NULL, NULL, 'https://app.aais.ai/'),
 (17, 'Smart Access', 'smart-access', 'Tools', 4, NULL, 1, NULL, NULL, 5, 5, NULL, '2025-10-29 17:26:39', '2025-10-29 17:29:59', NULL, NULL, 'http://10.80.10.138:8080/smartaccess/'),
 (18, 'TEST site', 'test-site', 'Tools', 1, NULL, 1, NULL, NULL, 5, 5, 5, '2025-10-31 16:24:32', '2025-10-31 16:24:32', '2025-10-31 16:25:12', NULL, 'https://bduci.com'),
-(19, 'Quiz DigiPRO', 'quiz-digipro', 'Ma prise en main', 3, '', 1, NULL, NULL, 5, 5, NULL, '2025-11-12 15:12:47', '2025-11-12 15:20:56', NULL, 331, 'https://t.formtimers.com/4UV04T');
+(19, 'Quiz DigiPRO', 'quiz-digipro', 'Ma prise en main', 3, '', 1, NULL, NULL, 5, 5, NULL, '2025-11-12 15:12:47', '2025-11-12 15:20:56', NULL, 331, 'https://t.formtimers.com/4UV04T'),
+(20, 'test iframe', 'test-iframe', 'Le guide du banquier', 4, '<div class=\"ql-code-block-container\" spellcheck=\"false\"><div class=\"ql-code-block\"><!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Vidéo YouTube intégrée</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><style> body { margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #f5f5f5; } .container { max-width: 900px; margin: 40px auto; padding: 15px; background: #ffffff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); } h1 { text-align: center; margin-bottom: 20px; color: #333; } .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 6px; } .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; } </style></head><body><div class=\"container\"><h1>Vidéo intégrée</h1><div class=\"video-wrapper\"><iframe src=\"https://www.youtube.com/embed/k-vFAbCnvaU\" title=\"Vidéo YouTube\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe></div></div></body></html></div></div>', 1, NULL, NULL, 5, 5, NULL, '2025-12-23 15:23:49', '2025-12-23 15:39:51', NULL, NULL, ''),
+(21, 'Jeu Pronostic', 'jeu-pronostic', 'Ma prise en main', 1, '', 1, NULL, NULL, 5, 5, NULL, '2025-12-26 11:48:35', '2025-12-26 11:48:35', NULL, 345, '');
 
 -- --------------------------------------------------------
 
@@ -2592,7 +2825,182 @@ INSERT INTO `page_view` (`id`, `route_name`, `visited_at`, `session_id`, `ip`, `
 (189, 'app_notes_publications', '2025-12-02 14:25:29', 'pebl0ph908m6l6fnf12h6uepib', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
 (190, 'app_offres', '2025-12-02 15:20:45', 'hliljvvvklbppmhpp5od873ur1', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0'),
 (191, 'organigramme', '2025-12-02 15:21:03', 'hliljvvvklbppmhpp5od873ur1', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0'),
-(192, 'logout', '2025-12-02 17:45:05', 'hliljvvvklbppmhpp5od873ur1', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0');
+(192, 'logout', '2025-12-02 17:45:05', 'hliljvvvklbppmhpp5od873ur1', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0'),
+(193, 'app_homepage', '2025-12-03 11:51:49', 'e93cffa4b61b1c79dee1be4e764b2fda', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0'),
+(194, '_wdt_stylesheet', '2025-12-03 11:51:50', 'e93cffa4b61b1c79dee1be4e764b2fda', '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0'),
+(195, 'app_homepage', '2025-12-03 13:54:54', 'm9pi30j6i439if438tksrirdki', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(196, 'app_agents', '2025-12-03 14:36:02', 'pebl0ph908m6l6fnf12h6uepib', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(197, 'actualite_update', '2025-12-03 14:38:23', 'pebl0ph908m6l6fnf12h6uepib', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(198, 'actualites', '2025-12-03 14:45:11', 'pebl0ph908m6l6fnf12h6uepib', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(199, 'login', '2025-12-03 15:21:55', 'pvkmka467o05l9serhik4a4vlv', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(200, 'dashboard', '2025-12-03 15:22:31', 'h1tiu7f4mso1l5trk2fqfmgnj6', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(201, 'app_documents', '2025-12-03 15:22:48', 'h1tiu7f4mso1l5trk2fqfmgnj6', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(202, 'document_delete', '2025-12-03 15:26:01', 'h1tiu7f4mso1l5trk2fqfmgnj6', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(203, 'document_edit', '2025-12-03 15:27:09', 'h1tiu7f4mso1l5trk2fqfmgnj6', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(204, 'doc_reference', '2025-12-03 15:28:33', 'h1tiu7f4mso1l5trk2fqfmgnj6', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(205, 'type_docs', '2025-12-03 15:28:36', 'h1tiu7f4mso1l5trk2fqfmgnj6', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(206, 'procedures', '2025-12-03 16:36:26', 'h1tiu7f4mso1l5trk2fqfmgnj6', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(207, 'login', '2025-12-09 08:22:17', 'edtskqvnqcn3tibsscjtl26vip', '10.80.5.215', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(208, 'dashboard', '2025-12-09 08:22:35', '8t1lmviu9ro5va1volhg6vdl3q', '10.80.5.215', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(209, 'page', '2025-12-15 08:34:47', '8ssv5c398ct422spocp03eetc1', '10.80.5.251', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(210, 'app_homepage', '2025-12-15 08:52:06', '8ssv5c398ct422spocp03eetc1', '10.80.5.251', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(211, 'procedures', '2025-12-15 08:53:03', '8ssv5c398ct422spocp03eetc1', '10.80.5.251', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(212, 'procedures', '2025-12-15 08:53:02', '8ssv5c398ct422spocp03eetc1', '10.80.5.251', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(213, 'login', '2025-12-16 16:08:33', '2gnlhngcl457vkk0qs2jev61f0', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(214, 'dashboard', '2025-12-16 16:08:50', '0740pd57nforq1g8o9f203gcea', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(215, 'app_documents', '2025-12-16 16:09:14', '0740pd57nforq1g8o9f203gcea', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(216, 'app_documents', '2025-12-16 16:09:16', '0740pd57nforq1g8o9f203gcea', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(217, 'app_documents', '2025-12-16 16:09:17', '0740pd57nforq1g8o9f203gcea', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(218, 'procedures', '2025-12-16 16:10:24', '0740pd57nforq1g8o9f203gcea', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(219, 'doc_reference', '2025-12-16 16:11:29', '0740pd57nforq1g8o9f203gcea', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(220, 'login', '2025-12-17 09:36:26', 'ome8s3cggoij54mrkmddq8142q', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(221, 'dashboard', '2025-12-17 09:36:42', 'vbj8fgvrilr5vod6gc3v14ts8t', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(222, 'login', '2025-12-17 09:36:43', 'vbj8fgvrilr5vod6gc3v14ts8t', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(223, 'list_pages', '2025-12-17 09:37:48', 'vbj8fgvrilr5vod6gc3v14ts8t', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(224, 'app_notes_publications', '2025-12-17 09:37:50', 'vbj8fgvrilr5vod6gc3v14ts8t', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(225, 'app_notes_publications', '2025-12-17 09:37:55', 'vbj8fgvrilr5vod6gc3v14ts8t', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(226, 'app_homepage', '2025-12-17 09:46:22', 'vbj8fgvrilr5vod6gc3v14ts8t', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(227, 'notes_publications', '2025-12-17 09:46:39', 'vbj8fgvrilr5vod6gc3v14ts8t', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(228, 'doc_reference', '2025-12-17 09:50:43', 'vbj8fgvrilr5vod6gc3v14ts8t', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(229, 'login', '2025-12-17 13:15:51', 'k763090vuho4vnbart2utmnqhl', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(230, 'dashboard', '2025-12-17 13:16:16', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(231, 'app_medias', '2025-12-17 13:16:45', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(232, 'liste_chartes', '2025-12-17 13:17:00', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(233, 'app_notes_publications', '2025-12-17 13:17:25', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(234, 'app_homepage', '2025-12-17 13:20:02', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(235, 'page', '2025-12-17 13:23:26', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(236, 'actualites', '2025-12-17 13:23:50', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(237, 'actualite.details', '2025-12-17 13:24:31', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(238, 'notes_publications', '2025-12-17 13:25:47', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(239, 'app_offres', '2025-12-17 13:29:14', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(240, 'theme.cover', '2025-12-17 13:30:16', '4qo6k95usi9vbu3hskailr30ah', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(241, 'app_homepage', '2025-12-17 17:17:13', 'airks7cpu6dtefsd651r4fuu1v', '10.80.5.160', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko/20100101 Firefox/144.0'),
+(242, 'liste_users', '2025-12-19 18:03:07', 'gaq474qife1t7u6o27tg93kg8b', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(243, 'liste_users', '2025-12-19 18:03:11', 'gaq474qife1t7u6o27tg93kg8b', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(244, 'permissions', '2025-12-19 18:03:17', 'gaq474qife1t7u6o27tg93kg8b', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36');
+INSERT INTO `page_view` (`id`, `route_name`, `visited_at`, `session_id`, `ip`, `user_agent`) VALUES
+(245, 'liste_roles', '2025-12-19 18:03:26', 'gaq474qife1t7u6o27tg93kg8b', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(246, 'liste_roles', '2025-12-19 18:03:29', 'gaq474qife1t7u6o27tg93kg8b', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(247, 'user_resume', '2025-12-19 18:03:44', 'gaq474qife1t7u6o27tg93kg8b', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(248, 'user_setting', '2025-12-19 18:03:55', 'gaq474qife1t7u6o27tg93kg8b', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(249, 'dashboard', '2025-12-19 18:07:06', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(250, 'app_agents', '2025-12-19 18:09:12', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(251, 'list_offres', '2025-12-19 18:12:50', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(252, 'add_offre', '2025-12-19 18:13:01', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(253, 'list_actualites', '2025-12-19 18:15:48', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(254, 'app_homepage', '2025-12-19 18:16:44', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(255, 'app_homepage', '2025-12-19 18:17:52', 'gaq474qife1t7u6o27tg93kg8b', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(256, 'livret.acceuil', '2025-12-19 18:19:16', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(257, 'app_offres', '2025-12-19 18:19:34', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(258, 'app_medias', '2025-12-19 18:20:22', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(259, 'param_type', '2025-12-19 18:33:23', 'v96vf0kaainh32mcq7j8g1plgj', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(260, 'login', '2025-12-19 18:44:44', '8hab3gqaj2gu3bn2hdjv466qot', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(261, 'dashboard', '2025-12-19 18:45:25', 'uob4ljohdogluf1pdee3if8ft7', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(262, 'liste_users', '2025-12-19 18:45:45', 'uob4ljohdogluf1pdee3if8ft7', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(263, 'list_offres', '2025-12-19 18:46:33', 'uob4ljohdogluf1pdee3if8ft7', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(264, 'add_offre', '2025-12-19 18:46:35', 'uob4ljohdogluf1pdee3if8ft7', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(265, 'param_type', '2025-12-19 18:53:32', 'uob4ljohdogluf1pdee3if8ft7', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(266, 'app_offres', '2025-12-19 18:53:47', 'uob4ljohdogluf1pdee3if8ft7', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(267, 'list_offres', '2025-12-22 09:41:45', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(268, 'add_offre', '2025-12-22 09:41:54', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(269, 'app_homepage', '2025-12-22 19:05:19', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(270, 'annuaire', '2025-12-22 19:05:27', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(271, 'app_agents', '2025-12-23 11:51:59', '605jc6db2bakpibftuqlh7dbb9', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(272, 'app_homepage', '2025-12-23 12:00:29', '605jc6db2bakpibftuqlh7dbb9', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(273, 'list_pages', '2025-12-23 15:15:01', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(274, 'list_pages', '2025-12-23 15:15:00', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(275, 'page.new', '2025-12-23 15:15:05', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(276, 'page.new', '2025-12-23 15:15:09', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(277, 'page.new', '2025-12-23 15:15:10', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(278, 'page.new', '2025-12-23 15:15:14', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(279, 'page', '2025-12-23 15:24:08', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(280, 'doc_reference', '2025-12-23 15:42:01', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(281, 'type_docs', '2025-12-23 15:42:03', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(282, 'dashboard', '2025-12-23 17:38:48', 'u4kasft2msffga58n06gc3datp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(283, 'list_offres', '2025-12-23 17:38:55', 'u4kasft2msffga58n06gc3datp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(284, 'add_offre', '2025-12-23 17:39:00', 'u4kasft2msffga58n06gc3datp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(285, 'app_offres', '2025-12-23 17:46:22', 'u4kasft2msffga58n06gc3datp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(286, 'actualites', '2025-12-23 17:47:12', '605jc6db2bakpibftuqlh7dbb9', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(287, 'app_offres', '2025-12-23 17:47:23', '605jc6db2bakpibftuqlh7dbb9', '10.80.5.162', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(288, 'login', '2025-12-26 14:44:59', 'rtqfi883lc45881a1iqhg9kcln', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(289, 'dashboard', '2025-12-26 14:45:20', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(290, 'carousel', '2025-12-26 14:45:46', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(291, 'carousel', '2025-12-26 14:45:54', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(292, 'slide_update', '2025-12-26 14:46:17', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(293, 'app_homepage', '2025-12-26 14:49:33', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(294, 'actualites', '2025-12-26 14:49:52', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(295, 'list_actualites', '2025-12-26 14:52:23', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(296, 'actualite_update', '2025-12-26 14:54:37', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(297, 'page', '2025-12-26 14:58:32', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(298, 'actualite.details', '2025-12-26 16:38:27', '5o21bhdp4f0k7ds0oh2pfkabsc', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(299, 'login', '2025-12-29 13:27:04', 'olu4fp746g1pjv8cdkemgnr1ff', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(300, 'dashboard', '2025-12-29 13:27:24', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(301, 'app_agents', '2025-12-29 13:27:43', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(302, 'app_documents', '2025-12-29 13:27:54', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(303, 'type_docs', '2025-12-29 20:48:05', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(304, 'login', '2025-12-30 11:09:05', 'hpla4qcgsf29iemql1l1ltjj0r', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(305, 'app_documents', '2025-12-30 11:09:20', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(306, 'app_medias', '2025-12-30 11:10:05', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(307, 'dashboard', '2025-12-30 11:10:24', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(308, 'liste_users', '2025-12-30 11:12:50', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(309, 'app_homepage', '2025-12-30 11:15:00', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(310, 'doc_reference', '2025-12-30 15:19:49', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(311, 'procedures', '2025-12-30 15:19:52', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(312, 'document_delete', '2025-12-30 15:45:31', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(313, 'document_edit', '2025-12-30 15:46:03', 'b88h3f6lfmab4c6kbj2hrncmlb', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(314, 'app_offres', '2025-12-30 15:55:35', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(315, 'procedures', '2025-12-30 15:55:43', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(316, 'app_notes_publications', '2025-12-30 15:57:01', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(317, 'app_documents', '2025-12-30 15:57:23', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(318, 'document_delete', '2025-12-30 15:59:18', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(319, 'login', '2025-12-30 20:20:57', 'q3m06sjc0ca00vcf7fkvf8062a', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(320, 'dashboard', '2025-12-30 20:21:13', 'm9o123ruivqu3cr3bl6sl7pqpp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(321, 'list_offres', '2025-12-30 20:21:35', 'm9o123ruivqu3cr3bl6sl7pqpp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(322, 'add_offre', '2025-12-30 20:21:40', 'm9o123ruivqu3cr3bl6sl7pqpp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(323, 'app_homepage', '2025-12-30 20:38:42', 'm9o123ruivqu3cr3bl6sl7pqpp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(324, 'app_offres', '2025-12-30 20:39:19', 'm9o123ruivqu3cr3bl6sl7pqpp', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(325, 'login', '2026-01-05 09:42:23', '9es125uduhocej7n9jdbuir577', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(326, 'app_documents', '2026-01-05 09:42:42', '9v4iphlebdbkeb0b6gl33ejuuv', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(327, 'app_offres', '2026-01-05 18:45:15', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(328, 'doc_reference', '2026-01-05 18:46:04', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(329, 'procedures', '2026-01-05 18:46:12', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(330, 'politique_ethique', '2026-01-05 18:47:42', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(331, 'document_delete', '2026-01-05 18:51:34', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(332, 'app_homepage', '2026-01-05 18:53:37', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(333, 'page', '2026-01-05 18:54:08', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(334, 'list_pages', '2026-01-05 18:54:19', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(335, 'page.new', '2026-01-05 18:54:24', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(336, 'login', '2026-01-06 16:14:00', 'u99hdqup8ev4ohafukbalfo4dk', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(337, 'app_documents', '2026-01-06 16:14:01', 'u99hdqup8ev4ohafukbalfo4dk', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(338, 'app_documents', '2026-01-06 16:14:15', 'c6ed4f56u1c69ed1dntlnb33vv', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(339, 'procedures', '2026-01-06 16:23:50', 'c6ed4f56u1c69ed1dntlnb33vv', '10.80.5.233', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0'),
+(340, 'list_offres', '2026-01-08 14:30:43', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(341, 'details_offre', '2026-01-08 14:32:00', 'vm6n53jhndnskictjoq99c8cmt', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'),
+(342, 'details_offre', '2026-01-08 17:51:15', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(343, 'login', '2026-01-12 12:16:57', 'ivnhr44sda0j7p43skqm94i46a', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(344, 'dashboard', '2026-01-12 12:17:23', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(345, 'app_notes_publications', '2026-01-12 12:18:34', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(346, 'list_actualites', '2026-01-12 12:18:38', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(347, 'list_actualites', '2026-01-12 12:18:41', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(348, 'list_actualites', '2026-01-12 12:18:46', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(349, 'app_medias', '2026-01-12 12:21:24', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(350, 'app_homepage', '2026-01-12 12:22:04', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(351, 'mediatheque', '2026-01-12 12:22:20', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(352, 'mediatheque', '2026-01-12 12:22:17', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(353, 'mediatheque', '2026-01-12 12:22:20', 'dtd7igvsunoi1b5toii4vkqnsa', '10.80.5.148', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(354, 'media_delete', '2026-01-12 12:22:36', 't6e9f1e37vs6k0ia6s8d9hp8ju', '10.80.4.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0'),
+(355, 'mot_du_dg', '2026-01-12 12:43:06', 'klvdnasvb98lnpakh09r0gftql', '10.80.3.195', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(356, 'doc_reference', '2026-01-12 12:43:11', 'klvdnasvb98lnpakh09r0gftql', '10.80.3.195', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(357, 'charte_graphique', '2026-01-12 12:43:48', 'klvdnasvb98lnpakh09r0gftql', '10.80.3.195', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(358, 'organigramme', '2026-01-12 12:44:17', 'klvdnasvb98lnpakh09r0gftql', '10.80.3.195', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(359, 'app_homepage', '2026-01-12 12:45:26', 'klvdnasvb98lnpakh09r0gftql', '10.80.3.195', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(360, 'page', '2026-01-12 12:46:08', 'klvdnasvb98lnpakh09r0gftql', '10.80.3.195', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'),
+(361, 'login', '2026-01-16 19:52:03', 'sr13cqfdgk5tkdq628eejemse3', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36'),
+(362, 'dashboard', '2026-01-16 19:52:48', 'stacns4qct5lkbmvvhntpcq13v', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36'),
+(363, 'list_offres', '2026-01-16 19:54:22', 'stacns4qct5lkbmvvhntpcq13v', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36'),
+(364, 'add_offre', '2026-01-16 19:54:28', 'stacns4qct5lkbmvvhntpcq13v', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36'),
+(365, 'app_offres', '2026-01-16 19:54:50', 'stacns4qct5lkbmvvhntpcq13v', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36'),
+(366, 'mot_du_dg', '2026-01-16 19:56:03', 'stacns4qct5lkbmvvhntpcq13v', '10.80.5.252', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -2941,7 +3349,8 @@ INSERT INTO `roles` (`id`, `created_user_id`, `updated_user_id`, `deleted_user_i
 (3, 4, 4, NULL, 'Analyste', 'analyste', 'Lorem ipsum', 0, '2025-08-22 19:42:41', '2025-08-22 19:42:41', NULL),
 (4, 4, 4, NULL, 'Essaie', 'essaie', NULL, 0, '2025-08-24 20:12:53', '2025-08-25 09:33:12', NULL),
 (5, 5, 5, NULL, 'Gestion des incidents', 'gestion-des-incidents', 'Permettre la gestion des incidents', 0, '2025-09-22 15:59:55', '2025-09-22 16:00:24', NULL),
-(6, 5, 5, NULL, 'Communication', 'communication', '', 0, '2025-10-06 11:26:32', '2025-12-02 10:44:32', NULL);
+(6, 5, 5, NULL, 'Communication', 'communication', '', 0, '2025-10-06 11:26:32', '2025-12-02 10:44:32', NULL),
+(7, 5, 5, NULL, 'RH', 'rh', 'capital humain', 0, '2025-12-19 18:05:58', '2025-12-19 18:05:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -2977,7 +3386,9 @@ INSERT INTO `sliders` (`id`, `image_id`, `titre`, `description`, `bouton`, `lien
 (5, 132, '', '', '', '', 5, 10, NULL, '2025-10-02 15:28:19', '2025-12-02 10:58:07', NULL, NULL),
 (6, 168, '', '', '', '', 10, 5, 10, '2025-10-07 19:18:47', '2025-10-08 16:35:50', '2025-12-02 10:57:30', 1),
 (7, 285, NULL, NULL, NULL, NULL, 5, 5, 5, '2025-10-31 16:16:47', '2025-10-31 16:16:47', '2025-10-31 16:17:09', 1),
-(8, 335, 'Save the Date-2nde Édition de l\'Arbre de Noël BDU 2025', NULL, NULL, NULL, 10, 10, NULL, '2025-12-02 10:56:27', '2025-12-02 10:56:27', NULL, 1);
+(8, 335, 'Save the Date-2nde Édition de l\'Arbre de Noël BDU 2025', '', '', '', 10, 10, NULL, '2025-12-02 10:56:27', '2025-12-26 14:46:17', NULL, NULL),
+(9, 347, NULL, NULL, NULL, NULL, 10, 10, NULL, '2025-12-26 14:49:24', '2025-12-26 14:49:24', NULL, 1),
+(10, 352, NULL, NULL, NULL, NULL, 10, 10, NULL, '2025-12-26 16:27:54', '2025-12-26 16:27:54', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3010,15 +3421,15 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role_id`, `avatar_id`, `created_user_id`, `updated_user_id`, `deleted_user_id`, `nom_complet`, `email`, `telephone`, `password`, `last_login`, `activated`, `activate_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (4, 1, NULL, 4, 4, NULL, 'Moussa Fofana', 'hello1@moussa-fofana.com', '0747161221', '$2y$13$H6U8oUyX0dkTkL6o.hLXZendrE91IFvkX4w.l2jwr0YE56gtMsEEO', '2025-10-20 15:03:21', 1, NULL, '2025-06-25 00:41:45', '2025-10-02 12:54:55', NULL),
-(5, 1, NULL, 4, 4, NULL, 'Joel yao', 'jyao@bduci.com', '+2250747711304', '$2y$13$H6U8oUyX0dkTkL6o.hLXZendrE91IFvkX4w.l2jwr0YE56gtMsEEO', '2025-12-02 10:38:01', 1, NULL, '2025-07-24 09:36:22', '2025-07-10 09:36:22', NULL),
+(5, 1, NULL, 4, 4, NULL, 'Joel yao', 'jyao@bduci.com', '+2250747711304', '$2y$13$H6U8oUyX0dkTkL6o.hLXZendrE91IFvkX4w.l2jwr0YE56gtMsEEO', '2025-12-29 13:27:21', 1, NULL, '2025-07-24 09:36:22', '2025-07-10 09:36:22', NULL),
 (6, 5, NULL, 5, 5, NULL, 'Eric Fernand BOHOUA', 'ebohoua@bduci.com', '0777073005', NULL, NULL, 1, NULL, '2025-09-22 16:18:14', '2025-09-23 18:28:26', NULL),
-(7, 1, NULL, 5, 5, NULL, 'AMADOU Hismayel Agouazin', 'hamadou@bduci.com', NULL, '$2y$13$nOOn6qt8t/tv8lEQnfr8muLE9opW5kjboDAxVEBg0SBcTRJ/HNnJK', '2025-11-10 10:57:38', 1, NULL, '2025-09-24 19:43:06', '2025-09-24 19:47:37', NULL),
+(7, 1, NULL, 5, 5, NULL, 'AMADOU Hismayel Agouazin', 'hamadou@bduci.com', NULL, '$2y$13$nOOn6qt8t/tv8lEQnfr8muLE9opW5kjboDAxVEBg0SBcTRJ/HNnJK', '2026-01-06 16:14:12', 1, NULL, '2025-09-24 19:43:06', '2025-09-24 19:47:37', NULL),
 (8, 1, NULL, 4, 4, NULL, 'User Essaie', 'hello@moussa-fofana.com', '0707070707', '$2y$13$RUOZhirbhKw/2Voq7JRk3u3DNTbx4h0LLxDve.rpzx8Z8A8FPrnFG', NULL, 1, NULL, '2025-10-02 12:55:47', '2025-10-02 12:55:47', NULL),
 (9, 3, NULL, 5, 5, NULL, 'Eric Ghislain GBETIBOUO', 'egbetibouo@bduci.com', NULL, '$2y$13$O9hs673fhQ0CGPbwG0wIx.PjFJiwqLsgre0F6zVKwb4/qMMZelde2', '2025-11-17 17:16:03', 1, NULL, '2025-10-06 11:45:42', '2025-10-06 11:50:56', NULL),
-(10, 6, NULL, 5, 5, NULL, 'Appia Emeline Deborah KOUASSI', 'AKOUASSI@bduci.com', NULL, '$2y$13$scbrUPmhdQ2eEnwRHWSS6u3Mv0O1Q4x1SbF9J9ArL9lWjGraxjMd2', '2025-12-02 10:41:21', 1, NULL, '2025-10-06 11:55:04', '2025-12-02 10:40:59', NULL),
-(11, 6, NULL, 5, 5, NULL, 'Manlanfoua Diane Constance ETCHIEN', 'DETCHIEN@bduci.com', NULL, '$2y$13$SyKYoXixFzYTNFXMnv1Iw.Q2laqA.R6ENi2x4ZJVL7W/S9CQ8/pc6', NULL, 1, NULL, '2025-10-06 11:57:26', '2025-10-06 11:57:26', NULL),
-(12, 6, NULL, 5, 5, NULL, 'BROU N\'DRI FRANCK ARTHUR', 'afbrou@bduci.com', NULL, '$2y$13$ZK/NBTDWghGghQn4uOjLauXxBsUevdPQ86H/hdRyj0kjS3K4sSuwe', '2025-10-13 18:07:41', 1, NULL, '2025-10-06 12:19:53', '2025-10-06 12:19:53', NULL),
-(13, 6, NULL, 5, 5, NULL, 'Willie Marguerite Djomo KOUAKOU', 'WKOUAKOU@bduci.com', NULL, '$2y$13$IquazO7Od2buPtr05XFDzOqhevmSRQgb2Jtic.2EPMhaGPMqoi3zm', NULL, 1, NULL, '2025-10-06 12:34:09', '2025-10-06 12:34:09', NULL),
+(10, 6, NULL, 5, 5, NULL, 'Appia Emeline Deborah KOUASSI', 'AKOUASSI@bduci.com', NULL, '$2y$13$scbrUPmhdQ2eEnwRHWSS6u3Mv0O1Q4x1SbF9J9ArL9lWjGraxjMd2', '2026-01-12 12:17:19', 1, NULL, '2025-10-06 11:55:04', '2025-12-02 10:40:59', NULL),
+(11, 7, NULL, 5, 5, NULL, 'Manlanfoua Diane Constance ETCHIEN', 'DETCHIEN@bduci.com', NULL, '$2y$13$SyKYoXixFzYTNFXMnv1Iw.Q2laqA.R6ENi2x4ZJVL7W/S9CQ8/pc6', '2025-12-23 11:51:38', 1, NULL, '2025-10-06 11:57:26', '2025-12-19 18:06:48', NULL),
+(12, 6, NULL, 5, 5, NULL, 'BROU N\'DRI FRANCK ARTHUR', 'afbrou@bduci.com', NULL, '$2y$13$ZK/NBTDWghGghQn4uOjLauXxBsUevdPQ86H/hdRyj0kjS3K4sSuwe', '2025-12-09 08:22:32', 1, NULL, '2025-10-06 12:19:53', '2025-10-06 12:19:53', NULL),
+(13, 7, NULL, 5, 5, NULL, 'Willie Marguerite Djomo KOUAKOU', 'WKOUAKOU@bduci.com', NULL, '$2y$13$IquazO7Od2buPtr05XFDzOqhevmSRQgb2Jtic.2EPMhaGPMqoi3zm', '2026-01-16 19:52:43', 1, NULL, '2025-10-06 12:34:09', '2025-12-19 18:15:00', NULL),
 (14, 1, NULL, 5, 5, NULL, 'Adama COULIBALY', 'acoulibaly@bduci.com', NULL, '$2y$13$5RSHCA8r29DPAQBqNkdRf.O2mwdJuZY4XFOiALjPFaKkjv7IwEGNu', '2025-10-08 13:34:35', 1, NULL, '2025-10-08 13:27:39', '2025-10-08 13:27:39', NULL);
 
 -- --------------------------------------------------------
@@ -3044,7 +3455,9 @@ INSERT INTO `votes` (`id`, `agent_id`, `voted_at`, `votant_id`) VALUES
 (4, 4, '2025-08-01 02:08:05', 4),
 (7, 3, '2025-08-01 17:40:44', 1),
 (8, 14, '2025-10-08 11:57:08', 1),
-(9, 66, '2025-11-12 13:00:27', 66);
+(9, 66, '2025-11-12 13:00:27', 66),
+(10, 81, '2026-01-07 12:27:23', 81),
+(11, 91, '2026-01-12 12:36:48', 36);
 
 -- --------------------------------------------------------
 
@@ -3095,7 +3508,19 @@ INSERT INTO `vote_note` (`id`, `critere_id`, `vote_id`, `note`) VALUES
 (34, 10, 9, 5),
 (35, 9, 9, 5),
 (36, 8, 9, 5),
-(37, 7, 9, 5);
+(37, 7, 9, 5),
+(38, 135, 10, 3),
+(39, 11, 10, 3),
+(40, 10, 10, 3),
+(41, 9, 10, 3),
+(42, 8, 10, 3),
+(43, 7, 10, 3),
+(44, 135, 11, 3),
+(45, 11, 11, 3),
+(46, 10, 11, 3),
+(47, 9, 11, 3),
+(48, 8, 11, 3),
+(49, 7, 11, 3);
 
 --
 -- Index pour les tables déchargées
@@ -3130,6 +3555,7 @@ ALTER TABLE `actualites`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_75315B6D989D9B62` (`slug`),
   ADD UNIQUE KEY `UNIQ_75315B6D922726E9` (`cover_id`),
+  ADD UNIQUE KEY `UNIQ_75315B6DFDFF2E92` (`thumbnail_id`),
   ADD KEY `IDX_75315B6DE104C1D3` (`created_user_id`),
   ADD KEY `IDX_75315B6DBB649746` (`updated_user_id`),
   ADD KEY `IDX_75315B6DFDE969F2` (`deleted_user_id`);
@@ -3370,25 +3796,25 @@ ALTER TABLE `actions`
 -- AUTO_INCREMENT pour la table `actions_autorisation`
 --
 ALTER TABLE `actions_autorisation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT pour la table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1143;
 
 --
 -- AUTO_INCREMENT pour la table `actualites`
 --
 ALTER TABLE `actualites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `agents`
 --
 ALTER TABLE `agents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT pour la table `alertes`
@@ -3400,7 +3826,7 @@ ALTER TABLE `alertes`
 -- AUTO_INCREMENT pour la table `autorisations`
 --
 ALTER TABLE `autorisations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT pour la table `banners`
@@ -3418,13 +3844,13 @@ ALTER TABLE `classement_mensuel`
 -- AUTO_INCREMENT pour la table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT pour la table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=337;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
 
 --
 -- AUTO_INCREMENT pour la table `incidents`
@@ -3448,25 +3874,25 @@ ALTER TABLE `messenger_messages`
 -- AUTO_INCREMENT pour la table `notes_publications`
 --
 ALTER TABLE `notes_publications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `offres_emploi`
 --
 ALTER TABLE `offres_emploi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `page_view`
 --
 ALTER TABLE `page_view`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
 
 --
 -- AUTO_INCREMENT pour la table `parametres`
@@ -3496,13 +3922,13 @@ ALTER TABLE `reset_password_request`
 -- AUTO_INCREMENT pour la table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `users`
@@ -3514,13 +3940,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `vote_note`
 --
 ALTER TABLE `vote_note`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Contraintes pour les tables déchargées
@@ -3552,7 +3978,8 @@ ALTER TABLE `actualites`
   ADD CONSTRAINT `FK_75315B6D922726E9` FOREIGN KEY (`cover_id`) REFERENCES `files` (`id`),
   ADD CONSTRAINT `FK_75315B6DBB649746` FOREIGN KEY (`updated_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_75315B6DE104C1D3` FOREIGN KEY (`created_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_75315B6DFDE969F2` FOREIGN KEY (`deleted_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_75315B6DFDE969F2` FOREIGN KEY (`deleted_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_75315B6DFDFF2E92` FOREIGN KEY (`thumbnail_id`) REFERENCES `files` (`id`);
 
 --
 -- Contraintes pour la table `agents`

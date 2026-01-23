@@ -20,8 +20,13 @@
             <button type="button" class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-1 focus:outline-none focus:ring-gray-300 rounded-md text-base font-medium px-5 py-2.5 text-center me-3 mb-3">Fun</button>
         </div> #}
         
-        {% set columns = medias|batch((medias|length / 4)|round(0, 'ceil')) %}
+        {% set columns = medias|batch((medias|length / 4)|round(0, 'ceil') ?: 1) %}
 
+        {% if medias|length == 0 %}
+            <p class="text-gray-500 text-center mt-10">
+                Aucun média disponible pour le moment.
+            </p>
+        {% else %}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
             {% for column in columns %}
                 <div class="grid gap-4">
@@ -33,6 +38,7 @@
                 </div>
             {% endfor %}
         </div>
+        {% endif %}
 
         {# --- PAGINATION --- #}
         {% if medias.pageCount > 1 %}

@@ -10,6 +10,7 @@ Contact: +225 07 471 612 21
 	<head>
 		<title>{% block title %}{% endblock %} | Admin Intra BDU</title>
 		<meta charset="utf-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="author" content="Digit Communication : Moussa Fofana"/>
 		<meta name="description" content="{% block description %}{% endblock %}"/>
 		<meta name="keywords" content="{% block keywords %}{% endblock %}"/>
@@ -327,23 +328,6 @@ Contact: +225 07 471 612 21
                                         </div>
                                         <!--end:Menu item-->
                                         {% endif %}
-                                        {% if 'L\'Étoile du Mois' in app.user.role.autorisations|map(a => a.permission.libelle) %}
-                                        <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                            <!--begin:Menu link-->
-                                            <a href="javascript:;" class="menu-link{% if app.session.get('menu') == 'clients' %} active{% endif %} disabled cursor-not-allowed">
-                                                <span class="menu-icon">
-                                                    <i class="ki-duotone ki-abstract-23 fs-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </span>
-                                                <span class="menu-title">L'Étoile du Mois</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        {% endif %}
                                         {% if 'Agents / employés' in app.user.role.autorisations|map(a => a.permission.libelle)
                                             or app.user.role.allAccess %}
                                         <!--begin:Menu item-->
@@ -472,7 +456,7 @@ Contact: +225 07 471 612 21
                                             <!--begin:Menu link-->
                                             <a href="{{path('project_index')}}" class="menu-link{% if app.session.get('menu') == 'etoile' %} active{% endif %}">
                                                 <span class="menu-icon">
-                                                    <i class="ki-duotone ki-design-2 fs-2">
+                                                    <i class="ki-duotone ki-abstract-23 fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>

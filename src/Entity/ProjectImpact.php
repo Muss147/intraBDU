@@ -14,7 +14,8 @@ class ProjectImpact extends EntityBase
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private string $title;
+    #[Assert\NotBlank(message: 'Le titre du projet est obligatoire')]
+    private ?string $title;
 
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(message: 'La description est obligatoire')]
@@ -30,6 +31,7 @@ class ProjectImpact extends EntityBase
     private bool $isArchived = false;
 
     #[ORM\ManyToOne]
+    #[Assert\NotNull(message: 'Le porteur du projet est obligatoire')]
     private Agents $owner; // porteur du projet
 
     public function getId(): ?int
@@ -61,7 +63,7 @@ class ProjectImpact extends EntityBase
 
     public function setDescription(string $description): static
     {
-        $this->description = $description;
+        $this->description = str_replace(["\u{00A0}", "Â"], ' ', $description);
 
         return $this;
     }

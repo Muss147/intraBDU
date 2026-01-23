@@ -3,6 +3,7 @@
 namespace App\Controller\BackController;
 
 use App\Entity\ProjectImpact;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\AgentsRepository;
 use App\Form\ProjectImpactType;
 use App\Repository\ProjectImpactRepository;
@@ -15,19 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/espace-admin/projects')]
 class ProjectImpactController extends AbstractController
 {
-    #[Route('/projects/{id?}', name: 'project_index')]
+    #[Route('/form/{id?}', name: 'project_index')]
     public function form(
         Request $request,
         EntityManagerInterface $em,
         ProjectImpactRepository $repo,
-        ProjectImpact $project = null
+        ProjectImpact $project = null,
+        SessionInterface $session
     ): Response {
+        $session->set('menu', 'etoile');
+        $session->set('subMenu', null);
+
         $project ??= new ProjectImpact();
         $project->setMonth((new \DateTime())->format('Y-m'));
 
         $form = $this->createForm(ProjectImpactType::class, $project);
         $form->handleRequest($request);
 
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+            foreach ($form->getErrors(true) as $error) {
+                $this->addFlash('error', $error->getMessage());
+            }
+        }
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($project);
             $em->flush();

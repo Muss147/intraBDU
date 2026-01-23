@@ -234,7 +234,7 @@
 
                         <div class="modal-body">
                             <!--begin::Form-->
-                            {{ form_start(form, {attr: {id: 'kt_modal_add_param_form', class: 'form', novalidate: 'novalidate'}}) }}
+                            {{ form_start(form, {attr: {id: 'kt_modal_add_porject_form', class: 'form', novalidate: 'novalidate'}}) }}
                                 <!--begin::Input group-->
                                 <div
                                     class="fv-row mb-7">
@@ -337,16 +337,34 @@
 	let projectEditor;
 
     const initCKEditor = () => {
-        const textarea = document.querySelector('#project_impact_description');
+		const textarea = document.querySelector('#project_impact_description');
 
-        if (textarea && !projectEditor) {
-            ClassicEditor.create(textarea)
-                .then(editor => {
-                    projectEditor = editor;
-                })
-                .catch(console.error);
-        }
-    };
+		if (textarea && !projectEditor) {
+			ClassicEditor.create(textarea, {
+				language: 'fr',
+				typing: {
+					transformations: {
+						remove: [
+							'nbsp'
+						]
+					}
+				}
+			})
+			.then(editor => {
+				projectEditor = editor;
+
+				// 🔥 Nettoyage en live
+				editor.model.document.on('change:data', () => {
+					const data = editor.getData();
+					const clean = data.replace(/\u00A0/g, ' ');
+					if (data !== clean) {
+						editor.setData(clean);
+					}
+				});
+			})
+			.catch(console.error);
+		}
+	};
 
     var optionFormat = function(item) {
         if (!item.id) {
@@ -388,7 +406,7 @@
             const project = projects.find(p => p.id == projectId);
             title.textContent = 'Modification de projet';
 
-            form.action = `/espace-admin/projects/${project.id}/edit`;
+            form.action = `/espace-admin/projects/form/${project.id}`;
 
             form.querySelector('[name="project_impact[title]"]').value = project.title;
             form.querySelector('[name="project_impact[owner]"]').value = project.owner;

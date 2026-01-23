@@ -67,7 +67,7 @@ class Actualites extends EntityBase
 
     public function setDescription(?string $description): static
     {
-        $this->description = $description;
+        $this->description = str_replace(["\u{00A0}", "Â"], ' ', $description);
 
         return $this;
     }
