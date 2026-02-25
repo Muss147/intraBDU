@@ -31,7 +31,10 @@
             {% for column in columns %}
                 <div class="grid gap-4">
                     {% for media in column %}
-                        <a href="javascript:;" data-modal-target="preview-modal" data-modal-toggle="preview-modal">
+                        <a href="javascript:;" 
+                            class="open-preview" 
+                            data-index="{{ loop.index0 + (loop.parent.loop.index0 * columns[0]|length) }}" 
+                            data-modal-target="preview-modal" data-modal-toggle="preview-modal">
                             <img class="h-full max-w-full object-cover rounded-lg" src="{{ asset(media.filename) }}" alt="{{ media.alt ?? '' }}">
                         </a>
                     {% endfor %}
@@ -93,29 +96,18 @@
             <!-- Modal content -->
             <div class="relative p-4 rounded-lg shadow-sm">
                 <!-- Modal body -->
-                <div id="gallery" class="relative w-full" data-carousel="slide">
+                <div id="gallery" class="relative w-full" data-carousel="static" data-carousel-interval="false">
                     <!-- Carousel wrapper -->
                     <div class="relative overflow-hidden rounded-lg h-[450px] md:h-[600px]">
-                        <!-- Item 1 -->
-                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{asset('assets/media/galery/Escompte.jpg')}}" class="absolute block w-full h-full inset-0 object-cover" alt="">
-                        </div>
-                        <!-- Item 2 -->
-                        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                            <img src="{{asset('assets/media/galery/jeune-fille-Wave.jpg')}}" class="absolute block w-full h-full inset-0 object-cover" alt="">
-                        </div>
-                        <!-- Item 3 -->
-                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{asset('assets/media/galery/Credit-Spot.jpg')}}" class="absolute block w-full h-full inset-0 object-cover" alt="">
-                        </div>
-                        <!-- Item 4 -->
-                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{asset('assets/media/galery/Escompte.jpg')}}" class="absolute block w-full h-full inset-0 object-cover" alt="">
-                        </div>
-                        <!-- Item 5 -->
-                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{asset('assets/media/galery/jeune-fille-WU.jpg')}}" class="absolute block w-full h-full inset-0 object-cover" alt="">
-                        </div>
+
+                        {% for media in medias %}
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item="{{ loop.first ? 'active' : '' }}">
+                                <img src="{{ asset(media.filename) }}"
+                                    class="absolute block w-full h-full inset-0 object-cover"
+                                    alt="{{ media.alt ?? '' }}">
+                            </div>
+                        {% endfor %}
+
                     </div>
                     <!-- Slider controls -->
                     <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
@@ -145,7 +137,40 @@
 {% block javascripts %}
 {{ parent() }}
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-  });
+    document.addEventListener('DOMContentLoaded', function () {
+
+    const previewLinks = document.querySelectorAll('.open-preview');
+
+    // Initialiser la modal Flowbite
+    const modalElement = document.getElementById('preview-modal');
+    const modal = new Modal(modalElement);
+
+    // Initialiser le carousel Flowbite
+    const carouselElement = document.getElementById('gallery');
+    const carouselItems = carouselElement.querySelectorAll('[data-carousel-item]');
+
+    const items = Array.from(carouselItems).map((el, index) => ({
+        position: index,
+        el: el
+    }));
+
+    const carousel = new Carousel(carouselElement, items, {
+        interval: false // désactive l’auto slide
+    });
+
+    previewLinks.forEach(link => {
+        link.addEventListener('click', function () {
+
+            const index = parseInt(this.dataset.index);
+
+            // Aller directement au slide cliqué
+            carousel.slideTo(index);
+
+            // Ouvrir la modal proprement
+            modal.show();
+        });
+    });
+
+});
 </script>
 {% endblock %}
